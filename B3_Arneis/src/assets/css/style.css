@@ -1,0 +1,98 @@
+@import url("./header.css");
+@import url("./footer.css");
+@import url("./homePage.css");
+
+@font-face {
+    font-family: "Circular Std Book";
+    src: url("../fonts/FontsFree-Net-Circular-Std-Book.ttf");
+}
+
+:root {
+    --blue:#16253F;
+    --black:#000000;
+    --white:#FFFFFF;
+    --darker-white: #F2F2F2;
+    --grey: #bbb;
+    --darker-grey: #717171;
+}
+
+*, *::after, *::before {
+    font-family: "Circular Std Book", sans-serif;
+    padding: 0; margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+    outline: none; border:none;
+    color: var(--black);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--darker-white);
+}
+
+/* Stylisation de la barre déroulante à droite */
+
+html::-webkit-scrollbar{
+    width: .7rem;
+ }
+ 
+ html::-webkit-scrollbar-track{
+    background-color: var(--white);
+ }
+ 
+ html::-webkit-scrollbar-thumb{
+    background-color: var(--blue);
+ }
+
+/* Animation d'underline utilisé dans la barre de navigation */
+
+.hover-underline-animation {
+    display: inline-block;
+    position: relative;
+    color: var(--black);
+    padding: 2px;
+    padding-bottom: 2px;
+}
+  
+.hover-underline-animation::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--black);
+    transform-origin: bottom center;
+    transition: transform 0.25s ease-out;
+}
+  
+.hover-underline-animation:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom center;
+}
+
+.scale_on_hover {
+    transition: 0.2s linear;
+}
+
+.scale_on_hover:hover {
+    transform: scale(1.1);
+}
+
+.main-container {
+    margin-top: 70.67px;
+    margin-bottom: 53.33px;
+}
+
+
+/* Média query */
+@media (max-width: 500px) {
+    .main-container {
+        margin-bottom: 2rem;
+    }
+}

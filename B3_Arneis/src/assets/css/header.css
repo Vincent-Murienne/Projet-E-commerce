@@ -1,0 +1,116 @@
+header {
+    position: fixed;
+    top: 0; left: 0;
+    z-index: 20000;
+    width: 100%;
+    background-color: var(--white);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    padding: 1rem 2rem;
+}
+
+header ul li Link img {
+    width: 25px;
+    color: var(--blue);
+}
+
+header h1 {
+    width: 30%;
+}
+
+header nav {
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+}
+
+header nav .middle-nav {
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 3rem;
+}
+
+header nav .end-nav {
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+    gap: 1rem;
+}
+
+/* Dropdown du menu utilisateur */
+
+header nav .dropdown-user-content {
+    display: none;
+    position: absolute;
+    background-color: var(--white);
+    width: 150px;
+    margin-left: -125px;
+    margin-top: 22.67px;
+    padding: 1rem 1rem 0 1rem;
+    z-index: 1;
+    text-align: end;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    border-top: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+header nav .dropdown-user-content li {
+    margin-bottom: 1rem;
+}
+
+header nav .dropdown-burger {
+    display: none;
+}
+
+header nav .dropdown-burger-content {
+    display: none;
+    position: absolute;
+    background-color: var(--white);
+    width: 150px;
+    margin-left: -125px;
+    margin-top: 22.67px;
+    padding: 1rem 1rem 0 1rem;
+    z-index: 1;
+    text-align: end;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    border-top: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+header nav .dropdown-burger-content li {
+    margin-bottom: 1rem;
+}
+
+header nav .separator {
+    width: 120px;
+    height: 1px;
+    border-bottom: 1px solid lightgray;
+    text-align: center;
+}
+
+.rotate {
+    transform: rotate(-180deg);
+}
+
+/* Média query */
+@media (max-width: 1000px) {
+    header nav .middle-nav {
+        display: none;
+    }
+
+    header nav .dropdown-user {
+        display: none;
+    }
+
+    header nav .dropdown-burger {
+        display: inline-block;
+        transition: .2s linear;
+    }
+}
