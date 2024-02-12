@@ -95,10 +95,6 @@ header nav .separator {
     text-align: center;
 }
 
-.rotate {
-    transform: rotate(-180deg);
-}
-
 /* Média query */
 @media (max-width: 1000px) {
     header nav .middle-nav {

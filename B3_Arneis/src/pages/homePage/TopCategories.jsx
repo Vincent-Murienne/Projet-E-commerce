@@ -3,26 +3,26 @@ import { Link } from "react-router-dom";
 const TopCategories = () => {
     return(
         <>
-            <section class="top-categories">
+            <section className="top-categories">
 
-                <h1 class="heading">Venant des hautes terres d'écosse nos meubles sont <span>immortels</span> </h1>
+                <h1 className="heading">Venant des hautes terres d'écosse nos meubles sont <span>immortels</span> </h1>
 
-                <div class="box-container">
+                <div className="box-container">
 
-                    <div class="box">
+                    <div className="box">
                         <img src="/img/slider_1.jpg" alt=""/>
                         <h3>Catégorie #1</h3>
-                        <Link to="/" class="btn">Voir plus</Link>
+                        <Link to="/" className="btn">Voir plus</Link>
                     </div>
-                    <div class="box">
+                    <div className="box">
                         <img src="/img/slider_2.jpg" alt=""/>
                         <h3>Catégorie #2</h3>
-                        <Link to="/" class="btn">Voir plus</Link>
+                        <Link to="/" className="btn">Voir plus</Link>
                     </div>
-                    <div class="box">
+                    <div className="box">
                         <img src="/img/slider_3.jpg" alt=""/>
                         <h3>Catégorie #3</h3>
-                        <Link to="/" class="btn">Voir plus</Link>
+                        <Link to="/" className="btn">Voir plus</Link>
                     </div>
                 </div>
             </section>

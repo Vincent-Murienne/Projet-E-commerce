@@ -21,12 +21,12 @@
 .homePage .btn
 {
     display: inline-block;
-    padding: .6rem 2rem;
+    padding: .4rem 1.5rem;
     border: .2rem solid var(--blue);
     color: var(--blue);
     cursor: pointer;
-    font-size: 1.7rem;
-    border-radius: .5rem;
+    font-size: 1.5rem;
+    border-radius: .4rem;
     position: relative;
     overflow: hidden;
     z-index: 0;
@@ -63,7 +63,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 1.5rem;
+    gap: 2rem;
 }
 
 .homePage .box-container .box
@@ -72,16 +72,15 @@
     background: #fff;
     box-shadow: 0 .5rem 1.5rem rgba(0,0,0,.1);
     border: .1rem solid rgba(0,0,0,.3);
-    border-radius: .5rem;
+    border-radius: .6rem;
     text-align: center;
-    /* flex: 1 1 20rem; */
-    max-width: 20rem;
+    max-width: 18rem;
     position: relative;
 }
 
 .homePage .box-container .box img
 {
-    height: 14rem;
+    height: 13rem;
     object-fit: cover;
     width: 100%;
     border-radius: .5rem;
@@ -89,6 +88,6 @@
 
 .homePage .box-container .box h3{
     color: var(--black);
-    font-size: 2rem;
+    font-size: 1.7rem;
     padding-top: 1rem;
 }

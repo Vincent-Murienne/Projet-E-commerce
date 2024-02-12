@@ -80,7 +80,7 @@ const Header = () => {
                                 {
                                     (isMenuOpen)
                                     ?
-                                        <FaX size={20} className="scale_on_hover rotate" onClick={MenuClicked}/>
+                                        <FaX size={20} className="scale_on_hover" onClick={MenuClicked}/>
                                     :
                                         <FaBars size={20} className="scale_on_hover" onClick={MenuClicked}/>
                                 }

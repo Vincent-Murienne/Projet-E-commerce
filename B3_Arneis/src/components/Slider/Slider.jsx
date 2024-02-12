@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import dataSlider from './dataSlider'
 
 export default function Slider() {
@@ -16,37 +16,47 @@ export default function Slider() {
         setCurrentIndex(newIndex);
     }
 
-  return (
-    <section className="slider">
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            plusSlides(1);
+        }, 5000);
 
-        <div className="slideshow">
-            {
-                dataSlider.map((obj, index) => {
-                    return (
-                        <div className="mySlides fade" key={obj.id} style={{display: index + 1 === currentIndex ? 'block' : 'none'}}>
-                            <img className="sliderImage" src={`/img/${obj.img}`}/>
-                        </div>
-                    )
-                })
-            }
-            
-            
+        return () => {
+            clearInterval(intervalId);
+        };
+    }, [currentIndex]);
 
-            <a className="prev" onClick={() => plusSlides(-1)}>&#10094;</a>
-            <a className="next" onClick={() => plusSlides(1)}>&#10095;</a>
+    return (
+        <section className="slider">
 
-            <div style={{textAlign: "center"}}>
+            <div className="slideshow">
                 {
                     dataSlider.map((obj, index) => {
                         return (
-                            <span className={index + 1 === currentIndex ? "dot active" : "dot"} onClick={() => setCurrentIndex(index + 1)} key={obj.id}></span>
+                            <div className="mySlides fade" key={obj.id} style={{display: index + 1 === currentIndex ? 'block' : 'none'}}>
+                                <img className="sliderImage" src={`/img/${obj.img}`}/>
+                            </div>
                         )
                     })
                 }
-            </div>
-        </div>
-        <br/>
+                
+                
 
-    </section>
-  )
+                <a className="prev" onClick={() => plusSlides(-1)}>&#10094;</a>
+                <a className="next" onClick={() => plusSlides(1)}>&#10095;</a>
+
+                <div style={{textAlign: "center"}}>
+                    {
+                        dataSlider.map((obj, index) => {
+                            return (
+                                <span className={index + 1 === currentIndex ? "dot active" : "dot"} onClick={() => setCurrentIndex(index + 1)} key={obj.id}></span>
+                            )
+                        })
+                    }
+                </div>
+            </div>
+            <br/>
+
+        </section>
+    )
 }
