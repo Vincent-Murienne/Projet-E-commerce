@@ -2,8 +2,8 @@
 const apiKey = import.meta.env.VITE_API_KEY;
 const apiUrl = import.meta.env.VITE_API_URL;
 
-const testAPI = async (data) => {
-    let api_url = `${apiUrl}/actions/homePage/getTopCategories.php`;
+const getData = async (action, data) => {
+    let api_url = `${apiUrl}/actions/homePage/${action}.php`;
 
     data.apiKey = apiKey;
 
@@ -21,4 +21,4 @@ const testAPI = async (data) => {
     return response;
 }
 
-export { testAPI };
+export { getData };

@@ -1,6 +1,29 @@
 import { Link } from "react-router-dom";
+import { getData } from '../../services/api';
+import { useEffect, useState } from "react";
 
 const TopCategories = () => {
+
+    const [getTopCategories, setTopCategories] = useState([]);
+
+    let data = {
+        "table": "categories"
+    };
+
+    useEffect(() => {
+        getData("getTop", data).then(response => {
+            if (response.success === true)
+            {
+                console.log(response);
+                setTopCategories(response.data);
+            }
+            else
+            {
+                console.log(response.error);
+            }
+        });
+    }, []);
+
     return(
         <>
             <section className="top-categories">
@@ -8,22 +31,13 @@ const TopCategories = () => {
                 <h1 className="heading">Venant des hautes terres d'écosse nos meubles sont <span>immortels</span> </h1>
 
                 <div className="box-container">
-
-                    <div className="box">
-                        <img src="/img/slider_1.jpg" alt=""/>
-                        <h3>Catégorie #1</h3>
-                        <Link to="/" className="btn">Voir plus</Link>
-                    </div>
-                    <div className="box">
-                        <img src="/img/slider_2.jpg" alt=""/>
-                        <h3>Catégorie #2</h3>
-                        <Link to="/" className="btn">Voir plus</Link>
-                    </div>
-                    <div className="box">
-                        <img src="/img/slider_3.jpg" alt=""/>
-                        <h3>Catégorie #3</h3>
-                        <Link to="/" className="btn">Voir plus</Link>
-                    </div>
+                    {getTopCategories && getTopCategories.map((category) => (
+                        <div key={category.category_id} className="box">
+                        <img src={`/img/${category.image_name}`} alt=""/>
+                        <h3>{category.category_name}</h3>
+                        <Link to={`/categories/${category.category_name}`} className="btn">Voir plus</Link>
+                        </div>
+                    ))}
                 </div>
             </section>
         </>

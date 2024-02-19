@@ -80,9 +80,9 @@
 
 .homePage .box-container .box img
 {
-    height: 13rem;
+    width: 240px;
+    height: 210px;
     object-fit: cover;
-    width: 100%;
     border-radius: .5rem;
 }
 
