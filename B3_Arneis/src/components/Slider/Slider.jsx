@@ -1,8 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { getData } from '../../services/api';
 
-// test modif
-
 export default function Slider() {
     const [currentIndex, setCurrentIndex] = useState(1);
     const [getSliderImages, setSliderImages] = useState([]);
