@@ -65,4 +65,22 @@ class Database {
 
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function registerUser(string $fullName, string $email, string $password, int $role = 0)
+    {
+        $existingUserQuery = $this->pdo->prepare("SELECT * FROM users WHERE email = :email");
+        $existingUserQuery->execute(['email' => $email]);
+        $existingUser = $existingUserQuery->fetch(PDO::FETCH_ASSOC);
+
+        if ($existingUser) {
+            return false;
+        }
+
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        $insertQuery = $this->pdo->prepare("INSERT INTO users (full_name, email, password, role) VALUES (:full_name, :email, :password, :role)");
+        $success = $insertQuery->execute(['full_name' => $fullName, 'email' => $email, 'password' => $hashedPassword, 'role' => $role]);
+
+        return $success;
+    }
 }
