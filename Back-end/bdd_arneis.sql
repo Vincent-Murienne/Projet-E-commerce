@@ -5,8 +5,8 @@ CREATE TABLE `users` (
   `id` integer PRIMARY KEY AUTO_INCREMENT,
   `full_name` varchar(100),
   `email` varchar(50),
-  `password` char,
-  `role` varchar(5)
+  `password` char(128),
+  `role` boolean
 );
 
 CREATE TABLE `payments` (
