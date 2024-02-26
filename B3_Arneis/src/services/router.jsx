@@ -1,8 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
-import DefaultLayout from "../components/DefaultLayout";
+import DefaultLayout from "../components/layouts/DefaultLayout";
+import AdminLayout from "../components/layouts/AdminLayout";
 import HomePage from "../pages/homePage/HomePage";
 import LoginPage from "../pages/loginPage/LoginPage";
 import RegisterPage from "../pages/registerPage/RegisterPage";
+import SliderManager from "../pages/admin/homePage/SliderManager";
 
 const router = createBrowserRouter([
     {
@@ -21,6 +23,16 @@ const router = createBrowserRouter([
                 path: "register",
                 element: <RegisterPage/>
             },  
+        ]
+    },
+    {
+        path: "/admin",
+        element: <AdminLayout/>,
+        children: [
+            {
+                path: "homePage/SliderManager",
+                element: <SliderManager/>
+            }
         ]
     }
 ]);
