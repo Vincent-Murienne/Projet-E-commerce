@@ -106,7 +106,7 @@ ALTER TABLE `baskets` ADD FOREIGN KEY (`product_id`) REFERENCES `products` (`id`
 ALTER TABLE `lots_of_product` ADD FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`);
 ALTER TABLE `lots_of_product` ADD FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 
-INSERT INTO categories (name, order) VALUES
+INSERT INTO categories (name, `order`) VALUES
 ('Chaises', 1),
 ('Tables', 2),
 ('Canapés', 3),
@@ -115,7 +115,7 @@ INSERT INTO categories (name, order) VALUES
 ('Tables de chevet', null),
 ('Accessoires de bureau', null); 
 
-INSERT INTO products (category_id, name, price, quantity, description, order) VALUES
+INSERT INTO products (category_id, name, price, quantity, description, `order`) VALUES
 (1, 'Chaise design en bois clair', 69.99, 20, 'Chaise ergonomique en bois clair avec un design contemporain', 1),
 (1, 'Chaise pivotante rembourrée', 110, 15, 'Chaise pivotante rembourrée pour un confort maximal pendant de longues heures', null),
 (1, 'Chaise moderne en métal', 89.99, 25, 'Chaise moderne en métal avec un siège confortable pour votre salle à manger', null),
@@ -139,11 +139,11 @@ INSERT INTO products (category_id, name, price, quantity, description, order) VA
 (7, 'Lampe de bureau articulée en métal', 39.99, 25, 'Lampe de bureau articulée en métal pour un éclairage ajustable pendant le travail', null),
 (7, 'Poubelle de bureau en acier inoxydable', 29.99, 15, 'Poubelle de bureau en acier inoxydable pour un bureau élégant et propre', null);
 
-INSERT INTO images (product_id, name, order) VALUES
+INSERT INTO images (product_id, category_id, name, `order`) VALUES
 (1, null, '1-1-chaise-design-blanc-et-bois-clair-.jpg', null),
 (1, null, '1-2-chaise-design-blanc-et-bois-clair-.jpg', null),
-(1, null, '1-3-chaise-design-blanc-et-bois-clair-.jpg', null),
-(2, 1, '2-1-chaise-pivotante.jpg', 1),
+(1, null, '1-3-chaise-design-blanc-et-bois-clair-.jpg', 1),
+(2, 1, '2-1-chaise-pivotante.jpg', null),
 (2, null, '2-2-chaise-pivotante.jpg', null),
 (2, null, '2-3-chaise-pivotante.jpg', null),
 (3, null, '3-1-Chaise en metal.jpg', null),
@@ -161,10 +161,10 @@ INSERT INTO images (product_id, name, order) VALUES
 (7, null, '7-1-Table de cuisine extensible.jpg', null),
 (7, null, '7-2-Table de cuisine extensible.jpg', null),
 (7, null, '7-3-Table de cuisine extensible.jpg', null),
-(8, 3, '8-1-Canape 3 places en cuir italien.jpg', null),
+(8, 3, '8-1-Canape 3 places en cuir italien.jpg', 3),
 (8, null, '8-2-Canape 3 places en cuir italien.jpg', null),
 (8, null, '8-3-Canape 3 places en cuir italien.jpg', null),
-(9, null, '9-1-Canape-lit avec rangement.jpg', 3),
+(9, null, '9-1-Canape-lit avec rangement.jpg', null),
 (9, null, '9-2-Canape-lit avec rangement.jpg', null),
 (9, null, '9-3-Canape-lit avec rangement.jpg', null),
 (10, null, '10-1-armoire-coulissant.jpg', null),
