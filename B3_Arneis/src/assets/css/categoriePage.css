@@ -1,6 +1,6 @@
 .categoriePage-image {
-    width: 2560px;
-    height: 1100px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
   }
   
