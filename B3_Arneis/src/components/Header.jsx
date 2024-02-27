@@ -49,7 +49,7 @@ const Header = () => {
                 <nav>
                     <ul className="middle-nav">
                         <li><Link to="/" className="hover-underline-animation">Accueil</Link></li>
-                        <li><Link to="/" className="hover-underline-animation">Catégories</Link></li>
+                        <li><Link to={"/categoriePage"} className="hover-underline-animation">Catégories</Link></li>
                         <li><Link to="/" className="hover-underline-animation">Produits</Link></li>
                         <li><Link to="/" className="hover-underline-animation">Contact</Link></li>
                     </ul>

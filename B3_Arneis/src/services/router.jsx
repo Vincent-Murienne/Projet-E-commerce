@@ -3,6 +3,8 @@ import DefaultLayout from "../components/DefaultLayout";
 import HomePage from "../pages/homePage/HomePage";
 import LoginPage from "../pages/loginPage/LoginPage";
 import RegisterPage from "../pages/registerPage/RegisterPage";
+import CategoriePage from "../pages/categoriePage/CategoriePage";
+
 
 const router = createBrowserRouter([
     {
@@ -21,6 +23,10 @@ const router = createBrowserRouter([
                 path: "register",
                 element: <RegisterPage/>
             },  
+            {
+                path: "categoriePage",
+                element: <CategoriePage/>
+            },
         ]
     }
 ]);
