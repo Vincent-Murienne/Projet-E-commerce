@@ -11,18 +11,19 @@ const CategoriePage = () => {
     return (
         <>
     <div>
-        <img src="/img/1-3-chaise-design-blanc-et-bois-clair-.jpg" alt="Chaise" className="categoriePage-image" />
+        <img src="/img/1-1-chaise-design-blanc-et-bois-clair-.jpg" alt="Chaise" className="categoriePage-image" />
     </div>
+    
     <br/>
-    <h2><p className="texte-centre">Chaises</p></h2>
      <br/> 
      <div className="description-centre">
-    <h3>Bienvenue dans la boutique "Àrneis" de la catégorie Chaise:</h3>
+    <h1>Bienvenue dans la boutique "Àrneis" de la catégorie Chaise:</h1>
+    <br/>
     <br/>
     <p>
-        Découvrez notre sélection de chaises alliant style et confort pour votre espace de vie. <br />
+        Découvrez notre sélection de chaises alliant style et confort pour votre espace de vie. <br /> <br />
         Commandez ici vos nouvelles chaises d'intérieur. Il y en a pour tous les goûts, profitez de produits originaux très colorés qui sauront
-        sublimer votre décoration. <br />
+        sublimer votre décoration. <br /><br />
         Passez commande sur notre site et recevez vos chaises ! Explorez dès aujourd'hui notre collection pour trouver la chaise idéale qui reflète votre style et votre personnalité.
     </p>
 </div>
@@ -31,7 +32,7 @@ const CategoriePage = () => {
 
 <div className="card-container">
     <div className="card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-        <img src="/img/1-1-chaise-design-blanc-et-bois-clair-.jpg" className="card-img-top" alt="..." />
+        <img src="/img/1-3-chaise-design-blanc-et-bois-clair-.jpg" className="card-img-top" alt="..." />
         <div className="card-body">
         <button className="btn2">Acheter maintenant</button>  
         </div>
