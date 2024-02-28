@@ -9,32 +9,40 @@ $response["success"] = false;
 // Récupérer la clé API depuis les données POST
 $apiKey = $_POST['apiKey'];
 
-// Ajoutons un log pour vérifier la clé API
 error_log("API Key received: " . $apiKey);
 
-// Check if the API call is legitimate
 if ($isAllowed) {
-    // Check if email and password are provided
     if (isset($json["email"]) && isset($json["password"])) {
-        // Create new instance of class Database to interact with the database
         $db = new Database();
 
         $email = $json["email"];
         $password = $json["password"];
-        $user = $db->findWhere("users", ["email" => $email, "password" => $password]);
+
+        // Récupérer l'utilisateur avec l'email fourni
+        $user = $db->selectWhere("users", ["email" => $email], false, null);
 
         if ($user) {
-            $response["success"] = true;
-            $response["user"] = $user;
+            // Vérifier si le mot de passe haché correspond
+            if (password_verify($password, $user["password"])) {
+                // Mot de passe correct, connexion réussie
+                $response["success"] = true;
+                $response["user"] = $user;
+                error_log("Connexion réussie pour l'utilisateur : " . $user["email"]);
+            } else {
+                // Mot de passe incorrect
+                $response["error"] = "Nom d'utilisateur/email ou mot de passe incorrect.";
+            }
         } else {
+            // Utilisateur non trouvé
             $response["error"] = "Nom d'utilisateur/email ou mot de passe incorrect.";
         }
     } else {
+        // Email ou mot de passe manquant
         $response["error"] = "Veuillez fournir un nom d'utilisateur/email et un mot de passe pour vous connecter.";
     }
 } else {
+    // Clé API invalide
     $response["error"] = "La clé API n'est pas fournie ou est incorrecte.";
 }
 
-// Print the response in the JSON format
 echo json_encode($response);

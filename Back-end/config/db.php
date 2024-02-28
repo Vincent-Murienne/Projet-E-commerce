@@ -28,25 +28,29 @@ class Database {
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // This method takes the name of the table, the name of the field to search in and the value to research. This doesn't use a prepare execute methods because we aren't using forms input on this method so the data we give it are safe.
-    public function findWhere(string $table, array $data, bool $orderby = false, string|null $orderbyField = null)
-    {
-        $sqlFields = [];
+    public function insert($table, $data) {
+        $columns = implode(', ', array_keys($data));
+        $placeholders = ':' . implode(', :', array_keys($data));
+        $sql = "INSERT INTO $table ($columns) VALUES ($placeholders)";
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+        return $query->rowCount();
+    }
 
+    public function selectWhere($table, $data, $orderby = false, $orderbyField = null) {
+        $sqlFields = [];
         foreach ($data as $key => $value) {
             $sqlFields[] = "$key = :$key";
         }
-
-        if($orderby && $orderbyField !== null) {
-            $sql = "SELECT * FROM $table WHERE " . implode(" AND ", $sqlFields) . " ORDER BY $orderbyField";
-        } else {
-            $sql = "INSERT INTO $table SET " . implode(" AND ", $sqlFields);
+        $sql = "SELECT * FROM $table WHERE " . implode(" AND ", $sqlFields);
+        if ($orderby && $orderbyField !== null) {
+            $sql .= " ORDER BY $orderbyField";
         }
-
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
-        return $query->fetchAll(PDO::FETCH_ASSOC);
+        return $query->fetch(PDO::FETCH_ASSOC);
     }
+    
 
     // This method is specific, it retrieves the top categories from the database.
     public function getTop(string $table)

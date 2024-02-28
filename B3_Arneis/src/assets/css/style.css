@@ -1,6 +1,7 @@
 @import url("./header.css");
 @import url("./footer.css");
 @import url("./homePage.css");
+@import url("./login-register.css");
 
 @font-face {
     font-family: "Circular Std Book";
