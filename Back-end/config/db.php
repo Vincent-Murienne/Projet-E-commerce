@@ -40,7 +40,7 @@ class Database {
         if($orderby && $orderbyField !== null) {
             $sql = "SELECT * FROM $table WHERE " . implode(" AND ", $sqlFields) . " ORDER BY $orderbyField";
         } else {
-            $sql = "INSERT INTO $table SET " . implode(" AND ", $sqlFields);
+            $sql = "SELECT * FROM $table WHERE " . implode(" AND ", $sqlFields);
         }
 
         $query = $this->pdo->prepare($sql);
