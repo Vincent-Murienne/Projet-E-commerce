@@ -1,6 +1,5 @@
 import '../../assets/css/categoriePage.css'
 
-
 const CategoriePage = () => {
     const handleMouseEnter = () => {
         console.log("La souris survole la carte");
@@ -13,13 +12,9 @@ const CategoriePage = () => {
     <div>
         <img src="/img/1-1-chaise-design-blanc-et-bois-clair-.jpg" alt="Chaise" className="categoriePage-image" />
     </div>
-    
-    <br/>
-     <br/> 
+     
      <div className="description-centre">
     <h1>Bienvenue dans la boutique "Àrneis" de la catégorie Chaise:</h1>
-    <br/>
-    <br/>
     <p>
         Découvrez notre sélection de chaises alliant style et confort pour votre espace de vie. <br /> <br />
         Commandez ici vos nouvelles chaises d'intérieur. Il y en a pour tous les goûts, profitez de produits originaux très colorés qui sauront
@@ -27,8 +22,6 @@ const CategoriePage = () => {
         Passez commande sur notre site et recevez vos chaises ! Explorez dès aujourd'hui notre collection pour trouver la chaise idéale qui reflète votre style et votre personnalité.
     </p>
 </div>
-    <br/>
-    <br/>
 
 <div className="card-container">
     <div className="card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
@@ -36,8 +29,6 @@ const CategoriePage = () => {
         <div className="card-body">
         <button className="btn2">Acheter maintenant</button>  
         </div>
-        <br />
-        <br />
         <div className="card-title">            
             <h4>Chaise en bois clair</h4>
             <h4>69.99 euro</h4>
@@ -48,8 +39,7 @@ const CategoriePage = () => {
     <div className="card-body">
     <button className="btn2">Acheter maintenant</button>
     </div>
-    <br />
-    <br />
+
     <div className="card-title">
         <h4>Chaise pivotante</h4>
         <h4>110 euro</h4>
@@ -60,8 +50,7 @@ const CategoriePage = () => {
         <div className="card-body">
             <button className="btn2">Acheter maintenant</button>      
         </div>
-        <br />
-        <br />
+
         <div className="card-title">
             <h4>Chaise en métal</h4>
             <h4>89.99 euro</h4>
@@ -72,8 +61,6 @@ const CategoriePage = () => {
         <div className="card-body">
     <button className="btn2">Acheter maintenant</button>
         </div>
-        <br />
-        <br />
         <div className="card-title">
             <h4>Chaise de bar </h4>
             <h4>79.99 euro</h4>
