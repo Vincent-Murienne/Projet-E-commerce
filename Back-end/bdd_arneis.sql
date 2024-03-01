@@ -130,7 +130,7 @@ INSERT INTO products (category_id, name, price, quantity, description) VALUES
 (4, 'Armoire dressing avec miroir', 1199.99, 8, 'Armoire dressing avec miroir pour un dressing fonctionnel et élégant'),
 (5, 'Ensemble de salon de jardin en rotin', 850, 15, 'Ensemble de salon de jardin en rotin pour profiter du plein air avec style'),
 (5, 'Chaise longue de jardin pliante', 145, 20, 'Chaise longue de jardin pliante pour se détendre au soleil'),
-(5, 'Table de jardin avec parasol', 399.99, 10, 'Table de jardin avec parasol pour des repas en plein air à l\'ombre'),
+(5, 'Table de jardin avec parasol', 399.99, 10, 'Table de jardin avec parasol pour des repas en plein air à l'ombre'),
 (6, 'Table de chevet en bois avec tiroir', 79.99, 30, 'Table de chevet en bois avec tiroir pour garder vos essentiels à portée de main'),
 (6, 'Table de chevet suspendue moderne', 99.99, 25, 'Table de chevet suspendue moderne pour un look épuré dans la chambre'),
 (6, 'Table de chevet design en verre', 129.99, 20, 'Table de chevet design en verre pour une touche contemporaine dans la chambre'),
