@@ -47,13 +47,13 @@ const AdminHeader = () => {
                 <h1>Àrneis - back office</h1>
                 <nav>
                     <ul className="middle-nav">
-                        <li><Link to="/" className="hover-underline-animation">Gestion de l'accueil</Link></li>
+                        <li><Link to="/admin/homePage/SliderManager" className="hover-underline-animation">Gestion de l'accueil</Link></li>
                         <li><Link to="/" className="hover-underline-animation">Catégories</Link></li>
                         <li><Link to="/" className="hover-underline-animation">Produits</Link></li>
                         <li><Link to="/" className="hover-underline-animation">Utilisateurs</Link></li>
                     </ul>
                     <ul className="end-nav">
-                        <li><Link to="/">Retour au site</Link></li>
+                        <li><Link to="/" className="hover-underline-animation">Retour au site</Link></li>
                         <div className="dropdown-user">
                             <li><FaUser size={20} className="scale_on_hover" onClick={UserMenuClicked}/></li>
                             <div className="dropdown-user-content">

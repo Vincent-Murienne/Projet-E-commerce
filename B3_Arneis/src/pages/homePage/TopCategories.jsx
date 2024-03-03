@@ -33,9 +33,9 @@ const TopCategories = () => {
                 <div className="box-container">
                     {getTopCategories && getTopCategories.map((category) => (
                         <div key={category.category_id} className="box">
-                        <img src={`/img/${category.image_name}`} alt=""/>
-                        <h3>{category.category_name}</h3>
-                        <Link to={`/categories/${category.category_name}`} className="btn">Voir plus</Link>
+                            <img src={`/img/${category.image_name}`} alt=""/>
+                            <h3>{category.category_name}</h3>
+                            <Link to={`/categories/${category.category_name}`} className="btn">Voir plus</Link>
                         </div>
                     ))}
                 </div>
