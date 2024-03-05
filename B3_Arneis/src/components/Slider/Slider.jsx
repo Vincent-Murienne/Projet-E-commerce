@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { getData } from '../../services/api';
+import { Data } from '../../services/api';
 
 export default function Slider() {
     const [currentIndex, setCurrentIndex] = useState(1);
@@ -10,7 +10,7 @@ export default function Slider() {
     };
 
     useEffect(() => {
-        getData("getTop", data).then(response => {
+        Data("homePage", "getTop", data).then(response => {
             if (response.success === true)
             {
                 console.log(response);

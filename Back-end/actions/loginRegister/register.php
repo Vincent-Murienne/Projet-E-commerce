@@ -10,31 +10,37 @@ $apiKey = $_POST['apiKey'];
 error_log("API Key received: " . $apiKey);
 
 if ($isAllowed) {
+    // Vérification si tous les champs requis sont présents
     if (isset($json["full_name"]) && isset($json["email"]) && isset($json["password"])) {
-        $db = new Database();
+        // Vérification si tous les champs requis sont non vides
+        if (!empty($json["full_name"]) && !empty($json["email"]) && !empty($json["password"])) {
+            $db = new Database();
 
-        $fullName = $json["full_name"];
-        $email = $json["email"];
-        $password = $json["password"];
+            $fullName = $json["full_name"];
+            $email = $json["email"];
+            $password = $json["password"];
 
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        $existingUser = $db->selectWhere("users", ["email" => $email], false, null);
+            $existingUser = $db->selectWhere("users", ["email" => $email], false, null);
 
-        if (!$existingUser) {
-            $insertedUser = $db->insert("users", ["full_name" => $fullName, "email" => $email, "password" => $hashedPassword, "role" => 0]);
+            if (!$existingUser) {
+                $insertedUser = $db->insert("users", ["full_name" => $fullName, "email" => $email, "password" => $hashedPassword, "role" => 0]);
 
-            if ($insertedUser) {
-                $response["success"] = true;
-                $response["message"] = "Inscription réussie.";
+                if ($insertedUser) {
+                    $response["success"] = true;
+                    $response["message"] = "Inscription réussie.";
+                } else {
+                    $response["error"] = "Une erreur s'est produite lors de l'inscription.";
+                }
             } else {
-                $response["error"] = "Une erreur s'est produite lors de l'inscription.";
+                $response["error"] = "L'utilisateur avec cette adresse e-mail existe déjà.";
             }
         } else {
-            $response["error"] = "L'utilisateur avec cette adresse e-mail existe déjà.";
+            $response["error"] = "Champs manquants à remplir.";
         }
     } else {
-        $response["error"] = "Veuillez fournir une adresse e-mail et un mot de passe pour vous inscrire.";
+        $response["error"] = "Veuillez fournir une adresse e-mail, un nom complet et un mot de passe pour vous inscrire.";
     }
 } else {
     $response["error"] = "La clé API n'est pas fournie ou est incorrecte.";

@@ -1,17 +1,21 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { FaRegEnvelope, FaLock, FaEye, FaEyeSlash} from "react-icons/fa"
 import { IconContext } from "react-icons";
-import { Link } from "react-router-dom";
-import { getData } from '../../services/apiLogin';
+import { useNavigate, Link } from "react-router-dom";
+import { Data } from '../../services/api';
+import { UserContext } from "../../context/UserProvider"; 
 import '../../assets/css/login-register.css';
 
 const LoginPage = () => {
+
+  const { login } = useContext(UserContext); // Utilisation du contexte utilisateur pour accéder à la fonction de connexion
 
   const [action, setAction] = useState('Connexion');
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -23,10 +27,13 @@ const LoginPage = () => {
 
     try {
       console.log("debug 1");
-      const response = await getData("login", { email, password });
+      const response = await Data("loginRegister", "login", { email, password });
       console.log("debug 2");
       if (response.success) {
-        // Connexion réussie, rediriger ou effectuer une autre action
+        // Connexion réussie, mettre à jour l'état de l'utilisateur
+        login({ id: response.userId, email: email });
+        navigate('/');
+        
       } else {
         setError(response.error);
         console.log(response.error);
@@ -35,7 +42,6 @@ const LoginPage = () => {
       setError('Une erreur est survenue lors de la connexion.');
     }
   };
-  
 
   return(
       <div className="body-login">
@@ -74,6 +80,3 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
-
-
-// label Champs obligatoires * avec une couleur rouge
