@@ -8,7 +8,7 @@
 .description-centre {
     text-align: center;
     padding: 20px;
-    margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .description-centre p {
@@ -111,3 +111,33 @@
     padding-top: 10px;
 }
 
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+p {
+    color: #555;
+    line-height: 1.6;
+}
+
+h2 {
+    margin-top: 50px; /* Ajoute un saut de ligne après le dernier h1 */
+}
