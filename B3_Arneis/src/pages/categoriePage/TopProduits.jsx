@@ -7,7 +7,8 @@ const TopProduits = () => {
     const [getTopProducts, setTopProducts] = useState([]);
 
     let data = {
-        "table": "products"
+        "table": "products",
+        "category_id": 1    
     };
 
     useEffect(() => {
@@ -23,21 +24,41 @@ const TopProduits = () => {
             }
         });
     }, []);
+    const handleMouseEnter = () => {
+        console.log("La souris survole la carte");
+    };
+    const handleMouseLeave = () => {
+        console.log("La souris quitte la carte");
+    };
+
+    const description = (
+        <div className="description-centre">
+            <h1>Bienvenue dans la boutique "Àrneis" de la catégorie Chaise:</h1>
+            <p>
+                Quels que soient vos préférences, vous trouverez des produits originaux et colorés qui rehausseront votre décoration.
+            </p>
+            <p>
+                Passez commande dès maintenant sur notre site et recevez vos chaises chez vous !
+            </p>
+        </div>
+    );
 
     return(
         <>
-            <section className="top-produits">
             <img src="/img/1-1-chaise-design-blanc-et-bois-clair-.jpg" alt="Chaise" className="categoriePage-image" />
-
-                <h1 className="heading">Les <span>Highlanders</span> du moment</h1>
-
-                <div className="box-container">
+            {description}
+            <section className="top-produits">
+                <h1 className="heading">Découvrez ici notre gamme de chaises d'intérieur :</h1>
+                <div className="box-container" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                     {getTopProducts && getTopProducts.map((product) => (
-                        <div key={product.product_id} className="box">
-                        <img src={`/img/${product.image_name}`} alt=""/>
-                        <h3>{product.product_name}</h3>
-                        <Link to="/" className="btn">Voir plus</Link>
-                    </div>
+                        <div key={product.category_id} className="box" >
+                            <img src={`/img/${product.image_name}`} alt=""/>
+                            <Link to="/" className="btn">Voir plus</Link>
+                            <div className="card-title">
+                            <h4>{product.product_name}</h4>
+                            <h4>90€</h4>
+                            </div>
+                        </div>
                     ))}
                 </div>
             </section>
