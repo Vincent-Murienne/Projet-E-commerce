@@ -4,7 +4,7 @@ import AdminLayout from "../components/layouts/AdminLayout";
 import HomePage from "../pages/homePage/HomePage";
 import LoginPage from "../pages/loginPage/LoginPage";
 import RegisterPage from "../pages/registerPage/RegisterPage";
-import SliderManager from "../pages/admin/homePage/SliderManager";
+import HomePageManager from "../pages/admin/homePage/HomePageManager";
 
 const router = createBrowserRouter([
     {
@@ -30,8 +30,8 @@ const router = createBrowserRouter([
         element: <AdminLayout/>,
         children: [
             {
-                path: "homePage/SliderManager",
-                element: <SliderManager/>
+                path: "homePage/HomePageManager",
+                element: <HomePageManager/>
             }
         ]
     }

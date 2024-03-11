@@ -1,0 +1,73 @@
+.homePageManager {
+    text-align: center;
+    margin-top: calc(3rem + 70.67px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4rem;
+}
+
+.homePageManager h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.editMode {
+    position: fixed;
+    top: 30.67px; left: 0;
+    z-index: 10000;
+    background-color: var(--dark-bg);
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.editMode form {
+    width: 40rem;
+    border-radius: .5rem;
+    background-color: var(--white);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem;
+}
+
+.editMode form .editTitle {
+    font-size: 2.5rem;
+    color: var(--blue);
+    margin-bottom: .5rem;
+}
+
+.editMode form div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.editMode form img {
+    width: 20rem;
+    object-fit: contain;
+}
+
+.editMode form label {
+    color: var(--black);
+}
+
+.editMode form select {
+    border: 1px solid var(--background-color-gray);
+    padding: .4rem .6rem;
+    border-radius: .2rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.editMode form button {
+    cursor: pointer;
+}
