@@ -2,8 +2,8 @@
 const apiKey = import.meta.env.VITE_API_KEY;
 const apiUrl = import.meta.env.VITE_API_URL;
 
-const getData = async (action, data) => {
-    let api_url = `${apiUrl}/actions/homePage/${action}.php`;
+const getData = async (folder, action, data) => {
+    let api_url = `${apiUrl}/actions/${folder}/${action}.php`;
 
     data.apiKey = apiKey;
 
