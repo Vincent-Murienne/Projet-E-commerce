@@ -1,11 +1,18 @@
-
 const apiKey = import.meta.env.VITE_API_KEY;
 const apiUrl = import.meta.env.VITE_API_URL;
 
-const getData = async (folder, action, data) => {
-    let api_url = `${apiUrl}/actions/${folder}/${action}.php`;
+const Data = async (endpoint, action, data) => {
+    const validEndpoints = ['homePage', 'loginRegister'];
+
+    if (!validEndpoints.includes(endpoint)) {
+        throw new Error('Endpoint non valide');
+    }
+
+    const api_url = `${apiUrl}/actions/${endpoint}/${action}.php`;
 
     data.apiKey = apiKey;
+
+    console.log("Data sent to backend:", data);
 
     const requestInfos = new Request(
         api_url,
@@ -21,4 +28,4 @@ const getData = async (folder, action, data) => {
     return response;
 }
 
-export { getData };
+export { Data };
