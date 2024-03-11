@@ -10,7 +10,7 @@ export default function Slider() {
     };
 
     useEffect(() => {
-        getData("getTop", data).then(response => {
+        getData("homePage", "getTop", data).then(response => {
             if (response.success === true)
             {
                 console.log(response);

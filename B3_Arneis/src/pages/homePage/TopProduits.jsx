@@ -11,7 +11,7 @@ const TopProduits = () => {
     };
 
     useEffect(() => {
-        getData("getTop", data).then(response => {
+        getData("homePage", "getTop", data).then(response => {
             if (response.success === true)
             {
                 console.log(response);
@@ -35,7 +35,7 @@ const TopProduits = () => {
                         <div key={product.product_id} className="box">
                         <img src={`/img/${product.image_name}`} alt=""/>
                         <h3>{product.product_name}</h3>
-                        <Link to="/" className="btn">Voir plus</Link>
+                        <Link to="/CategoriePage" className="btn">Voir plus</Link>
                     </div>
                     ))}
                 </div>

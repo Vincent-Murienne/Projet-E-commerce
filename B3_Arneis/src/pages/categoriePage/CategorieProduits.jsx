@@ -2,17 +2,16 @@ import { Link } from "react-router-dom";
 import { getData } from '../../services/api';
 import { useEffect, useState } from "react";
 
-const TopProduits = () => {
+const CategorieProduits = () => {
 
     const [getTopProducts, setTopProducts] = useState([]);
-
     let data = {
         "table": "products",
-        "category_id": 1    
+        "category_id": 1
     };
 
     useEffect(() => {
-        getData("getTop", data).then(response => {
+        getData("categoriePage", "findWhere", data).then(response => {
             if (response.success === true)
             {
                 console.log(response);
@@ -24,6 +23,7 @@ const TopProduits = () => {
             }
         });
     }, []);
+
     const handleMouseEnter = () => {
         console.log("La souris survole la carte");
     };
@@ -51,12 +51,12 @@ const TopProduits = () => {
                 <h1 className="heading">Découvrez ici notre gamme de chaises d'intérieur :</h1>
                 <div className="box-container" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                     {getTopProducts && getTopProducts.map((product) => (
-                        <div key={product.category_id} className="box" >
+                        <div key={product.id} className="box" >
                             <img src={`/img/${product.image_name}`} alt=""/>
                             <Link to="/" className="btn">Voir plus</Link>
                             <div className="card-title">
                             <h4>{product.product_name}</h4>
-                            <h4>90€</h4>
+                            <h4>{product.price}</h4>
                             </div>
                         </div>
                     ))}
@@ -66,4 +66,4 @@ const TopProduits = () => {
     );
 };
 
-export default TopProduits;
+export default CategorieProduits;

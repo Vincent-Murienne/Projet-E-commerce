@@ -1,4 +1,4 @@
-import TopProduits from "./TopProduits";
+import CategorieProduits from "./CategorieProduits";
 import '../../assets/css/categoriePage.css';
 
 
@@ -6,7 +6,7 @@ const CategoriePage = () => {
     return(
         <>
             <section className="categoriePage">
-                <TopProduits/>
+                <CategorieProduits/>
             </section>
         </>
     );
