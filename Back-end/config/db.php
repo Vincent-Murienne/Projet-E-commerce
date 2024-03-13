@@ -42,7 +42,7 @@ class Database {
         } else {
             $sql = "SELECT * FROM $table WHERE " . implode(" AND ", $sqlFields);
         }
-
+        
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
         return $query->fetchAll(PDO::FETCH_ASSOC);
@@ -65,4 +65,15 @@ class Database {
 
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getProductsFromCategory()
+    {
+        $sql = "SELECT products.*, product_image.category_id AS product_image_category_id, product_image.name AS product_image_name, category_image.category_id AS category_image_category_id, category_image.name AS category_image_name FROM products INNER JOIN (SELECT product_id, MIN(id) AS min_image_id FROM images GROUP BY product_id) AS first_image ON products.id = first_image.product_id INNER JOIN images AS product_image ON first_image.min_image_id = product_image.id LEFT JOIN images AS category_image ON products.category_id = category_image.category_id AND category_image.category_id = 1 WHERE products.category_id = 1";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute();
+
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }   
 }
+

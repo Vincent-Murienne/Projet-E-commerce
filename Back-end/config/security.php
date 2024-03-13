@@ -14,6 +14,7 @@ $apiKey = getenv("API_KEY");
 // On vient comparer notre clé api avec celle fournit dans la requête API afin de vérifier qu'elle est légitime
 $isAllowed = false;
 $json = json_decode(file_get_contents("php://input"), true);
+
 if(isset($json["apiKey"]) && $json["apiKey"] == $apiKey) {
     $isAllowed = true;
 }
