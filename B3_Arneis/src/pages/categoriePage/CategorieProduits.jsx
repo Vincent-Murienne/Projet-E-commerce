@@ -7,11 +7,11 @@ const CategorieProduits = () => {
     const [getTopProducts, setTopProducts] = useState([]);
     let data = {
         "table": "products",
-        "category_id": 1
+        "id": 1
     };
 
     useEffect(() => {
-        getData("categoriePage", "findWhere", data).then(response => {
+        getData("category", "getCategory", data).then(response => {
             if (response.success === true)
             {
                 console.log(response);
@@ -55,8 +55,8 @@ const CategorieProduits = () => {
                             <img src={`/img/${product.image_name}`} alt=""/>
                             <Link to="/" className="btn">Voir plus</Link>
                             <div className="card-title">
-                            <h4>{product.product_name}</h4>
-                            <h4>{product.price}</h4>
+                            <h4>{product.name}</h4>
+                            <h4>{product.price}€</h4>
                             </div>
                         </div>
                     ))}
