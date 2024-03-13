@@ -6,7 +6,7 @@ import { UserContext } from "../context/UserProvider";
 
 
 const Header = () => {
-    const {user, setUser} = useContext(UserContext);
+    const { user, login, logout } = useContext(UserContext);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const MenuClicked = () => {
@@ -42,6 +42,11 @@ const Header = () => {
         }
     };
 
+    const handleLogout = () => {
+        // Appeler la fonction de déconnexion du contexte
+        logout();
+    };
+
     return (
         <>
             <header>
@@ -65,7 +70,7 @@ const Header = () => {
                                         <>
                                             <li><Link to="/" className="hover-underline-animation">Paramètre</Link></li>
                                             <li><div className='separator'></div></li>
-                                            <li><Link to="/" className="hover-underline-animation">Se déconnecter</Link></li>
+                                            <li><Link to="/" className="hover-underline-animation" onClick={handleLogout}>Se déconnecter</Link></li>
                                         </>
                                     :
                                         <>
@@ -96,7 +101,7 @@ const Header = () => {
                                         <>
                                             <li><Link to="/" className="hover-underline-animation">Paramètre</Link></li>
                                             <li><div className="separator"></div></li>
-                                            <li><Link to="/" className="hover-underline-animation">Se déconnecter</Link></li>
+                                            <li><Link to="/" className="hover-underline-animation" onClick={handleLogout}>Se déconnecter</Link></li>
                                         </>
                                     :
                                         <>

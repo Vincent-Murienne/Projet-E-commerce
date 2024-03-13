@@ -28,25 +28,29 @@ class Database {
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // This method takes the name of the table, the name of the field to search in and the value to research. This doesn't use a prepare execute methods because we aren't using forms input on this method so the data we give it are safe.
-    public function findWhere(string $table, array $data, bool $orderby = false, string|null $orderbyField = null)
-    {
-        $sqlFields = [];
+    public function insert($table, $data) {
+        $columns = implode(', ', array_keys($data));
+        $placeholders = ':' . implode(', :', array_keys($data));
+        $sql = "INSERT INTO $table ($columns) VALUES ($placeholders)";
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+        return $query->rowCount();
+    }
 
+    public function selectWhere($table, $data, $orderby = false, $orderbyField = null) {
+        $sqlFields = [];
         foreach ($data as $key => $value) {
             $sqlFields[] = "$key = :$key";
         }
-
-        if($orderby && $orderbyField !== null) {
-            $sql = "SELECT * FROM $table WHERE " . implode(" AND ", $sqlFields) . " ORDER BY $orderbyField";
-        } else {
-            $sql = "SELECT * FROM $table WHERE " . implode(" AND ", $sqlFields);
+        $sql = "SELECT * FROM $table WHERE " . implode(" AND ", $sqlFields);
+        if ($orderby && $orderbyField !== null) {
+            $sql .= " ORDER BY $orderbyField";
         }
-        
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
-        return $query->fetchAll(PDO::FETCH_ASSOC);
+        return $query->fetch(PDO::FETCH_ASSOC);
     }
+    
 
     // This method is specific, it retrieves the top categories from the database.
     public function getTop(string $table)
@@ -64,6 +68,24 @@ class Database {
         $query->execute();
 
         return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function registerUser(string $fullName, string $email, string $password, int $role = 0)
+    {
+        $existingUserQuery = $this->pdo->prepare("SELECT * FROM users WHERE email = :email");
+        $existingUserQuery->execute(['email' => $email]);
+        $existingUser = $existingUserQuery->fetch(PDO::FETCH_ASSOC);
+
+        if ($existingUser) {
+            return false;
+        }
+
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        $insertQuery = $this->pdo->prepare("INSERT INTO users (full_name, email, password, role) VALUES (:full_name, :email, :password, :role)");
+        $success = $insertQuery->execute(['full_name' => $fullName, 'email' => $email, 'password' => $hashedPassword, 'role' => $role]);
+
+        return $success;
     }
 
     public function getProductsFromCategory()
