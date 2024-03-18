@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { getData } from '../../services/api';
+import { Data } from '../../services/api';
 import { useEffect, useState } from "react";
 
 const TopCategories = () => {
@@ -11,7 +11,7 @@ const TopCategories = () => {
     };
 
     useEffect(() => {
-        getData("homePage", "getTop", data).then(response => {
+        Data("homePage", "getTop", data).then(response => {
             if (response.success === true)
             {
                 console.log(response);
