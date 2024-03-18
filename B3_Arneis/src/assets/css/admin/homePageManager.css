@@ -27,6 +27,8 @@
 
 .editMode form {
     width: 40rem;
+    height: 500px;
+    overflow-y: scroll;
     border-radius: .5rem;
     background-color: var(--white);
     text-align: center;
@@ -53,7 +55,7 @@
 }
 
 .editMode form img {
-    width: 20rem;
+    width: 15rem;
     object-fit: contain;
 }
 

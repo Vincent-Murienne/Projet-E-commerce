@@ -52,9 +52,9 @@ class Database {
     public function getTop(string $table)
     {
         if($table == "categories") {
-            $sql = "SELECT categories.id AS 'category_id', categories.name AS 'category_name', images.name AS 'image_name' FROM categories JOIN images ON categories.id = images.category_id WHERE categories.`order` IS NOT NULL ORDER BY categories.`order`";
+            $sql = "SELECT categories.id AS 'category_id', categories.name AS 'category_name', categories.order AS 'category_order', images.name AS 'image_name' FROM categories JOIN images ON categories.id = images.category_id WHERE categories.`order` IS NOT NULL ORDER BY categories.`order`";
         } else if($table == "products") {
-            $sql = "SELECT products.id AS 'product_id', products.name AS 'product_name', images.name AS 'image_name' FROM products JOIN images ON products.id = images.product_id WHERE products.`order` IS NOT NULL GROUP BY products.id ORDER BY products.`order`";
+            $sql = "SELECT products.id AS 'product_id', products.name AS 'product_name', products.order AS 'product_order', images.name AS 'image_name' FROM products JOIN images ON products.id = images.product_id WHERE products.`order` IS NOT NULL GROUP BY products.id ORDER BY products.`order`";
         } else if($table == "images") {
             $sql = "SELECT * FROM images WHERE `order` IS NOT NULL ORDER BY `order`";
         } else {
