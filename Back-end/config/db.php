@@ -50,15 +50,26 @@ class Database {
         $query->execute($data);
         return $query->fetch(PDO::FETCH_ASSOC);
     }
-    
 
-    // This method is specific, it retrieves the top categories from the database.
+    // This method takes the table an array of data and an integer where to update the data
+    function update(string $table, array $data, int $id) {
+        $sqlFields = [];
+        foreach ($data as $key => $value){
+            $sqlFields[] = "$key = :$key";
+        }
+        $query = $this->pdo->prepare("UPDATE $table SET " . implode(', ', $sqlFields) .
+            " WHERE id = :id");
+    
+        return $query->execute(array_merge($data, ['id' => $id]));
+    }
+
+    // This method is specific, it retrieves the top categories/images/products from the database.
     public function getTop(string $table)
     {
         if($table == "categories") {
-            $sql = "SELECT categories.id AS 'category_id', categories.name AS 'category_name', categories.order AS 'category_order', images.name AS 'image_name' FROM categories JOIN images ON categories.id = images.category_id WHERE categories.`order` IS NOT NULL ORDER BY categories.`order`";
+            $sql = "SELECT categories.id AS 'category_id', categories.name AS 'category_name', categories.order AS 'category_order', images.name AS 'image_name' FROM categories LEFT JOIN images ON categories.id = images.category_id WHERE categories.`order` IS NOT NULL ORDER BY categories.`order`";
         } else if($table == "products") {
-            $sql = "SELECT products.id AS 'product_id', products.name AS 'product_name', products.order AS 'product_order', images.name AS 'image_name' FROM products JOIN images ON products.id = images.product_id WHERE products.`order` IS NOT NULL GROUP BY products.id ORDER BY products.`order`";
+            $sql = "SELECT products.id AS 'product_id', products.name AS 'product_name', products.order AS 'product_order', images.name AS 'image_name' FROM products LEFT JOIN images ON products.id = images.product_id WHERE products.`order` IS NOT NULL GROUP BY products.id ORDER BY products.`order`";
         } else if($table == "images") {
             $sql = "SELECT * FROM images WHERE `order` IS NOT NULL ORDER BY `order`";
         } else {
@@ -68,6 +79,22 @@ class Database {
         $query->execute();
 
         return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // This method is specific, it deletes the order associated to the old element and assigns it to the new top categories/images/products in the database.
+    function updateTop(string $table, int $order, int $id) {
+        $query = $this->pdo->prepare("UPDATE $table SET `order` = NULL WHERE `order` = :order");
+
+        $query->bindValue("order", $order, PDO::PARAM_INT);
+
+        $query->execute();
+
+        $query = $this->pdo->prepare("UPDATE $table SET `order` = :order WHERE id = :id");
+
+        $query->bindValue("order", $order, PDO::PARAM_INT);
+        $query->bindValue("id", $id, PDO::PARAM_INT);
+    
+        return $query->execute();
     }
 
     public function registerUser(string $fullName, string $email, string $password, int $role = 0)
