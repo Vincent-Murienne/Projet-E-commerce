@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { getData } from '../../../services/api';
 
@@ -8,20 +8,24 @@ const HomePageManager = () => {
     const [getEditMode, setEditMode] = useState(false);
     const [getEditModeData, setEditModeData] = useState([]);
 
-    const enableEditModeSlider = () => {
+    const enableEditModeSlider = (data) => {
         setEditModeSlider(true);
+        setEditModeData(data);
     };
 
     const disableEditModeSlider = () => {
         setEditModeSlider(false);
+        setEditModeData([]);
     }
 
-    const enableEditMode = () => {
+    const enableEditMode = (data) => {
         setEditMode(true);
+        setEditModeData(data);
     };
 
     const disableEditMode = () => {
         setEditMode(false);
+        setEditModeData([]);
     }
 
     const [getSliderImages, setSliderImages] = useState([]);
@@ -87,7 +91,6 @@ const HomePageManager = () => {
         getData("homePage", "getAllImages", data4).then(response => {
             if (response.success === true)
             {
-                console.log(response.data);
                 setEditModeData(response.data);
             }
             else
@@ -104,115 +107,151 @@ const HomePageManager = () => {
                     <div className="sliderManager">
                         <h1>Slider manager</h1>
                         <div className="box-container">
-                            {getSliderImages && getSliderImages.map((image) => (
-                                (image.order == 1)
+                        {
+                                (getSliderImages)
                                 ?
-                                <div key={image.id} className="box">
-                                    <img src={`/img/${image.name}`} alt=""/>
-                                    <h3 className="position">Image #1</h3>
-                                    <button onClick={enableEditModeSlider} className="btn">Modifier</button>
-                                </div>
+                                    <>
+                                        {getSliderImages.length > 0 && (
+                                            <div key="slider1" className="box">
+                                                <img src={`/img/${getSliderImages[0].name}`} alt=""/>
+                                                <h3 className="position">Image #1</h3>
+                                                <button onClick={() => enableEditModeSlider(["test"])} className="btn">Modifier</button>
+                                            </div>
+                                        )}
+                                    </>
                                 :
-                                <div key={image.id + "_hidden"} style={{display: "none"}}></div>
-                            ))}
-                            {getSliderImages && getSliderImages.map((image) => (
-                                (image.order == 2)
+                                <></>
+                            }
+                            {
+                                (getSliderImages)
                                 ?
-                                <div key={image.id} className="box">
-                                    <img src={`/img/${image.name}`} alt=""/>
-                                    <h3 className="position">Image #2</h3>
-                                    <button onClick={enableEditMode} className="btn">Modifier</button>
-                                </div>
+                                    <>
+                                        {getSliderImages.length > 0 && (
+                                            <div key="slider2" className="box">
+                                                <img src={`/img/${getSliderImages[1].name}`} alt=""/>
+                                                <h3 className="position">Image #2</h3>
+                                                <button onClick={() => enableEditModeSlider(["test"])} className="btn">Modifier</button>
+                                            </div>
+                                        )}
+                                    </>
                                 :
-                                <div key={image.id + "_hidden"} style={{display: "none"}}></div>
-                            ))}
-                            {getSliderImages && getSliderImages.map((image) => (
-                                (image.order == 3)
+                                <></>
+                            }
+                            {
+                                (getSliderImages)
                                 ?
-                                <div key={image.id} className="box">
-                                    <img src={`/img/${image.name}`} alt=""/>
-                                    <h3 className="position">Image #3</h3>
-                                    <button onClick={enableEditMode} className="btn">Modifier</button>
-                                </div>
+                                    <>
+                                        {getSliderImages.length > 0 && (
+                                            <div key="slider3" className="box">
+                                                <img src={`/img/${getSliderImages[2].name}`} alt=""/>
+                                                <h3 className="position">Image #3</h3>
+                                                <button onClick={() => enableEditModeSlider(["test"])} className="btn">Modifier</button>
+                                            </div>
+                                        )}
+                                    </>
                                 :
-                                <div key={image.id + "_hidden"} style={{display: "none"}}></div>
-                            ))}
+                                <></>
+                            }
                         </div>
                     </div>
                     <div className="topCategoriesManager">
                         <h1>Top Catégories manager</h1>
                         <div className="box-container">
-                            {getTopCategories && getTopCategories.map((category) => (
-                                (category.category_order == 1)
+                            {
+                                (getTopCategories)
                                 ?
-                                <div key={category.category_id} className="box">
-                                    <img src={`/img/${category.image_name}`} alt=""/>
-                                    <h3 className="position">{category.category_name}</h3>
-                                    <Link to="/" className="btn">Modifier</Link>
-                                </div>
+                                    <>
+                                        {getTopCategories.length > 0 && (
+                                            <div key="category1" className="box">
+                                                <img src={`/img/${getTopCategories[0].image_name}`} alt=""/>
+                                                <h3 className="position">{getTopCategories[0].category_name}</h3>
+                                                <Link to="/" className="btn">Modifier</Link>
+                                            </div>
+                                        )}
+                                    </>
                                 :
-                                <div key={category.category_id + "_hidden"} style={{display: "none"}}></div>
-                            ))}
-                            {getTopCategories && getTopCategories.map((category) => (
-                                (category.category_order == 2)
+                                <></>
+                            }
+                            {
+                                (getTopCategories)
                                 ?
-                                <div key={category.category_id} className="box">
-                                    <img src={`/img/${category.image_name}`} alt=""/>
-                                    <h3 className="position">{category.category_name}</h3>
-                                    <Link to="/" className="btn">Modifier</Link>
-                                </div>
+                                    <>
+                                        {getTopCategories.length > 0 && (
+                                            <div key="category2" className="box">
+                                                <img src={`/img/${getTopCategories[1].image_name}`} alt=""/>
+                                                <h3 className="position">{getTopCategories[1].category_name}</h3>
+                                                <Link to="/" className="btn">Modifier</Link>
+                                            </div>
+                                        )}
+                                    </>
                                 :
-                                <div key={category.category_id + "_hidden"} style={{display: "none"}}></div>
-                            ))}
-                            {getTopCategories && getTopCategories.map((category) => (
-                                (category.category_order == 3)
+                                <></>
+                            }
+                            {
+                                (getTopCategories)
                                 ?
-                                <div key={category.category_id} className="box">
-                                    <img src={`/img/${category.image_name}`} alt=""/>
-                                    <h3 className="position">{category.category_name}</h3>
-                                    <Link to="/" className="btn">Modifier</Link>
-                                </div>
+                                    <>
+                                        {getTopCategories.length > 0 && (
+                                            <div key="category3" className="box">
+                                                <img src={`/img/${getTopCategories[2].image_name}`} alt=""/>
+                                                <h3 className="position">{getTopCategories[2].category_name}</h3>
+                                                <Link to="/" className="btn">Modifier</Link>
+                                            </div>
+                                        )}
+                                    </>
                                 :
-                                <div key={category.category_id + "_hidden"} style={{display: "none"}}></div>
-                            ))}
+                                <></>
+                            }
                         </div>
                     </div>
                     <div className="topProductsManager">
                         <h1>Top Produits manager</h1>
                         <div className="box-container">
-                            {getTopProducts && getTopProducts.map((product) => (
-                                (product.product_order == 1)
+                            {
+                                (getTopProducts)
                                 ?
-                                <div key={product.product_id} className="box">
-                                    <img src={`/img/${product.image_name}`} alt=""/>
-                                    <h3 className="position">{product.product_name}</h3>
-                                    <Link to="/" className="btn">Modifier</Link>
-                                </div>
+                                    <>
+                                        {getTopProducts.length > 0 && (
+                                            <div key="product1" className="box">
+                                                <img src={`/img/${getTopProducts[0].image_name}`} alt=""/>
+                                                <h3 className="position">{getTopProducts[0].product_name}</h3>
+                                                <Link to="/" className="btn">Modifier</Link>
+                                            </div>
+                                        )}
+                                    </>
                                 :
-                                <div key={product.category_id + "_hidden"} style={{display: "none"}}></div>
-                            ))}
-                            {getTopProducts && getTopProducts.map((product) => (
-                                (product.product_order == 2)
+                                <></>
+                            }
+                            {
+                                (getTopProducts)
                                 ?
-                                <div key={product.product_id} className="box">
-                                    <img src={`/img/${product.image_name}`} alt=""/>
-                                    <h3 className="position">{product.product_name}</h3>
-                                    <Link to="/" className="btn">Modifier</Link>
-                                </div>
+                                    <>
+                                        {getTopProducts.length > 0 && (
+                                            <div key="product2" className="box">
+                                                <img src={`/img/${getTopProducts[1].image_name}`} alt=""/>
+                                                <h3 className="position">{getTopProducts[1].product_name}</h3>
+                                                <Link to="/" className="btn">Modifier</Link>
+                                            </div>
+                                        )}
+                                    </>
                                 :
-                                <div key={product.category_id + "_hidden"} style={{display: "none"}}></div>
-                            ))}
-                            {getTopProducts && getTopProducts.map((product) => (
-                                (product.product_order == 3)
+                                <></>
+                            }
+                            {
+                                (getTopProducts)
                                 ?
-                                <div key={product.product_id} className="box">
-                                    <img src={`/img/${product.image_name}`} alt=""/>
-                                    <h3 className="position">{product.product_name}</h3>
-                                    <Link to="/" className="btn">Modifier</Link>
-                                </div>
+                                    <>
+                                        {getTopProducts.length > 0 && (
+                                            <div key="product3" className="box">
+                                                <img src={`/img/${getTopProducts[2].image_name}`} alt=""/>
+                                                <h3 className="position">{getTopProducts[2].product_name}</h3>
+                                                <Link to="/" className="btn">Modifier</Link>
+                                            </div>
+                                        )}
+                                    </>
                                 :
-                                <div key={product.category_id + "_hidden"} style={{display: "none"}}></div>
-                            ))}
+                                <></>
+                            }
                         </div>
                     </div>
                     {
@@ -220,23 +259,19 @@ const HomePageManager = () => {
                         ?
                             <>
                                 <div className="editMode">
-                                    <form action="http://localhost:8000/actions/homePage/homePageManager.php" method="post" encType="multipart/form-data">
+                                    <form method="post" encType="multipart/form-data">
                                         <h1 className="editTitle">Modifier l'élément sélectionné</h1>
-                                        <div>
-                                            <h3>Prévisualisation de l'image</h3>
-                                            <img src="/img/1-1-chaise-design-blanc-et-bois-clair-.jpg" alt=""/>
-                                        </div>
                                         <div>
                                             <label htmlFor="selectImage">Sélectionner parmis les images déjà existantes:</label>
                                             <select name="selectImage" id="selectImage">
-                                                <option selected value=""></option>
+                                                <option key="defaultValue" defaultValue=""></option>
                                                 {getEditModeData && getEditModeData.map((image) => (
-                                                    <option value={image.id}>{image.name}</option>
+                                                    <option key={"editSliderImage" + image.id} value={image.name}>{image.name}</option>
                                                 ))}
                                             </select>
                                         </div>
                                         <button type="submit" className="form-btn-success">Modifier</button>
-                                        <button onClick={disableEditMode} className="form-btn-error">Annuler</button>
+                                        <button type="reset" onClick={disableEditModeSlider} className="form-btn-error">Annuler</button>
                                     </form>
                                 </div>
                             </>
