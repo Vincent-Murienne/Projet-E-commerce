@@ -1,8 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
-import DefaultLayout from "../components/DefaultLayout";
+import DefaultLayout from "../components/layouts/DefaultLayout";
+import AdminLayout from "../components/layouts/AdminLayout";
 import HomePage from "../pages/homePage/HomePage";
 import LoginPage from "../pages/loginPage/LoginPage";
 import RegisterPage from "../pages/registerPage/RegisterPage";
+import HomePageManager from "../pages/admin/homePage/HomePageManager";
 import CategoriePage from "../pages/categoriePage/CategoriePage";
 
 
@@ -27,6 +29,16 @@ const router = createBrowserRouter([
                 path: "categoriePage",
                 element: <CategoriePage/>
             },
+        ]
+    },
+    {
+        path: "/admin",
+        element: <AdminLayout/>,
+        children: [
+            {
+                path: "homePage/HomePageManager",
+                element: <HomePageManager/>
+            }
         ]
     }
 ]);

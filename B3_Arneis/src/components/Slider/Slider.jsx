@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { Data } from '../../services/api';
 
 export default function Slider() {
-    const [currentIndex, setCurrentIndex] = useState(1);
+    const [currentIndex, setCurrentIndex] = useState(0);
     const [getSliderImages, setSliderImages] = useState([]);
 
     let data = {
@@ -15,6 +15,7 @@ export default function Slider() {
             {
                 console.log(response);
                 setSliderImages(response.data);
+                setCurrentIndex(currentIndex+1);
             }
             else
             {

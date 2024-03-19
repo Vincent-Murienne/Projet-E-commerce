@@ -2,7 +2,7 @@ import { FaSearch, FaShoppingCart, FaUser, FaBars } from "react-icons/fa"
 import { FaX } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
-import { UserContext } from "../context/UserProvider";
+import { UserContext } from "../../context/UserProvider";
 
 
 const Header = () => {
