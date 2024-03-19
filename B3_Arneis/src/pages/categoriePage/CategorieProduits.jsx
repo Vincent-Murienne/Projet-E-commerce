@@ -1,28 +1,30 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom"; // Import de useParams pour récupérer les paramètres d'URL
 import { Data } from '../../services/api';
 import { useEffect, useState } from "react";
 
 const CategorieProduits = () => {
+    const { categoryId } = useParams(); // Récupération de l'ID de la catégorie depuis les paramètres d'URL
 
     const [getTopProducts, setTopProducts] = useState([]);
-    let data = {
-        "table": "products",
-        "id": 1
-    };
 
     useEffect(() => {
-        Data("category", "getCategory", data).then(response => {
-            if (response.success === true)
-            {
-                console.log(response);
-                setTopProducts(response.data);
+        // Utilisation de l'ID de la catégorie pour récupérer les produits dynamiquement
+        const fetchData = async () => {
+            try {
+                const response = await Data("category", "getCategory", { table: "products", id: categoryId });
+                if (response.success === true) {
+                    console.log(response);
+                    setTopProducts(response.data);
+                } else {
+                    console.log(response.error);
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
             }
-            else
-            {
-                console.log(response.error);
-            }
-        });
-    }, []);
+        };
+
+        fetchData();
+    }, [categoryId]);
 
     const handleMouseEnter = () => {
         console.log("La souris survole la carte");
