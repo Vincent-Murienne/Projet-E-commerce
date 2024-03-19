@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { getData } from '../../services/api';
+import { Data } from '../../services/api';
 import { useEffect, useState } from "react";
 
 const CategorieProduits = () => {
@@ -11,7 +11,7 @@ const CategorieProduits = () => {
     };
 
     useEffect(() => {
-        getData("category", "getCategory", data).then(response => {
+        Data("category", "getCategory", data).then(response => {
             if (response.success === true)
             {
                 console.log(response);
@@ -52,11 +52,11 @@ const CategorieProduits = () => {
                 <div className="box-container" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                     {getTopProducts && getTopProducts.map((product) => (
                         <div key={product.id} className="box" >
-                            <img src={`/img/${product.image_name}`} alt=""/>
+                            <img src={`/img/${product.product_image_name}`} alt=""/>
                             <Link to="/" className="btn">Voir plus</Link>
                             <div className="card-title">
-                            <h4>{product.name}</h4>
-                            <h4>{product.price}€</h4>
+                                <h4>{product.name}</h4>
+                                <h4>{product.price}€</h4>
                             </div>
                         </div>
                     ))}

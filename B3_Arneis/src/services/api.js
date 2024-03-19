@@ -2,7 +2,7 @@ const apiKey = import.meta.env.VITE_API_KEY;
 const apiUrl = import.meta.env.VITE_API_URL;
 
 const Data = async (endpoint, action, data) => {
-    const validEndpoints = ['homePage', 'loginRegister'];
+    const validEndpoints = ['homePage', 'loginRegister', 'category'];
 
     if (!validEndpoints.includes(endpoint)) {
         throw new Error('Endpoint non valide');
