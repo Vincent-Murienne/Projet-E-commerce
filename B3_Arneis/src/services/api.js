@@ -2,11 +2,6 @@ const apiKey = import.meta.env.VITE_API_KEY;
 const apiUrl = import.meta.env.VITE_API_URL;
 
 const Data = async (endpoint, action, data) => {
-    // const validEndpoints = ['homePage', 'loginRegister'];
-
-    // if (!validEndpoints.includes(endpoint)) {
-    //     throw new Error('Endpoint non valide');
-    // }
 
     const api_url = `${apiUrl}/actions/${endpoint}/${action}.php`;
 
