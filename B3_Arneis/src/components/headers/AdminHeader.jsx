@@ -47,10 +47,10 @@ const AdminHeader = () => {
                 <h1>Àrneis - back office</h1>
                 <nav>
                     <ul className="middle-nav">
-                        <li><Link to="/admin/homePage/SliderManager" className="hover-underline-animation">Gestion de l'accueil</Link></li>
+                        <li><Link to="/admin/HomePageManager" className="hover-underline-animation">Gestion de l'accueil</Link></li>
                         <li><Link to="/" className="hover-underline-animation">Catégories</Link></li>
                         <li><Link to="/" className="hover-underline-animation">Produits</Link></li>
-                        <li><Link to="/" className="hover-underline-animation">Utilisateurs</Link></li>
+                        <li><Link to="/admin/ImageManager" className="hover-underline-animation">Images</Link></li>
                     </ul>
                     <ul className="end-nav">
                         <li><Link to="/" className="hover-underline-animation">Retour au site</Link></li>
@@ -71,10 +71,10 @@ const AdminHeader = () => {
                                         <FaBars size={20} className="scale_on_hover" onClick={MenuClicked}/>
                                 }
                             <div className="dropdown-burger-content">
-                                <li><Link to="/" className="hover-underline-animation">Gestion de l'accueil</Link></li>
+                                <li><Link to="/admin/HomePageManager" className="hover-underline-animation">Gestion de l'accueil</Link></li>
                                 <li><Link to="/" className="hover-underline-animation">Catégories</Link></li>
                                 <li><Link to="/" className="hover-underline-animation">Produits</Link></li>
-                                <li><Link to="/" className="hover-underline-animation">Utilisateurs</Link></li>
+                                <li><Link to="/admin/ImageManager" className="hover-underline-animation">Images</Link></li>
                                 <li><div className="separator"></div></li>
                                 <li><Link to="/" className="hover-underline-animation">Paramètre</Link></li>
                                 <li><div className="separator"></div></li>

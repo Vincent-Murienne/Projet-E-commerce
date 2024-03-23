@@ -5,6 +5,7 @@ import HomePage from "../pages/homePage/HomePage";
 import LoginPage from "../pages/loginPage/LoginPage";
 import RegisterPage from "../pages/registerPage/RegisterPage";
 import HomePageManager from "../pages/admin/homePage/HomePageManager";
+import ImageList from "../pages/admin/ImageManager/ImageList";
 
 const router = createBrowserRouter([
     {
@@ -30,8 +31,12 @@ const router = createBrowserRouter([
         element: <AdminLayout/>,
         children: [
             {
-                path: "homePage/HomePageManager",
+                path: "HomePageManager",
                 element: <HomePageManager/>
+            },
+            {
+                path: "ImageManager",
+                element: <ImageList/>
             }
         ]
     }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import { Data } from '../../../services/api';
+import { ToastQueue } from "@react-spectrum/toast";
 
 
 const HomePageManager = () => {
@@ -12,6 +12,7 @@ const HomePageManager = () => {
         order: ""
     });
 
+    const [getReload, setReload] = useState(false);
     const [getEditMode, setEditMode] = useState(false);
     const [getEditModeData, setEditModeData] = useState([]);
     const [getAllImages, setAllImages] = useState([]);
@@ -63,6 +64,7 @@ const HomePageManager = () => {
     };
 
     useEffect(() => {
+        setReload(false);
         Data("homePage", "getTop", data).then(response => {
             if (response.success === true)
             {
@@ -106,13 +108,14 @@ const HomePageManager = () => {
                 console.log(response.error);
             }
         });
-    }, []);
+    }, [getReload]);
 
     let data2 = {
         "table": "categories"
     };
 
     useEffect(() => {
+        setReload(false);
         Data("homePage", "getTop", data2).then(response => {
             if (response.success === true)
             {
@@ -156,13 +159,14 @@ const HomePageManager = () => {
                 console.log(response.error);
             }
         });
-    }, []);
+    }, [getReload]);
 
     let data3 = {
         "table": "products"
     };
 
     useEffect(() => {
+        setReload(false);
         Data("homePage", "getTop", data3).then(response => {
             if (response.success === true)
             {
@@ -206,7 +210,7 @@ const HomePageManager = () => {
                 console.log(response.error);
             }
         });
-    }, []);
+    }, [getReload]);
 
     // Fonctions de gestion des modifications des top 3 de chaque sections.
 
@@ -220,12 +224,14 @@ const HomePageManager = () => {
         try {
             const response = await Data("homePage", "updateData", formData);
             if (response.success) {
-                window.location.reload();
+                setReload(true);
+                disableEditMode();
+                ToastQueue.positive("Modification réussite avec succès !", {timeout: 5000});
             } else {
-                console.log(response.error);
+                ToastQueue.negative(response.error, {timeout: 5000});
             }
         } catch (error) {
-            console.log("Une erreur est survenue lors de la modification en base de donnée.");
+            ToastQueue.negative("Une erreur est survenue lors de la modification en base de donnée.", {timeout: 5000});
         }
     };
 

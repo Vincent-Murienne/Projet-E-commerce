@@ -1,14 +1,19 @@
 import { RouterProvider } from "react-router-dom"
 import router from "./services/router"
 import { UserProvider } from "./context/UserProvider";
+import { ToastContainer } from "@react-spectrum/toast";
+import { Provider, defaultTheme } from "@adobe/react-spectrum";
 
 
 function App() {
   return (
     <>
-      <UserProvider>
-        <RouterProvider router={router}/>
-      </UserProvider>
+      <Provider theme={defaultTheme}>
+        <ToastContainer/>
+        <UserProvider>
+          <RouterProvider router={router}/>
+        </UserProvider>
+      </Provider>
     </>
   )
 }
