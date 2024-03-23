@@ -11,7 +11,7 @@ const TopCategories = () => {
     };
 
     useEffect(() => {
-        Data("homePage", "getTop", data).then(response => {
+        Data("panelAdmin", "getTop", data).then(response => {
             if (response.success === true)
             {
                 console.log(response);

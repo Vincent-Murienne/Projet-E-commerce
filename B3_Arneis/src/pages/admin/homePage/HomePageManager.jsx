@@ -65,7 +65,7 @@ const HomePageManager = () => {
 
     useEffect(() => {
         setReload(false);
-        Data("homePage", "getTop", data).then(response => {
+        Data("panelAdmin", "getTop", data).then(response => {
             if (response.success === true)
             {
                 // On vient vérifier qu'on a bien 3 éléments distincts dans notre tableau, dans le cas contraire on viendra normaliser celui-ci afin d'éviter les erreurs lors de l'intégration des données dans le front.
@@ -98,7 +98,7 @@ const HomePageManager = () => {
                 console.log(response.error);
             }
         });
-        Data("homePage", "getAllFromTable", data).then(response => {
+        Data("panelAdmin", "getAllFromTable", data).then(response => {
             if (response.success === true)
             {
                 setAllImages(response.data);
@@ -116,7 +116,7 @@ const HomePageManager = () => {
 
     useEffect(() => {
         setReload(false);
-        Data("homePage", "getTop", data2).then(response => {
+        Data("panelAdmin", "getTop", data2).then(response => {
             if (response.success === true)
             {
                 // On vient vérifier qu'on a bien 3 éléments distincts dans notre tableau, dans le cas contraire on viendra normaliser celui-ci afin d'éviter les erreurs lors de l'intégration des données dans le front.
@@ -149,7 +149,7 @@ const HomePageManager = () => {
                 console.log(response.error);
             }
         });
-        Data("homePage", "getAllFromTable", data2).then(response => {
+        Data("panelAdmin", "getAllFromTable", data2).then(response => {
             if (response.success === true)
             {
                 setAllCategories(response.data);
@@ -167,7 +167,7 @@ const HomePageManager = () => {
 
     useEffect(() => {
         setReload(false);
-        Data("homePage", "getTop", data3).then(response => {
+        Data("panelAdmin", "getTop", data3).then(response => {
             if (response.success === true)
             {
                 // On vient vérifier qu'on a bien 3 éléments distincts dans notre tableau, dans le cas contraire on viendra normaliser celui-ci afin d'éviter les erreurs lors de l'intégration des données dans le front.
@@ -200,7 +200,7 @@ const HomePageManager = () => {
                 console.log(response.error);
             }
         });
-        Data("homePage", "getAllFromTable", data3).then(response => {
+        Data("panelAdmin", "getAllFromTable", data3).then(response => {
             if (response.success === true)
             {
                 setAllProducts(response.data);
@@ -222,7 +222,7 @@ const HomePageManager = () => {
         e.preventDefault();
     
         try {
-            const response = await Data("homePage", "updateData", formData);
+            const response = await Data("panelAdmin", "updateTop", formData);
             if (response.success) {
                 setReload(true);
                 disableEditMode();

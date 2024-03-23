@@ -1,8 +1,7 @@
 
-function ImageList(props) {
+function ImageList() {
     return (
-        <>
-        </>
+        <></>
     );
 };
 
