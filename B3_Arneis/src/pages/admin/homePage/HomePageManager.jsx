@@ -44,10 +44,6 @@ const HomePageManager = () => {
         }
     };
 
-    useEffect(() => {
-        console.log(formData);
-      }, [formData]);
-
     const disableEditMode = () => {
         setEditMode(false);
         setFormData({"id": "", "table": "", "order": ""});
@@ -95,7 +91,7 @@ const HomePageManager = () => {
             }
             else
             {
-                console.log(response.error);
+                ToastQueue.negative(response.error, {timeout: 5000});
             }
         });
         Data("panelAdmin", "getAllFromTable", data).then(response => {
@@ -105,7 +101,7 @@ const HomePageManager = () => {
             }
             else
             {
-                console.log(response.error);
+                ToastQueue.negative(response.error, {timeout: 5000});
             }
         });
     }, [getReload]);
@@ -146,7 +142,7 @@ const HomePageManager = () => {
             }
             else
             {
-                console.log(response.error);
+                ToastQueue.negative(response.error, {timeout: 5000});
             }
         });
         Data("panelAdmin", "getAllFromTable", data2).then(response => {
@@ -156,7 +152,7 @@ const HomePageManager = () => {
             }
             else
             {
-                console.log(response.error);
+                ToastQueue.negative(response.error, {timeout: 5000});
             }
         });
     }, [getReload]);
@@ -197,7 +193,7 @@ const HomePageManager = () => {
             }
             else
             {
-                console.log(response.error);
+                ToastQueue.negative(response.error, {timeout: 5000});
             }
         });
         Data("panelAdmin", "getAllFromTable", data3).then(response => {
@@ -207,7 +203,7 @@ const HomePageManager = () => {
             }
             else
             {
-                console.log(response.error);
+                ToastQueue.negative(response.error, {timeout: 5000});
             }
         });
     }, [getReload]);

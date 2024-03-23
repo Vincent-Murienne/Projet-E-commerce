@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Data } from '../../services/api';
 import { useEffect, useState } from "react";
+import { ToastQueue } from "@react-spectrum/toast";
 
 const TopCategories = () => {
 
@@ -14,12 +15,12 @@ const TopCategories = () => {
         Data("panelAdmin", "getTop", data).then(response => {
             if (response.success === true)
             {
-                console.log(response);
                 setTopCategories(response.data);
             }
             else
             {
                 console.log(response.error);
+                ToastQueue.negative(response.error, {timeout: 5000});
             }
         });
     }, []);

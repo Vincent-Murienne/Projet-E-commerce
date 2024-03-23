@@ -97,7 +97,7 @@ header nav .separator {
 }
 
 /* Média query */
-@media (max-width: 1000px) {
+@media (max-width: 1100px) {
     header nav .middle-nav {
         display: none;
     }

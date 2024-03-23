@@ -6,11 +6,6 @@ require_once "../../config/db.php";
 // Set default success response to false in case of unlegitimate API call
 $response["success"] = false;
 
-// Récupérer la clé API depuis les données POST
-$apiKey = $_POST['apiKey'];
-
-error_log("API Key received: " . $apiKey);
-
 if ($isAllowed) {
     if (isset($json["email"]) && isset($json["password"])) {
         $db = new Database();
@@ -23,11 +18,10 @@ if ($isAllowed) {
 
         if ($user) {
             // Vérifier si le mot de passe haché correspond
-            if (password_verify($password, $user["password"])) {
+            if (password_verify($password, $user[0]["password"])) {
                 // Mot de passe correct, connexion réussie
                 $response["success"] = true;
                 $response["user"] = $user;
-                error_log("Connexion réussie pour l'utilisateur : " . $user["email"]);
             } else {
                 // Mot de passe incorrect
                 $response["error"] = "Nom d'utilisateur/email ou mot de passe incorrect.";

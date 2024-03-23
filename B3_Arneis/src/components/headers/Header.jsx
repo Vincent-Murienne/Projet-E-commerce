@@ -6,7 +6,7 @@ import { UserContext } from "../../context/UserProvider";
 
 
 const Header = () => {
-    const { user, login, logout } = useContext(UserContext);
+    const { getMessage, user, login, logout, addMessage, saveUserData } = useContext(UserContext);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const MenuClicked = () => {
@@ -42,21 +42,23 @@ const Header = () => {
         }
     };
 
-    const handleLogout = () => {
-        // Appeler la fonction de déconnexion du contexte
-        logout();
-    };
-
     return (
         <>
             <header>
-                <h1>Àrneis</h1>
+                <h1>Àirneis</h1>
                 <nav>
                     <ul className="middle-nav">
                         <li><Link to="/" className="hover-underline-animation">Accueil</Link></li>
                         <li><Link to="/" className="hover-underline-animation">Catégories</Link></li>
                         <li><Link to="/" className="hover-underline-animation">Produits</Link></li>
                         <li><Link to="/" className="hover-underline-animation">Contact</Link></li>
+                        {
+                            (user.isAdmin)
+                            ?
+                                <li><Link to="/admin/homePageManager" className="hover-underline-animation">Panel Admin</Link></li>
+                            :
+                                <></>
+                        }
                     </ul>
                     <ul className="end-nav">
                         <li><Link to="/"><FaSearch size={20} className="scale_on_hover"/></Link></li>
@@ -70,7 +72,7 @@ const Header = () => {
                                         <>
                                             <li><Link to="/" className="hover-underline-animation">Paramètre</Link></li>
                                             <li><div className='separator'></div></li>
-                                            <li><Link to="/" className="hover-underline-animation" onClick={handleLogout}>Se déconnecter</Link></li>
+                                            <li><Link to="/" className="hover-underline-animation" onClick={logout}>Se déconnecter</Link></li>
                                         </>
                                     :
                                         <>
@@ -101,7 +103,7 @@ const Header = () => {
                                         <>
                                             <li><Link to="/" className="hover-underline-animation">Paramètre</Link></li>
                                             <li><div className="separator"></div></li>
-                                            <li><Link to="/" className="hover-underline-animation" onClick={handleLogout}>Se déconnecter</Link></li>
+                                            <li><Link to="/" className="hover-underline-animation" onClick={logout}>Se déconnecter</Link></li>
                                         </>
                                     :
                                         <>

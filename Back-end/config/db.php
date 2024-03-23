@@ -28,6 +28,7 @@ class Database {
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // This methods takes the name of the table and an array to insert into the database
     public function insert($table, $data) {
         $columns = implode(', ', array_keys($data));
         $placeholders = ':' . implode(', :', array_keys($data));
@@ -37,6 +38,7 @@ class Database {
         return $query->rowCount();
     }
 
+    // This methods takes the name of the table, an array and you can also give a field to sort on. It will return you the data to matches the condition given in the array.
     public function selectWhere($table, $data, $orderby = false, $orderbyField = null) {
         $sqlFields = [];
         foreach ($data as $key => $value) {
@@ -48,7 +50,7 @@ class Database {
         }
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
-        return $query->fetch(PDO::FETCH_ASSOC);
+        return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // This method takes the table an array of data and an integer where to update the data
@@ -97,6 +99,7 @@ class Database {
         return $query->execute();
     }
 
+    // This method is specific, it creates a new user if it doesn't already exists
     public function registerUser(string $fullName, string $email, string $password, int $role = 0)
     {
         $existingUserQuery = $this->pdo->prepare("SELECT * FROM users WHERE email = :email");
@@ -113,5 +116,14 @@ class Database {
         $success = $insertQuery->execute(['full_name' => $fullName, 'email' => $email, 'password' => $hashedPassword, 'role' => $role]);
 
         return $success;
+    }
+
+    // This method is generic, it receives the table and the id and will then delete this id from the table
+    function delete(string $table, string $id):bool {
+        $sql = "DELETE FROM $table WHERE id = :id";
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue("id", $id, PDO::PARAM_INT);
+    
+        return $query->execute();
     }
 }

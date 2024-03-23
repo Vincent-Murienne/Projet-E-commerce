@@ -5,10 +5,6 @@ require_once "../../config/db.php";
 
 $response["success"] = false;
 
-$apiKey = $_POST['apiKey'];
-
-error_log("API Key received: " . $apiKey);
-
 if ($isAllowed) {
     // Vérification si tous les champs requis sont présents
     if (isset($json["full_name"]) && isset($json["email"]) && isset($json["password"])) {

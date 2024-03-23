@@ -5,10 +5,11 @@ import { useNavigate, Link } from "react-router-dom";
 import { Data } from '../../services/api';
 import { UserContext } from "../../context/UserProvider"; 
 import '../../assets/css/login-register.css';
+import { ToastQueue } from '@react-spectrum/toast';
 
 const LoginPage = () => {
 
-  const { login } = useContext(UserContext); // Utilisation du contexte utilisateur pour accéder à la fonction de connexion
+  const { login, saveUserData } = useContext(UserContext); // Utilisation du contexte utilisateur pour accéder à la fonction de connexion
 
   const [action, setAction] = useState('Connexion');
   const [showPassword, setShowPassword] = useState(false);
@@ -26,20 +27,22 @@ const LoginPage = () => {
     setError('');
 
     try {
-      console.log("debug 1");
-      const response = await Data("loginRegister", "login", { email, password });
-      console.log("debug 2");
-      if (response.success) {
-        // Connexion réussie, mettre à jour l'état de l'utilisateur
-        login({ id: response.userId, email: email });
-        navigate('/');
-        
-      } else {
-        setError(response.error);
-        console.log(response.error);
-      }
+      let data = {
+        "email": email,
+        "password": password
+      };
+
+      Data("loginRegister", "login", data).then(response => {
+        if (response.success === true){
+          console.log(response);
+          login({ id: response.user[0].id, email: email, isAdmin: (response.user[0].role === "1") ? true : false });
+          navigate('/');
+        } else{
+          ToastQueue.negative(response.error, {timeout: 5000});
+        }
+      });
     } catch (error) {
-      setError('Une erreur est survenue lors de la connexion.');
+      ToastQueue.negative(error, {timeout: 5000});
     }
   };
 

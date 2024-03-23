@@ -4,6 +4,7 @@ import { IconContext } from "react-icons";
 import { useNavigate, Link } from "react-router-dom";
 import { Data } from "../../services/api"; // Assuming you have a function to send POST requests
 import { UserContext } from "../../context/UserProvider"; // État pour gérer la redirection
+import { ToastQueue } from '@react-spectrum/toast';
 
 const RegisterPage = () => {
   const { login } = useContext(UserContext); // Utilisation du contexte utilisateur pour accéder à la fonction de connexion
@@ -59,16 +60,25 @@ const RegisterPage = () => {
     }
 
     try {
-      const response = await Data("loginRegister", "register", { full_name: fullName, email, password, apiKey: import.meta.env.VITE_API_KEY });
-      if (response.success) {
-        // Inscription réussie, connecter automatiquement l'utilisateur
-        login({ id: response.userId, email: email });
-        navigate('/');
-      } else {
-        setError(response.error);
-      }
+      let data = {
+        "full_name": fullName,
+        "email": email,
+        "password": password
+      };
+
+      Data("loginRegister", "register", data).then(response => {
+        if (response.success === true)
+        {
+          login({ id: response.userId, email: email });
+          navigate('/');
+        }
+        else
+        {
+          ToastQueue.negative(response.error, {timeout: 5000});
+        }
+      });
     } catch (error) {
-      setError('Une erreur est survenue lors de l\'inscription.');
+      ToastQueue.negative(error, {timeout: 5000});
     }
   };
 

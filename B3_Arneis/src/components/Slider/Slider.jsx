@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { Data } from '../../services/api';
+import { ToastQueue } from '@react-spectrum/toast';
 
 export default function Slider() {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -10,16 +11,15 @@ export default function Slider() {
     };
 
     useEffect(() => {
-        Data("homePage", "getTop", data).then(response => {
+        Data("panelAdmin", "getTop", data).then(response => {
             if (response.success === true)
             {
-                console.log(response);
                 setSliderImages(response.data);
                 setCurrentIndex(currentIndex+1);
             }
             else
             {
-                console.log(response.error);
+                ToastQueue.negative(response.error, {timeout: 5000});
             }
         });
     }, []);
