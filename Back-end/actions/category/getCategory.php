@@ -17,13 +17,13 @@ if($isAllowed) {
         if($resData) {
             $response["success"] = true;
             $response["data"] = $resData;
-        }
         } else {
             $response["error"] = "Veuillez indiquer dans les données envoyés la table dans laquelle faire cette recherche.";
         }
     } else {
         $response["error"] = "La clé API n'est pas fournie ou est incorrecte.";
     }
+}
 
-    // Print the response in the json format
-    echo json_encode($response);
+// Print the response in the json format
+echo json_encode($response);
