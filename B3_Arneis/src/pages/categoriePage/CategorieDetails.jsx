@@ -1,17 +1,16 @@
-import { Link, useParams } from "react-router-dom"; // Import de useParams pour récupérer les paramètres d'URL
+import { Link, useParams } from "react-router-dom"; // Importing useParams to retrieve URL parameters
 import { Data } from '../../services/api';
 import { useEffect, useState } from "react";
 
 
 const CategorieDetails = () => {
-    const { categoryId } = useParams(); // Récupération de l'ID de la catégorie depuis les paramètres d'URL
+    const { categoryId } = useParams(); // Retrieving the category ID from URL parameters
 
     const [getTopProducts, setTopProducts] = useState([]);
     const [getCategoryImage, setCategoryImage] = useState([]);
 
-
     useEffect(() => {
-        // Utilisation de l'ID de la catégorie pour récupérer les produits dynamiquement
+        // Using the category ID to dynamically fetch products
         const fetchData = async () => {
             try {
                 const response = await Data("category", "getCategory", { table: "products", id: categoryId });
@@ -34,14 +33,14 @@ const CategorieDetails = () => {
             <section className="categoriePage">
                 <img src={`/img/${getCategoryImage}`} alt="Image de catégorie" className="categoriePage-image"/>
                 <div className="description-centre">
-                <h1>Bienvenue dans la boutique "Àrneis" de la catégorie Chaise:</h1>
-                <p>
-                    Quels que soient vos préférences, vous trouverez des produits originaux et colorés qui rehausseront votre décoration.
-                </p>
-                <p>
-                    Passez commande dès maintenant sur notre site et recevez vos chaises chez vous !
-                </p>
-            </div>
+                    <h1>Bienvenue dans la boutique "Àrneis" de la catégorie Chaise:</h1>
+                    <p>
+                        Quels que soient vos préférences, vous trouverez des produits originaux et colorés qui rehausseront votre décoration.
+                    </p>
+                    <p>
+                        Passez commande dès maintenant sur notre site et recevez vos chaises chez vous !
+                    </p>
+                </div>
                 <section className="top-produits">
                     <h1 className="heading">Découvrez ici notre gamme de chaises d'intérieur :</h1>
                     <div className="box-container">
