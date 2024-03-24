@@ -6,6 +6,7 @@ import LoginPage from "../pages/loginPage/LoginPage";
 import RegisterPage from "../pages/registerPage/RegisterPage";
 import HomePageManager from "../pages/admin/homePage/HomePageManager";
 import CategorieDetails from "../pages/categoriePage/CategorieDetails";
+import CategorieList from "../pages/categoriePage/CategorieList";
 
 import ImageList from "../pages/admin/ImageManager/ImageList";
 
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
             {
                 path: "categories/:categoryId", 
                 element: <CategorieDetails/>
+            },
+            {
+                path: "categories", 
+                element: <CategorieList/>
             },
         ]
     },
