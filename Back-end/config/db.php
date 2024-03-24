@@ -82,7 +82,8 @@ class Database {
             $sql = "SELECT products.id AS 'product_id', products.name AS 'product_name', products.order AS 'product_order', images.name AS 'image_name' FROM products LEFT JOIN images ON products.id = images.product_id WHERE products.`order` IS NOT NULL GROUP BY products.id ORDER BY products.`order`";
         } else if($table == "images") {
             $sql = "SELECT * FROM images WHERE `order` IS NOT NULL ORDER BY `order`";
-        } else {
+        }
+         else {
             $sql = "";
         }
         $query = $this->pdo->prepare($sql);
@@ -125,6 +126,29 @@ class Database {
 
         return $success;
     }
+
+    public function getProductsFromCategory($id)
+    {
+        $sql = "SELECT products.*, product_image.category_id AS product_image_category_id, product_image.name AS product_image_name, category_image.category_id AS category_image_category_id, category_image.name AS category_image_name FROM products INNER JOIN (SELECT product_id, MIN(id) AS min_image_id FROM images GROUP BY product_id) AS first_image ON products.id = first_image.product_id INNER JOIN images AS product_image ON first_image.min_image_id = product_image.id LEFT JOIN images AS category_image ON products.category_id = category_image.category_id AND category_image.category_id = :id WHERE products.category_id = :id ORDER BY products.quantity DESC";
+
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue("id", $id, PDO::PARAM_INT);
+        $query->execute();
+
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    } 
+    
+    public function getAllCategoriesWithImage()
+    {
+        $sql = "SELECT categories.id AS 'category_id', categories.name AS 'category_name', categories.order AS 'category_order', images.name AS 'image_name' FROM categories LEFT JOIN images ON categories.id = images.category_id";
+        $query = $this->pdo->prepare($sql);
+        $query->execute();
+
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    } 
+}
+
+
 
     // This method is generic, it receives the table and the id and will then delete this id from the table
     function delete(string $table, string $id):bool {

@@ -5,6 +5,8 @@ import HomePage from "../pages/homePage/HomePage";
 import LoginPage from "../pages/loginPage/LoginPage";
 import RegisterPage from "../pages/registerPage/RegisterPage";
 import HomePageManager from "../pages/admin/homePage/HomePageManager";
+import CategorieDetails from "../pages/categoriePage/CategorieDetails";
+
 import ImageList from "../pages/admin/ImageManager/ImageList";
 
 const router = createBrowserRouter([
@@ -24,6 +26,10 @@ const router = createBrowserRouter([
                 path: "register",
                 element: <RegisterPage/>
             },  
+            {
+                path: "categories/:categoryId", 
+                element: <CategorieDetails/>
+            },
         ]
     },
     {

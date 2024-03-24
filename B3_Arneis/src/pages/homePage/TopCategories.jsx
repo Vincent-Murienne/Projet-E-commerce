@@ -35,7 +35,7 @@ const TopCategories = () => {
                         <div key={category.category_id} className="box">
                             <img src={`/img/${category.image_name}`} alt=""/>
                             <h3>{category.category_name}</h3>
-                            <Link to={`/categories/${category.category_name}`} className="btn">Voir plus</Link>
+                            <Link to={`/categories/${category.category_id}`} className="btn">Voir plus</Link>
                         </div>
                     ))}
                 </div>

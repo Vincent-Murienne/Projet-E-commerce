@@ -1,0 +1,167 @@
+.categoriePage-image {
+    width: 100%;
+    height: 50vh;
+    object-fit: cover;
+    
+}
+
+.description-centre {
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+    font-size: 1.2rem;
+}
+
+.categoriePage p {
+    color: #555;
+    line-height: 1.6;
+    margin-top: 2px;
+    
+}
+
+.description-centre p {
+    font-size: 125%;
+}
+
+.categoriePage h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+}
+
+.categoriePage section {
+    padding: 2rem 9%;
+}
+
+.categoriePage .heading {
+    text-align: center;
+    font-size: 2.5rem;
+    padding: 1rem;
+    color: var(--black);
+    margin-bottom: 30px ;
+}
+
+.categoriePage .heading span {
+    color: var(--blue);
+}
+
+.categoriePage .btn {
+    display: inline-block;
+    padding: .4rem 1.5rem;
+    border: .2rem solid var(--blue);
+    color: var(--blue);
+    cursor: pointer;
+    font-size: 1.5rem;
+    border-radius: .4rem;
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+    margin-top: 1rem;
+}
+
+.categoriePage .box .btn {
+    display: none; /* Bouton initialement caché */
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: .4rem 1.5rem;
+    border: .2rem solid var(--blue);
+    color: var(--blue);
+    cursor: pointer;
+    font-size: 1.5rem;
+    border-radius: .4rem;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.categoriePage .box:hover .btn {
+    display: inline-block; 
+}
+
+
+.categoriePage .btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0%;
+    height: 100%;
+    background: var(--blue);
+    transition: .3s linear;
+    z-index: -1;
+}
+
+.categoriePage .btn:hover::before {
+    width: 100%;
+    left: 0;
+}
+
+.categoriePage .btn:hover {
+    color: #fff;
+}
+
+.categoriePage .box-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.categoriePage .box:hover img {
+    filter: blur(5px);
+  }
+
+  .categoriePage .box .box-description {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+  
+  .categoriePage .box:hover .box-description {
+    opacity: 1;
+  }
+
+.categoriePage .box-container .box {
+    padding: 1.5rem;
+    background: #fff;
+    box-shadow: 0 .5rem 1.5rem rgba(0,0,0,.1);
+    border: .1rem solid rgba(0,0,0,.3);
+    border-radius: .6rem;
+    text-align: center;
+    max-width: 18rem;
+    position: relative;
+}
+
+.categoriePage .box-container .box img {
+    width: 240px;
+    height: 210px;
+    object-fit: cover;
+    border-radius: .5rem;
+}
+
+.categoriePage .box-container .box h3 {
+    color: var(--black);
+    font-size: 1.7rem;
+    padding-top: 1rem;
+}
+
+.card-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.card-title h4:first-child {
+    margin-right: 70px; 
+}
+
+
