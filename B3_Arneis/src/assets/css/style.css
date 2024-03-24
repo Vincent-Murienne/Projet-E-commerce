@@ -3,6 +3,7 @@
 @import url("./homePage.css");
 @import url("./login-register.css");
 @import url("./admin/homePageManager.css");
+@import url("./categoriePage.css");
 
 @font-face {
     font-family: "Circular Std Book";

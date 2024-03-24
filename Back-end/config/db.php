@@ -72,7 +72,8 @@ class Database {
             $sql = "SELECT products.id AS 'product_id', products.name AS 'product_name', products.order AS 'product_order', images.name AS 'image_name' FROM products LEFT JOIN images ON products.id = images.product_id WHERE products.`order` IS NOT NULL GROUP BY products.id ORDER BY products.`order`";
         } else if($table == "images") {
             $sql = "SELECT * FROM images WHERE `order` IS NOT NULL ORDER BY `order`";
-        } else {
+        }
+         else {
             $sql = "";
         }
         $query = $this->pdo->prepare($sql);
@@ -124,6 +125,15 @@ class Database {
         $query->execute();
 
         return $query->fetchAll(PDO::FETCH_ASSOC);
-    }   
+    } 
+    
+    public function getAllCategoriesWithImage()
+    {
+        $sql = "SELECT categories.id AS 'category_id', categories.name AS 'category_name', categories.order AS 'category_order', images.name AS 'image_name' FROM categories LEFT JOIN images ON categories.id = images.category_id";
+        $query = $this->pdo->prepare($sql);
+        $query->execute();
+
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    } 
 }
 

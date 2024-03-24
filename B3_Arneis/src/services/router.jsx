@@ -5,7 +5,7 @@ import HomePage from "../pages/homePage/HomePage";
 import LoginPage from "../pages/loginPage/LoginPage";
 import RegisterPage from "../pages/registerPage/RegisterPage";
 import HomePageManager from "../pages/admin/homePage/HomePageManager";
-import CategoriePage from "../pages/categoriePage/CategoriePage";
+import CategorieDetails from "../pages/categoriePage/CategorieDetails";
 
 
 const router = createBrowserRouter([
@@ -27,7 +27,7 @@ const router = createBrowserRouter([
             },  
             {
                 path: "categories/:categoryId", 
-                element: <CategoriePage/>
+                element: <CategorieDetails/>
             },
         ]
     },

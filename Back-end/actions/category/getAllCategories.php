@@ -12,7 +12,7 @@ if($isAllowed) {
 
         // Create new instance of class Database to interact with the database
         $db = new Database();
-        $resData = $db->getProductsFromCategory($json["id"]);
+        $resData = $db->getAllCategoriesWithImage();
         
         if($resData) {
             $response["success"] = true;
