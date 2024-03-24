@@ -5,7 +5,6 @@ import Slider from "../../components/Slider/Slider";
 
 
 const CategorieList = () => {
-    // const { categoryId } = useParams();
 
     const [categories, setCategories] = useState([]);
   
@@ -30,7 +29,6 @@ const CategorieList = () => {
     return (
         
         <section className="categoriePage"> 
-            <Slider/>
             <section className="top-categories">
             <h1 className="heading">Découvrez la gamme complète de nos catégories de produits</h1>
                 <div className="box-container">

@@ -8,7 +8,7 @@ import { Provider, defaultTheme } from "@adobe/react-spectrum";
 function App() {
   return (
     <>
-      <Provider theme={defaultTheme}>
+      <Provider theme={defaultTheme} colorScheme="light">
         <ToastContainer/>
         <UserProvider>
           <RouterProvider router={router}/>
