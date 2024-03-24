@@ -16,6 +16,7 @@ const CategorieDetails = () => {
             try {
                 const response = await Data("category", "getCategory", { table: "products", id: categoryId });
                 if (response.success === true) {
+                    console.log()
                     setTopProducts(response.data);
                     setCategoryImage(response.data[0].category_image_name);
                 } else {

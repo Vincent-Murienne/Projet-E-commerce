@@ -146,9 +146,6 @@ class Database {
 
         return $query->fetchAll(PDO::FETCH_ASSOC);
     } 
-}
-
-
 
     // This method is generic, it receives the table and the id and will then delete this id from the table
     function delete(string $table, string $id):bool {

@@ -84,7 +84,7 @@ const HomePageManager = () => {
                                 item3 = response.data[index];
                                 break;
                         }
-                    })
+                    });
                     let newData = [item1, item2, item3];
                     setSliderImages(newData);
                 }
