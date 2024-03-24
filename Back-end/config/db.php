@@ -28,6 +28,14 @@ class Database {
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // This method takes the name of the table and the id of what you wants to get the informations of (assuming the field you want to search in is called id)
+    public function find(string $table, int $id)
+    {
+        $query = $this->pdo->prepare("SELECT * FROM $table WHERE id = :id ");
+        $query->execute(["id" => $id]);
+        return $query->fetch(PDO::FETCH_ASSOC);
+    }
+
     // This methods takes the name of the table and an array to insert into the database
     public function insert($table, $data) {
         $columns = implode(', ', array_keys($data));
@@ -125,5 +133,11 @@ class Database {
         $query->bindValue("id", $id, PDO::PARAM_INT);
     
         return $query->execute();
+    }
+
+    // This method will return you the id of the last inserted things into the database. Useful to get the id of the last new user (to add it to the session to prevent the user to have to re login after signing in)
+    public function getLastIdInserted()
+    {
+        return $this->pdo->query("SELECT LAST_INSERT_ID()")->fetch(PDO::FETCH_ASSOC);
     }
 }

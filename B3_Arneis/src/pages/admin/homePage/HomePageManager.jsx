@@ -4,7 +4,7 @@ import { ToastQueue } from "@react-spectrum/toast";
 
 
 const HomePageManager = () => {
-    // Mise en place des useState et des fonctions permettant d'afficher correctement la page de modification des top 3 de chaque sections
+    // Setting up useStates and function to show all top 3 correctly on the front end
     
     const [formData, setFormData] = useState({
         id: "",
@@ -49,7 +49,7 @@ const HomePageManager = () => {
         setFormData({"id": "", "table": "", "order": ""});
     };
 
-    // Récupération des top 3 de chaques catégories afin des les afficher.
+    // Functions to retreive the tops 3 from the database
 
     const [getSliderImages, setSliderImages] = useState([]);
     const [getTopCategories, setTopCategories] = useState([]);
@@ -64,7 +64,7 @@ const HomePageManager = () => {
         Data("panelAdmin", "getTop", data).then(response => {
             if (response.success === true)
             {
-                // On vient vérifier qu'on a bien 3 éléments distincts dans notre tableau, dans le cas contraire on viendra normaliser celui-ci afin d'éviter les erreurs lors de l'intégration des données dans le front.
+                // We check that we do have 3 distinct elements in are table, otherwise we will normalize it with generic data to prevent error during the integration of the data in the front end
                 if(response.data.length === 3) {
                     setSliderImages(response.data);
                 } else {
@@ -115,7 +115,7 @@ const HomePageManager = () => {
         Data("panelAdmin", "getTop", data2).then(response => {
             if (response.success === true)
             {
-                // On vient vérifier qu'on a bien 3 éléments distincts dans notre tableau, dans le cas contraire on viendra normaliser celui-ci afin d'éviter les erreurs lors de l'intégration des données dans le front.
+                // We check that we do have 3 distinct elements in are table, otherwise we will normalize it with generic data to prevent error during the integration of the data in the front end
                 if(response.data.length === 3) {
                     setTopCategories(response.data);
                 } else {
@@ -166,7 +166,7 @@ const HomePageManager = () => {
         Data("panelAdmin", "getTop", data3).then(response => {
             if (response.success === true)
             {
-                // On vient vérifier qu'on a bien 3 éléments distincts dans notre tableau, dans le cas contraire on viendra normaliser celui-ci afin d'éviter les erreurs lors de l'intégration des données dans le front.
+                // We check that we do have 3 distinct elements in are table, otherwise we will normalize it with generic data to prevent error during the integration of the data in the front end
                 if(response.data.length === 3) {
                     setTopProducts(response.data);
                 } else {
@@ -208,7 +208,7 @@ const HomePageManager = () => {
         });
     }, [getReload]);
 
-    // Fonctions de gestion des modifications des top 3 de chaque sections.
+    // Function to handle form submission and update the data in the database
 
     const handleSelect = (e) => {
         setFormData({"id": e.target.value, "table": formData.table, "order": formData.order});

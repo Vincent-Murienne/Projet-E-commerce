@@ -3,7 +3,6 @@ import { Data } from '../../../services/api';
 import { ToastQueue } from '@react-spectrum/toast';
 import { UserContext } from '../../../context/UserProvider';
 import { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 function ImageList() {
 
@@ -46,32 +45,31 @@ function ImageList() {
 
     // This part is used when the user select the action button on the table. We will either edit or delete the row.
 
-    const navigate = useNavigate();
-
-    const { getMessage, user, login, logout, addMessage } = useContext(UserContext);
+    const { saveData } = useContext(UserContext);
 
     const action = (key, id) => {
         if(key === "edit"){
 
         } else if(key === "delete"){
-            const data_delete = {
-                "table": "images",
-                "id": id
-            };
-
-            Data("panelAdmin", "delete", data_delete).then(response => {
-                if (response.success === true)
-                {
-                    // ToastQueue.positive("Suppresion effectué avec succès !", {timeout: 5000});
-                    addMessage("success", "Suppresion effectué avec succès !");
-                    window.location.reload();
-                    // navigate("/admin/homePageManager");
-                }
-                else
-                {
-                    ToastQueue.negative(response.error, {timeout: 5000});
-                }
-            });
+            const confirmed = window.confirm("Voulez-vous vraiment supprimer cet élément ?");
+            if (confirmed) {
+                const data_delete = {
+                    "table": "images",
+                    "id": id
+                };
+    
+                Data("panelAdmin", "delete", data_delete).then(response => {
+                    if (response.success === true)
+                    {
+                        saveData("message", {type: "success", body: "Suppression réussite avec succès !"}); // This line is used to store the message into the cookies to display it after the reload of the page
+                        window.location.reload();
+                    }
+                    else
+                    {
+                        ToastQueue.negative(response.error, {timeout: 5000});
+                    }
+                });
+            }
         }
     };
 

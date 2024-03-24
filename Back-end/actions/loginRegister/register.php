@@ -24,8 +24,15 @@ if ($isAllowed) {
                 $insertedUser = $db->insert("users", ["full_name" => $fullName, "email" => $email, "password" => $hashedPassword, "role" => 0]);
 
                 if ($insertedUser) {
-                    $response["success"] = true;
-                    $response["message"] = "Inscription réussie.";
+                    $lastInsertedId = $db->getLastIdInserted()["LAST_INSERT_ID()"];
+                    $user = $db->find("users", $lastInsertedId);
+
+                    if($user){
+                        $response["success"] = true;
+                        $response["user"] = $user;
+                    } else {
+                        $response["error"] = "Impossible de récupérer les informations de l'utilisateur.";
+                    }
                 } else {
                     $response["error"] = "Une erreur s'est produite lors de l'inscription.";
                 }

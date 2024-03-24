@@ -7,17 +7,49 @@ import { ToastQueue } from "@react-spectrum/toast";
 
 const AdminHeader = () => {
     // We need to start by checking if the user is allowed to access to the panel Admin
-    const { getMessage, user, login, logout, addMessage, pullUserData } = useContext(UserContext);
+    const { saveData, pullData, removeData, reloadData } = useContext(UserContext);
     const navigate = useNavigate();
 
     useEffect(() => {
-        pullUserData();
-        if(user.isAdmin !== true){
-            addMessage("error", "Vous n'êtes pas autorisé à accéder à cette page !");
+        let data = pullData("user");
+        if(data.isAdmin !== true){
+            saveData("message", {type: "error", body: "Vous n'êtes pas autorisé à accéder à cette page !"});
             navigate("/");
         }
+    }, []);
+
+    // Then we will set the user information and close the menus if they are opens when the data is being reloaded
+    const [ user, setUser ] = useState({
+        isConnected: false,
+        isAdmin: false,
+        id: "",
+        email: ""
     });
 
+    const closeMenus = () => {
+        let dropdownBurgerContent = document.querySelector('.dropdown-burger-content');
+        let dropdownUserContent = document.querySelector('.dropdown-user-content');
+        if (dropdownBurgerContent.style.display === "block") {
+            dropdownBurgerContent.style.display = "none";
+            setIsMenuOpen(false);
+        }
+    
+        if (dropdownUserContent.style.display === "block") {
+            dropdownUserContent.style.display = "none";
+        }
+    };
+
+    useEffect(()=>{
+        closeMenus();
+        let data = pullData("user");
+        if(data !== undefined){
+            if(user.id !== data.id){
+                setUser(data);
+            }
+        }
+    }, [reloadData]);
+
+    // Those blocks of code allows us to show or hide the menus if the user clicks on it
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const MenuClicked = () => {
@@ -40,38 +72,36 @@ const AdminHeader = () => {
         }
     }
 
+    // We want to close the menus if the user scrolls
     window.onscroll = () =>{
-        let dropdownBurgerContent = document.querySelector('.dropdown-burger-content');
-        let dropdownUserContent = document.querySelector('.dropdown-user-content');
-        if (dropdownBurgerContent.style.display === "block") {
-            dropdownBurgerContent.style.display = "none";
-            setIsMenuOpen(false);
-        }
-    
-        if (dropdownUserContent.style.display === "block") {
-            dropdownUserContent.style.display = "none";
-        }
+        closeMenus();
     };
 
+    // We will to display the messages from the cookies if there are some
     useEffect(() => {
-        // console.log(getMessage);
-        if(getMessage && getMessage.type !== "")
+        let data = pullData("message");
+        if(data !== undefined)
         {
-            if(getMessage.type === "success"){
-                ToastQueue.positive(getMessage.body, {timeout: 5000});
-            } else if(getMessage.type === "error"){
-                ToastQueue.negative(getMessage.body, {timeout: 5000});
+            if(data.type === "success"){
+                ToastQueue.positive(data.body, {timeout: 5000});
+            } else if(data.type === "error"){
+                ToastQueue.negative(data.body, {timeout: 5000});
             }
-            // setMessage({"type": "", "body": ""});
+            removeData("message");
         }
     }, []);
 
-    useEffect(() => {
-        console.log(getMessage);
-    }, [getMessage]);
-    useEffect(() => {
-        console.log(user);
-    }, [user]);
+    // This function allows use to logout the user easily
+    const handleLogout = () => {
+        removeData("user");
+        setUser({
+            isConnected: false,
+            isAdmin: false,
+            id: "",
+            email: ""
+        });
+        ToastQueue.positive("Vous vous êtes correctement déconnecté.", {timeout: 5000});
+    };
 
     return (
         <>
@@ -91,7 +121,7 @@ const AdminHeader = () => {
                             <div className="dropdown-user-content">
                                 <li><Link to="/" className="hover-underline-animation">Paramètre</Link></li>
                                 <li><div className='separator'></div></li>
-                                <li><Link to="/" className="hover-underline-animation" onClick={logout}>Se déconnecter</Link></li>
+                                <li><Link to="/" className="hover-underline-animation" onClick={handleLogout}>Se déconnecter</Link></li>
                             </div>
                         </div>
                         <div className="dropdown-burger">
@@ -110,7 +140,7 @@ const AdminHeader = () => {
                                 <li><div className="separator"></div></li>
                                 <li><Link to="/" className="hover-underline-animation">Paramètre</Link></li>
                                 <li><div className="separator"></div></li>
-                                <li><Link to="/" className="hover-underline-animation" onClick={logout}>Se déconnecter</Link></li>
+                                <li><Link to="/" className="hover-underline-animation" onClick={handleLogout}>Se déconnecter</Link></li>
                             </div>
                         </div>
                     </ul>

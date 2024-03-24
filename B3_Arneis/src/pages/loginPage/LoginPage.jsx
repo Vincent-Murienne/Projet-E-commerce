@@ -3,13 +3,12 @@ import { FaRegEnvelope, FaLock, FaEye, FaEyeSlash} from "react-icons/fa"
 import { IconContext } from "react-icons";
 import { useNavigate, Link } from "react-router-dom";
 import { Data } from '../../services/api';
-import { UserContext } from "../../context/UserProvider"; 
-import '../../assets/css/login-register.css';
+import { UserContext } from "../../context/UserProvider";
 import { ToastQueue } from '@react-spectrum/toast';
 
 const LoginPage = () => {
 
-  const { login, saveUserData } = useContext(UserContext); // Utilisation du contexte utilisateur pour accéder à la fonction de connexion
+  const { saveData } = useContext(UserContext);
 
   const [action, setAction] = useState('Connexion');
   const [showPassword, setShowPassword] = useState(false);
@@ -22,6 +21,7 @@ const LoginPage = () => {
     setShowPassword(!showPassword);
   };
 
+  //This function is called after the validation of the form. We will check the existance of this user and will log him if his credentials are matching.
   const handleLogin = async (e) => {
     e.preventDefault();
     setError('');
@@ -34,8 +34,8 @@ const LoginPage = () => {
 
       Data("loginRegister", "login", data).then(response => {
         if (response.success === true){
-          console.log(response);
-          login({ id: response.user[0].id, email: email, isAdmin: (response.user[0].role === "1") ? true : false });
+          saveData("user", { isConnected: true, isAdmin: (response.user[0].role === "1") ? true : false, id: response.user[0].id, email: email });
+          saveData("message", {type: "success", body: "Connexion réussite avec succès !"});
           navigate('/');
         } else{
           ToastQueue.negative(response.error, {timeout: 5000});

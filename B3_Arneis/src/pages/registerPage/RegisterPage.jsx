@@ -2,12 +2,12 @@ import { useContext, useState } from 'react';
 import { FaUser, FaRegEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import { IconContext } from "react-icons";
 import { useNavigate, Link } from "react-router-dom";
-import { Data } from "../../services/api"; // Assuming you have a function to send POST requests
-import { UserContext } from "../../context/UserProvider"; // État pour gérer la redirection
+import { Data } from "../../services/api";
+import { UserContext } from "../../context/UserProvider";
 import { ToastQueue } from '@react-spectrum/toast';
 
 const RegisterPage = () => {
-  const { login } = useContext(UserContext); // Utilisation du contexte utilisateur pour accéder à la fonction de connexion
+  const { saveData } = useContext(UserContext);
 
   const [action, setAction] = useState('Inscription');
   const [showPassword, setShowPassword] = useState(false);
@@ -15,7 +15,7 @@ const RegisterPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [isChecked, setIsChecked] = useState(false); // État pour gérer l'état de la case à cocher
+  const [isChecked, setIsChecked] = useState(false);
   const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
@@ -30,6 +30,7 @@ const RegisterPage = () => {
     setIsChecked(!isChecked);
   };
 
+  // In this function we are going to perform multiple verification on each of the value passed into the form to see if it fits our restrictions. If it does we insert the new user into the database
   const handleRegister = async (e) => {
     e.preventDefault();
     setError('');
@@ -40,14 +41,12 @@ const RegisterPage = () => {
       return;
     }
 
-    // Regex pour l'email
     const emailRegex = /^[^\s@]{1,50}@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       setError('Veuillez saisir une adresse e-mail valide (maximum 50 caractères).');
       return;
     }
 
-    // Regex pour le mot de passe (12 caractères alphanumériques)
     const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d@#$%^&*()-_+=!]{12,30}$/;
     if (!passwordRegex.test(password)) {
       setError('Le mot de passe doit comporter au moins 12 caractères alphanumériques (maximum 30 caractères).');
@@ -69,7 +68,8 @@ const RegisterPage = () => {
       Data("loginRegister", "register", data).then(response => {
         if (response.success === true)
         {
-          login({ id: response.userId, email: email });
+          saveData("user", { isConnected: true, isAdmin: (response.user.role === "1") ? true : false, id: response.user.id, email: email });
+          saveData("message", {type: "success", body: "Inscription réussite avec succès !"});
           navigate('/');
         }
         else

@@ -6,6 +6,7 @@ export default function Slider() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [getSliderImages, setSliderImages] = useState([]);
 
+    // Get the slider images from the database
     let data = {
         "table": "images"
     };
@@ -24,6 +25,7 @@ export default function Slider() {
         });
     }, []);
 
+    // Function to increase the index of the slider and update the image to show
     const plusSlides = (n) => {
         let newIndex = currentIndex + n;
         if(newIndex <= 0)
@@ -36,6 +38,7 @@ export default function Slider() {
         setCurrentIndex(newIndex);
     }
 
+    // Everytime the index is changed, we start a new timer of 5 seconds after what we will increase the index to show another image
     useEffect(() => {
         const intervalId = setInterval(() => {
             plusSlides(1);

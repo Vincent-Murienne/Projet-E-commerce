@@ -1,78 +1,49 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import Cookies from "js-cookie";
-import { ToastQueue } from "@react-spectrum/toast";
 
 const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
 
-    const [getMessage, setMessage] = useState({
-        type: "",
-        body: ""
-    });
+    const [ reloadData, setReloadData ] = useState(false);
 
-    const [user, setUser] = useState({
-        isConnected: false,
-        isAdmin: false,
-        id: "",
-        email: ""
-    });
-
-    const saveUserData = () => {
-        Cookies.set("user", JSON.stringify(user));
+    // Function to save data in cookies so it can live in the whole application even after a reload
+    const saveData = (key, data) => {
+        Cookies.set(key, JSON.stringify(data));
+        changeReload();
     };
 
-    const pullUserData = () => {
-        let storedData = Cookies.get("user");
+    // Function to pull the data associated to the key from the cookies
+    const pullData = (key) => {
+        let response = undefined;
+        let storedData = Cookies.get(key);
         if(storedData !== undefined){
             let parsedData = JSON.parse(storedData);
             if(parsedData.isConnected !== false) {
-                setUser(parsedData);
+                response = parsedData;
             }
         }
+
+        return response;
     };
 
-    // useEffect(() => {
-    //     if(user.isConnected){
-    //         saveUserData();
-    //     } else {
-    //         pullUserData();
-    //     }
-    //     console.log(user)
-    // }, [user]);
-
-    // Function to set the user data in our context application
-    const login = (userData) => {
-        setUser({
-            isConnected: true,
-            isAdmin: userData.isAdmin,
-            id: userData.id,
-            email: userData.email
-        });
+    // Function to remove the cookie associated to the key
+    const removeData = (key) => {
+        Cookies.remove(key);
     };
 
-    // Function to logout the user
-    const logout = () => {
-        Cookies.remove("user");
-        setUser({
-            isConnected: false,
-            isAdmin: false,
-            id: "",
-            email: ""
-        });
-    };
-
-    // Function to set a message that we need to show after a navigation on another page
-    const addMessage = (type, body) => {
-        setMessage({
-            type: type,
-            body: body
-        });
+    // Function to force the reload of some useEffects
+    const changeReload = () => {
+        if(reloadData === true){
+            setReloadData(false);
+        } else{
+            setReloadData(true);
+        }
     };
 
     return (
         <>
-        <UserContext.Provider value={{ getMessage, user, login, logout, addMessage, pullUserData }}>
+        <UserContext.Provider value={{ pullData, saveData, removeData, reloadData }}>
             {children}
         </UserContext.Provider>
         </>

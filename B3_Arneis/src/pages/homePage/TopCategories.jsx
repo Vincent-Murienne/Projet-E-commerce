@@ -19,7 +19,6 @@ const TopCategories = () => {
             }
             else
             {
-                console.log(response.error);
                 ToastQueue.negative(response.error, {timeout: 5000});
             }
         });
