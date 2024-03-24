@@ -21,9 +21,7 @@ const CategorieList = () => {
         });
     }, []);
 
-    return (
-        <section className="categoriePage">
-        
+    return (       
         <section className="categoriePage"> 
             <section className="top-categories">
             <h1 className="heading">Découvrez la gamme complète de nos catégories de produits</h1>
