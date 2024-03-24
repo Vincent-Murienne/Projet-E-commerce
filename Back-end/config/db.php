@@ -145,23 +145,21 @@ class Database {
         $query->execute();
 
         return $query->fetchAll(PDO::FETCH_ASSOC);
-    } 
-}
-
-
-
-    // This method is generic, it receives the table and the id and will then delete this id from the table
-    function delete(string $table, string $id):bool {
-        $sql = "DELETE FROM $table WHERE id = :id";
-        $query = $this->pdo->prepare($sql);
-        $query->bindValue("id", $id, PDO::PARAM_INT);
-    
-        return $query->execute();
     }
 
     // This method will return you the id of the last inserted things into the database. Useful to get the id of the last new user (to add it to the session to prevent the user to have to re login after signing in)
     public function getLastIdInserted()
     {
         return $this->pdo->query("SELECT LAST_INSERT_ID()")->fetch(PDO::FETCH_ASSOC);
+    }
+
+    // This method is generic, it receives the table and the id and will then delete this id from the table
+    public function delete(string $table, string $id):bool 
+    {
+        $sql = "DELETE FROM $table WHERE id = :id";
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue("id", $id, PDO::PARAM_INT);
+        
+        return $query->execute();
     }
 }

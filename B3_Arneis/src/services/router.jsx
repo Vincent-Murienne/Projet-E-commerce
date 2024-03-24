@@ -9,6 +9,7 @@ import CategorieDetails from "../pages/categoriePage/CategorieDetails";
 import CategorieList from "../pages/categoriePage/CategorieList";
 
 import ImageList from "../pages/admin/ImageManager/ImageList";
+import SearchPage from "../pages/searchPage/SearchPage";
 
 const router = createBrowserRouter([
     {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
             {
                 path: "",
                 element: <HomePage/>
+            },
+            {
+                path: "search",
+                element: <SearchPage/>
             },
             {
                 path: "login",
