@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router-dom"; 
 import { Data } from '../../services/api';
 import { useEffect, useState } from "react";
-import Slider from "../../components/Slider/Slider";
+import { ToastQueue } from "@react-spectrum/toast";
 
 
 const CategorieList = () => {
@@ -9,24 +9,20 @@ const CategorieList = () => {
     const [categories, setCategories] = useState([]);
   
       useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await Data("category", "getAllCategories", { table: "categories" });
-                if (response.success === true) {
-                    console.log(response);
-                    setCategories(response.data);
-                } else {
-                    console.log(response.error);
-                }
-            } catch (error) {
-                console.error('Error fetching data:', error);
+        Data("category", "getAllCategories", { "table": "categories" }).then(response => {
+            if (response.success === true)
+            {
+                setCategories(response.data);
             }
-        };
-
-        fetchData();
+            else
+            {
+                ToastQueue.negative(response.error, {timeout: 5000});
+            }
+        });
     }, []);
 
     return (
+        <section className="categoriePage">
         
         <section className="categoriePage"> 
             <section className="top-categories">
