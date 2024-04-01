@@ -2,5 +2,42 @@
 
 .tableContainer {
     width: 80%;
-    margin: 3rem auto;
+    height: 100%;
+    margin: 7rem auto;
+}
+
+.tableContainer .add-btn {
+    margin-bottom: 2rem;
+}
+
+input[type=file] {
+    width: 300px;
+    max-width: 100%;
+    color: var(--blue);
+    padding: 8px;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.45);
+    border-radius: .23rem;
+}
+
+input[type=file]:focus {
+    outline: 2px dashed var(--blue);
+    outline-offset: 2px;
+}
+
+input[type=file]::file-selector-button {
+    margin-right: 8px;
+    border: none;
+    background: #222245;
+    padding: 8px 12px;
+    color: #fff;
+    cursor: pointer;
+}
+
+input[type=file]::file-selector-button:hover {
+    background: #4747b8;
+}
+
+.panelAdminAddElement form button {
+    cursor: pointer;
 }

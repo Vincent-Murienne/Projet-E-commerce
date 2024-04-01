@@ -1,8 +1,9 @@
-import {useAsyncList, useCollator, TableView, TableHeader, TableBody, Column, Row, Cell, Image, Item, ActionMenu } from '@adobe/react-spectrum';
+import { useAsyncList, useCollator, TableView, TableHeader, TableBody, Column, Row, Cell, Image, Item, ActionMenu } from '@adobe/react-spectrum';
 import { Data } from '../../../services/api';
 import { ToastQueue } from '@react-spectrum/toast';
 import { UserContext } from '../../../context/UserProvider';
 import { useContext } from 'react';
+import { Link } from "react-router-dom";
 
 function ImageList() {
 
@@ -76,6 +77,7 @@ function ImageList() {
     return (
         <>
             <section className="tableContainer">
+                <Link to="/admin/ImageManager/Add" className="add-btn form-btn-success">Ajouter une image</Link>
                 <TableView
                 aria-label="Table with client side sorting"
                 sortDescriptor={list.sortDescriptor}
@@ -83,6 +85,7 @@ function ImageList() {
                 selectionMode="single"
                 selectionStyle="highlight"
                 density="spacious"
+                marginTop={20}
                 >
                     <TableHeader>
                         <Column key="id" allowsSorting showDivider="true" width={50}>Id</Column>
