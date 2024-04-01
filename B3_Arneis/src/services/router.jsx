@@ -7,7 +7,6 @@ import RegisterPage from "../pages/registerPage/RegisterPage";
 import HomePageManager from "../pages/admin/homePage/HomePageManager";
 import CategorieDetails from "../pages/categoriePage/CategorieDetails";
 import CategorieList from "../pages/categoriePage/CategorieList";
-
 import ImageList from "../pages/admin/ImageManager/ImageList";
 import SearchPage from "../pages/searchPage/SearchPage";
 

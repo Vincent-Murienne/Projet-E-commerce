@@ -145,7 +145,7 @@ class Database {
         $query->execute();
 
         return $query->fetchAll(PDO::FETCH_ASSOC);
-    }
+    } 
 
     // This method will return you the id of the last inserted things into the database. Useful to get the id of the last new user (to add it to the session to prevent the user to have to re login after signing in)
     public function getLastIdInserted()
@@ -162,4 +162,11 @@ class Database {
         
         return $query->execute();
     }
+
+    // This method will return you the id of the last inserted things into the database. Useful to get the id of the last new user (to add it to the session to prevent the user to have to re login after signing in)
+    public function getLastIdInserted()
+    {
+        return $this->pdo->query("SELECT LAST_INSERT_ID()")->fetch(PDO::FETCH_ASSOC);
+    }
+
 }
