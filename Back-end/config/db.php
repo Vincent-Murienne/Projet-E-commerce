@@ -161,4 +161,15 @@ class Database {
     {
         return $this->pdo->query("SELECT LAST_INSERT_ID()")->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function getProduitDetail($productId)
+    {
+        $sql = "SELECT products.id AS 'product_id', products.name AS 'product_name', products.order AS 'product_order', images.name AS 'image_name' FROM products LEFT JOIN images ON products.id = images.product_id where product_id = :product_id;";
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue("id", $productId, PDO::PARAM_INT);
+        $query->execute();
+
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
 }

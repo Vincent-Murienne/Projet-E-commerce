@@ -99,7 +99,7 @@ const Header = () => {
                     <ul className="middle-nav">
                         <li><Link to="/" className="hover-underline-animation">Accueil</Link></li>
                         <li><Link to="/categories" className="hover-underline-animation">Catégories</Link></li>
-                        <li><Link to="/" className="hover-underline-animation">Produits</Link></li>
+                        <li><Link to="/produits" className="hover-underline-animation">Produits</Link></li>
                         <li><Link to="/" className="hover-underline-animation">Contact</Link></li>
                         {
                             (user.isAdmin)
@@ -143,7 +143,7 @@ const Header = () => {
                             <div className="dropdown-burger-content">
                                 <li><Link to="/" className="hover-underline-animation">Accueil</Link></li>
                                 <li><Link to="/categories" className="hover-underline-animation">Catégories</Link></li>
-                                <li><Link to="/" className="hover-underline-animation">Produits</Link></li>
+                                <li><Link to="/produits" className="hover-underline-animation">Produits</Link></li>
                                 <li><Link to="/" className="hover-underline-animation">Contact</Link></li>
                                 <li><div className="separator"></div></li>
                                 {

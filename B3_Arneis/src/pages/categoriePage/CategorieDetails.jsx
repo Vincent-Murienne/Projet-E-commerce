@@ -44,7 +44,7 @@ const CategorieDetails = () => {
                     </p>
                 </div>
                 <section className="top-produits">
-                    <h1 className="heading">Découvrez ici notre gamme de {getCategoryName.toLowerCase()} d'intérieur :</h1>
+                    <h1 className="heading">Découvrez ici notre gamme de {getCategoryName.toLowerCase()} :</h1>
                     <div className="box-container">
                         {getTopProducts && getTopProducts.map((product) => (
                             <div key={product.id} className="box" >
@@ -53,7 +53,7 @@ const CategorieDetails = () => {
                                     <h4>{product.name}</h4>
                                     <h4>{product.price}€</h4>
                                 </div>
-                                <Link to="/" className="btn">Voir plus</Link>
+                                <Link to="/produits" className="btn">Voir plus</Link>
                             </div>
                         ))}
                     </div>
