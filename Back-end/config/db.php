@@ -162,14 +162,13 @@ class Database {
         return $this->pdo->query("SELECT LAST_INSERT_ID()")->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function getProduitDetail($productId)
+    public function getProductDetail()
     {
-        $sql = "SELECT products.id AS 'product_id', products.name AS 'product_name', products.order AS 'product_order', images.name AS 'image_name' FROM products LEFT JOIN images ON products.id = images.product_id where product_id = :product_id;";
+        $sql = "SELECT categories.name AS category_name, products.*, images.id AS image_id, images.name AS image_name FROM products INNER JOIN images ON products.id = images.product_id LEFT JOIN categories ON products.category_id = categories.id WHERE products.id = 1 ORDER BY products.quantity DESC LIMIT 3";
+           
         $query = $this->pdo->prepare($sql);
-        $query->bindValue("id", $productId, PDO::PARAM_INT);
         $query->execute();
 
-        return $query->fetchAll(PDO::FETCH_ASSOC);
+        return $query->fetchAll(PDO::FETCH_ASSOC);       
     }
-    
 }

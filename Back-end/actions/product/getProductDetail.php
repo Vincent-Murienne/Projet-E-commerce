@@ -11,15 +11,13 @@ if($isAllowed) {
     if(isset($json["table"])) {
         // Create new instance of class Database to interact with the database
         $db = new Database();
-        $data = $db->getProduitDetail($json["table"]);
+        $data = $db->getProductDetail($json["table"]);
         if($data) {
             $response["success"] = true;
             $response["data"] = $data;
         }
     } else {
-        $response["error"] = "Veuillez indiquer dans les données envoyées la table dans laquelle faire cette recherche.";
-        // Log the received data for debugging
-        error_log("Received data: " . print_r($json, true));
+        $response["error"] = "Veuillez indiquer dans les données envoyés la table dans laquelle faire cette recherche.";
     }
 } else {
     $response["error"] = "La clé API n'est pas fournie ou est incorrecte.";
@@ -27,4 +25,3 @@ if($isAllowed) {
 
 // Print the response in the json format
 echo json_encode($response);
-?>

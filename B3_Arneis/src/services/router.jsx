@@ -8,7 +8,7 @@ import HomePageManager from "../pages/admin/homePage/HomePageManager";
 import CategorieDetails from "../pages/categoriePage/CategorieDetails";
 import CategorieList from "../pages/categoriePage/CategorieList";
 import ImageList from "../pages/admin/ImageManager/ImageList";
-import ProduitPage from "../pages/produitsPage/ProduitPage"
+import ProductPage from "../pages/productsPage/ProductPage";
 
 const router = createBrowserRouter([
     {
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "produits", 
-                element: <ProduitPage/>
+                element: <ProductPage/>
             },
         ]
     },
