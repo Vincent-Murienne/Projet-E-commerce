@@ -9,6 +9,7 @@ import CategorieDetails from "../pages/categoriePage/CategorieDetails";
 import CategorieList from "../pages/categoriePage/CategorieList";
 import ImageList from "../pages/admin/ImageManager/ImageList";
 import ImageAdd from "../pages/admin/ImageManager/ImageAdd";
+import ImageEdit from "../pages/admin/ImageManager/ImageEdit";
 
 const router = createBrowserRouter([
     {
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
             {
                 path: "ImageManager/Add",
                 element: <ImageAdd/>
+            },
+            {
+                path: "ImageManager/Edit/:imageId",
+                element: <ImageEdit/>
             }
         ]
     }

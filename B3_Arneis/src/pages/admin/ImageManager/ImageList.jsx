@@ -3,7 +3,7 @@ import { Data } from '../../../services/api';
 import { ToastQueue } from '@react-spectrum/toast';
 import { UserContext } from '../../../context/UserProvider';
 import { useContext } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function ImageList() {
 
@@ -47,21 +47,29 @@ function ImageList() {
     // This part is used when the user select the action button on the table. We will either edit or delete the row.
 
     const { saveData } = useContext(UserContext);
+    const navigate = useNavigate();
 
-    const action = (key, id) => {
+    const action = (key, imageId, imageName) => {
         if(key === "edit"){
-
+            // If the user clicked on the edit button, we build the url to the specific element and navigates towards it
+            let editUrl = "/admin/ImageManager/Edit/" + imageId;
+            navigate(editUrl);
         } else if(key === "delete"){
+            // If the user clicked on the delete button, we are going to delete the specific element
             const confirmed = window.confirm("Voulez-vous vraiment supprimer cet élément ?");
             if (confirmed) {
+                // If success, we are going to delete the image from the database
                 const data_delete = {
                     "table": "images",
-                    "id": id
+                    "id": imageId
                 };
     
                 Data("panelAdmin", "delete", data_delete).then(response => {
                     if (response.success === true)
                     {
+                        // We will now unlink the image from our image folder
+                        Data("panelAdmin", "deleteImage", {"image": imageName});
+
                         saveData("message", {type: "success", body: "Suppression réussite avec succès !"}); // This line is used to store the message into the cookies to display it after the reload of the page
                         window.location.reload();
                     }
@@ -112,7 +120,7 @@ function ImageList() {
                                             (columnKey === "action")
                                             ?
                                                 <Cell>
-                                                    <ActionMenu onAction={(key) => action(key, item.id)}>
+                                                    <ActionMenu onAction={(key) => action(key, item.id, item.name)}>
                                                         <Item key="edit" textValue="Edit">Edit</Item>
                                                         <Item key="delete" textValue="Delete">Delete</Item>
                                                     </ActionMenu>
