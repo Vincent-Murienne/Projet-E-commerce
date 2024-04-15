@@ -1,27 +1,32 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Data } from '../../services/api';
 import { useEffect, useState } from "react";
 import SliderProduct from "./SliderProduct";
+import ProductSimilaire from "./ProductSimilaire";
 
 const ProductPage = () => {
     const [product, setProduct] = useState(null);
-
-    let data = {
-        "table": "products"
-    };
+    const { productId } = useParams(); // Récupère l'ID du produit depuis les paramètres d'URL
 
     useEffect(() => {
-        Data("product", "getProductDetail", data).then(response => {
-            if (response.success === true) {
-                // Accéder au premier produit du tableau de données
-                setProduct(response.data[0]);
-            } else {
-                ToastQueue.negative(response.error, {timeout: 5000});
+        const fetchData = async () => {
+            try {
+                const response = await Data("product", "getProductDetail", { table: "products", id: productId });
+                if (response.success === true) {
+                    setProduct(response.data[0]);
+                } else {
+                    console.error(response.error);
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
             }
-        });
-    }, []);
+        };
+
+        fetchData();
+    }, [productId]);
 
     const stockStatus = product && (product.quantity === null || product.quantity === 0) ? "Hors stock" : "En stock";
+
     return (
         <>
             <section className="categoriePage">
@@ -33,16 +38,20 @@ const ProductPage = () => {
                                 <h3>{product.name}</h3>   
                                 <div className="stock">
                                     <h3>{stockStatus} </h3>                           
-                                </div>                             
+                                </div>                                                 
                                 <h2>{product.price} €</h2>                              
-                                    <h3>{product.description}.</h3>
+                                <h3>{product.description}.</h3>
+                                {product.material && (
+                                    <h3>Conçu avec un matériau de qualité supérieure, fait de {product.material}.</h3>
+                                )}
                             </div>     
-                            <Link to="/produits" className="btnProduit">AJOUTER AU PANIER</Link>                     
+                            <Link to={`/product/${product.id}`} className={`btnProduit ${stockStatus === "En stock" ? "" : "disabled"}`}>
+                                {stockStatus === "En stock" ? "AJOUTER AU PANIER" : "STOCK ÉPUISÉ"}
+                            </Link>
                         </div>                   
-                )}
-                
+                    )}
                 </div>
-                <h1 className="heading">PRODUITS SIMILAIRES :</h1>
+                <ProductSimilaire/>
             </section>
         </>
     );

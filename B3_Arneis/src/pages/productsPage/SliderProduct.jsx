@@ -1,30 +1,30 @@
 import React, {useState, useEffect} from 'react';
+import { useParams } from "react-router-dom";
 import { Data } from '../../services/api';
 import { ToastQueue } from '@react-spectrum/toast';
 
 export default function SliderProduct() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [getSliderImages, setSliderImages] = useState([]);
+    const { productId } = useParams();
 
     // Get the slider images from the database
-    let data = {
-        "table": "products"
-    };
-
     useEffect(() => {
-        Data("product", "getProductDetail", data).then(response => {
-            console.log(response.data); 
-            if (response.success === true)
-            {
-                setSliderImages(response.data);
-                setCurrentIndex(currentIndex+1);
+        const fetchData = async () => {
+            try {
+                const response = await Data("product", "getProductDetail", { table: "products", id: productId });
+                if (response.success === true) {
+                    setSliderImages(response.data);
+                } else {
+                    ToastQueue.negative(response.error, {timeout: 5000});
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
             }
-            else
-            {
-                ToastQueue.negative(response.error, {timeout: 5000});
-            }
-        });
-    }, []);
+        };
+
+        fetchData();
+    }, [productId]);
 
     // Function to increase the index of the slider and update the image to show
     const plusSlides = (n) => {

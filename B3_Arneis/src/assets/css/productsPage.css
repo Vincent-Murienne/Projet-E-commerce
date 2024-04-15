@@ -86,31 +86,32 @@
     align-items: flex-start; /* Ajustez l'alignement à flex-start */
     margin-left: auto; 
     padding-left: 20px; /* Ajustez la marge à votre convenance */
-    padding-top: 50px;
-}
-
-.product-text h3 {
-   padding-right: 5%;
 }
 
 .stock h3 {
     color: gray; /* Couleur de texte pour le stock en stock */
-    font-size: 14px; /* Taille de police pour le stock en stock */
+    font-size: 15px; /* Taille de police pour le stock en stock */
     padding-left: 50px;
 }
 .product-text h3:first-child {
-    margin-left: 550px; /* Ajoutez un espacement entre le prix et le nom */
+    margin-left: 550px;
+    font-size: 20px; /* Ajoutez un espacement entre le prix et le nom */
+}
+
+.product-text h3:last-child {
+    margin-top: 20px; /* Ajouter une marge en bas de la description */
 }
 
 /* Style du bouton */
 .btnProduit {
     display: flex;
-    padding: 10px 30%; /* Ajustez le rembourrage selon vos besoins */
+    padding:10px 30%; /* Ajustez le rembourrage selon vos besoins */
     background-color:#FADBD8; /* Couleur de fond du bouton */
     color: black; /* Couleur du texte du bouton */
     text-decoration: none; /* Supprimer le soulignement du lien */
     border: 4px solid black;
     font-weight: bold;
+    margin-left: 20px;
 }
 
 /* Style du bouton au survol */

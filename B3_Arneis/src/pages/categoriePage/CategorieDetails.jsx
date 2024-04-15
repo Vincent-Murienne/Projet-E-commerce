@@ -53,8 +53,7 @@ const CategorieDetails = () => {
                                     <h4>{product.name}</h4>
                                     <h4>{product.price}€</h4>
                                 </div>
-                                <Link to="/produits" className="btn">Voir plus</Link>
-                            </div>
+                                <Link to={`/product/${product.id}`} className="btn">Voir plus</Link>                            </div>
                         ))}
                     </div>
                 </section>
