@@ -75,8 +75,6 @@ const ImageAdd = () => {
                 fileInputRef.current.value = '';
                 ToastQueue.negative("Veuillez sélectionner un fichier d'un format accepté (png, jpg, jpeg)", {timeout: 5000});
             }
-        } else {
-
         }
     };
 
@@ -101,11 +99,11 @@ const ImageAdd = () => {
                             "product_id": (formData.product_id === 'null') ? null : formData.product_id
                         }
                     };
-                    console.log(data);
+                    
                     Data("panelAdmin", "insert", data).then(response => {
                         if (response.success === true)
                         {
-                            ToastQueue.positive("Modification réussite avec succès !", {timeout: 5000});
+                            ToastQueue.positive("Création réussite avec succès !", {timeout: 5000});
                             navigate("/admin/ImageManager");
                         }
                         else
