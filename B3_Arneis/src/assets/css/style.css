@@ -95,6 +95,7 @@ html::-webkit-scrollbar{
 .main-container {
     margin-top: 70.67px;
     margin-bottom: 53.33px;
+    background-color: var(--darker-white);
 }
 
 .form-btn-success {
@@ -111,6 +112,32 @@ html::-webkit-scrollbar{
     border-radius: .4rem;
     background-color: red;
     color: var(--white);
+}
+
+.panelAdminAddElement {
+    width: 400px;
+    height: 100%;
+    margin: 7rem auto;
+    text-align: center;
+    background-color: var(--darker-white);
+}
+
+.panelAdminAddElement form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    background-color: var(--white);
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.panelAdminAddElement form .buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
 }
 
 

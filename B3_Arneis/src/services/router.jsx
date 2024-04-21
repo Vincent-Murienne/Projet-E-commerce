@@ -10,6 +10,11 @@ import CategorieList from "../pages/categoriePage/CategorieList";
 import ImageList from "../pages/admin/ImageManager/ImageList";
 import SearchPage from "../pages/searchPage/SearchPage";
 import ProductPage from "../pages/productPage/ProductPage";
+import ImageAdd from "../pages/admin/ImageManager/ImageAdd";
+import ImageEdit from "../pages/admin/ImageManager/ImageEdit";
+import CategoryList from "../pages/admin/CategoryManager/CategoryList";
+import CategoryAdd from "../pages/admin/CategoryManager/CategoryAdd";
+import CategoryEdit from "../pages/admin/CategoryManager/CategoryEdit";
 
 const router = createBrowserRouter([
     {
@@ -57,6 +62,26 @@ const router = createBrowserRouter([
             {
                 path: "ImageManager",
                 element: <ImageList/>
+            },
+            {
+                path: "ImageManager/Add",
+                element: <ImageAdd/>
+            },
+            {
+                path: "ImageManager/Edit/:imageId",
+                element: <ImageEdit/>
+            },
+            {
+                path: "CategoryManager",
+                element: <CategoryList/>
+            },
+            {
+                path: "CategoryManager/Add",
+                element: <CategoryAdd/>
+            },
+            {
+                path: "CategoryManager/Edit/:categoryId",
+                element: <CategoryEdit/>
             }
         ]
     }
