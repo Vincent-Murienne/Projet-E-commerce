@@ -1,11 +1,12 @@
 import {useState} from 'react'
-import {TextField, Flex, CheckboxGroup, Checkbox, Text, ActionButton } from '@adobe/react-spectrum';
+import {TextField, Flex, CheckboxGroup, Checkbox, Text, ActionButton, Form, View } from '@adobe/react-spectrum';
 import Delete from '@spectrum-icons/workflow/Delete';
 import Checkmark from '@spectrum-icons/workflow/Checkmark';
 
 const SearchPage = () => {
     const [minPrice, setMinPrice] = useState('');
     const [maxPrice, setMaxPrice] = useState('');
+    const [validatePressBtn, setValidatePressBtn] = useState(false);
 
     const handleMinPriceChange = (value) => {
         setMinPrice(value);
@@ -13,6 +14,10 @@ const SearchPage = () => {
 
     const handleMaxPriceChange = (value) => {
         setMaxPrice(value);
+    };
+
+    const handleValidatePressBtn = () => {
+        setValidatePressBtn(true);
     };
 
     let [checkedMaterials, setCheckedMaterials] = useState([]);
@@ -23,94 +28,100 @@ const SearchPage = () => {
 
     return (
         <>
-            <Flex justifyContent="center" direction="row" gap="size-300" wrap>
-                <TextField 
-                    label="Titre" 
-                    placeholder='Titre'
-                    validate={(value) => {
-                        if (value === '') {
-                            return 'Ce champ est obligatoire';
-                        }
-                    }}
-                    isRequired necessityIndicator="icon" 
-                />
-                <TextField 
-                    label="Description" 
-                    placeholder='Description'
-                    validate={(value) => {
-                        if (value === '') {
-                            return 'Ce champ est obligatoire';
-                        }
-                    }}
-                    isRequired necessityIndicator="icon" 
-                />
-                <TextField 
-                    label="Prix min" 
-                    maxLength={5}
-                    onChange={handleMinPriceChange}
-                    placeholder='Prix min€'
-                    type='number'
-                    onClick={() => console.log('click')}
-                    validate={(value) => {
-                        if (value !== '' && value > maxPrice) {
-                            return 'Le prix minimum doit être inférieur au prix maximum';
-                        }
-                        else if (value === '') {
-                            return 'Ce champ est obligatoire';
-                        }
-                    }}
-                    isRequired necessityIndicator="icon" 
-                />
-                <TextField 
-                    label="Prix max" 
-                    maxLength={5}
-                    onChange={handleMaxPriceChange}
-                    placeholder='Prix max€'
-                    type='number'
-                    validate={(value) => {
-                        console.log(value);
-                        if (value !== '' && value < minPrice) {
-                            return 'Le prix maximum doit être supérieur au prix minimum';
-                        }
-                        else if (value === '') {
-                            return 'Ce champ est obligatoire';
-                        }
-                    }}
-                    isRequired necessityIndicator="icon" 
-                />
-                <CheckboxGroup 
-                    label="Matériaux" 
-                    name="matériaux"
-                    onChange={setCheckedMaterials}
-                    isInvalid={!isMaterialsValid}
-                    errorMessage={isMaterialsValid ? '' : 'Sélectionnez au moins un matériau'}
-                >
-                    <Checkbox value="bois">Bois</Checkbox>
-                    <Checkbox value="acier">Acier</Checkbox>
-                    <Checkbox value="plastique">Plastique</Checkbox>
-                </CheckboxGroup>
-            
-                <CheckboxGroup 
-                    label="Catégories" 
-                    name="catégories"
-                    onChange={setCheckedCategories}
-                    isInvalid={!isCategoriesValid}
-                    errorMessage={isCategoriesValid ? '' : 'Sélectionnez au moins une catégorie'}
-                >
-                    <Checkbox value="table">Table</Checkbox>
-                    <Checkbox value="lit">Lit</Checkbox>
-                    <Checkbox value="fauteuil">Fauteuil</Checkbox>
-                </CheckboxGroup>
+            <Form validationBehavior="native">
+                <View colorVersion={6}>
+                <Flex justifyContent="center" direction="row" gap="size-300" wrap>
+                    <TextField 
+                        colorVersion="cyan-900"
+                        label="Titre"
+                        validate={(value) => {
+                            if (value === '' && validatePressBtn === true) {
+                                return 'Ce champ est obligatoire';
+                            }
+                        }}
+                        isRequired necessityIndicator="icon"
+                    />
+                    <TextField 
+                        label="Description" 
+                        validate={(value) => {
+                            if (value === '' && validatePressBtn === true) {
+                                return 'Ce champ est obligatoire';
+                            }
+                        }}
+                        isRequired necessityIndicator="icon" 
+                    />
+                    <TextField 
+                        label="Prix min€" 
+                        maxLength={5}
+                        onChange={handleMinPriceChange}
+                        type='number'
+                        onClick={() => console.log('click')}
+                        validate={(value) => {
+                            if (value !== '' && value > maxPrice) {
+                                return 'Le prix minimum doit être inférieur au prix maximum';
+                            }
+                            else if (value === '' && validatePressBtn === true) {
+                                return 'Ce champ est obligatoire';
+                            }
+                        }}
+                        isRequired necessityIndicator="icon" 
+                    />
+                    <TextField 
+                        label="Prix max€" 
+                        maxLength={5}
+                        onChange={handleMaxPriceChange}
+                        type='number'
+                        validate={(value) => {
+                            console.log(value);
+                            if (value !== '' && value < minPrice) {
+                                return 'Le prix maximum doit être supérieur au prix minimum';
+                            }
+                            else if (value === '' && validatePressBtn === true) {
+                                return 'Ce champ est obligatoire';
+                            }
+                        }}
+                        isRequired necessityIndicator="icon" 
+                    />
+                    <CheckboxGroup
+                        marginStart={20}
+                        width={200}
+                        label="Matériaux" 
+                        name="matériaux"
+                        onChange={setCheckedMaterials}
+                        isInvalid={!isMaterialsValid}
+                        isRequired={true}
+                        errorMessage={isMaterialsValid && validatePressBtn === false ? '' : 'Sélectionnez au moins un matériau'}
+                    >
+                        <Checkbox width={200} value="bois">Bois</Checkbox>
+                        <Checkbox wwidth={200} value="acier">Acier</Checkbox>
+                        <Checkbox value="plastique">Plastique</Checkbox>
+                    </CheckboxGroup>
+                
+                    <CheckboxGroup
+                        width={200}
+                        label="Catégories" 
+                        name="catégories"
+                        onChange={setCheckedCategories}
+                        isInvalid={!isCategoriesValid}
+                        isRequired={true}
+                        errorMessage={isCategoriesValid && validatePressBtn === false ? '' : 'Sélectionnez au moins une catégorie'}
+                    >
+                        <Checkbox value="table">Table</Checkbox>
+                        <Checkbox value="lit">Lit</Checkbox>
+                        <Checkbox value="fauteuil">Fauteuil</Checkbox>
+                    </CheckboxGroup>
 
-                <ActionButton> 
-                    <Checkmark />
-                    <Text>Appliquer</Text>
-                </ActionButton>
-                <ActionButton> 
-                    <Delete />
-                    <Text>Réinitialiser</Text>
-                </ActionButton>
-            </Flex>
+                    <ActionButton onClick={handleValidatePressBtn} type="submit"> 
+                        <Checkmark />
+                        <Text>Appliquer</Text>
+                    </ActionButton>
+                    <ActionButton type="reset"> 
+                        <Delete />
+                        <Text>Réinitialiser</Text>
+                    </ActionButton>
+                </Flex>
+                </View>
+            </Form>
         </>
     );
 }

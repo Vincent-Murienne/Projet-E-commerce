@@ -13,13 +13,16 @@ const ProductPage = () => {
   const showResults = searchQuery !== null; // Checks if searchQuery is defined
 
   const [showSearchPage, setShowSearchPage] = useState(false);
+  const [filtering, setFiltering] = useState(false);
 
   const handleShowSearchPage = () => {
     setShowSearchPage(true);
+    setFiltering(true);
   };
 
   const handleCloseSearchPage = () => {
     setShowSearchPage(false);
+    setFiltering(false);
   };
 
   return (
@@ -37,11 +40,11 @@ const ProductPage = () => {
             </>
         )}
         <Flex justifyContent="center" direction="row" gap="size-300" wrap>
-            <ActionButton onClick={handleShowSearchPage}> 
+            <ActionButton onClick={handleShowSearchPage} isDisabled={filtering}> 
                 <Filter />
                 <Text>Filtrer</Text>
             </ActionButton>
-            <ComboBox placeholder='Trier par:'>
+            <ComboBox placeholder='Trier par:' isDisabled={filtering}>
                 <Item key="prixAsc">prix (asc)</Item>
                 <Item key="prixDesc">prix (desc)</Item>
                 <Item key="AjoutAsc">Date d'ajout (asc)</Item>
