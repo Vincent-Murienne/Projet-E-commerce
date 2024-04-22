@@ -2,15 +2,16 @@ import { Link, useParams } from "react-router-dom";
 import { Data } from '../../services/api';
 import { useEffect, useState } from "react";
 
-const ProductSimilaire = () => {
+const ProductSimilaire = ({ categoryId, productId }) => {
     const [getTopProducts, setTopProducts] = useState([]);
-
+    
     useEffect(() => {
         // Utiliser l'ID du produit pour récupérer les produits similaires
         const fetchData = async () => {
             try {
-                const response = await Data("product", "getProductSimilaire", { table: "products", id: 1 });
+                const response = await Data("product", "getProductSimilaire", { table: "products", id: categoryId });
                 if (response.success === true) {
+                    console.log(response.data)
                     setTopProducts(response.data);
                 } else {
                     console.log(response.error);
@@ -30,7 +31,7 @@ const ProductSimilaire = () => {
                     <h1 className="heading">PRODUITS SIMILAIRES</h1>
                     <div className="box-container">
                         {getTopProducts && getTopProducts.map((product) => (
-                            product.id !== 1 && (
+                            product.id !== productId && (
                                 <div key={product.id} className="box" >
                                     <img src={`/img/${product.product_image_name}`} alt=""/>
                                     <div className="card-title">
