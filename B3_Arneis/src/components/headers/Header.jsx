@@ -91,6 +91,34 @@ const Header = () => {
         ToastQueue.positive("Vous vous êtes correctement déconnecté.", {timeout: 5000});
     };
 
+    const [searchVisible, setSearchVisible] = useState(false);
+    const [searchQuery, setSearchQuery] = useState("");
+
+    const toggleSearchBar = () => {
+        setSearchVisible(!searchVisible);
+    };
+    
+
+    const handleSearchInputChange = (event) => {
+        setSearchQuery(event.target.value);
+    };
+
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault(); // Prevents default behavior of "Enter" key in input
+          navigateToProductPage();
+        }
+      };
+    
+      const navigateToProductPage = () => {
+        window.location.href = `/product?search=${searchQuery}`;
+      };
+
+    const handleSearchSubmit = (event) => {
+        event.preventDefault();
+        console.log("Recherche soumise :", searchQuery);
+    };
+
     return (
         <>
             <header>
@@ -99,7 +127,7 @@ const Header = () => {
                     <ul className="middle-nav">
                         <li><Link to="/" className="hover-underline-animation">Accueil</Link></li>
                         <li><Link to="/categories" className="hover-underline-animation">Catégories</Link></li>
-                        <li><Link to="/" className="hover-underline-animation">Produits</Link></li>
+                        <li><Link to="/product" className="hover-underline-animation">Produits</Link></li>
                         <li><Link to="/" className="hover-underline-animation">Contact</Link></li>
                         {
                             (user.isAdmin)
@@ -110,7 +138,22 @@ const Header = () => {
                         }
                     </ul>
                     <ul className="end-nav">
-                        <li><Link to="/"><FaSearch size={20} className="scale_on_hover"/></Link></li>
+                        <li><FaSearch size={20} className="scale_on_hover" onClick={toggleSearchBar}/></li> 
+
+                        {searchVisible && (
+                            <li>
+                                <form onSubmit={handleSearchSubmit}>
+                                    <input
+                                        type="text"
+                                        value={searchQuery}
+                                        onChange={handleSearchInputChange}
+                                        onKeyPress={handleKeyPress} // Add onKeyPress event to detect the "Enter" key
+                                        placeholder="Rechercher un produit ..."
+                                    />                                          
+                                </form>
+                            </li>
+                        )}
+
                         <li><Link to="/"><FaShoppingCart size={20}  className="scale_on_hover"/></Link></li>
                         <div className="dropdown-user">
                             <li><FaUser size={20} className="scale_on_hover" onClick={UserMenuClicked}/></li>
@@ -143,7 +186,7 @@ const Header = () => {
                             <div className="dropdown-burger-content">
                                 <li><Link to="/" className="hover-underline-animation">Accueil</Link></li>
                                 <li><Link to="/categories" className="hover-underline-animation">Catégories</Link></li>
-                                <li><Link to="/" className="hover-underline-animation">Produits</Link></li>
+                                <li><Link to="/product" className="hover-underline-animation">Produits</Link></li>
                                 <li><Link to="/" className="hover-underline-animation">Contact</Link></li>
                                 <li><div className="separator"></div></li>
                                 {

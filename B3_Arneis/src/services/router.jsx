@@ -8,8 +8,13 @@ import HomePageManager from "../pages/admin/homePage/HomePageManager";
 import CategorieDetails from "../pages/categoriePage/CategorieDetails";
 import CategorieList from "../pages/categoriePage/CategorieList";
 import ImageList from "../pages/admin/ImageManager/ImageList";
+import SearchPage from "../pages/searchPage/SearchPage";
+import ProductPage from "../pages/productPage/ProductPage";
 import ImageAdd from "../pages/admin/ImageManager/ImageAdd";
 import ImageEdit from "../pages/admin/ImageManager/ImageEdit";
+import CategoryList from "../pages/admin/CategoryManager/CategoryList";
+import CategoryAdd from "../pages/admin/CategoryManager/CategoryAdd";
+import CategoryEdit from "../pages/admin/CategoryManager/CategoryEdit";
 import ProductPage from "../pages/productsPage/ProductPage";
 
 const router = createBrowserRouter([
@@ -20,6 +25,10 @@ const router = createBrowserRouter([
             {
                 path: "",
                 element: <HomePage/>
+            },
+            {
+                path: "search",
+                element: <SearchPage/>
             },
             {
                 path: "login",
@@ -36,6 +45,10 @@ const router = createBrowserRouter([
             {
                 path: "categories", 
                 element: <CategorieList/>
+            },
+            {
+                path: "product", 
+                element: <ProductPage/>
             },
             {
                 path: "product/:productId", 
@@ -62,6 +75,18 @@ const router = createBrowserRouter([
             {
                 path: "ImageManager/Edit/:imageId",
                 element: <ImageEdit/>
+            },
+            {
+                path: "CategoryManager",
+                element: <CategoryList/>
+            },
+            {
+                path: "CategoryManager/Add",
+                element: <CategoryAdd/>
+            },
+            {
+                path: "CategoryManager/Edit/:categoryId",
+                element: <CategoryEdit/>
             }
         ]
     }
