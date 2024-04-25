@@ -162,7 +162,7 @@ const Header = () => {
                                     (user.isConnected)
                                     ?
                                         <>
-                                            <li><Link to="/" className="hover-underline-animation">Paramètre</Link></li>
+                                            <li><Link to="/monCompte" className="hover-underline-animation">Paramètre</Link></li>
                                             <li><div className='separator'></div></li>
                                             <li><Link to="/" className="hover-underline-animation" onClick={handleLogout}>Se déconnecter</Link></li>
                                         </>
@@ -193,7 +193,7 @@ const Header = () => {
                                     (user.isConnected)
                                     ?
                                         <>
-                                            <li><Link to="/" className="hover-underline-animation">Paramètre</Link></li>
+                                            <li><Link to="/monCompte" className="hover-underline-animation">Paramètre</Link></li>
                                             <li><div className="separator"></div></li>
                                             <li><Link to="/" className="hover-underline-animation" onClick={handleLogout}>Se déconnecter</Link></li>
                                         </>

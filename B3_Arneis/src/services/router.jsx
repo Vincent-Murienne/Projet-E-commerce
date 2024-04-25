@@ -15,6 +15,7 @@ import CategoryList from "../pages/admin/CategoryManager/CategoryList";
 import CategoryAdd from "../pages/admin/CategoryManager/CategoryAdd";
 import CategoryEdit from "../pages/admin/CategoryManager/CategoryEdit";
 import ProductPage from "../pages/productsPage/ProductPage";
+import MonComptePage from "../pages/monComptePage/MonComptePage";
 
 const router = createBrowserRouter([
     {
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
                 path: "product/:productId", 
                 element: <ProductPage/>
             },
+            {
+                path: "monCompte",
+                element: <MonComptePage/>
+            }
         ]
     },
     {

@@ -39,7 +39,7 @@ const ProductSimilaire = ({ categoryId, productId }) => {
                                         <h4>{product.name}</h4>
                                         <h4>{product.price}€</h4>
                                     </div>
-                                    <Link to={`/product/${product.id}`} className="btn">View more</Link>
+                                    <Link to={`/product/${product.id}`} className="btn">Voir plus</Link>
                                 </div>
                             )
                         ))}
