@@ -6,7 +6,7 @@ const ProductSimilaire = ({ categoryId, productId }) => {
     const [getTopProducts, setTopProducts] = useState([]);
     
     useEffect(() => {
-        // Utiliser l'ID du produit pour récupérer les produits similaires
+        // Use the category ID to fetch similar products
         const fetchData = async () => {
             try {
                 const response = await Data("product", "getProductSimilaire", { table: "products", id: categoryId });
@@ -28,9 +28,10 @@ const ProductSimilaire = ({ categoryId, productId }) => {
         <>  
             <section className="categoriePage">               
                 <section className="top-produits">
-                    <h1 className="heading">PRODUITS SIMILAIRES</h1>
+                    <h1 className="heading">SIMILAR PRODUCTS</h1>
                     <div className="box-container">
                         {getTopProducts && getTopProducts.map((product) => (
+                            // Check if the product is different from the current product
                             product.id !== productId && (
                                 <div key={product.id} className="box" >
                                     <img src={`/img/${product.product_image_name}`} alt=""/>
@@ -38,7 +39,7 @@ const ProductSimilaire = ({ categoryId, productId }) => {
                                         <h4>{product.name}</h4>
                                         <h4>{product.price}€</h4>
                                     </div>
-                                    <Link to={`/product/${product.id}`} className="btn">Voir plus</Link>
+                                    <Link to={`/product/${product.id}`} className="btn">View more</Link>
                                 </div>
                             )
                         ))}

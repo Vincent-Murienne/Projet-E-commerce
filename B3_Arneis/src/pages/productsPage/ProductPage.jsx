@@ -12,8 +12,7 @@ const ProductPage = () => {
     const [isDecrementDesactivated, setIsDecrementDesactivated] = useState(true);
 
     const [cartCount, setCartCount] = useState(1);
-    const { productId } = useParams(); // Récupère l'ID du produit depuis les paramètres d'URL
-
+    const { productId } = useParams(); 
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -31,6 +30,7 @@ const ProductPage = () => {
         fetchData();
     }, [productId]);
 
+    //Determine the stock status based on the product's available quantity
     const stockStatus = product && (product.quantity === null || product.quantity === 0) ? "Hors stock" : "En stock";
 
     const { pullData } = useContext(UserContext);

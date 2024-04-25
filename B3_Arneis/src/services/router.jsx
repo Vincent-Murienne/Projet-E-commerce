@@ -9,7 +9,6 @@ import CategorieDetails from "../pages/categoriePage/CategorieDetails";
 import CategorieList from "../pages/categoriePage/CategorieList";
 import ImageList from "../pages/admin/ImageManager/ImageList";
 import SearchPage from "../pages/searchPage/SearchPage";
-import ProductPage from "../pages/productPage/ProductPage";
 import ImageAdd from "../pages/admin/ImageManager/ImageAdd";
 import ImageEdit from "../pages/admin/ImageManager/ImageEdit";
 import CategoryList from "../pages/admin/CategoryManager/CategoryList";
