@@ -1,51 +1,45 @@
-import React, { useState, useContext } from "react";
-import { UserContext } from "../../context/UserProvider";
+import React from 'react';
+import { BsPencilSquare } from 'react-icons/bs';
+
 
 const MonComptePage = () => {
-    const { user, updateUser } = useContext(UserContext);
+    return (   
+        <>
+            <section className="comptePage"> 
+                <h1 className="titreCompte">Paramètres de mon compte</h1>
 
-    const [fullName, setFullName] = useState(user.fullName);
-    const [email, setEmail] = useState(user.email);
-    const [password, setPassword] = useState("");
+                <label><b>Nom complet</b></label>
+                <input type="text" placeholder="Prénom"/>
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
+                <label><b>E-mail</b></label>
+                <input type="text" placeholder="Email"/>
 
-        updateUser({ fullName, email, password });
-    };
-
-    return (
-        <div>
-            <h2>Paramètres du compte</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Nom complet:</label>
-                    <input
-                        type="text"
-                        value={fullName}
-                        onChange={(e) => setFullName(e.target.value)}
-                    />
+                <div className="input-group">
+                    <label><b>Mot de passe</b></label>
+                    <div className="password-input">
+                        <input type="password" placeholder="Mot de passe"/>
+                        {/* Utilisez l'icône de modification ici */}
+                        <BsPencilSquare className="edit-icon" />
+                    </div>
                 </div>
-                <div>
-                    <label>E-mail:</label>
-                    <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
+
+                <label><b>Adresse de livraison</b></label>
+                <input type="text" placeholder="Adresse de livraison"/> 
+
+                <label><b>Adresse de facturation</b></label>
+                <input type="text" placeholder="Adresse de facturation"/> 
+
+                <label><b>Méthode de payement</b></label>
+                <input type="text" placeholder="Méthode de payement"/> 
+                <br />
+
+                <div className="buttons-container">
+                    <button className="submit" type="submit">Télécharger mes données</button>
+                    <button className="submitDelete" type="submit">Supprimer mon compte</button>
                 </div>
-                <div>
-                    <label>Mot de passe:</label>
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </div>
-                <button type="submit">Enregistrer les modifications</button>
-            </form>
-        </div>
+            </section>
+        </>
     );
-};
+}
 
 export default MonComptePage;
