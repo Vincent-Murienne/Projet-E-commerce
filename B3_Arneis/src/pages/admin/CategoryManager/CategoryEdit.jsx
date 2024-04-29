@@ -7,9 +7,8 @@ import { TextField } from "@adobe/react-spectrum";
 
 const CategoryEdit = () => {
 
-    const [getCategoryDetails, setCategoryDetails] = useState([]);
     const [getCategoryName, setCategoryName] = useState([]);
-    const [validState, setValidState] = useState(0);
+    const [validState, setValidState] = useState(1);
 
     const { categoryId } = useParams(); // Retrieving the category ID from URL parameters
     let data = {
@@ -21,7 +20,6 @@ const CategoryEdit = () => {
         Data("panelAdmin", "getWhere", data).then(response => {
             if (response.success === true)
             {
-                setCategoryDetails(response.data[0]);
                 setCategoryName(response.data[0].name)
             }
             else
@@ -32,13 +30,10 @@ const CategoryEdit = () => {
     }, []);
 
     useEffect(() => {
-        if(getCategoryName !== null) {
-            if(getCategoryName.length < 2 || getCategoryName.length > 49) {
-                setValidState(2);
-                setCategoryName(null);
-            } else {
-                setValidState(1);
-            }
+        if(getCategoryName.length < 2 || getCategoryName.length > 49) {
+            setValidState(2);
+        } else {
+            setValidState(1);
         }
     }, [getCategoryName]);
 
@@ -48,8 +43,7 @@ const CategoryEdit = () => {
     const FormSubmitted = async (e) => {
         e.preventDefault();
 
-        if(getCategoryName !== null) {
-            console.log(getCategoryName);
+        if(validState === 1) {
             let data = {
                 "table": "categories",
                 "id": categoryId,
@@ -70,7 +64,7 @@ const CategoryEdit = () => {
                 }
             });
         } else {
-            ToastQueue.negative("Veuillez entrer un nom de catégorie valide (entre 2 et 50 caractères", {timeout: 5000});
+            ToastQueue.negative("Veuillez entrer un nom de catégorie valide (entre 2 et 50 caractères).", {timeout: 5000});
         }
     };
 
@@ -81,37 +75,27 @@ const CategoryEdit = () => {
                     <h1 className="formTitle">Modifier une catégorie</h1>
                     <div>
                         {
-                            (validState === 0)
+                            (validState === 1)
                             ?
                                 <TextField
                                     label="Nom de la catégorie"
                                     onChange={setCategoryName}
                                     value={getCategoryName}
-                                    isRequired
+                                    isRequired 
+                                    validationState="valid"
+                                    errorMessage="Veuillez entrer un nom correct (entre 2 et 50 caractères)."
                                     width={300}
                                 />
                             :
-                                (validState === 1)
-                                ?
-                                    <TextField
-                                        label="Nom de la catégorie"
-                                        onChange={setCategoryName}
-                                        value={getCategoryName}
-                                        isRequired 
-                                        validationState="valid"
-                                        errorMessage="Veuillez entrer un nom correct (entre 2 et 50 caractères)."
-                                        width={300}
-                                    />
-                                :
-                                    <TextField
-                                        label="Nom de la catégorie"
-                                        onChange={setCategoryName}
-                                        value={getCategoryName}
-                                        isRequired 
-                                        validationState="invalid"
-                                        errorMessage="Veuillez entrer un nom correct (entre 2 et 50 caractères)."
-                                        width={300}
-                                    />
+                                <TextField
+                                    label="Nom de la catégorie"
+                                    onChange={setCategoryName}
+                                    value={getCategoryName}
+                                    isRequired 
+                                    validationState="invalid"
+                                    errorMessage="Veuillez entrer un nom correct (entre 2 et 50 caractères)."
+                                    width={300}
+                                />
                         }
                     </div>
                     <div className="buttons">

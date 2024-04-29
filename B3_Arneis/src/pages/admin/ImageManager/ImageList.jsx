@@ -96,12 +96,12 @@ function ImageList() {
                 marginTop={20}
                 >
                     <TableHeader>
-                        <Column key="id" allowsSorting showDivider="true" width={50}>Id</Column>
-                        <Column key="product_id" allowsSorting showDivider="true" width={100}>Product Id</Column>
-                        <Column key="category_id" allowsSorting showDivider="true" width={110}>Category Id</Column>
-                        <Column key="name" allowsSorting showDivider="true" align='end'>Name</Column>
-                        <Column key="image_preview" showDivider="true" width={130}>Image Preview</Column>
-                        <Column key="order" allowsSorting showDivider="true" width={50} align="end">Order</Column>
+                        <Column key="id" allowsSorting showDivider="true" width={50}>ID</Column>
+                        <Column key="product_id" allowsSorting showDivider="true" width={100}>ID Produit</Column>
+                        <Column key="category_id" allowsSorting showDivider="true" width={110}>ID Categorie</Column>
+                        <Column key="name" allowsSorting showDivider="true" align='end'>Nom</Column>
+                        <Column key="image_preview" showDivider="true" width={150}>Aperçu de l'image</Column>
+                        <Column key="order" allowsSorting showDivider="true" width={50} align="end">Ordre</Column>
                         <Column key="action" showDivider="true" width={50} align="end">Action</Column>
                     </TableHeader>
                     <TableBody

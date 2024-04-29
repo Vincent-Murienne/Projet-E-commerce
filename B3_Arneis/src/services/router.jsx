@@ -13,6 +13,9 @@ import ImageEdit from "../pages/admin/ImageManager/ImageEdit";
 import CategoryList from "../pages/admin/CategoryManager/CategoryList";
 import CategoryAdd from "../pages/admin/CategoryManager/CategoryAdd";
 import CategoryEdit from "../pages/admin/CategoryManager/CategoryEdit";
+import ProductEdit from "../pages/admin/ProductManager/ProductEdit";
+import ProductAdd from "../pages/admin/ProductManager/ProductAdd";
+import ProductList from "../pages/admin/ProductManager/ProductList";
 
 const router = createBrowserRouter([
     {
@@ -72,6 +75,18 @@ const router = createBrowserRouter([
             {
                 path: "CategoryManager/Edit/:categoryId",
                 element: <CategoryEdit/>
+            },
+            {
+                path: "ProductManager",
+                element: <ProductList/>
+            },
+            {
+                path: "ProductManager/Add",
+                element: <ProductAdd/>
+            },
+            {
+                path: "ProductManager/Edit/:productId",
+                element: <ProductEdit/>
             }
         ]
     }

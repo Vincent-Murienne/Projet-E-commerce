@@ -14,7 +14,6 @@ const CategoryAdd = () => {
         if(getCategoryName !== null) {
             if(getCategoryName.length < 2 || getCategoryName.length > 49) {
                 setValidState(2);
-                setCategoryName(null);
             } else {
                 setValidState(1);
             }
@@ -26,26 +25,30 @@ const CategoryAdd = () => {
 
     const FormSubmitted = async (e) => {
         e.preventDefault();
-    
-        // We are going to add the category to the database
-        let data = {
-            "table": "categories",
-            "data": {
-                "name": getCategoryName
-            }
-        };
 
-        Data("panelAdmin", "insert", data).then(response => {
-            if (response.success === true)
-            {
-                ToastQueue.positive("Création réussite avec succès !", {timeout: 5000});
-                navigate("/admin/CategoryManager");
-            }
-            else
-            {
-                ToastQueue.negative(response.error, {timeout: 5000});
-            }
-        });
+        if(validState === 1) {
+            // We are going to add the category to the database
+            let data = {
+                "table": "categories",
+                "data": {
+                    "name": getCategoryName
+                }
+            };
+
+            Data("panelAdmin", "insert", data).then(response => {
+                if (response.success === true)
+                {
+                    ToastQueue.positive("Création réussite avec succès !", {timeout: 5000});
+                    navigate("/admin/CategoryManager");
+                }
+                else
+                {
+                    ToastQueue.negative(response.error, {timeout: 5000});
+                }
+            });
+        } else {
+            ToastQueue.negative("Veuillez remplir correctement tous les champs.", {timeout: 5000});
+        }
     };
 
     return(
