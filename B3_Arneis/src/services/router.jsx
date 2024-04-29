@@ -8,11 +8,13 @@ import HomePageManager from "../pages/admin/homePage/HomePageManager";
 import CategorieDetails from "../pages/categoriePage/CategorieDetails";
 import CategorieList from "../pages/categoriePage/CategorieList";
 import ImageList from "../pages/admin/ImageManager/ImageList";
+import SearchPage from "../pages/searchPage/SearchPage";
 import ImageAdd from "../pages/admin/ImageManager/ImageAdd";
 import ImageEdit from "../pages/admin/ImageManager/ImageEdit";
 import CategoryList from "../pages/admin/CategoryManager/CategoryList";
 import CategoryAdd from "../pages/admin/CategoryManager/CategoryAdd";
 import CategoryEdit from "../pages/admin/CategoryManager/CategoryEdit";
+import ProductPage from "../pages/productsPage/ProductPage";
 import ProductEdit from "../pages/admin/ProductManager/ProductEdit";
 import ProductAdd from "../pages/admin/ProductManager/ProductAdd";
 import ProductList from "../pages/admin/ProductManager/ProductList";
@@ -25,6 +27,10 @@ const router = createBrowserRouter([
             {
                 path: "",
                 element: <HomePage/>
+            },
+            {
+                path: "search",
+                element: <SearchPage/>
             },
             {
                 path: "login",
@@ -41,6 +47,14 @@ const router = createBrowserRouter([
             {
                 path: "categories", 
                 element: <CategorieList/>
+            },
+            {
+                path: "product", 
+                element: <ProductPage/>
+            },
+            {
+                path: "product/:productId", 
+                element: <ProductPage/>
             },
         ]
     },

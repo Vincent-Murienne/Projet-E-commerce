@@ -5,6 +5,8 @@
 @import url("./admin/homePageManager.css");
 @import url("./categoriePage.css");
 @import url("./admin/ImageManager.css");
+@import url("./productPage.css");
+@import url("./productsPage.css");
 
 @font-face {
     font-family: "Circular Std Book";
