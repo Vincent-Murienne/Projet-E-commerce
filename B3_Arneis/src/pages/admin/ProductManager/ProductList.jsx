@@ -5,13 +5,13 @@ import { UserContext } from '../../../context/UserProvider';
 import { useContext } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 
-function CategoryList() {
+function ProductList() {
 
     // This block of code is used to retrieve the data from the api and then sort the data if needed on what it needs to be sorted if the user selected one column
     let collator = useCollator({ numeric: true });
 
     const data = {
-        "table": "categories"
+        "table": "products"
     };
 
     let list = useAsyncList({
@@ -52,7 +52,7 @@ function CategoryList() {
     const action = (key, id) => {
         if(key === "edit"){
             // If the user clicked on the edit button, we build the url to the specific element and navigates towards it
-            let editUrl = "/admin/CategoryManager/Edit/" + id;
+            let editUrl = "/admin/ProductManager/Edit/" + id;
             navigate(editUrl);
         } else if(key === "delete"){
             // If the user clicked on the delete button, we are going to delete the specific element
@@ -60,7 +60,7 @@ function CategoryList() {
             if (confirmed) {
                 // If success, we are going to delete the element from the database
                 const data_delete = {
-                    "table": "categories",
+                    "table": "products",
                     "id": id
                 };
     
@@ -82,7 +82,7 @@ function CategoryList() {
     return (
         <>
             <section className="tableContainer">
-                <Link to="/admin/CategoryManager/Add" className="add-btn form-btn-success">Ajouter une catégorie</Link>
+                <Link to="/admin/ProductManager/Add" className="add-btn form-btn-success">Ajouter un produit</Link>
                 <TableView
                 aria-label="Table with client side sorting"
                 sortDescriptor={list.sortDescriptor}
@@ -94,7 +94,11 @@ function CategoryList() {
                 >
                     <TableHeader>
                         <Column key="id" allowsSorting showDivider="true" width={50}>ID</Column>
+                        <Column key="category_id" allowsSorting showDivider="true" width={115}>ID Categorie</Column>
                         <Column key="name" allowsSorting showDivider="true">Nom</Column>
+                        <Column key="price" allowsSorting showDivider="true" width={90}>Prix</Column>
+                        <Column key="quantity" allowsSorting showDivider="true" width={90}>Quantité</Column>
+                        <Column key="description" allowsSorting showDivider="true">Description</Column>
                         <Column key="order" allowsSorting showDivider="true" width={50} align="end">Ordre</Column>
                         <Column key="action" showDivider="true" width={50} align="end">Action</Column>
                     </TableHeader>
@@ -129,4 +133,4 @@ function CategoryList() {
     );
 };
 
-export default CategoryList;
+export default ProductList;
