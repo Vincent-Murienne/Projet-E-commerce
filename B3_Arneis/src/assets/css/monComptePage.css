@@ -129,18 +129,23 @@
     width: 48%; /* Définissez la largeur des boutons */
 }
 
-.password-input {
-    position: relative;
+.input-group {
+    display: flex;
+    align-items: center; /* Pour aligner les éléments verticalement */
+    width: 300px; /* Largeur totale de la boîte */
 }
 
-.password-input input[type="password"] {
-    padding-right: 30px; /* Ajustez selon la taille de l'icône */
+.input-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
 }
 
-.password-input .edit-icon {
-    position: absolute;
-    top: 50%;
-    right: 5px; /* Ajustez selon l'espacement souhaité */
-    transform: translateY(-50%);
+.icon-container {
+    margin-left: 10px;
+    padding-top: 20px;
+}
+
+.icon {
     cursor: pointer;
 }
