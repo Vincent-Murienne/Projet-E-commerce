@@ -60,11 +60,10 @@ function UserList() {
             if (confirmed) {
                 // If success, we are going to delete the element from the database
                 const data_delete = {
-                    "table": "users",
                     "id": id
                 };
     
-                Data("panelAdmin", "delete", data_delete).then(response => {
+                Data("panelAdmin", "deleteUser", data_delete).then(response => {
                     if (response.success === true)
                     {
                         saveData("message", {type: "success", body: "Suppression réussite avec succès !"}); // This line is used to store the message into the cookies to display it after the reload of the page

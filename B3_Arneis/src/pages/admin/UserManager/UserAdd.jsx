@@ -17,7 +17,8 @@ const UserAdd = () => {
 
     useEffect(() => {
         if(getUserName !== null) {
-            if(getUserName.length >= 5 && getUserName.length <= 49 && getUserName.includes(" ")) {
+            const fullNameRegex = /^[a-zA-ZÀ-ÿ\s-]{5,50}$/;
+            if(fullNameRegex.test(getUserName)) {
                 setUserNameValidState(1);
             } else {
                 setUserNameValidState(2);
@@ -156,6 +157,7 @@ const UserAdd = () => {
                                     label="Mot de passe de l'utilisateur"
                                     onChange={setPassword}
                                     isRequired
+                                    type="password"
                                     width={300}
                                 />
                             :
@@ -165,6 +167,7 @@ const UserAdd = () => {
                                         label="Mot de passe de l'utilisateur"
                                         onChange={setPassword}
                                         isRequired 
+                                        type="password"
                                         validationState="valid"
                                         width={300}
                                     />
@@ -173,6 +176,7 @@ const UserAdd = () => {
                                         label="Mot de passe de l'utilisateur"
                                         onChange={setPassword}
                                         isRequired 
+                                        type="password"
                                         validationState="invalid"
                                         errorMessage="Veuillez entrer un mot de passe valide (12 caractères minimum, 1 chiffre minimum)."
                                         width={300}
@@ -185,7 +189,7 @@ const UserAdd = () => {
                         </Checkbox>
                     </div>
                     <div className="buttons">
-                        <Link to="/admin/ProductManager" className="form-btn-error">Annuler</Link>
+                        <Link to="/admin/UserManager" className="form-btn-error">Annuler</Link>
                         <button type="submit" className="form-btn-success" onClick={FormSubmitted}>Ajouter</button>
                     </div>
                 </form>

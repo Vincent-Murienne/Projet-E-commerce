@@ -157,6 +157,31 @@ class Database {
         return $query->execute();
     }
 
+    // This method is specific, it receives the id of a user and will then delete this id from the table users and also deletes every data linked to that user in the other tables
+    public function deleteUser(string $id):bool 
+    {
+        $sql1 = "DELETE FROM addresses WHERE user_id = :id";
+        $query1 = $this->pdo->prepare($sql1);
+        $query1->bindValue("id", $id, PDO::PARAM_INT);
+        $query1->execute();
+
+        $sql2 = "DELETE FROM baskets WHERE user_id = :id";
+        $query2 = $this->pdo->prepare($sql2);
+        $query2->bindValue("id", $id, PDO::PARAM_INT);
+        $query2->execute();
+
+        $sql3 = "DELETE FROM payments WHERE user_id = :id";
+        $query3 = $this->pdo->prepare($sql3);
+        $query3->bindValue("id", $id, PDO::PARAM_INT);
+        $query3->execute();
+
+        $sql4 = "DELETE FROM users WHERE id = :id";
+        $query4 = $this->pdo->prepare($sql4);
+        $query4->bindValue("id", $id, PDO::PARAM_INT);
+        
+        return $query4->execute();
+    }
+
     // This method will return you the id of the last inserted things into the database. Useful to get the id of the last new user (to add it to the session to prevent the user to have to re login after signing in)
     public function getLastIdInserted()
     {
