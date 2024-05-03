@@ -114,7 +114,7 @@ const AdminHeader = () => {
                         <li><Link to="/admin/CategoryManager" className="hover-underline-animation">Catégories</Link></li>
                         <li><Link to="/admin/ProductManager" className="hover-underline-animation">Produits</Link></li>
                         <li><Link to="/admin/ImageManager" className="hover-underline-animation">Images</Link></li>
-                        <li><Link to="/" className="hover-underline-animation">Utilisateurs</Link></li>
+                        <li><Link to="/admin/UserManager" className="hover-underline-animation">Utilisateurs</Link></li>
                     </ul>
                     <ul className="end-nav">
                         <div className="dropdown-user">
@@ -138,7 +138,7 @@ const AdminHeader = () => {
                                 <li><Link to="/admin/CategoryManager" className="hover-underline-animation">Catégories</Link></li>
                                 <li><Link to="/admin/ProductManager" className="hover-underline-animation">Produits</Link></li>
                                 <li><Link to="/admin/ImageManager" className="hover-underline-animation">Images</Link></li>
-                                <li><Link to="/" className="hover-underline-animation">Utilisateurs</Link></li>
+                                <li><Link to="/admin/UserManager" className="hover-underline-animation">Utilisateurs</Link></li>
                                 <li><div className="separator"></div></li>
                                 <li><Link to="/" className="hover-underline-animation">Paramètre</Link></li>
                                 <li><div className="separator"></div></li>

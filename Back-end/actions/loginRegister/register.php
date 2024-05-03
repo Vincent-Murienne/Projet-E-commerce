@@ -16,7 +16,7 @@ if ($isAllowed) {
             $email = $json["email"];
             $password = $json["password"];
 
-            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            $hashedPassword = hash("sha512", $password);
 
             $existingUser = $db->selectWhere("users", ["email" => $email], false, null);
 

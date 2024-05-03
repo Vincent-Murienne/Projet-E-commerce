@@ -18,6 +18,9 @@ import ProductPage from "../pages/productsPage/ProductPage";
 import ProductEdit from "../pages/admin/ProductManager/ProductEdit";
 import ProductAdd from "../pages/admin/ProductManager/ProductAdd";
 import ProductList from "../pages/admin/ProductManager/ProductList";
+import UserEdit from "../pages/admin/UserManager/UserEdit";
+import UserAdd from "../pages/admin/UserManager/UserAdd";
+import UserList from "../pages/admin/UserManager/UserList";
 import MonComptePage from "../pages/monComptePage/MonComptePage";
 import MonCompteEdit from "../pages/monComptePage/MonCompteEdit";
 
@@ -113,6 +116,18 @@ const router = createBrowserRouter([
             {
                 path: "ProductManager/Edit/:productId",
                 element: <ProductEdit/>
+            },
+            {
+                path: "UserManager",
+                element: <UserList/>
+            },
+            {
+                path: "UserManager/Add",
+                element: <UserAdd/>
+            },
+            {
+                path: "UserManager/Edit/:userId",
+                element: <UserEdit/>
             }
         ]
     }
