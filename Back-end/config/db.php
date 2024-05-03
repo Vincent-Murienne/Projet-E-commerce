@@ -184,14 +184,4 @@ class Database {
         return $query->fetchAll(PDO::FETCH_ASSOC);
     
     }
-
-    public function getUser($id)
-    {
-        $sql = "SELECT * FROM users WHERE id = :id";
-        $query = $this->pdo->prepare($sql);
-        $query->bindValue("id", $id, PDO::PARAM_INT);
-        $query->execute();
-
-        return $query->fetchAll(PDO::FETCH_ASSOC);
-    }
 }

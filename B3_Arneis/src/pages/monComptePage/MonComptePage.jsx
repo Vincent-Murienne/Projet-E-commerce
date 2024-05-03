@@ -1,37 +1,38 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { BsPencilSquare } from 'react-icons/bs';
 import { TextField } from "@adobe/react-spectrum";
 import { Link } from 'react-router-dom';
-import { useContext, useEffect, useState } from "react";
-import {useParams } from "react-router-dom";
 import { Data } from "../../services/api";
-
+import { UserContext } from '../../context/UserProvider';
+import { ToastQueue } from "@react-spectrum/toast";
 
 const MonComptePage = () => {
-   
+    const { pullData } = useContext(UserContext);
+    const [getUserName, setUserName] = useState([]);
+    const [getUserMail, setUserMail] = useState([]);
+    const [getUserPassword, setUserPassword] = useState([]);
 
-const [getUsers, setUsers] = useState([]);
-  const { userId } = useParams(); 
-  
-  // Retrieving the category ID from URL parameters
-    let data = {
-        "table": "users",
-        "id": userId
-    };
+    let userId;
 
     useEffect(() => {
-        Data("compte", "getUser", data).then(response => {
-            if (response.success === true)
-            {
-                setUsers(response.data[0]);
-            }
-            else
-            {
+        let userData = pullData("user");
+        userId = userData.id;
+
+        let data = {
+            "table": "users",
+            "id": userId
+        };
+
+        Data("panelAdmin", "getWhere", data).then(response => {
+            if (response.success === true) {
+                setUserName(response.data[0].full_name);
+                setUserMail(response.data[0].email);
+                setUserPassword(response.data[0].password);
+            } else {
                 ToastQueue.negative(response.error, {timeout: 5000});
             }
         });
     }, []);
-
 
     return (   
         <>
@@ -41,12 +42,13 @@ const [getUsers, setUsers] = useState([]);
                 <div className="input-group">
                     <div className="input-container">
                         <TextField
-                            label="Nom complet"
-                            placeholder="Prénom"
-                            width={300}
+                           label="Nom complet"
+                           value={getUserName}
+                           width={300}
+                           disabled // Pour empêcher l'édition du champ
                         />
                         <div className="icon-container">
-                        <Link to="/monCompteEdit">
+                            <Link to="/monCompteEdit">
                                 <BsPencilSquare className="icon" size={25}/>
                             </Link>
                         </div>
@@ -57,7 +59,7 @@ const [getUsers, setUsers] = useState([]);
                     <div className="input-container">
                         <TextField
                             label="E-mail"
-                            placeholder="Email"
+                            value={getUserMail}
                             width={300}
                         />
                         <div className="icon-container">
@@ -70,7 +72,7 @@ const [getUsers, setUsers] = useState([]);
                     <div className="input-container">
                         <TextField
                             label="Mot de passe"
-                            placeholder="Mot de passe"
+                            value={getUserPassword}
                             type="password"
                             width={300}
                         />

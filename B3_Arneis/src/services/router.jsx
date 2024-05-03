@@ -59,9 +59,9 @@ const router = createBrowserRouter([
                 path: "product/:productId", 
                 element: <ProductPage/>
             },
-            {
+            {      
                 path: "monCompte",
-                element: <MonComptePage/>
+                element: <MonComptePage/>        
             },   
             {
                 path: "monCompteEdit",
