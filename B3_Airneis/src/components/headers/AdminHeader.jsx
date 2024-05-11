@@ -109,7 +109,7 @@ const AdminHeader = () => {
                 <h1><Link to="/">Back to Àirneis</Link></h1>
                 <nav>
                     <ul className="middle-nav">
-                        <li><Link to="/" className="hover-underline-animation">Suivi des ventes</Link></li>
+                        <li><Link to="/admin/TrackSales" className="hover-underline-animation">Suivi des ventes</Link></li>
                         <li><Link to="/admin/HomePageManager" className="hover-underline-animation">Gestion de l'accueil</Link></li>
                         <li><Link to="/admin/CategoryManager" className="hover-underline-animation">Catégories</Link></li>
                         <li><Link to="/admin/ProductManager" className="hover-underline-animation">Produits</Link></li>
@@ -134,6 +134,7 @@ const AdminHeader = () => {
                                         <FaBars size={20} className="scale_on_hover" onClick={MenuClicked}/>
                                 }
                             <div className="dropdown-burger-content">
+                                <li><Link to="/admin/TrackSales" className="hover-underline-animation">Suivi des ventes</Link></li>
                                 <li><Link to="/admin/HomePageManager" className="hover-underline-animation">Gestion de l'accueil</Link></li>
                                 <li><Link to="/admin/CategoryManager" className="hover-underline-animation">Catégories</Link></li>
                                 <li><Link to="/admin/ProductManager" className="hover-underline-animation">Produits</Link></li>

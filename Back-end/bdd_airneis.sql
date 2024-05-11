@@ -1,5 +1,5 @@
-CREATE DATABASE arneis_e_commerce;
-USE arneis_e_commerce;
+CREATE DATABASE airneis_e_commerce;
+USE airneis_e_commerce;
 
 CREATE TABLE `users` (
   `id` integer PRIMARY KEY AUTO_INCREMENT,
@@ -15,7 +15,7 @@ CREATE TABLE `payments` (
   `card_name` varchar(50),
   `card_owner` varchar(50),
   `card_number` varchar(16),
-  `expiration_date` timestamp,
+  `expiration_date` timestamp NOT NULL default CURRENT_TIMESTAMP,
   `cvv` integer
 );
 
@@ -77,7 +77,11 @@ CREATE TABLE `baskets` (
 
 CREATE TABLE `orders` (
   `id` integer PRIMARY KEY AUTO_INCREMENT,
-  `date` timestamp
+  `date` timestamp NOT NULL default CURRENT_TIMESTAMP,
+  `user_id` integer,
+  `address_id` integer,
+  `payment_id` integer,
+  `order_state` VARCHAR(10)
 );
 
 CREATE TABLE `lots_of_product` (
@@ -100,11 +104,17 @@ ALTER TABLE `products_materials` ADD FOREIGN KEY (`product_id`) REFERENCES `prod
 
 ALTER TABLE `products_materials` ADD FOREIGN KEY (`materials_list_id`) REFERENCES `materials_list` (`id`);
 
-
 ALTER TABLE `baskets` ADD FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
+
+ALTER TABLE `orders` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+ALTER TABLE `orders` ADD FOREIGN KEY (`address_id`) REFERENCES `addresses` (`id`);
+ALTER TABLE `orders` ADD FOREIGN KEY (`payment_id`) REFERENCES `payments` (`id`);
 
 ALTER TABLE `lots_of_product` ADD FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`);
 ALTER TABLE `lots_of_product` ADD FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
+
+INSERT INTO users (full_name, email, password, role) VALUES
+('ADMIN', 'admin@admin.com', '395bdb57512f444f07f23923cb637b5bba7c38ea967a458a0553199e8615f1a747a468de07a213c259ac42c390e8c12a48d35cec2d255d89a1d8f6f149b5d976', 1); -- Mdp: Admin1234567
 
 INSERT INTO categories (name, `order`) VALUES
 ('Chaises', 1),
@@ -206,3 +216,31 @@ INSERT INTO images (product_id, category_id, name, `order`) VALUES
 (22, null, '22-1-Poubelle de bureau en acier inoxydable.jpg', null),
 (22, null, '22-2-Poubelle de bureau en acier inoxydable.jpg', null),
 (22, null, '22-3-Poubelle de bureau en acier inoxydable.jpg', null);
+
+INSERT INTO orders (date, user_id, order_state) VALUES
+(STR_TO_DATE("11/05/2024", "%d/%m/%Y"), 1, "En cours"),
+(STR_TO_DATE("10/05/2024", "%d/%m/%Y"), 1, "En cours"),
+(STR_TO_DATE("05/05/2024", "%d/%m/%Y"), 1, "Livré"),
+(STR_TO_DATE("05/05/2024", "%d/%m/%Y"), 1, "Livré"),
+(STR_TO_DATE("05/05/2024", "%d/%m/%Y"), 1, "Livré"),
+(STR_TO_DATE("28/04/2024", "%d/%m/%Y"), 1, "Livré"),
+(STR_TO_DATE("28/04/2024", "%d/%m/%Y"), 1, "Livré");
+
+INSERT INTO lots_of_product (order_id, product_id, quantity) VALUES
+(1, 1, 2),
+(1, 5, 1),
+(1, 7, 1),
+(2, 6, 5),
+(2, 12, 2),
+(3, 11, 1),
+(3, 1, 5),
+(3, 2, 5),
+(4, 3, 2),
+(4, 15, 7),
+(5, 19, 2),
+(5, 20, 10),
+(6, 12, 1),
+(7, 22, 3),
+(7, 17, 1),
+(7, 10, 1),
+(7, 11, 1);

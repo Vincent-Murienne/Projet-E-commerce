@@ -189,14 +189,14 @@ class Database {
     }
 
     public function getProductDetail($id)
-{
-    $sql = "SELECT categories.name AS category_name, products.*, images.id AS image_id, images.name AS image_name, materials_list.name AS material FROM products INNER JOIN images ON products.id = images.product_id LEFT JOIN categories ON products.category_id = categories.id LEFT JOIN products_materials ON products.id = products_materials.product_id LEFT JOIN materials_list ON products_materials.materials_list_id = materials_list.id WHERE products.id = :id ORDER BY products.quantity DESC LIMIT 3;";
-    $query = $this->pdo->prepare($sql);
-    $query->bindValue("id", $id, PDO::PARAM_INT);
-    $query->execute();
+    {
+        $sql = "SELECT categories.name AS category_name, products.*, images.id AS image_id, images.name AS image_name, materials_list.name AS material FROM products INNER JOIN images ON products.id = images.product_id LEFT JOIN categories ON products.category_id = categories.id LEFT JOIN products_materials ON products.id = products_materials.product_id LEFT JOIN materials_list ON products_materials.materials_list_id = materials_list.id WHERE products.id = :id ORDER BY products.quantity DESC LIMIT 3;";
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue("id", $id, PDO::PARAM_INT);
+        $query->execute();
 
-    return $query->fetchAll(PDO::FETCH_ASSOC);       
-}
+        return $query->fetchAll(PDO::FETCH_ASSOC);       
+    }
 
 
     public function getProductSimilaire($id)
@@ -207,6 +207,16 @@ class Database {
         $query->execute();
 
         return $query->fetchAll(PDO::FETCH_ASSOC);
-    
+    }
+
+    public function getChart1Data($date_start, $date_end)
+    {
+        $sql = "SELECT date, ROUND(SUM(lots_of_product.quantity*products.price), 2) AS 'total_price' FROM `orders` JOIN lots_of_product ON `orders`.id = lots_of_product.order_id JOIN products ON lots_of_product.product_id = products.id WHERE date BETWEEN STR_TO_DATE(:date_start, '%e/%c/%Y %H:%i:%s') AND STR_TO_DATE(:date_end, '%e/%c/%Y %H:%i:%s') GROUP BY CAST(orders.date as DATE)";
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue("date_start", $date_start, PDO::PARAM_STR);
+        $query->bindValue("date_end", $date_end, PDO::PARAM_STR);
+        $query->execute();
+
+        return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 }
