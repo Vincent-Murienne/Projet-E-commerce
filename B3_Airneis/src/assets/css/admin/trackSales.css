@@ -1,0 +1,33 @@
+
+.trackSales {
+    margin-top: 7rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.trackSales .buttons {
+    width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.trackSales .btn-active {
+    font-size: 1.2rem;
+    padding: .6rem 1.5rem;
+    border-radius: .4rem;
+    background-color: #5470C6;
+    color: var(--white);
+    cursor: pointer;
+}
+
+.trackSales .btn-inactive {
+    font-size: 1.2rem;
+    padding: .6rem 1.5rem;
+    border-radius: .4rem;
+    background-color: rgb(81, 81, 81);
+    color: var(--white);
+    cursor: default;
+}
