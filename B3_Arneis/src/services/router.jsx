@@ -23,6 +23,8 @@ import UserAdd from "../pages/admin/UserManager/UserAdd";
 import UserList from "../pages/admin/UserManager/UserList";
 import MonComptePage from "../pages/monComptePage/MonComptePage";
 import MonCompteEdit from "../pages/monComptePage/MonCompteEdit";
+import MonCompteAddresse from "../pages/monComptePage/MonCompteAdresse";
+import MonComptePayment from "../pages/monComptePage/MonComptePayment";
 
 
 const router = createBrowserRouter([
@@ -69,9 +71,16 @@ const router = createBrowserRouter([
             {
                 path: "monCompteEdit",
                 element: <MonCompteEdit/>
-            }        
-            
-        ]
+            },
+            {
+                path: "monCompteAddresse",
+                element: <MonCompteAddresse/>
+            },
+            {
+                path: "monComptePayment",
+                element: <MonComptePayment/>
+            }  
+       ]
     },
     {
         path: "/admin",

@@ -33,6 +33,10 @@ CREATE TABLE `addresses` (
   `phone_number` integer
 );
 
+INSERT INTO `addresses` (`id`, `user_id`, `address_name`, `first_name`, `last_name`, `address`, `city`, `zip_code`, `region`, `country`, `phone_number`) VALUES
+(1, 3, 'Maison de neri', 'neri', 'her', '123 Rue de la Liberté', 'Paris', 75001, 'Île-de-France', 'France', 723456789),
+(2, 3, 'Maison de neri 2', 'neri', 'her', '456 Business Boulevard', 'Paris', 75002, 'Île-de-France', 'France', 723456789);
+
 CREATE TABLE `categories` (
   `id` integer PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(50),

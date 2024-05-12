@@ -44,14 +44,9 @@ const MonComptePage = () => {
                         <TextField
                            label="Nom complet"
                            value={getUserName}
-                           width={300}
-                           disabled // Pour empêcher l'édition du champ
+                            width={300}
+                           disabled // To prevent editing the field
                         />
-                        <div className="icon-container">
-                            <Link to="/monCompteEdit">
-                                <BsPencilSquare className="icon" size={25}/>
-                            </Link>
-                        </div>
                     </div>
                 </div>
 
@@ -61,10 +56,8 @@ const MonComptePage = () => {
                             label="E-mail"
                             value={getUserMail}
                             width={300}
-                        />
-                        <div className="icon-container">
-                            <BsPencilSquare className="icon" size={25}/>
-                        </div>
+                            disabled
+                        />                     
                     </div>
                 </div>
 
@@ -75,53 +68,36 @@ const MonComptePage = () => {
                             value={getUserPassword}
                             type="password"
                             width={300}
-                        />
-                        <div className="icon-container">
-                            <BsPencilSquare className="icon" size={25}/>
-                        </div>
+                            disabled
+                        />                 
                     </div>
                 </div>
+                
+                   <div className="input-group">
+                        <h4 className="addresses-title">Mes adresses</h4>
+                        <div className="bordered-button">
+                            <Link to="/MonCompteAddresse" className="custom-link">
+                                <button type="button" className="custom-button">
+                                    Voir mes adresses
+                                </button>
+                            </Link>
+                        </div>
+                    </div>
 
                 <div className="input-group">
-                    <div className="input-container">
-                        <TextField
-                            label="Adresse de livraison"
-                            placeholder="Adresse de livraison"
-                            width={300}
-                        />
-                        <div className="icon-container">
-                            <BsPencilSquare className="icon" size={25}/>
-                        </div>
+                    <h4 className="payement-title">Méthode de payement</h4>
+                        <div className="bordered-button">
+                            <Link to="/MonComptePayment" className="custom-link">
+                                <button type="button" className="custom-button">
+                                Les méthodes de paiement
+                                </button>
+                            </Link>     
                     </div>
                 </div>
-
-                <div className="input-group">
-                    <div className="input-container">
-                        <TextField
-                            label="Adresse de facturation"
-                            placeholder="Adresse de facturation"
-                            width={300}
-                        />
-                        <div className="icon-container">
-                            <BsPencilSquare className="icon" size={25}/>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="input-group">
-                    <div className="input-container">
-                        <TextField
-                            label="Méthode de payement"
-                            placeholder="Méthode de payement"
-                            width={300}
-                        />
-                        <div className="icon-container">
-                            <BsPencilSquare className="icon" size={25}/>
-                        </div>
-                    </div>
-                </div>
+        
                 <div className="buttons-container">
                     <button className="submit" type="submit">Télécharger mes données</button>
+                    <Link to="/monCompteEdit" className="submitModify">Modifier mes données</Link>
                     <button className="submitDelete" type="submit">Supprimer mon compte</button>
                 </div>
             </section>
