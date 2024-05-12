@@ -13,8 +13,8 @@ const ImageEdit = () => {
     const [getAllProducts, setAllProducts] = useState([]);
     const [getImageDetails, setImageDetails] = useState([]);
     const [isSelected, setSelected] = useState(false);
-    const [category, setCategory] = useState([]);
-    const [product, setProduct] = useState([]);
+    const [getCategory, setCategory] = useState(undefined);
+    const [getProduct, setProduct] = useState(undefined);
     const fileInputRef = useRef(null);
 
     // We are using those useEffect to make API calls to retrieve each categories and products
@@ -77,8 +77,17 @@ const ImageEdit = () => {
     }, []);
 
     useEffect(() => {
-        setCategory(getImageDetails.category_id);
-        setProduct(getImageDetails.product_id);
+        if(getImageDetails.category_id !== undefined && getImageDetails.category_id !== null && getImageDetails.category_id !== "null") {
+            setCategory(getImageDetails.category_id.toString());
+        } else {
+            setCategory(getImageDetails.category_id);
+        }
+        
+        if(getImageDetails.product_id !== undefined && getImageDetails.product_id !== null && getImageDetails.product_id !== "null") {
+            setProduct(getImageDetails.product_id.toString());
+        } else {
+            setProduct(getImageDetails.product_id);
+        }
     }, [getImageDetails]);
 
     //We are now going to handle the form submission
@@ -124,8 +133,8 @@ const ImageEdit = () => {
                             "id": getImageDetails.id,
                             "data": {
                                 "name": response.data.imageName,
-                                "category_id": (category === 'null') ? null : category,
-                                "product_id": (product === 'null') ? null : product
+                                "category_id": (getCategory === 'null') ? null : getCategory,
+                                "product_id": (getProduct === 'null') ? null : getProduct
                             }
                         };
                         Data("panelAdmin", "update", data).then(response => {
@@ -159,8 +168,8 @@ const ImageEdit = () => {
                 "table": "images",
                 "id": getImageDetails.id,
                 "data": {
-                    "category_id": (category === 'null') ? null : category,
-                    "product_id": (product === 'null') ? null : product
+                    "category_id": (getCategory === 'null') ? null : getCategory,
+                    "product_id": (getProduct === 'null') ? null : getProduct
                 }
             };
 
@@ -189,7 +198,7 @@ const ImageEdit = () => {
                             necessityIndicator="label"
                             minWidth={300}
                             items={getAllCategories}
-                            selectedKey={category}
+                            selectedKey={getCategory}
                             onSelectionChange={selected => setCategory(selected)}
                         >
                             {item => <Item key={item.id}>{item.name}</Item> }
@@ -201,7 +210,7 @@ const ImageEdit = () => {
                             necessityIndicator="label"
                             minWidth={300}
                             items={getAllProducts}
-                            selectedKey={product}
+                            selectedKey={getProduct}
                             onSelectionChange={selected => setProduct(selected)}
                         >
                             {item => <Item key={item.id}>{item.name}</Item> }

@@ -27,7 +27,7 @@ const ProductEdit = () => {
         Data("panelAdmin", "getWhere", data).then(response => {
             if (response.success === true)
             {
-                setCategoryId(response.data[0].category_id);
+                setCategoryId(response.data[0].category_id.toString());
                 setProductName(response.data[0].name);
                 setPrice(response.data[0].price);
                 setQuantity(response.data[0].quantity);

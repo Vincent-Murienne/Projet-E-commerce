@@ -28,7 +28,7 @@ const ProductAdd = () => {
             if (response.success === true)
             {
                 setAllCategories(response.data);
-                setCategoryId(response.data[0].id);
+                setCategoryId(response.data[0].id.toString());
             }
             else
             {
