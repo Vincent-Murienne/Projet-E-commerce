@@ -219,4 +219,26 @@ class Database {
 
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getChart2Data($date_start, $date_end)
+    {
+        $sql = "SELECT date, categories.name, ROUND(SUM(lots_of_product.quantity*products.price), 2) AS 'total_price' FROM `orders` JOIN lots_of_product ON `orders`.id = lots_of_product.order_id JOIN products ON lots_of_product.product_id = products.id JOIN categories ON products.category_id = categories.id WHERE date BETWEEN STR_TO_DATE(:date_start, '%e/%c/%Y %H:%i:%s') AND STR_TO_DATE(:date_end, '%e/%c/%Y %H:%i:%s') GROUP BY date, categories.name";
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue("date_start", $date_start, PDO::PARAM_STR);
+        $query->bindValue("date_end", $date_end, PDO::PARAM_STR);
+        $query->execute();
+
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getChart3Data($date_start, $date_end)
+    {
+        $sql = "SELECT categories.name, SUM(lots_of_product.quantity) AS 'value' FROM `orders` JOIN lots_of_product ON `orders`.id = lots_of_product.order_id JOIN products ON lots_of_product.product_id = products.id JOIN categories ON products.category_id = categories.id WHERE date BETWEEN STR_TO_DATE(:date_start, '%e/%c/%Y %H:%i:%s') AND STR_TO_DATE(:date_end, '%e/%c/%Y %H:%i:%s') GROUP BY categories.name";
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue("date_start", $date_start, PDO::PARAM_STR);
+        $query->bindValue("date_end", $date_end, PDO::PARAM_STR);
+        $query->execute();
+
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

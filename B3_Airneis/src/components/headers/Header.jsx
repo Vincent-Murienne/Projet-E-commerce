@@ -132,7 +132,7 @@ const Header = () => {
                         {
                             (user.isAdmin)
                             ?
-                                <li><Link to="/admin/homePageManager" className="hover-underline-animation">Panel Admin</Link></li>
+                                <li><Link to="/admin/TrackSales" className="hover-underline-animation">Panel Admin</Link></li>
                             :
                                 <></>
                         }
@@ -188,6 +188,13 @@ const Header = () => {
                                 <li><Link to="/categories" className="hover-underline-animation">Catégories</Link></li>
                                 <li><Link to="/product" className="hover-underline-animation">Produits</Link></li>
                                 <li><Link to="/" className="hover-underline-animation">Contact</Link></li>
+                                {
+                                    (user.isAdmin)
+                                    ?
+                                        <li><Link to="/admin/TrackSales" className="hover-underline-animation">Panel Admin</Link></li>
+                                    :
+                                        <></>
+                                }
                                 <li><div className="separator"></div></li>
                                 {
                                     (user.isConnected)
