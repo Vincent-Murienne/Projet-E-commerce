@@ -105,7 +105,7 @@ const Header = () => {
 
     const handleKeyPress = (e) => {
         if (e.key === 'Enter') {
-          e.preventDefault(); // Prevents default behavior of "Enter" key in input
+          e.preventDefault();
           navigateToProductPage();
         }
       };
@@ -127,7 +127,6 @@ const Header = () => {
                     <ul className="middle-nav">
                         <li><Link to="/" className="hover-underline-animation">Accueil</Link></li>
                         <li><Link to="/categories" className="hover-underline-animation">Catégories</Link></li>
-                        <li><Link to="/product" className="hover-underline-animation">Produits</Link></li>
                         <li><Link to="/" className="hover-underline-animation">Contact</Link></li>
                         {
                             (user.isAdmin)
@@ -147,7 +146,7 @@ const Header = () => {
                                         type="text"
                                         value={searchQuery}
                                         onChange={handleSearchInputChange}
-                                        onKeyPress={handleKeyPress} // Add onKeyPress event to detect the "Enter" key
+                                        onKeyPress={handleKeyPress}
                                         placeholder="Rechercher un produit ..."
                                     />                                          
                                 </form>
@@ -186,7 +185,6 @@ const Header = () => {
                             <div className="dropdown-burger-content">
                                 <li><Link to="/" className="hover-underline-animation">Accueil</Link></li>
                                 <li><Link to="/categories" className="hover-underline-animation">Catégories</Link></li>
-                                <li><Link to="/product" className="hover-underline-animation">Produits</Link></li>
                                 <li><Link to="/" className="hover-underline-animation">Contact</Link></li>
                                 <li><div className="separator"></div></li>
                                 {
