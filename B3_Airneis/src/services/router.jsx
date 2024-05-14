@@ -27,6 +27,11 @@ import MonComptePage from "../pages/monComptePage/MonComptePage"
 import MonCompteAdresse from "../pages/monComptePage/MonCompteAdresse";
 import MonComptePayment from "../pages/monComptePage/MonComptePayment";
 import MonCompteEdit from "../pages/monComptePage/MonCompteEdit"
+import CheckoutPage from "../pages/checkoutPage/CheckoutPage"
+import CheckoutAdresse from "../pages/checkoutPage/CheckoutAdresse"
+import CheckoutPayment from "../pages/checkoutPage/CheckoutPayment"
+
+
 
 const router = createBrowserRouter([
     {
@@ -80,6 +85,18 @@ const router = createBrowserRouter([
             {
                 path: "monCompteEdit", 
                 element: <MonCompteEdit/>
+            },
+            {
+                path: "checkoutPage", 
+                element: <CheckoutPage/>
+            },
+            {
+                path: "checkoutAdresse", 
+                element: <CheckoutAdresse/>
+            },
+            {
+                path: "checkoutPayment", 
+                element: <CheckoutPayment/>
             },
         ]
     },
