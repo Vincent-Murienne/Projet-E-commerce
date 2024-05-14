@@ -46,7 +46,7 @@
    }
    
    /* Full-width inputs */
-.comptePage input[type=text], input[type=password] {
+.comptePage input[type=text], .comptePage input[type=password] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
