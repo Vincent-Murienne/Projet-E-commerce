@@ -11,7 +11,6 @@ const ProductSimilaire = ({ categoryId, productId }) => {
             try {
                 const response = await Data("product", "getProductSimilaire", { table: "products", id: categoryId });
                 if (response.success === true) {
-                    console.log(response.data)
                     setTopProducts(response.data);
                 } else {
                     console.log(response.error);

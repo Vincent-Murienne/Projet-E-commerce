@@ -33,10 +33,6 @@ CREATE TABLE `addresses` (
   `phone_number` integer
 );
 
-INSERT INTO `addresses` (`id`, `user_id`, `address_name`, `first_name`, `last_name`, `address`, `city`, `zip_code`, `region`, `country`, `phone_number`) VALUES
-(1, 3, 'Maison de neri', 'neri', 'her', '123 Rue de la Liberté', 'Paris', 75001, 'Île-de-France', 'France', 723456789),
-(2, 3, 'Maison de neri 2', 'neri', 'her', '456 Business Boulevard', 'Paris', 75002, 'Île-de-France', 'France', 723456789);
-
 CREATE TABLE `categories` (
   `id` integer PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(50),
@@ -118,7 +114,9 @@ ALTER TABLE `lots_of_product` ADD FOREIGN KEY (`order_id`) REFERENCES `orders` (
 ALTER TABLE `lots_of_product` ADD FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 
 INSERT INTO users (full_name, email, password, role) VALUES
-('ADMIN', 'admin@admin.com', '395bdb57512f444f07f23923cb637b5bba7c38ea967a458a0553199e8615f1a747a468de07a213c259ac42c390e8c12a48d35cec2d255d89a1d8f6f149b5d976', 1); -- Mdp: Admin1234567
+('ADMIN', 'admin@admin.com', '395bdb57512f444f07f23923cb637b5bba7c38ea967a458a0553199e8615f1a747a468de07a213c259ac42c390e8c12a48d35cec2d255d89a1d8f6f149b5d976', 1),
+('Neriman', 'neri@gmail.com', '53db0fc135fbce6f381cf5acd2c0e1010d7597e32b7f5c91e371f6985945d7f1bad9e7d6468f885d8849450ebb603540cb59080ff376d7030e707c6ee67b3b32', 1);
+
 
 INSERT INTO categories (name, `order`) VALUES
 ('Chaises', 1),
@@ -247,4 +245,13 @@ INSERT INTO lots_of_product (order_id, product_id, quantity) VALUES
 (7, 22, 3),
 (7, 17, 1),
 (7, 10, 1),
+(7, 10, 1),
 (7, 11, 1);
+
+INSERT INTO `addresses` (`user_id`, `address_name`, `first_name`, `last_name`, `address`, `city`, `zip_code`, `region`, `country`, `phone_number`) VALUES
+(2, 'Maison de neri', 'neri', 'her', '123 Rue de la Liberté', 'Paris', 75001, 'Île-de-France', 'France', 723456789),
+(2, 'Maison de neri 2', 'neri', 'her', '456 Business Boulevard', 'Paris', 75002, 'Île-de-France', 'France', 723456789);
+
+INSERT INTO `payments` (`user_id`, `card_name`, `card_owner`, `card_number`, `expiration_date`, `cvv`) VALUES 
+(2, 'Mastercard', 'Neriman Her', '1111111111111234', TIMESTAMP('2026-05-01'), 123),
+(2, 'Visa', 'Neriman Her', '1111111111115364', TIMESTAMP('2025-09-01'), 456);

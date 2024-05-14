@@ -5,9 +5,10 @@
 @import url("./admin/homePageManager.css");
 @import url("./categoriePage.css");
 @import url("./admin/ImageManager.css");
-@import url("./productPage.css");
+@import url("./productSearchPage.css");
 @import url("./productsPage.css");
 @import url("./admin/trackSales.css");
+@import url("./monComptePage.css");
 
 @font-face {
     font-family: "Circular Std Book";

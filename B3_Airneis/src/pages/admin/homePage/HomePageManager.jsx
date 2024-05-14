@@ -73,7 +73,7 @@ const HomePageManager = () => {
                     let item2 = {"id": "", "name": ""};
                     let item3 = {"id": "", "name": ""};
                     response.data.map((item, index) => {
-                        switch(item.order) {
+                        switch(item.order.toString()) {
                             case "1":
                                 item1 = response.data[index];
                                 break;
@@ -112,7 +112,7 @@ const HomePageManager = () => {
 
     useEffect(() => {
         setReload(false);
-        Data("panelAdmin", "getTop", data2).then(response => {
+        Data("panelAdmin", "getTop", data2).then(response => {           
             if (response.success === true)
             {
                 // We check that we do have 3 distinct elements in are table, otherwise we will normalize it with generic data to prevent error during the integration of the data in the front end
@@ -124,7 +124,7 @@ const HomePageManager = () => {
                     let item2 = {"category_id": "", "image_name": "", "category_name": ""};
                     let item3 = {"category_id": "", "image_name": "", "category_name": ""};
                     response.data.map((item, index) => {
-                        switch(item.category_order) {
+                        switch(item.category_order.toString()) {
                             case "1":
                                 item1 = response.data[index];
                                 break;
@@ -175,7 +175,7 @@ const HomePageManager = () => {
                     let item2 = {"product_id": "", "image_name": "", "product_name": ""};
                     let item3 = {"product_id": "", "image_name": "", "product_name": ""};
                     response.data.map((item, index) => {
-                        switch(item.product_order) {
+                        switch(item.product_order.toString()) {
                             case "1":
                                 item1 = response.data[index];
                                 break;
