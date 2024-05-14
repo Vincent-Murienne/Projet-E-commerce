@@ -11,14 +11,14 @@ if ($isAllowed) {
         $db = new Database();
 
         $email = $json["email"];
-        $password = $json["password"];
+        $password = hash("sha512", $json["password"]);
 
         // Récupérer l'utilisateur avec l'email fourni
         $user = $db->selectWhere("users", ["email" => $email], false, null);
 
         if ($user) {
             // Vérifier si le mot de passe haché correspond
-            if (password_verify($password, $user[0]["password"])) {
+            if ($password == $user[0]["password"]) {
                 // Mot de passe correct, connexion réussie
                 $response["success"] = true;
                 $response["user"] = $user;

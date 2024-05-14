@@ -147,12 +147,6 @@ class Database {
         return $query->fetchAll(PDO::FETCH_ASSOC);
     } 
 
-    // This method will return you the id of the last inserted things into the database. Useful to get the id of the last new user (to add it to the session to prevent the user to have to re login after signing in)
-    public function getLastIdInserted()
-    {
-        return $this->pdo->query("SELECT LAST_INSERT_ID()")->fetch(PDO::FETCH_ASSOC);
-    }
-
     // This method is generic, it receives the table and the id and will then delete this id from the table
     public function delete(string $table, string $id):bool 
     {
@@ -161,6 +155,91 @@ class Database {
         $query->bindValue("id", $id, PDO::PARAM_INT);
         
         return $query->execute();
+    }
+
+    // This method is specific, it receives the id of a user and will then delete this id from the table users and also deletes every data linked to that user in the other tables
+    public function deleteUser(string $id):bool 
+    {
+        $sql1 = "DELETE FROM addresses WHERE user_id = :id";
+        $query1 = $this->pdo->prepare($sql1);
+        $query1->bindValue("id", $id, PDO::PARAM_INT);
+        $query1->execute();
+
+        $sql2 = "DELETE FROM baskets WHERE user_id = :id";
+        $query2 = $this->pdo->prepare($sql2);
+        $query2->bindValue("id", $id, PDO::PARAM_INT);
+        $query2->execute();
+
+        $sql3 = "DELETE FROM payments WHERE user_id = :id";
+        $query3 = $this->pdo->prepare($sql3);
+        $query3->bindValue("id", $id, PDO::PARAM_INT);
+        $query3->execute();
+
+        $sql4 = "DELETE FROM users WHERE id = :id";
+        $query4 = $this->pdo->prepare($sql4);
+        $query4->bindValue("id", $id, PDO::PARAM_INT);
+        
+        return $query4->execute();
+    }
+
+    // This method will return you the id of the last inserted things into the database. Useful to get the id of the last new user (to add it to the session to prevent the user to have to re login after signing in)
+    public function getLastIdInserted()
+    {
+        return $this->pdo->query("SELECT LAST_INSERT_ID()")->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function getProductDetail($id)
+    {
+        $sql = "SELECT categories.name AS category_name, products.*, images.id AS image_id, images.name AS image_name, materials_list.name AS material FROM products INNER JOIN images ON products.id = images.product_id LEFT JOIN categories ON products.category_id = categories.id LEFT JOIN products_materials ON products.id = products_materials.product_id LEFT JOIN materials_list ON products_materials.materials_list_id = materials_list.id WHERE products.id = :id ORDER BY products.quantity DESC LIMIT 3;";
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue("id", $id, PDO::PARAM_INT);
+        $query->execute();
+
+        return $query->fetchAll(PDO::FETCH_ASSOC);       
+    }
+
+
+    public function getProductSimilaire($id)
+    {
+        $sql = "SELECT categories.name AS category_name, products.*, product_image.category_id AS product_image_category_id, product_image.name AS product_image_name, category_image.category_id AS category_image_category_id, category_image.name AS category_image_name FROM products INNER JOIN (SELECT product_id, MIN(id) AS min_image_id FROM images GROUP BY product_id) AS first_image ON products.id = first_image.product_id INNER JOIN images AS product_image ON first_image.min_image_id = product_image.id LEFT JOIN images AS category_image ON products.category_id = category_image.category_id AND category_image.category_id = :id LEFT JOIN categories ON products.category_id = categories.id WHERE products.category_id = :id ORDER BY products.quantity DESC";
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue("id", $id, PDO::PARAM_INT);
+        $query->execute();
+
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getChart1Data($date_start, $date_end)
+    {
+        $sql = "SELECT date, ROUND(SUM(lots_of_product.quantity*products.price), 2) AS 'total_price' FROM `orders` JOIN lots_of_product ON `orders`.id = lots_of_product.order_id JOIN products ON lots_of_product.product_id = products.id WHERE date BETWEEN STR_TO_DATE(:date_start, '%e/%c/%Y %H:%i:%s') AND STR_TO_DATE(:date_end, '%e/%c/%Y %H:%i:%s') GROUP BY CAST(orders.date as DATE)";
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue("date_start", $date_start, PDO::PARAM_STR);
+        $query->bindValue("date_end", $date_end, PDO::PARAM_STR);
+        $query->execute();
+
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getChart2Data($date_start, $date_end)
+    {
+        $sql = "SELECT date, categories.name, ROUND(SUM(lots_of_product.quantity*products.price), 2) AS 'total_price' FROM `orders` JOIN lots_of_product ON `orders`.id = lots_of_product.order_id JOIN products ON lots_of_product.product_id = products.id JOIN categories ON products.category_id = categories.id WHERE date BETWEEN STR_TO_DATE(:date_start, '%e/%c/%Y %H:%i:%s') AND STR_TO_DATE(:date_end, '%e/%c/%Y %H:%i:%s') GROUP BY date, categories.name";
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue("date_start", $date_start, PDO::PARAM_STR);
+        $query->bindValue("date_end", $date_end, PDO::PARAM_STR);
+        $query->execute();
+
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getChart3Data($date_start, $date_end)
+    {
+        $sql = "SELECT categories.name, SUM(lots_of_product.quantity) AS 'value' FROM `orders` JOIN lots_of_product ON `orders`.id = lots_of_product.order_id JOIN products ON lots_of_product.product_id = products.id JOIN categories ON products.category_id = categories.id WHERE date BETWEEN STR_TO_DATE(:date_start, '%e/%c/%Y %H:%i:%s') AND STR_TO_DATE(:date_end, '%e/%c/%Y %H:%i:%s') GROUP BY categories.name";
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue("date_start", $date_start, PDO::PARAM_STR);
+        $query->bindValue("date_end", $date_end, PDO::PARAM_STR);
+        $query->execute();
+
+        return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Cette méthode recherche le titre des produits en fonction des critères fournis avec priorité
