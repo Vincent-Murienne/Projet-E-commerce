@@ -23,6 +23,7 @@ import UserAdd from "../pages/admin/UserManager/UserAdd";
 import UserList from "../pages/admin/UserManager/UserList";
 import TrackSales from "../pages/admin/trackSales/TrackSales";
 import ProductSearchPage from "../pages/productSearchPage/ProductSearchPage";
+import BasketPage from "../pages/basketPage/BasketPage";
 
 const router = createBrowserRouter([
     {
@@ -44,7 +45,11 @@ const router = createBrowserRouter([
             {
                 path: "register",
                 element: <RegisterPage/>
-            },  
+            },
+            {
+                path: "panier",
+                element: <BasketPage/>
+            },
             {
                 path: "categories/:categoryId", 
                 element: <CategorieDetails/>

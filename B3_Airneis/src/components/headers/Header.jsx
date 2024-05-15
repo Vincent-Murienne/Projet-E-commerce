@@ -153,7 +153,7 @@ const Header = () => {
                             </li>
                         )}
 
-                        <li><Link to="/"><FaShoppingCart size={20}  className="scale_on_hover"/></Link></li>
+                        <li><Link to="/panier"><FaShoppingCart size={20}  className="scale_on_hover"/></Link></li>
                         <div className="dropdown-user">
                             <li><FaUser size={20} className="scale_on_hover" onClick={UserMenuClicked}/></li>
                             <div className="dropdown-user-content">

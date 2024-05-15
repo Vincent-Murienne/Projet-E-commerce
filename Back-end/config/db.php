@@ -290,5 +290,37 @@ class Database {
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getProductBasket($userId)
+    {
+        $sql = "SELECT p.name, b.quantity, p.price, p.description, (SELECT i.name FROM images i WHERE i.product_id = p.id LIMIT 1) AS image_name
+        FROM baskets b
+        LEFT JOIN products p ON b.product_id = p.id
+        WHERE b.user_id = :userId";
+
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue('userId', $userId, PDO::PARAM_INT);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function deleteProductBasket($userId, $productId)
+    {
+        $sql = "DELETE FROM baskets WHERE user_id = :userId AND product_id = :productId";
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue('userId', $userId, PDO::PARAM_INT);
+        $query->bindValue('productId', $productId, PDO::PARAM_INT);
+        return $query->execute();
+    }
+
+    public function updateProductQuantity($userId, $productId, $quantity)
+    {
+        $sql = "UPDATE baskets SET quantity = :quantity WHERE user_id = :userId AND product_id = :productId";
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue('userId', $userId, PDO::PARAM_INT);
+        $query->bindValue('productId', $productId, PDO::PARAM_INT);
+        $query->bindValue('quantity', $quantity, PDO::PARAM_INT);
+        return $query->execute();
+    }
     
 }
