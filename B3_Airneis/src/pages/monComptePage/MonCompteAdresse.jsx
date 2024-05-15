@@ -10,6 +10,7 @@ const MonCompteAdresse = () => {
     const { pullData } = useContext(UserContext);
     const [getUserAddresses, setUserAddresses] = useState([]);
     const [getSelectedAddress, setSelectedAddress] = useState(null); 
+    const [isDeleting, setIsDeleting] = useState(false);
 
     const [getAddressName, setAddressName] = useState(undefined);
     const [getFirstName, setFirstName] = useState(undefined);
@@ -32,20 +33,31 @@ const MonCompteAdresse = () => {
     const [getPhoneValidState, setPhoneValidState] = useState(1);
 
     useEffect(() => {
-        getUserAddresses.forEach(address => {
-            if(getSelectedAddress.toString() === address.id.toString()){ 
-                setAddressName(address.address_name);
-                setFirstName(address.first_name);
-                setLastName(address.last_name);
-                setAddress(address.address);
-                setCity(address.city);
-                setZipCode(address.zip_code); 
-                setRegion(address.region);
-                setCountry(address.country);
-                setPhone(address.phone_number);
-            }          
-        }) 
-    }, [getSelectedAddress]);
+        if (getSelectedAddress === "0") {
+            setAddressName("");
+            setFirstName("");
+            setLastName("");
+            setAddress("");
+            setCity("");
+            setZipCode("");
+            setRegion("");
+            setCountry("");
+            setPhone("");
+        } else {       
+            const selectedAddress = getUserAddresses.find(address => address.id.toString() === getSelectedAddress.toString());
+            if (selectedAddress) {
+                setAddressName(selectedAddress.address_name);
+                setFirstName(selectedAddress.first_name);
+                setLastName(selectedAddress.last_name);
+                setAddress(selectedAddress.address);
+                setCity(selectedAddress.city);
+                setZipCode(selectedAddress.zip_code);
+                setRegion(selectedAddress.region);
+                setCountry(selectedAddress.country);
+                setPhone(selectedAddress.phone_number);
+            }
+        }
+    }, [getSelectedAddress, getUserAddresses]);
 
     const [getUserId, setUserId] = useState(undefined);
     let userId;
@@ -69,6 +81,7 @@ const MonCompteAdresse = () => {
         Data("panelAdmin", "getAddresses", addressData).then(response => {
             if (response.success === true) {
                 setUserAddresses(response.data);  
+                setSelectedAddress(0);
                 setSelectedAddress(response.data[0].id.toString());
                 setAddressName(response.data[0].address_name);           
                 setFirstName(response.data[0].first_name);
@@ -188,58 +201,128 @@ const MonCompteAdresse = () => {
     const FormSubmitted = async (e) => {
         e.preventDefault();
 
-        if(getFirstNameValidState === 1 && getLastNameValidState === 1 && getAddressValidState === 1 && getCityValidState === 1 && getZipCodeValidState === 1 && getRegionValidState === 1 && getCountryValidState === 1 && getPhoneValidState === 1) {           
-            let data = {
+        if(getSelectedAddress === "0") { // If 'Add a new address' is selected
+            if(getFirstNameValidState === 1 && getLastNameValidState === 1 && getAddressValidState === 1 && getCityValidState === 1 && getZipCodeValidState === 1 && getRegionValidState === 1 && getCountryValidState === 1 && getPhoneValidState === 1) {           
+                let data = {
+                    "table": "addresses",
+                    "data": {
+                        "user_id": getUserId,
+                        "address_name": getAddressName,
+                        "first_name": getFirstName,
+                        "last_name": getLastName,
+                        "address": getAddress,
+                        "city": getCity,
+                        "zip_code": getZipCode,
+                        "region": getRegion,
+                        "country": getCountry,
+                        "phone_number": getPhone
+                    }             
+                };
+          
+                Data("panelAdmin", "insert", data).then(response => {
+                    if (response.success === true) {
+                        ToastQueue.positive("Adresse ajoutée avec succès !", {timeout: 5000});
+                        navigate("/monCompte");
+                    } else {
+                        ToastQueue.negative(response.error, {timeout: 5000});
+                    }
+                });
+            } else {
+                ToastQueue.negative("Veuillez remplir correctement tous les champs.", {timeout: 5000});
+            }
+        } else { // If an existing address is selected, then it's an update
+            if(getFirstNameValidState === 1 && getLastNameValidState === 1 && getAddressValidState === 1 && getCityValidState === 1 && getZipCodeValidState === 1 && getRegionValidState === 1 && getCountryValidState === 1 && getPhoneValidState === 1) {           
+                let data = {
+                    "table": "addresses",
+                    "id": getSelectedAddress,
+                    "data": {
+                        "address_name": getAddressName,
+                        "first_name": getFirstName,
+                        "last_name": getLastName,
+                        "address": getAddress,
+                        "city": getCity,
+                        "zip_code": getZipCode,
+                        "region": getRegion,
+                        "country": getCountry,
+                        "phone_number": getPhone
+                    }             
+                };
+          
+                Data("panelAdmin", "update", data).then(response => {
+                    if (response.success === true) {
+                        ToastQueue.positive("Modification réussie avec succès !", {timeout: 5000});
+                        navigate("/monCompte");
+                    } else {
+                        ToastQueue.negative(response.error, {timeout: 5000});
+                    }
+                });
+            } else {
+                ToastQueue.negative("Veuillez remplir correctement tous les champs.", {timeout: 5000});
+            }
+        }
+    };
+
+    const handleDelete = () => {
+        setIsDeleting(true);
+        const confirmed = window.confirm("Voulez-vous vraiment supprimer cette adresse ?");
+        if (confirmed) {
+            const data = {
                 "table": "addresses",
-                "id": getSelectedAddress,
-                "data": {
-                    "address_name": getAddressName,
-                    "first_name": getFirstName,
-                    "last_name": getLastName,
-                    "address": getAddress,
-                    "city": getCity,
-                    "zip_code": getZipCode,
-                    "region": getRegion,
-                    "country": getRegion,
-                    "phone_number": getPhone
-                }             
+                "id": getSelectedAddress 
             };
-      
-            Data("panelAdmin", "update", data).then(response => {
+
+            Data("panelAdmin", "delete", data).then(response => {
+                setIsDeleting(false);
                 if (response.success === true) {
-                    ToastQueue.positive("Modification réussie avec succès !", {timeout: 5000});
-                    navigate("/monCompte");
+                    saveData("message", {type: "success", body: "Suppression réussite avec succès !"}); // This line is used to store the message into the cookies to display it after the reload of the page
+                    window.location.reload();                
                 } else {
-                    ToastQueue.negative(response.error, {timeout: 5000});
+                    ToastQueue.negative(response.error, { timeout: 5000 });
                 }
             });
         } else {
-            ToastQueue.negative("Veuillez remplir correctement tous les champs.", {timeout: 5000});
+            setIsDeleting(false);
         }
+    };
 
+    const renderButtons = () => {
+        if (getSelectedAddress === "0") {
+            return (
+                <>
+                    <Link to="/monCompte" className="form-btn-error">Annuler</Link>
+                    <button type="submit" className="form-btn-success">Ajouter</button>
+                </>
+            );
+        } else {
+            return (
+                <>
+                    <Link to="/monCompte" className="form-btn-error">Annuler</Link>
+                    <button type="submit" className="form-btn-success">Modifier</button>
+                    <button type="button" className="form-btn-delete" onClick={handleDelete} disabled={isDeleting}>Supprimer</button>
+                </>
+            );
+        }
     };
 
     return (   
         <>
-            <div className="panelAdminAddElement">
+            <div className="monComptePageAdresse">
                 <form onSubmit={FormSubmitted}>
                     <h1 className="formTitle">Modifier votre adresse</h1>
-
                     <div className="picker-container">
                         <Picker
                             label="Choisir une adresse"
                             necessityIndicator="label"
                             isRequired
                             minWidth={300}
-                            items={getUserAddresses}                       
+                            items={[{ id: 0, address_name: "Ajouter une nouvelle adresse" }, ...getUserAddresses]}
                             selectedKey={getSelectedAddress} 
-                            onSelectionChange={selected => {setSelectedAddress(selected);                
-                            }}
+                            onSelectionChange={selected => setSelectedAddress(selected)}
                         >
                             {item => <Item key={item.id}>{item.address_name}</Item>}
-                        </Picker> 
-                    </div> 
+                        </Picker>
 
+                    </div> 
                     <div>                                               
                         {
                             (getAddressNameValidState === 1)
@@ -262,7 +345,6 @@ const MonCompteAdresse = () => {
                             />
                         }
                     </div>
-
                     <div>                                               
                         {
                             (getFirstNameValidState === 1)
@@ -307,7 +389,6 @@ const MonCompteAdresse = () => {
                             />
                         }
                     </div>
-
                     <div>
                         {
                             (getAddressValidState === 1)
@@ -330,7 +411,6 @@ const MonCompteAdresse = () => {
                             />
                         }
                     </div>
-
                     <div>
                         {
                             (getCityValidState === 1)
@@ -353,7 +433,6 @@ const MonCompteAdresse = () => {
                             />
                         }
                     </div>
-
                     <div>
                         {
                             (getZipCodeValidState === 1)
@@ -420,7 +499,6 @@ const MonCompteAdresse = () => {
                             />
                         }
                     </div>
-
                     <div>
                         {
                             (getPhoneValidState === 1)
@@ -446,9 +524,8 @@ const MonCompteAdresse = () => {
                     <></>
                     
                     <div className="buttons">
-                        <Link to="/monCompte" className="form-btn-error">Annuler</Link>
-                        <button type="submit" className="form-btn-success" onClick={FormSubmitted}>Modifier</button>
-                    </div>                 
+                        {renderButtons()}
+                    </div>                               
                 </form>                   
             </div>
         </>
