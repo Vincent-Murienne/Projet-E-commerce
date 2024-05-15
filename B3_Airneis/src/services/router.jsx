@@ -14,6 +14,7 @@ import ImageEdit from "../pages/admin/ImageManager/ImageEdit";
 import CategoryList from "../pages/admin/CategoryManager/CategoryList";
 import CategoryAdd from "../pages/admin/CategoryManager/CategoryAdd";
 import CategoryEdit from "../pages/admin/CategoryManager/CategoryEdit";
+import ProductSearchPage from "../pages/productSearchPage/ProductSearchPage";
 import ProductPage from "../pages/productsPage/ProductPage";
 import ProductEdit from "../pages/admin/ProductManager/ProductEdit";
 import ProductAdd from "../pages/admin/ProductManager/ProductAdd";
@@ -22,6 +23,10 @@ import UserEdit from "../pages/admin/UserManager/UserEdit";
 import UserAdd from "../pages/admin/UserManager/UserAdd";
 import UserList from "../pages/admin/UserManager/UserList";
 import TrackSales from "../pages/admin/trackSales/TrackSales";
+import MonComptePage from "../pages/monComptePage/MonComptePage"
+import MonCompteAdresse from "../pages/monComptePage/MonCompteAdresse";
+import MonComptePayment from "../pages/monComptePage/MonComptePayment";
+import MonCompteEdit from "../pages/monComptePage/MonCompteEdit"
 import ProductSearchPage from "../pages/productSearchPage/ProductSearchPage";
 import BasketPage from "../pages/basketPage/BasketPage";
 
@@ -61,10 +66,27 @@ const router = createBrowserRouter([
             {
                 path: "product", 
                 element: <ProductSearchPage/>
+                element: <ProductSearchPage/>
             },
             {
                 path: "product/:productId", 
                 element: <ProductPage/>
+            },
+            {
+                path: "monCompte", 
+                element: <MonComptePage/>
+            },
+            {
+                path: "monCompteAddresse", 
+                element: <MonCompteAdresse/>
+            },
+            {
+                path: "monComptepayment", 
+                element: <MonComptePayment/>
+            },
+            {
+                path: "monCompteEdit", 
+                element: <MonCompteEdit/>
             },
         ]
     },

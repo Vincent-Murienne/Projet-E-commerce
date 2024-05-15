@@ -34,7 +34,7 @@ const LoginPage = () => {
 
       Data("loginRegister", "login", data).then(response => {
         if (response.success === true){
-          saveData("user", { isConnected: true, isAdmin: (response.user[0].role === "1") ? true : false, id: response.user[0].id, email: email });
+          saveData("user", { isConnected: true, isAdmin: (response.user[0].role === "1" || response.user[0].role === 1) ? true : false, id: response.user[0].id, email: email });
           saveData("message", {type: "success", body: "Connexion réussite avec succès !"});
           navigate('/');
         } else{

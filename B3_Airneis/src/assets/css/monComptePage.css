@@ -1,0 +1,237 @@
+.comptePage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.picker-container {
+    margin-bottom: 15px; 
+}
+
+.link-container {
+    margin-top: 20px;
+  }
+
+.comptePage input[type="text"],
+.comptePage input[type="password"] {
+    width: 300px; 
+    margin-bottom: 20px; 
+}
+
+
+.center{
+    display: block;
+    align-items:center;
+    justify-content: center;
+    margin:0;
+}
+
+   #container{
+    width:400px;
+    margin:0 auto;
+    margin-top:10%;
+   }
+   /* Bordered form */
+.comptePage form {
+    width:100%;
+    padding: 30px;
+    border: 1px solid #f1f1f1;
+    background: #fff;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+   }
+.comptePage #container h1{
+    width: 38%;
+    margin: 0 auto;
+    padding-bottom: 10px;
+   }
+   
+   /* Full-width inputs */
+.comptePage input[type=text], .comptePage input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+   }  
+
+.comptePage.submit-container{
+    display: flex;
+    gap: 30px;
+    margin: 60px auto;
+}
+
+.comptePage .submit{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    height: 59px;
+    background: #16577f;
+    border-radius: 50px;
+    color: #FFFFFF;
+    font-size: 19px;
+    font-weight: 700;
+    cursor: pointer; 
+}
+
+.comptePage .submit:hover{
+    background: #7f7d88; 
+}
+
+.comptePage.submitDelete-container{
+    display: flex;
+    gap: 30px;
+    margin: 60px auto;
+}
+
+.comptePage .submitDelete{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    height: 59px;
+    background: red;
+    border-radius: 50px;
+    color: #FFFFFF;
+    font-size: 19px;
+    font-weight: 700;
+    cursor: pointer; 
+}
+
+.comptePage .submitDelete:hover{
+    background: #7f7d88; 
+}
+
+.comptePage .buttons-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 800px; 
+    margin-top: 45px; 
+}
+
+.comptePage .submit,
+.comptePage .submitDelete 
+.comptePage .submitModify {
+    width: 48%; 
+}
+
+.comptePage .submit:not(:last-child),
+.comptePage .submitDelete:not(:last-child),
+.comptePage .submitModify:not(:last-child) {
+    margin-right: 10px;
+}
+
+.comptePage.submitModify-container{
+    display: flex;
+    gap: 30px;
+    margin: 60px auto;
+}
+
+.comptePage .submitModify{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    height: 59px;
+    background: #299b21;
+    border-radius: 50px;
+    color: #FFFFFF;
+    font-size: 19px;
+    font-weight: 700;
+    cursor: pointer; 
+}
+
+.comptePage .submitModify:hover{
+    background: #7f7d88; 
+}
+
+.bordered-button {
+    border: 2px solid #000; 
+    display: inline-block; 
+    border-radius: 5px; 
+}
+
+.custom-button {
+    width: 300px;
+    background-color: transparent;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s; 
+}
+
+.custom-button:hover {
+    background-color: #6e7176; 
+    color: white; 
+}
+
+
+.addresses-title {
+    margin-bottom: 10px; 
+    font-weight: normal; 
+}
+.payement-title {
+    margin-bottom: 10px;
+    margin-top: 30px; 
+    font-weight: normal; 
+}
+
+
+.monComptePageAdresse {
+    width: 500px;
+    height: 100%;
+    margin: 7rem auto;
+    text-align: center;
+    background-color: var(--darker-white);
+}
+
+.monComptePageAdresse form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    background-color: var(--white);
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.monComptePageAdresse form .buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+/* Pour les petits écrans */
+@media only screen and (max-width: 600px) {
+    .comptePage {
+        padding: 20px; 
+    }
+
+    .comptePage input[type="text"],
+    .comptePage input[type="password"] {
+        width: 100%; 
+    }
+}
+
+.form-btn-delete {
+    font-size: 1.2rem;
+    padding: .6rem 1.1rem;
+    border-radius: .4rem;
+    background-color: rgb(154, 19, 19);
+    color: var(--white);
+}
+
+/* Pour les écrans moyens et grands */
+@media only screen and (min-width: 601px) {
+    .comptePage {
+        padding: 50px; /* Ajoutez un peu plus d'espace autour du contenu */
+    }
+
+    .comptePage input[type="text"],
+    .comptePage input[type="password"] {
+        width: 300px; /* Revenez à la largeur fixe pour les écrans plus grands */
+    }
+}

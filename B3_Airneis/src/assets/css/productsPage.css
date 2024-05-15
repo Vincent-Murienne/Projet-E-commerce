@@ -85,6 +85,7 @@
     flex-direction: column; /* Align items vertically */
     align-items: flex-start; /* Align items horizontally to the left */
     margin-top: 20px; /* Add top margin to separate from "Add to Cart" button */
+    padding-left: 3%;
 }
 
 .stock h3 {

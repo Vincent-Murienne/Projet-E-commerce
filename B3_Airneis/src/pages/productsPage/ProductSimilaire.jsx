@@ -11,7 +11,6 @@ const ProductSimilaire = ({ categoryId, productId }) => {
             try {
                 const response = await Data("product", "getProductSimilaire", { table: "products", id: categoryId });
                 if (response.success === true) {
-                    console.log(response.data)
                     setTopProducts(response.data);
                 } else {
                     console.log(response.error);
@@ -39,7 +38,7 @@ const ProductSimilaire = ({ categoryId, productId }) => {
                                         <h4>{product.name}</h4>
                                         <h4>{product.price}€</h4>
                                     </div>
-                                    <Link to={`/product/${product.id}`} className="btn">View more</Link>
+                                    <Link to={`/product/${product.id}`} className="btn">Voir plus</Link>
                                 </div>
                             )
                         ))}

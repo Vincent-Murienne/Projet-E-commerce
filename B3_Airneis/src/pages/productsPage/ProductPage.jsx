@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Data } from '../../services/api';
 import { useContext, useEffect, useState } from "react";
 import SliderProduct from "./SliderProduct";
@@ -19,6 +19,8 @@ const ProductPage = () => {
                 const response = await Data("product", "getProductDetail", { table: "products", id: productId });
                 if (response.success === true) {
                     setProduct(response.data[0]);
+                    setCartCount(1);
+                    
                 } else {
                     console.error(response.error);
                 }
@@ -37,7 +39,6 @@ const ProductPage = () => {
 
     const addToCart = async () => {
         let user = pullData("user");
-        console.log(user);
 
         if (!user) {
             ToastQueue.negative("Veuillez vous connecter pour ajouter des produits au panier.", { timeout: 5000 });
@@ -57,6 +58,7 @@ const ProductPage = () => {
             if (response.success === true) {
                 ToastQueue.positive("L'élément a bien été ajouté au panier.", { timeout: 5000 });
                 setCartCount(1);
+                setIsDecrementDesactivated(true);
             } else {
                 ToastQueue.negative(response.error, { timeout: 5000 });
             }
