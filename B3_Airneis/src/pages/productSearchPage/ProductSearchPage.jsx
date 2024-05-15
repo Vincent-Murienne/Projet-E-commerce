@@ -8,7 +8,7 @@ import { Data } from '../../services/api';
 import { ToastQueue } from "@react-spectrum/toast";
 import {Grid} from '@adobe/react-spectrum'
 
-const ProductPage = () => {
+const ProductSearchPage = () => {
   // Récupération des informations de la barre de recherche
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -40,16 +40,24 @@ const ProductPage = () => {
     });
   }, [searchQuery]);
 
+  // J'aimerai que cette fonction soit appelée lorsque l'utilisateur clique sur le bouton de filtrage
+  // les informations de filtrage sont récupérées dans le composant SearchPage
+  // et sont envoyées à la fonction handleSearch
+  // handleSearch doit ensuite appeler la fonction Data pour récupérer les produits filtrés
+  // et les afficher dans la liste des produits
+
   const handleSearch = (searchData) => {
-    Data("searchProduct", "getProductByFilter", { "data" : searchData, "table": "products" }).then(response => {
-        if (response.success === true) {
-          setProduits(response.data);
-          console.log("tqt", produits);
-        } else {
-          ToastQueue.negative(response.error, { timeout: 5000 });
-        }
+    console.log(searchData);
+    Data("searchProduct", "getProductByFilter", searchData).then(response => {
+      if (response.success === true) {
+        setProduits(response.data);
+        console.log("tqt", produits);
+      } else {
+        ToastQueue.negative(response.error, {timeout: 5000});
+      }
     });
-};
+  }
+
 
   return (
     <>
@@ -121,4 +129,4 @@ const ProductPage = () => {
   );
 }
 
-export default ProductPage;
+export default ProductSearchPage;

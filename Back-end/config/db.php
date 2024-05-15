@@ -277,8 +277,8 @@ class Database {
             WHERE 
                 (:prix_min IS NULL OR products.price >= :prix_min) -- Prix minimum
                 AND (:prix_max IS NULL OR products.price <= :prix_max) -- Prix maximum
-                AND (:materiaux IS NULL OR materials_list.id IN (:materiaux)) -- Matériaux
-                AND (:categories IS NULL OR categories.id IN (:categories)) -- Catégories
+                AND (:materiaux IS NULL OR materials_list.name IN (:materiaux)) -- Matériaux
+                AND (:categories IS NULL OR categories.name IN (:categories)) -- Catégories
                 AND (:en_stock = 0 OR products.quantity > 0)";
 
         $query = $this->pdo->prepare($sql);

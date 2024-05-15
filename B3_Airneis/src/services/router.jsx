@@ -22,6 +22,7 @@ import UserEdit from "../pages/admin/UserManager/UserEdit";
 import UserAdd from "../pages/admin/UserManager/UserAdd";
 import UserList from "../pages/admin/UserManager/UserList";
 import TrackSales from "../pages/admin/trackSales/TrackSales";
+import ProductSearchPage from "../pages/productSearchPage/ProductSearchPage";
 
 const router = createBrowserRouter([
     {
@@ -54,7 +55,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "product", 
-                element: <ProductPage/>
+                element: <ProductSearchPage/>
             },
             {
                 path: "product/:productId", 

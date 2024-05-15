@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import {useState, useEffect} from 'react';
 import {TextField, Checkbox, Text, ActionButton, Form} from '@adobe/react-spectrum';
 import Delete from '@spectrum-icons/workflow/Delete';
 import { Data } from '../../services/api';
@@ -8,15 +8,15 @@ import {Cell, Column, Row, TableView, TableBody, TableHeader} from '@adobe/react
 import {Grid} from '@adobe/react-spectrum'
 import PropTypes from 'prop-types'; // Importer PropTypes
 
-
 const SearchPage = ({ onSearch }) => {
     SearchPage.propTypes = {
         onSearch: PropTypes.func.isRequired, // Assurez-vous que onSearch est une fonction et qu'elle est requise
     };
+
     const [minPrice, setMinPrice] = useState('');
     const [maxPrice, setMaxPrice] = useState('');
-    const [categories, setCategories] = useState([]);
     const [materials, setMaterials] = useState([]);
+    const [categories, setCategories] = useState([]);
     const [enStock, setEnStock] = useState(false);
 
     const handleMinPriceChange = (value) => {
@@ -52,27 +52,20 @@ const SearchPage = ({ onSearch }) => {
 
     useEffect(() => {
         Data("panelAdmin", "getAllFromTable", dataCategories).then(response => {
-            if (response.success === true)
-            {
+            if (response.success === true) {
                 setCategories(response.data);
-            }
-            else
-            {
+            } else {
                 ToastQueue.negative(response.error, {timeout: 5000});
             }
         });
         Data("panelAdmin", "getAllFromTable", dataMaterials).then(response => {
-            if (response.success === true)
-            {
+            if (response.success === true) {
                 setMaterials(response.data);
-            }
-            else
-            {
+            } else {
                 ToastQueue.negative(response.error, {timeout: 5000});
             }
         });
-    });
-    
+    }, []); // Pass an empty array as dependency to useEffect to execute it once after initial render
 
     return (
         <>
@@ -124,9 +117,9 @@ const SearchPage = ({ onSearch }) => {
                             <Column>Matériaux</Column>
                         </TableHeader>
                         <TableBody>
-                            {materials.map((materials) => (
-                                <Row key={materials.id}>
-                                    <Cell>{materials.name}</Cell>
+                            {materials.map((material) => (
+                                <Row key={material.id}>
+                                    <Cell>{material.name}</Cell>
                                 </Row>
                             ))}
                         </TableBody>
@@ -141,9 +134,9 @@ const SearchPage = ({ onSearch }) => {
                             <Column>Catégories</Column>
                         </TableHeader>
                         <TableBody>
-                            {categories.map((categories) => (
-                                <Row key={categories.id}>
-                                    <Cell>{categories.name}</Cell>
+                            {categories.map((category) => (
+                                <Row key={category.id}>
+                                    <Cell>{category.name}</Cell>
                                 </Row>
                             ))}
                         </TableBody>
