@@ -21,18 +21,39 @@ const MonComptePayment = () => {
     const [getCardNumberValidState, setCardNumberValidState] = useState(1);
     const [getExpirationDateValidState, setExpirationDateValidState] = useState(1);
     const [getCvvValidState, setCvvValidState] = useState(1);
+    const [isDeleting, setIsDeleting] = useState(false);
+
+
+    // useEffect(() => {
+    //     getUserPayment.forEach(payment => {
+    //         if(getSelectedPayment.toString() === payment.id.toString()){ 
+    //             setCardName(payment.card_name);
+    //             setCardOwner(payment.card_owner);
+    //             setCardNumber(payment.card_number);
+    //             setExpirationDate(payment.expiration_date);
+    //             setCvv(payment.cvv);          
+    //         }          
+    //     }) 
+    // }, [getSelectedPayment]);
 
     useEffect(() => {
-        getUserPayment.forEach(payment => {
-            if(getSelectedPayment.toString() === payment.id.toString()){ 
-                setCardName(payment.card_name);
-                setCardOwner(payment.card_owner);
-                setCardNumber(payment.card_number);
-                setExpirationDate(payment.expiration_date);
-                setCvv(payment.cvv);          
-            }          
-        }) 
-    }, [getSelectedPayment]);
+        if (getSelectedPayment === "0") {
+            setCardName("");
+            setCardOwner("");
+            setCardNumber("");
+            setExpirationDate("");
+            setCvv("");
+        } else {       
+            const selectedPayment = getUserPayment.find(payment => payment.id.toString() === getSelectedPayment.toString());
+            if (selectedPayment) {
+                setCardName(selectedPayment.card_name);
+                setCardOwner(selectedPayment.card_owner);
+                setCardNumber(selectedPayment.card_number);
+                setExpirationDate(selectedPayment.expiration_date);
+                setCvv(selectedPayment.cvv);              
+            }
+        }
+    }, [getSelectedPayment, getUserPayment]);
 
     const [getUserId, setUserId] = useState(undefined);
     let userId;
@@ -103,6 +124,34 @@ const MonComptePayment = () => {
     }, [getCardNumber]);
 
     useEffect(() => {
+        if (getExpirationDate !== undefined) {
+            // Check if the expiration date is in the format YYYY-MM-DD
+            const expirationDateRegex = /^(\d{4})-(\d{2})-(\d{2})\s(\d{2}):(\d{2}):(\d{2})$/;
+            const match = getExpirationDate.match(expirationDateRegex);
+    
+            if (match) {
+                const expYear = parseInt(match[1], 10);
+                const expMonth = parseInt(match[2], 10);
+                const expDay = parseInt(match[3], 10);
+                const expDate = new Date(expYear, expMonth - 1, expDay); // Months are 0-indexed in JavaScript Date
+                const currentDate = new Date();
+    
+                // Check if the expiration date is at the beginning of the given day and in the future
+                const isFutureDate = expDate > currentDate && expDate.getHours() === 0 && expDate.getMinutes() === 0 && expDate.getSeconds() === 0;
+    
+                if (isFutureDate) {
+                    setExpirationDateValidState(1); // Valid state
+                } else {
+                    setExpirationDateValidState(2); // Invalid state, date is in the past or not at the beginning of the day
+                }
+            } else {
+                setExpirationDateValidState(2); // Invalid state, format is incorrect
+            }
+        }
+    }, [getExpirationDate]);
+    
+
+    useEffect(() => {
         if(getCvv !== undefined) {        
             const cvvRegex = /^\d{3}$/; 
             if(cvvRegex.test(getCvv)) {
@@ -116,6 +165,32 @@ const MonComptePayment = () => {
     const FormSubmitted = async (e) => {
         e.preventDefault();
 
+        if(getSelectedPayment === "0") { // If 'Add a new address' is selected
+            if(getCardNameValidState === 1 && getCardOwnerValidState === 1 && getCardNumberValidState === 1 && getExpirationDateValidState === 1 && getCvvValidState === 1) {           
+                let data = {
+                    "table": "payments",
+                    "data": {
+                        "user_id": getUserId,
+                        "card_name": getCardName,
+                        "card_owner": getCardOwner,
+                        "card_number": getCardNumber,
+                        "expiration_date": getExpirationDate,
+                        "cvv": getCvv,  
+                    }             
+                };
+          
+                Data("panelAdmin", "insert", data).then(response => {
+                    if (response.success === true) {
+                        ToastQueue.positive("Adresse ajoutée avec succès !", {timeout: 5000});
+                        navigate("/monCompte");
+                    } else {
+                        ToastQueue.negative(response.error, {timeout: 5000});
+                    }
+                });
+            } else {
+                ToastQueue.negative("Veuillez remplir correctement tous les champs.", {timeout: 5000});
+            }
+        } else {
         if(getCardNameValidState === 1 && getCardOwnerValidState === 1 && getCardNumberValidState === 1 && getExpirationDateValidState === 1 && getCvvValidState === 1) {           
             let data = {
                 "table": "payments",
@@ -141,10 +216,53 @@ const MonComptePayment = () => {
             ToastQueue.negative("Veuillez remplir correctement tous les champs.", {timeout: 5000});
         }
     };
+}
+
+    const handleDelete = () => {
+        setIsDeleting(true);
+        const confirmed = window.confirm("Voulez-vous vraiment supprimer cette méthode de paiement ?");
+        if (confirmed) {
+            const data = {
+                "table": "payments",
+                "id": getSelectedPayment 
+            };
+
+            Data("panelAdmin", "delete", data).then(response => {
+                setIsDeleting(false);
+                if (response.success === true) {
+                    saveData("message", {type: "success", body: "Suppression réussite avec succès !"}); // This line is used to store the message into the cookies to display it after the reload of the page
+                    window.location.reload();                
+                } else {
+                    ToastQueue.negative(response.error, { timeout: 5000 });
+                }
+            });
+        } else {
+            setIsDeleting(false);
+        }
+    };
+
+    const renderButtons = () => {
+        if (getSelectedPayment === "0") {
+            return (
+                <>
+                    <Link to="/monCompte" className="form-btn-error">Annuler</Link>
+                    <button type="submit" className="form-btn-success">Ajouter</button>
+                </>
+            );
+        } else {
+            return (
+                <>
+                    <Link to="/monCompte" className="form-btn-error">Annuler</Link>
+                    <button type="submit" className="form-btn-success">Modifier</button>
+                    <button type="button" className="form-btn-delete" onClick={handleDelete} disabled={isDeleting}>Supprimer</button>
+                </>
+            );
+        }
+    };
 
     return (   
         <>
-            <div className="panelAdminAddElement">
+            <div className="monComptePageAdresse">
                 <form onSubmit={FormSubmitted}>
                     <h1 className="formTitle">Modifier vos méthodes de paiement</h1>
 
@@ -154,7 +272,7 @@ const MonComptePayment = () => {
                             necessityIndicator="label"
                             isRequired
                             minWidth={300}
-                            items={getUserPayment}                       
+                            items={[{ id: 0, card_name: "Ajouter une méthode de paiement" }, ...getUserPayment]}
                             selectedKey={getSelectedPayment} 
                             onSelectionChange={selected => {setSelectedPayment(selected);                
                             }}
@@ -248,7 +366,7 @@ const MonComptePayment = () => {
                                 onChange={setExpirationDate}
                                 value={getExpirationDate}
                                 validationState="invalid"
-                                errorMessage="Veuillez entrer une date valide."
+                                errorMessage="Le format de la date AAAA-MM-JJ 00:00:00."
                                 width={300}
                             />
                         }
@@ -279,9 +397,8 @@ const MonComptePayment = () => {
                     <></>
                     
                     <div className="buttons">
-                        <Link to="/monCompte" className="form-btn-error">Annuler</Link>
-                        <button type="submit" className="form-btn-success" onClick={FormSubmitted}>Modifier</button>
-                    </div>                 
+                        {renderButtons()}
+                    </div>                  
                 </form>                   
             </div>
         </>

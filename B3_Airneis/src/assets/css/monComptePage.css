@@ -177,6 +177,33 @@
     font-weight: normal; 
 }
 
+
+.monComptePageAdresse {
+    width: 500px;
+    height: 100%;
+    margin: 7rem auto;
+    text-align: center;
+    background-color: var(--darker-white);
+}
+
+.monComptePageAdresse form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    background-color: var(--white);
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.monComptePageAdresse form .buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
 /* Pour les petits écrans */
 @media only screen and (max-width: 600px) {
     .comptePage {
@@ -187,6 +214,14 @@
     .comptePage input[type="password"] {
         width: 100%; 
     }
+}
+
+.form-btn-delete {
+    font-size: 1.2rem;
+    padding: .6rem 1.1rem;
+    border-radius: .4rem;
+    background-color: rgb(154, 19, 19);
+    color: var(--white);
 }
 
 /* Pour les écrans moyens et grands */

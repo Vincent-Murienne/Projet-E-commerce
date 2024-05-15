@@ -136,7 +136,7 @@ const MonCompteEdit = () => {
 
     return(
         <>
-            <div className="panelAdminAddElement">
+            <div className="monComptePageAdresse">
                 <form onSubmit={FormSubmitted}>
                     <h1 className="formTitle">Modifier le profil</h1>
                     <div>                                               
