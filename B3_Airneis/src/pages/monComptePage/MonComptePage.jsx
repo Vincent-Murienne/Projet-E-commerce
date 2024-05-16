@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { BsPencilSquare } from 'react-icons/bs';
 import { TextField } from "@adobe/react-spectrum";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Data } from "../../services/api";
 import { UserContext } from '../../context/UserProvider';
 import { ToastQueue } from "@react-spectrum/toast";
@@ -12,10 +12,18 @@ const MonComptePage = () => {
     const [getUserMail, setUserMail] = useState([]);
     const [getUserPassword, setUserPassword] = useState([]);
 
+    const [getUserId, setUserId] = useState(undefined);
     let userId;
+    const navigate = useNavigate();
 
     useEffect(() => {
-        let userData = pullData("user");
+        let userData = pullData("user");       
+        if(userData === undefined){
+            ToastQueue.negative("Veuillez vous connecter afin de pouvoir accéder à cette page.", {timeout: 5000});
+            navigate("/");
+            return;
+        }
+
         userId = userData.id;
 
         let data = {

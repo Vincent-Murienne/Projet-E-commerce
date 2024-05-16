@@ -230,8 +230,8 @@ const MonComptePayment = () => {
             Data("panelAdmin", "delete", data).then(response => {
                 setIsDeleting(false);
                 if (response.success === true) {
-                    saveData("message", {type: "success", body: "Suppression réussite avec succès !"}); // This line is used to store the message into the cookies to display it after the reload of the page
-                    window.location.reload();                
+                    ToastQueue.positive("Suppression réussie avec succès !", {timeout: 5000});
+                    navigate("/monCompte");               
                 } else {
                     ToastQueue.negative(response.error, { timeout: 5000 });
                 }

@@ -13,10 +13,10 @@ const ProductSimilaire = ({ categoryId, productId }) => {
                 if (response.success === true) {
                     setTopProducts(response.data);
                 } else {
-                    console.log(response.error);
+                    ToastQueue.negative(response.error, {timeout: 5000});
                 }
             } catch (error) {
-                console.error('Error fetching data:', error);
+                console.error('Une erreur est survenue lors de la récupération des produits similaires:', error);
             }
         };
 

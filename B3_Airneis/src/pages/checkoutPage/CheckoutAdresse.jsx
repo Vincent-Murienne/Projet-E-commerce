@@ -32,20 +32,31 @@ const CheckoutAdresse = () => {
     const [getPhoneValidState, setPhoneValidState] = useState(1);
 
     useEffect(() => {
-        getUserAddresses.forEach(address => {
-            if(getSelectedAddress.toString() === address.id.toString()){ 
-                setAddressName(address.address_name);
-                setFirstName(address.first_name);
-                setLastName(address.last_name);
-                setAddress(address.address);
-                setCity(address.city);
-                setZipCode(address.zip_code); 
-                setRegion(address.region);
-                setCountry(address.country);
-                setPhone(address.phone_number);
-            }          
-        }) 
-    }, [getSelectedAddress]);
+        if (getSelectedAddress === "0") {
+            setAddressName("");
+            setFirstName("");
+            setLastName("");
+            setAddress("");
+            setCity("");
+            setZipCode("");
+            setRegion("");
+            setCountry("");
+            setPhone("");
+        } else {       
+            const selectedAddress = getUserAddresses.find(address => address.id.toString() === getSelectedAddress.toString());
+            if (selectedAddress) {
+                setAddressName(selectedAddress.address_name);
+                setFirstName(selectedAddress.first_name);
+                setLastName(selectedAddress.last_name);
+                setAddress(selectedAddress.address);
+                setCity(selectedAddress.city);
+                setZipCode(selectedAddress.zip_code);
+                setRegion(selectedAddress.region);
+                setCountry(selectedAddress.country);
+                setPhone(selectedAddress.phone_number);
+            }
+        }
+    }, [getSelectedAddress, getUserAddresses]);
 
     const [getUserId, setUserId] = useState(undefined);
     let userId;
@@ -188,38 +199,56 @@ const CheckoutAdresse = () => {
     const FormSubmitted = async (e) => {
         e.preventDefault();
 
-        if(getFirstNameValidState === 1 && getLastNameValidState === 1 && getAddressValidState === 1 && getCityValidState === 1 && getZipCodeValidState === 1 && getRegionValidState === 1 && getCountryValidState === 1 && getPhoneValidState === 1) {           
-            let data = {
-                "table": "addresses",
-                "id": getSelectedAddress,
-                "data": {
-                    "address_name": getAddressName,
-                    "first_name": getFirstName,
-                    "last_name": getLastName,
-                    "address": getAddress,
-                    "city": getCity,
-                    "zip_code": getZipCode,
-                    "region": getRegion,
-                    "country": getRegion,
-                    "phone_number": getPhone
-                }             
-            };
-      
-            Data("panelAdmin", "insert", data).then(response => {
-                if (response.success === true)
-                {
-                    ToastQueue.positive("Création réussite avec succès !", {timeout: 5000});
-                    navigate("/admin/CategoryManager");
-                }
-                else
-                {
-                    ToastQueue.negative(response.error, {timeout: 5000});
-                }
-            });
-        } else {
-            ToastQueue.negative("Veuillez remplir correctement tous les champs.", {timeout: 5000});
-        }
-    };
+        if(getSelectedAddress === "0") { // If 'Add a new address' is selected
+            if(getFirstNameValidState === 1 && getLastNameValidState === 1 && getAddressValidState === 1 && getCityValidState === 1 && getZipCodeValidState === 1 && getRegionValidState === 1 && getCountryValidState === 1 && getPhoneValidState === 1) {           
+                let data = {
+                    "table": "addresses",
+                    "data": {
+                        "user_id": getUserId,
+                        "address_name": getAddressName,
+                        "first_name": getFirstName,
+                        "last_name": getLastName,
+                        "address": getAddress,
+                        "city": getCity,
+                        "zip_code": getZipCode,
+                        "region": getRegion,
+                        "country": getCountry,
+                        "phone_number": getPhone
+                    }             
+                };
+          
+                Data("panelAdmin", "insert", data).then(response => {
+                    if (response.success === true) {
+                        ToastQueue.positive("Adresse ajoutée avec succès !", {timeout: 5000});
+                        navigate("/checkoutAdresse");
+                    } else {
+                        ToastQueue.negative(response.error, {timeout: 5000});
+                    }
+                });
+            } else {
+                ToastQueue.negative("Veuillez remplir correctement tous les champs.", {timeout: 5000});
+            }
+    }
+};
+
+const renderButtons = () => {
+    if (getSelectedAddress === "0") {
+        return (
+            <>
+                <Link to="/" className="form-btn-error">Annuler</Link>
+                <button type="submit" className="form-btn-success">Ajouter</button>
+            </>
+        );
+    } else {
+        return (
+            <>     
+                <div className="checkoutAdresse">      
+                  <Link to="/checkoutPayment" className="btnProduit">Passer au paiement</Link> 
+                </div> 
+            </>
+        );
+    }
+};
 
     return (   
         <>
@@ -233,93 +262,243 @@ const CheckoutAdresse = () => {
                             necessityIndicator="label"
                             isRequired
                             minWidth={300}
-                            items={getUserAddresses}                       
+                            items={[{ id: 0, address_name: "Ajouter une nouvelle adresse" }, ...getUserAddresses]}
                             selectedKey={getSelectedAddress} 
-                            onSelectionChange={selected => {setSelectedAddress(selected);                
-                            }}
+                            onSelectionChange={selected => setSelectedAddress(selected)}
                         >
                             {item => <Item key={item.id}>{item.address_name}</Item>}
-                        </Picker> 
+                        </Picker>
                     </div> 
-
                     <div>                                               
-
+                        {
+                            (getAddressNameValidState === 1)
+                            ?
+                        <TextField
+                            label="Nom d'adresse"
+                            onChange={setAddressName}
+                            value={getAddressName}
+                            isReadOnly={getSelectedAddress !== "0"}
+                            validationState={getAddressNameValidState === 1 ? "valid" : "invalid"}
+                            errorMessage="Veuillez entrer un nom correct (entre 3 et 50 caractères)."
+                            width={300}
+                        />
+                            :
                             <TextField
                                 label="Nom d'adresse"
-                                value={getAddressName} 
+                                onChange={setAddressName}
+                                value={getAddressName}
+                                isReadOnly={getSelectedAddress !== "0"}
+                                validationState={getAddressNameValidState === 1 ? "valid" : "invalid"}
+                                errorMessage="Veuillez entrer un nom correct (entre 3 et 50 caractères)."
                                 width={300}
-                            />                         
+                            />
+                        }
                     </div>
-
                     <div>                                               
+                        {
+                            (getFirstNameValidState === 1)
+                            ?
                             <TextField
                                 label="Prénom"
-                                value={getFirstName} 
+                                onChange={setFirstName}
+                                value={getFirstName}
+                                isReadOnly={getSelectedAddress !== "0"}
+                                validationState={getFirstNameValidState === 1 ? "valid" : "invalid"}
+                                errorMessage="Veuillez entrer un nom correct (entre 3 et 50 caractères)."
                                 width={300}
-                            />                       
+                            />
+                            :
+                           <TextField
+                                label="Prénom"
+                                onChange={setFirstName}
+                                value={getFirstName}
+                                isReadOnly={getSelectedAddress !== "0"}
+                                validationState={getFirstNameValidState === 1 ? "valid" : "invalid"}
+                                errorMessage="Veuillez entrer un nom correct (entre 3 et 50 caractères)."
+                                width={300}
+                            />
+                        }
                     </div>
                     <div>
-                        
+                        {
+                            (getLastNameValidState === 1)
+                            ?
                             <TextField
                                 label="Nom"
+                                onChange={setLastName}
                                 value={getLastName}
+                                isReadOnly={getSelectedAddress !== "0"}
+                                validationState={getLastNameValidState === 1 ? "valid" : "invalid"}
+                                errorMessage="Veuillez entrer un nom correct (entre 3 et 50 caractères)."
                                 width={300}
                             />
+                            :
+                            <TextField
+                                label="Nom"
+                                onChange={setLastName}
+                                value={getLastName}
+                                isReadOnly={getSelectedAddress !== "0"}
+                                validationState={getLastNameValidState === 1 ? "valid" : "invalid"}
+                                errorMessage="Veuillez entrer un nom correct (entre 3 et 50 caractères)."
+                                width={300}
+                            />
+                        }
                     </div>
-
                     <div>
+                        {
+                            (getAddressValidState === 1)
+                            ?
                             <TextField
                                 label="Adresse"
+                                onChange={setAddress}
                                 value={getAddress}
+                                isReadOnly={getSelectedAddress !== "0"}
+                                validationState={getAddressValidState === 1 ? "valid" : "invalid"}
+                                errorMessage="Veuillez entrer une address valide."
                                 width={300}
                             />
+                            :
+                            <TextField
+                                label="Adresse"
+                                onChange={setAddress}
+                                value={getAddress}
+                                isReadOnly={getSelectedAddress !== "0"}
+                                validationState={getAddressValidState === 1 ? "valid" : "invalid"}
+                                errorMessage="Veuillez entrer une address valide."
+                                width={300}
+                            />
+                        }
                     </div>
-
                     <div>
+                        {
+                            (getCityValidState === 1)
+                            ?
                             <TextField
                                 label="Ville"
+                                onChange={setCity}
                                 value={getCity}
+                                isReadOnly={getSelectedAddress !== "0"}
+                                validationState={getCityValidState === 1 ? "valid" : "invalid"}
+                                errorMessage="Veuillez entrer un nom valide."
                                 width={300}
                             />
+                            :
+                            <TextField
+                                label="Ville"
+                                onChange={setCity}
+                                value={getCity}
+                                isReadOnly={getSelectedAddress !== "0"}
+                                validationState={getCityValidState === 1 ? "valid" : "invalid"}
+                                errorMessage="Veuillez entrer un nom valide."
+                                width={300}
+                            />
+                        }
                     </div>
-
                     <div>
-                       
+                        {
+                            (getZipCodeValidState === 1)
+                            ?
                             <TextField
                                 label="Code postal"
+                                onChange={setZipCode}
                                 value={getZipCode}
+                                isReadOnly={getSelectedAddress !== "0"}
+                                validationState={getZipCodeValidState === 1 ? "valid" : "invalid"}
+                                errorMessage="Veuillez entrer un code postal valide."
                                 width={300}
                             />
+                            :
+                            <TextField
+                                label="Code postal"
+                                onChange={setZipCode}
+                                value={getZipCode}
+                                isReadOnly={getSelectedAddress !== "0"}
+                                validationState={getZipCodeValidState === 1 ? "valid" : "invalid"}
+                                errorMessage="Veuillez entrer un code postal valide."
+                                width={300}
+                            />
+                        }
                     </div>
                     <div>
+                        {
+                            (getRegionValidState === 1)
+                            ?
                             <TextField
                                 label="Région"
+                                onChange={setRegion}
                                 value={getRegion}
+                                isReadOnly={getSelectedAddress !== "0"}
+                                validationState={getRegionValidState === 1 ? "valid" : "invalid"}
+                                errorMessage="Veuillez entrer une region valide."
                                 width={300}
                             />
+                            :
+                            <TextField
+                                label="Région"
+                                onChange={setRegion}
+                                value={getRegion}
+                                isReadOnly={getSelectedAddress !== "0"}
+                                validationState={getRegionValidState === 1 ? "valid" : "invalid"}
+                                errorMessage="Veuillez entrer une region valide."
+                                width={300}
+                            />
+                        }
                     </div>
                     <div>
-                      
+                        {
+                            (getCountryValidState === 1)
+                            ?
                             <TextField
                                 label="Pays"
+                                onChange={setCountry}
                                 value={getCountry}
+                                isReadOnly={getSelectedAddress !== "0"}
+                                validationState={getCountryValidState === 1 ? "valid" : "invalid"}
+                                errorMessage="Veuillez entrer un pays valide."
                                 width={300}
                             />
+                            :
+                            <TextField
+                                label="Pays"
+                                onChange={setCountry}
+                                value={getCountry}
+                                isReadOnly={getSelectedAddress !== "0"}
+                                validationState={getCountryValidState === 1 ? "valid" : "invalid"}
+                                errorMessage="Veuillez entrer un pays valide."
+                                width={300}
+                            />
+                        }
                     </div>
-
                     <div>
+                        {
+                            (getPhoneValidState === 1)
+                            ?
                             <TextField
                                 label="Téléphone"
+                                onChange={setPhone}
                                 value={getPhone}
+                                isReadOnly={getSelectedAddress !== "0"}
+                                validationState={getPhoneValidState === 1 ? "valid" : "invalid"}
+                                errorMessage="Veuillez entrer un numero valide."
                                 width={300}
                             />
+                            :
+                            <TextField
+                                label="Téléphone"
+                                onChange={setPhone}
+                                value={getPhone}
+                                isReadOnly={getSelectedAddress !== "0"}
+                                validationState={getPhoneValidState === 1 ? "valid" : "invalid"}
+                                errorMessage="Veuillez entrer un numero valide."
+                                width={300}
+                            />
+                        }
                     </div>             
                     <></>
                     
                     <div className="buttons">
-                        <Link to="/checkoutPage" className="form-btn-error">Annuler</Link>
-                        <button type="submit" className="form-btn-success" onClick={FormSubmitted}>Confirmer</button>
-                    </div>   
+                        {renderButtons()}
+                    </div> 
                     </form>                            
             </div>
         </>
