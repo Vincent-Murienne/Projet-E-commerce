@@ -26,6 +26,8 @@ import TrackSales from "../pages/admin/trackSales/TrackSales";
 import MonComptePage from "../pages/monComptePage/MonComptePage"
 import MonCompteAdresse from "../pages/monComptePage/MonCompteAdresse";
 import MonComptePayment from "../pages/monComptePage/MonComptePayment";
+
+import BasketPage from  "../pages/basketPage/BasketPage";
 import MonCompteEdit from "../pages/monComptePage/MonCompteEdit"
 import CheckoutAdresse from "../pages/checkoutPage/CheckoutAdresse"
 import CheckoutPayment from "../pages/checkoutPage/CheckoutPayment"
@@ -52,7 +54,11 @@ const router = createBrowserRouter([
             {
                 path: "register",
                 element: <RegisterPage/>
-            },  
+            },
+            {
+                path: "panier",
+                element: <BasketPage/>
+            },
             {
                 path: "categories/:categoryId", 
                 element: <CategorieDetails/>

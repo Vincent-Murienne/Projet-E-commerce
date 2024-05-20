@@ -1,11 +1,15 @@
-import { useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import {Flex, Text, ActionButton, ComboBox, Item} from '@adobe/react-spectrum';
 import SearchPage from '../searchPage/SearchPage';
 import Close from '@spectrum-icons/workflow/Close';
 import Filter from '@spectrum-icons/workflow/Filter';
+import { Data } from '../../services/api';
+import { ToastQueue } from "@react-spectrum/toast";
+import {Grid} from '@adobe/react-spectrum'
 
 const ProductSearchPage = () => {
+  // Récupération des informations de la barre de recherche
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const searchQuery = searchParams.get('search');
@@ -13,6 +17,7 @@ const ProductSearchPage = () => {
 
   const [showSearchPage, setShowSearchPage] = useState(false);
   const [filtering, setFiltering] = useState(false);
+  const [produits, setProduits] = useState([]);
 
   const handleShowSearchPage = () => {
     setShowSearchPage(true);
@@ -24,49 +29,102 @@ const ProductSearchPage = () => {
     setFiltering(false);
   };
 
+  useEffect(() => {
+    Data("searchProduct", "getProductByPriority", { "name": searchQuery, "table": "products" }).then(response => {
+      if (response.success === true) {
+        setProduits(response.data);
+        console.log("tqt", produits);
+      } else {
+        ToastQueue.negative(response.error, {timeout: 5000});
+      }
+    });
+  }, [searchQuery]);
+
+  // J'aimerai que cette fonction soit appelée lorsque l'utilisateur clique sur le bouton de filtrage
+  // les informations de filtrage sont récupérées dans le composant SearchPage
+  // et sont envoyées à la fonction handleSearch
+  // handleSearch doit ensuite appeler la fonction Data pour récupérer les produits filtrés
+  // et les afficher dans la liste des produits
+
+  const handleSearch = (searchData) => {
+    console.log(searchData);
+    Data("searchProduct", "getProductByFilter", searchData).then(response => {
+      if (response.success === true) {
+        setProduits(response.data);
+        console.log("tqt", produits);
+      } else {
+        ToastQueue.negative(response.error, {timeout: 5000});
+      }
+    });
+  }
+
+
   return (
     <>
       {/* ProductPage */}
-      <div className={`product-page ${showSearchPage ? 'inactive' : ''}`}>
-        {showResults ? (
-            <>
-                <h1>Résultat</h1>
-                <h2>Liste des produits : "{searchQuery}"</h2>
-            </>
-        ) : (
-            <>
-                <h1>Liste des produits</h1>
-            </>
-        )}
-        <Flex justifyContent="center" direction="row" gap="size-300" wrap>
+      <section className="categoriePage">
+        <div className={`product-page ${showSearchPage ? 'inactive' : ''}`}>
+          {showResults ? (
+              <>
+                  <h1>Résultat</h1>
+                  <h2>Liste des produits : "{searchQuery}"</h2>
+              </>
+          ) : (
+              <>
+                  <h1>Liste des produits</h1>
+              </>
+          )}
+          <Flex justifyContent="center" direction="row" gap="size-300" wrap>
             <ActionButton onClick={handleShowSearchPage} isDisabled={filtering}> 
-                <Filter />
-                <Text>Filtrer</Text>
+              <Filter />
+              <Text>Filtrer</Text>
             </ActionButton>
             <ComboBox placeholder='Trier par:' isDisabled={filtering}>
-                <Item key="prixAsc">prix (asc)</Item>
-                <Item key="prixDesc">prix (desc)</Item>
-                <Item key="AjoutAsc">Date d'ajout (asc)</Item>
-                <Item key="AjoutDesc">Date d'ajout (desc)</Item>
-                <Item key="QuantitéAsc">Quantité en stock (asc)</Item>
-                <Item key="QuantitéDesc">Quantité en stock (desc)</Item>
+              <Item key="prixAsc">prix (asc)</Item>
+              <Item key="prixDesc">prix (desc)</Item>
+              <Item key="AjoutAsc">Date d'ajout (asc)</Item>
+              <Item key="AjoutDesc">Date d'ajout (desc)</Item>
+              <Item key="QuantitéAsc">Quantité en stock (asc)</Item>
+              <Item key="QuantitéDesc">Quantité en stock (desc)</Item>
             </ComboBox>
-        </Flex>
-      </div>
-      
-      {/* SearchPage */}
-      {showSearchPage && (
-        <div className="rectangle">
-            <Flex justifyContent="center" marginTop="5%"direction="row" gap="size-300" wrap>
-                <h1>Tous les filtres</h1>
-                <ActionButton onClick={handleCloseSearchPage}> 
-                    <Close />
-                    <Text>Fermer</Text>
-                </ActionButton>
-                <SearchPage />
-            </Flex>
+          </Flex>
+          {produits.length > 0 ? (
+            <div className="box-container">
+              {produits.map((product, index) => (
+                <div key={product.id || index} className="box">
+                  <img src={`/img/${product.image_name}`} alt=""/>
+                  <div className="card-title">
+                    <h4>{product.produits_nom}</h4>
+                    <h4>{product.price}€</h4>
+                  </div>
+                  <Link to={`/product/${product.id}`} className="btn">Voir plus</Link>  
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div>Aucun produit trouvé.</div>
+          )}
         </div>
-      )}
+  
+        {/* SearchPage */}
+        {showSearchPage && (
+          <div className="rectangle">
+            <Grid
+              areas={[
+                'btnClose btnClose'
+              ]}
+              columns={['2fr', '2fr']}
+              rows={['size-1000']}
+              rowGap={'size-500'}>
+              <ActionButton onClick={handleCloseSearchPage} gridArea="btnClose" width={'size-1500'} marginTop={'size-400'} justifySelf={'center'}>
+                <Close/>
+                <Text>Fermer</Text>
+              </ActionButton>
+            </Grid>
+            <SearchPage onSearch={handleSearch} />
+          </div>
+        )}
+      </section>
     </>
   );
 }

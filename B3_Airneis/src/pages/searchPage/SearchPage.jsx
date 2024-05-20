@@ -1,12 +1,23 @@
-import {useState} from 'react'
-import {TextField, Flex, CheckboxGroup, Checkbox, Text, ActionButton, Form, View } from '@adobe/react-spectrum';
+import {useState, useEffect} from 'react';
+import {TextField, Checkbox, Text, ActionButton, Form} from '@adobe/react-spectrum';
 import Delete from '@spectrum-icons/workflow/Delete';
+import { Data } from '../../services/api';
 import Checkmark from '@spectrum-icons/workflow/Checkmark';
+import { ToastQueue } from "@react-spectrum/toast";
+import {Cell, Column, Row, TableView, TableBody, TableHeader} from '@adobe/react-spectrum'
+import {Grid} from '@adobe/react-spectrum'
+import PropTypes from 'prop-types'; // Importer PropTypes
 
-const SearchPage = () => {
+const SearchPage = ({ onSearch }) => {
+    SearchPage.propTypes = {
+        onSearch: PropTypes.func.isRequired, // Assurez-vous que onSearch est une fonction et qu'elle est requise
+    };
+
     const [minPrice, setMinPrice] = useState('');
     const [maxPrice, setMaxPrice] = useState('');
-    const [validatePressBtn, setValidatePressBtn] = useState(false);
+    const [materials, setMaterials] = useState([]);
+    const [categories, setCategories] = useState([]);
+    const [enStock, setEnStock] = useState(false);
 
     const handleMinPriceChange = (value) => {
         setMinPrice(value);
@@ -16,111 +27,129 @@ const SearchPage = () => {
         setMaxPrice(value);
     };
 
-    const handleValidatePressBtn = () => {
-        setValidatePressBtn(true);
+    const handleEnStockChange = (value) => {
+        setEnStock(value);
     };
 
-    let [checkedMaterials, setCheckedMaterials] = useState([]);
-    let [checkedCategories, setCheckedCategories] = useState([]);
-    let isMaterialsValid = checkedMaterials.length >= 1;
-    let isCategoriesValid = checkedCategories.length >= 1;
-    
+    const handleSearch = () => {
+        const searchData = {
+            prix_min: minPrice,
+            prix_max: maxPrice,
+            materiaux: materials.map(material => material.id),
+            categories: categories.map(category => category.id),
+            en_stock: enStock ? 1 : 0
+        };
+        onSearch(searchData);
+    };
+
+    let dataCategories = {
+        "table": "categories"
+    };
+
+    let dataMaterials = {
+        "table": "materials_list"
+    };
+
+    useEffect(() => {
+        Data("panelAdmin", "getAllFromTable", dataCategories).then(response => {
+            if (response.success === true) {
+                setCategories(response.data);
+            } else {
+                ToastQueue.negative(response.error, {timeout: 5000});
+            }
+        });
+        Data("panelAdmin", "getAllFromTable", dataMaterials).then(response => {
+            if (response.success === true) {
+                setMaterials(response.data);
+            } else {
+                ToastQueue.negative(response.error, {timeout: 5000});
+            }
+        });
+    }, []); // Pass an empty array as dependency to useEffect to execute it once after initial render
 
     return (
         <>
             <Form validationBehavior="native">
-                <View colorVersion={6}>
-                <Flex justifyContent="center" direction="row" gap="size-300" wrap>
-                    <TextField 
-                        colorVersion="cyan-900"
-                        label="Titre"
-                        validate={(value) => {
-                            if (value === '' && validatePressBtn === true) {
-                                return 'Ce champ est obligatoire';
-                            }
-                        }}
-                        isRequired necessityIndicator="icon"
-                    />
-                    <TextField 
-                        label="Description" 
-                        validate={(value) => {
-                            if (value === '' && validatePressBtn === true) {
-                                return 'Ce champ est obligatoire';
-                            }
-                        }}
-                        isRequired necessityIndicator="icon" 
-                    />
-                    <TextField 
+                <Grid
+                    areas={[
+                        'prixMin prixMax',
+                        'enStock enStock',
+                        'matérials matérials',
+                        'catégories catégories',
+                        'appliquer réinitialiser',
+                        'vide vide'
+                    ]}
+                    columns={['2fr','2fr']}
+                    rows={['size-700', 'size-400', 'auto', 'auto', 'size-1000', 'size-500']}
+                    rowGap="size-300">
+
+                    <TextField
                         label="Prix min€" 
                         maxLength={5}
                         onChange={handleMinPriceChange}
                         type='number'
-                        onClick={() => console.log('click')}
-                        validate={(value) => {
-                            if (value !== '' && value > maxPrice) {
-                                return 'Le prix minimum doit être inférieur au prix maximum';
-                            }
-                            else if (value === '' && validatePressBtn === true) {
-                                return 'Ce champ est obligatoire';
-                            }
-                        }}
-                        isRequired necessityIndicator="icon" 
+                        gridArea="prixMin"
+                        justifySelf={'center'}
+                        width={'size-2000'}
                     />
                     <TextField 
                         label="Prix max€" 
                         maxLength={5}
                         onChange={handleMaxPriceChange}
                         type='number'
-                        validate={(value) => {
-                            console.log(value);
-                            if (value !== '' && value < minPrice) {
-                                return 'Le prix maximum doit être supérieur au prix minimum';
-                            }
-                            else if (value === '' && validatePressBtn === true) {
-                                return 'Ce champ est obligatoire';
-                            }
-                        }}
-                        isRequired necessityIndicator="icon" 
+                        gridArea="prixMax"
+                        justifySelf={'center'}
+                        width={'size-2000'}
                     />
-                    <CheckboxGroup
-                        marginStart={20}
-                        width={200}
-                        label="Matériaux" 
-                        name="matériaux"
-                        onChange={setCheckedMaterials}
-                        isInvalid={!isMaterialsValid}
-                        isRequired={true}
-                        errorMessage={isMaterialsValid && validatePressBtn === false ? '' : 'Sélectionnez au moins un matériau'}
-                    >
-                        <Checkbox width={200} value="bois">Bois</Checkbox>
-                        <Checkbox wwidth={200} value="acier">Acier</Checkbox>
-                        <Checkbox value="plastique">Plastique</Checkbox>
-                    </CheckboxGroup>
-                
-                    <CheckboxGroup
-                        width={200}
-                        label="Catégories" 
-                        name="catégories"
-                        onChange={setCheckedCategories}
-                        isInvalid={!isCategoriesValid}
-                        isRequired={true}
-                        errorMessage={isCategoriesValid && validatePressBtn === false ? '' : 'Sélectionnez au moins une catégorie'}
-                    >
-                        <Checkbox value="table">Table</Checkbox>
-                        <Checkbox value="lit">Lit</Checkbox>
-                        <Checkbox value="fauteuil">Fauteuil</Checkbox>
-                    </CheckboxGroup>
-
-                    <ActionButton onClick={handleValidatePressBtn} type="submit"> 
+                    <Checkbox 
+                        justifySelf={'center'} 
+                        isSelected={enStock}
+                        onChange={handleEnStockChange}
+                        gridArea='enStock'>En stock</Checkbox>
+                    <TableView
+                        aria-label="Example table with static contents"
+                        selectionMode="multiple"
+                        height={200}
+                        position={'relative'}
+                        gridArea='matérials'
+                        >
+                        <TableHeader>
+                            <Column>Matériaux</Column>
+                        </TableHeader>
+                        <TableBody>
+                            {materials.map((material) => (
+                                <Row key={material.id}>
+                                    <Cell>{material.name}</Cell>
+                                </Row>
+                            ))}
+                        </TableBody>
+                    </TableView>
+                    <TableView
+                        selectionMode="multiple"
+                        height={200}
+                        position={'relative'}
+                        gridArea='catégories'
+                        >
+                        <TableHeader>
+                            <Column>Catégories</Column>
+                        </TableHeader>
+                        <TableBody>
+                            {categories.map((category) => (
+                                <Row key={category.id}>
+                                    <Cell>{category.name}</Cell>
+                                </Row>
+                            ))}
+                        </TableBody>
+                    </TableView>
+                    <ActionButton onClick={handleSearch} type="submit" gridArea='appliquer' width={'size-2000'} justifySelf={'center'} > 
                         <Checkmark />
                         <Text>Appliquer</Text>
                     </ActionButton>
-                    <ActionButton type="reset"> 
+                    <ActionButton type="reset" gridArea='réinitialiser' width={'size-2000'} justifySelf={'center'}> 
                         <Delete />
                         <Text>Réinitialiser</Text>
                     </ActionButton>
-                </Flex>
-                </View>
+                </Grid>
             </Form>
         </>
     );
