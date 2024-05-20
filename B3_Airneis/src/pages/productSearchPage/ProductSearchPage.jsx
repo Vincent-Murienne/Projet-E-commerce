@@ -97,7 +97,7 @@ const ProductSearchPage = () => {
                     <h4>{product.produits_nom}</h4>
                     <h4>{product.price}€</h4>
                   </div>
-                  <Link to="/" className="btn">Voir plus</Link>
+                  <Link to={`/product/${product.id}`} className="btn">Voir plus</Link>  
                 </div>
               ))}
             </div>

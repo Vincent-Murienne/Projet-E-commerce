@@ -245,7 +245,7 @@ class Database {
     // Cette méthode recherche le titre des produits en fonction des critères fournis avec priorité
     public function searchProductNameWithPriority($name) 
     {   
-        $sql = "SELECT products.name AS 'produits_nom', products.description, products.price, image_table.name AS 'image_name'
+        $sql = "SELECT products.id, products.name AS 'produits_nom', products.description, products.price, image_table.name AS 'image_name'
             FROM products 
             LEFT JOIN (
                 SELECT product_id, MIN(id) AS min_image_id, name FROM images GROUP BY product_id
@@ -291,34 +291,36 @@ class Database {
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getProductBasket($userId)
+    public function getProductBasket($user_id)
     {
-        $sql = "SELECT p.name, b.quantity, p.price, p.description, (SELECT i.name FROM images i WHERE i.product_id = p.id LIMIT 1) AS image_name
+        $sql = "SELECT p.id, p.name, SUM(b.quantity) AS quantity, p.price, p.description, 
+        (SELECT i.name FROM images i WHERE i.product_id = p.id LIMIT 1) AS image_name
         FROM baskets b
         LEFT JOIN products p ON b.product_id = p.id
-        WHERE b.user_id = :userId";
+        WHERE b.user_id = :user_id
+        GROUP BY p.id, p.name, p.price, p.description";
 
         $query = $this->pdo->prepare($sql);
-        $query->bindValue('userId', $userId, PDO::PARAM_INT);
+        $query->bindValue('user_id', $user_id, PDO::PARAM_INT);
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function deleteProductBasket($userId, $productId)
+    public function deleteProductBasket($user_id, $product_id)
     {
-        $sql = "DELETE FROM baskets WHERE user_id = :userId AND product_id = :productId";
+        $sql = "DELETE FROM baskets WHERE user_id = :user_id AND product_id = :product_id";
         $query = $this->pdo->prepare($sql);
-        $query->bindValue('userId', $userId, PDO::PARAM_INT);
-        $query->bindValue('productId', $productId, PDO::PARAM_INT);
+        $query->bindValue('user_id', $user_id, PDO::PARAM_INT);
+        $query->bindValue('product_id', $product_id, PDO::PARAM_INT);
         return $query->execute();
     }
 
-    public function updateProductQuantity($userId, $productId, $quantity)
+    public function updateProductQuantity($user_id, $product_id, $quantity)
     {
-        $sql = "UPDATE baskets SET quantity = :quantity WHERE user_id = :userId AND product_id = :productId";
+        $sql = "UPDATE baskets SET quantity = :quantity WHERE user_id = :user_id AND product_id = :product_id";
         $query = $this->pdo->prepare($sql);
-        $query->bindValue('userId', $userId, PDO::PARAM_INT);
-        $query->bindValue('productId', $productId, PDO::PARAM_INT);
+        $query->bindValue('user_id', $user_id, PDO::PARAM_INT);
+        $query->bindValue('product_id', $product_id, PDO::PARAM_INT);
         $query->bindValue('quantity', $quantity, PDO::PARAM_INT);
         return $query->execute();
     }

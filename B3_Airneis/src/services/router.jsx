@@ -26,9 +26,8 @@ import TrackSales from "../pages/admin/trackSales/TrackSales";
 import MonComptePage from "../pages/monComptePage/MonComptePage"
 import MonCompteAdresse from "../pages/monComptePage/MonCompteAdresse";
 import MonComptePayment from "../pages/monComptePage/MonComptePayment";
-import MonCompteEdit from "../pages/monComptePage/MonCompteEdit"
-import ProductSearchPage from "../pages/productSearchPage/ProductSearchPage";
-import BasketPage from "../pages/basketPage/BasketPage";
+import MonCompteEdit from "../pages/monComptePage/MonCompteEdit";
+import BasketPage from  "../pages/basketPage/BasketPage";
 
 const router = createBrowserRouter([
     {
@@ -65,7 +64,6 @@ const router = createBrowserRouter([
             },
             {
                 path: "product", 
-                element: <ProductSearchPage/>
                 element: <ProductSearchPage/>
             },
             {

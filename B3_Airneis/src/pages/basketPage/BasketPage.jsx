@@ -1,48 +1,76 @@
-import { useState, useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { Data } from '../../services/api';
 import { ToastQueue } from "@react-spectrum/toast";
+import { UserContext } from '../../context/UserProvider';
 
 const BasketPage = () => {
+    const { pullData } = useContext(UserContext);
     const [products, setProducts] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
-    const data = {
-        "userId": 3
-    };
+    const [userId, setUserId] = useState(null);
+    const { saveData } = useContext(UserContext);
+    const tva = 0.17;
+    const totalAPayer = totalPrice + (totalPrice * tva);
+
 
     useEffect(() => {
-        Data("basket", "getProduct", data).then(response => {
-            if (response.success === true) {
-                setProducts(response.data);
-                calculateTotalPrice(response.data);
-            } else {
-                ToastQueue.negative(response.error, { timeout: 5000 });
-            }
-        });
+        const userData = pullData("user");
+        if (userData) {
+            setUserId(userData.id);
+            const basketsData = {
+                "user_id": userData.id
+            };
+
+            Data("basket", "getProduct", basketsData).then(response => {
+                if (response.success === true) {
+                    setProducts(response.data);
+                    calculateTotalPrice(response.data);
+                } else {
+                    ToastQueue.negative(response.error, { timeout: 5000 });
+                }
+            });
+        }
     }, []);
 
-    const handleDelete = (productId) => {
-        Data("basket", "deleteProduct", { userId: data, productId }).then(response => {
+    const handleDelete = (product_id) => {
+        const basketsData = {
+            "user_id": userId,
+            "product_id": product_id
+        };
+
+        Data("basket", "deleteProduct", JSON.stringify(basketsData)).then(response => {
             if (response.success === true) {
-                // Mettre à jour l'état des produits après la suppression
-                setProducts(products.filter(product => product.id !== productId));
-                calculateTotalPrice(products.filter(product => product.id !== productId));
+                setProducts(currentProducts => {
+                    const updatedProducts = currentProducts.filter(product => product.id !== product_id);
+                    calculateTotalPrice(updatedProducts);
+                    saveData("message", {type: "success", body: "Suppression réussite avec succès !"});
+                    return updatedProducts;
+                });
             } else {
                 ToastQueue.negative(response.error, { timeout: 5000 });
             }
         });
     };
 
-    const handleQuantityChange = (productId, quantity) => {
-        Data("basket", "updateProductQuantity", { userId: data, productId, quantity }).then(response => {
+    const handleQuantityChange = (product_id, quantity) => {
+        const basketsData = {
+            "user_id": userId,
+            "product_id": product_id,
+            "quantity": quantity
+        };
+
+        Data("basket", "updateProductQuantity", basketsData).then(response => {
             if (response.success === true) {
-                // Mettre à jour l'état des produits avec la nouvelle quantité
-                setProducts(products.map(product => {
-                    if (product.id === productId) {
-                        return { ...product, quantity };
-                    }
-                    return product;
-                }));
-                calculateTotalPrice(products);
+                setProducts(currentProducts => {
+                    const updatedProducts = currentProducts.map(product => {
+                        if (product.id === product_id) {
+                            return { ...product, quantity };
+                        }
+                        return product;
+                    });
+                    calculateTotalPrice(updatedProducts);
+                    return updatedProducts;
+                });
             } else {
                 ToastQueue.negative(response.error, { timeout: 5000 });
             }
@@ -54,7 +82,7 @@ const BasketPage = () => {
         products.forEach(product => {
             total += product.price * product.quantity;
         });
-        setTotalPrice(total);
+        setTotalPrice(parseFloat(total.toFixed(2)));
     };
 
     return (
@@ -67,21 +95,29 @@ const BasketPage = () => {
                         <div className="product-info">
                             <h2 className="product-name">{product.name}</h2>
                             <p className="product-description">{product.description}</p>
-                            <p className="product-quantity">Quantité: {product.quantity}</p>
-                            <p className="product-price">{product.price} €</p>
+                            <p className="product-quantity">Quantité :
+                                <input
+                                type="number"
+                                min="1"
+                                value={product.quantity}
+                                onChange={(e) => handleQuantityChange(product.id, parseInt(e.target.value))}
+                                onKeyDown={(e) => {
+                                    // Prevent the default action if the key pressed is an arrow key
+                                    if (e.key === 'Backspace') {
+                                        e.preventDefault();
+                                    }
+                                }}
+                                className="quantity-input"/>
+                            </p>
+                            <p className="product-price">Prix : {product.price} €</p>
+                            <button onClick={() => handleDelete(product.id) + console.log(product.id)}  className="delete-button">Supprimer</button>
                         </div>
-                        <button onClick={() => handleDelete(product.id)} className="delete-button">🗑️</button>
-                        <input
-                            type="number"
-                            value={product.quantity}
-                            onChange={(e) => handleQuantityChange(product.id, parseInt(e.target.value))}
-                            className="quantity-input"
-                        />
                     </div>
                 ))}
             </div>
             <div className="checkout-area">
-                <div className="total-price">TOTAL: {totalPrice} €</div>
+                <div className="total-price">Prix total : {totalPrice.toFixed(2)} €</div>
+                <div className="tva-price">TVA : {(totalPrice.toFixed(2) * tva).toFixed(2)} €</div>
                 <div className="checkout-button" onClick={() => {/* handle checkout */}}>
                     Passer la commande
                 </div>

@@ -18,7 +18,7 @@
 }
 
 .product-image {
-    width: 150px;
+    width: 250px;
     height: 150px;
     object-fit: cover;
 }
@@ -26,6 +26,9 @@
 .product-info {
     padding: 10px;
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .product-name {
@@ -43,6 +46,7 @@
 .product-price {
     font-weight: bold;
     color: #333;
+    font-size: 1rem;
 }
 
 .checkout-area {
@@ -50,41 +54,56 @@
 }
 
 .basket-title {
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: bold;
+    margin-bottom: 10px;
 }
 
 .total-price {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     font-weight: bold;
     color: #333;
+}
+
+.tva-price {
+    font-size: 1.2rem;
+    color: #797979;
 }
 
 .checkout-button {
     background-color: #16253F;
     color: white;
-    padding: 10px 20px;
+    padding: 10px;
     border-radius: 5px;
     text-align: center;
     cursor: pointer;
+    font-size: 1rem;
 }
 
 /* Responsive styles */
 @media (max-width: 768px) {
     .product-card {
         flex-direction: column;
+        width: 70%;
+        margin: 0 auto;
     }
 
     .product-image {
         width: 100%;
-        height: auto;
+        margin: 0 auto;
     }
 
-    .checkout-area {
-        grid-template-areas:
-            'title'
-            'total'
-            'checkout';
+    * {
+        text-align: center;
+    }
+
+    .delete-button {
+        margin-top: 10px;
+    }
+
+    .checkout-button {
+        width: 70%;
+        margin: 0 auto;
     }
 }
 .delete-button {
@@ -92,6 +111,10 @@
     border: none;
     cursor: pointer;
     font-size: 1.2rem;
+}
+
+.delete-button:hover {
+    color: red;
 }
 
 .quantity-input {

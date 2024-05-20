@@ -5,9 +5,9 @@ require_once "../../config/db.php";
 $response["success"] = false;
 
 if($isAllowed) {
-    if(isset($json["userId"]) && isset($json["productId"]) && isset($json["quantity"])) {
+    if(isset($json["user_id"]) && isset($json["product_id"]) && isset($json["quantity"])) {
         $db = new Database();
-        $data = $db->updateProductQuantity($json["userId"], $json["productId"], $json["quantity"]);
+        $data = $db->updateProductQuantity($json["user_id"], $json["product_id"], $json["quantity"]);
         if($data) {
             $response["success"] = true;
             $response["data"] = $data;

@@ -8,16 +8,16 @@ $response["success"] = false;
 // Check if the API call is legitimate
 if($isAllowed) {
     // Check if the table to lookup for is given
-    if(isset($json["userId"]) && isset($json["productId"])) {
+    if(isset($json["user_id"]) && isset($json["product_id"])) {
         // Create new instance of class Database to interact with the database
         $db = new Database();
-        $data = $db->deleteProductBasket($json["userId"], $json["productId"]);
+        $data = $db->deleteProductBasket($json["user_id"], $json["product_id"]);
         if($data) {
             $response["success"] = true;
             $response["data"] = $data;
         }
     } else {
-        $response["error"] = "Une erreur est survenue lors de la suppression du produit.";
+        $response["error"] = "Une erreur est survenue lors de la suppression de ce produit.";
     }
 } else {
     $response["error"] = "La clé API n'est pas fournie ou est incorrecte.";
