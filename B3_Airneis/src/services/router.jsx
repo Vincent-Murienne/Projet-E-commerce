@@ -29,6 +29,7 @@ import MonComptePayment from "../pages/monComptePage/MonComptePayment";
 import MonCompteEdit from "../pages/monComptePage/MonCompteEdit"
 import CheckoutAdresse from "../pages/checkoutPage/CheckoutAdresse"
 import CheckoutPayment from "../pages/checkoutPage/CheckoutPayment"
+import CheckoutConfirmer from "../pages/checkoutPage/CheckoutConfirmer";
 
 
 const router = createBrowserRouter([
@@ -91,6 +92,10 @@ const router = createBrowserRouter([
             {
                 path: "checkoutPayment", 
                 element: <CheckoutPayment/>
+            },
+            {
+                path: "checkoutConfirmer", 
+                element: <CheckoutConfirmer/>
             },
         ]
     },

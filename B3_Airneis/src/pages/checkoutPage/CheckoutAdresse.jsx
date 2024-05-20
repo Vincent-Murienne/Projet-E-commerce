@@ -9,7 +9,7 @@ import { TextField } from "@adobe/react-spectrum";
 const CheckoutAdresse = () => {
     const { pullData } = useContext(UserContext);
     const [getUserAddresses, setUserAddresses] = useState([]);
-    const [getSelectedAddress, setSelectedAddress] = useState(null); 
+    const [getSelectedAddress, setSelectedAddress] = useState("0"); 
 
     const [getAddressName, setAddressName] = useState(undefined);
     const [getFirstName, setFirstName] = useState(undefined);
@@ -30,7 +30,6 @@ const CheckoutAdresse = () => {
     const [getRegionValidState, setRegionValidState] = useState(1);
     const [getCountryValidState, setCountryValidState] = useState(1);
     const [getPhoneValidState, setPhoneValidState] = useState(1);
-
     useEffect(() => {
         if (getSelectedAddress === "0") {
             setAddressName("");
@@ -69,6 +68,7 @@ const CheckoutAdresse = () => {
             navigate("/");
             return;
         }
+        setUserId(userData.id);
 
         userId = userData.id;
 
@@ -80,7 +80,10 @@ const CheckoutAdresse = () => {
         Data("panelAdmin", "getAddresses", addressData).then(response => {
             if (response.success === true) {
                 setUserAddresses(response.data);  
-                setSelectedAddress(response.data[0].id.toString());
+                if (response.data.length === 0) {
+                    setSelectedAddress("0");
+                } else {
+                    setSelectedAddress(response.data[0].id.toString());  
                 setAddressName(response.data[0].address_name);           
                 setFirstName(response.data[0].first_name);
                 setLastName(response.data[0].last_name);
@@ -91,6 +94,7 @@ const CheckoutAdresse = () => {
                 setCountry(response.data[0].country);
                 setPhone(response.data[0].phone_number);
                 setUserId(userId);
+                }
             } else {
                 ToastQueue.negative(response.error, {timeout: 5000});
             }
@@ -195,60 +199,77 @@ const CheckoutAdresse = () => {
             }
         }
     }, [getPhone]);
+
+    const isFormValid = () => {
+        return (
+          getAddressNameValidState === 1 &&
+          getFirstNameValidState === 1 &&
+          getLastNameValidState === 1 &&
+          getAddressValidState === 1 &&
+          getCityValidState === 1 &&
+          getZipCodeValidState === 1 &&
+          getRegionValidState === 1 &&
+          getCountryValidState === 1 &&
+          getPhoneValidState === 1
+        );
+      };
+      
     
     const FormSubmitted = async (e) => {
         e.preventDefault();
+        if (!isFormValid()) {
+            ToastQueue.negative("Veuillez remplir correctement tous les champs.", { timeout: 5000 });
+            return;
+          }
+        if (getSelectedAddress === "0") {
+            let data = {
+                "table": "addresses",
+                "data": {
+                    "user_id": getUserId,
+                    "address_name": getAddressName,
+                    "first_name": getFirstName,
+                    "last_name": getLastName,
+                    "address": getAddress,
+                    "city": getCity,
+                    "zip_code": getZipCode,
+                    "region": getRegion,
+                    "country": getCountry,
+                    "phone_number": getPhone
+                }
+            };
 
-        if(getSelectedAddress === "0") { // If 'Add a new address' is selected
-            if(getFirstNameValidState === 1 && getLastNameValidState === 1 && getAddressValidState === 1 && getCityValidState === 1 && getZipCodeValidState === 1 && getRegionValidState === 1 && getCountryValidState === 1 && getPhoneValidState === 1) {           
-                let data = {
-                    "table": "addresses",
-                    "data": {
-                        "user_id": getUserId,
-                        "address_name": getAddressName,
-                        "first_name": getFirstName,
-                        "last_name": getLastName,
-                        "address": getAddress,
-                        "city": getCity,
-                        "zip_code": getZipCode,
-                        "region": getRegion,
-                        "country": getCountry,
-                        "phone_number": getPhone
-                    }             
-                };
-          
-                Data("panelAdmin", "insert", data).then(response => {
-                    if (response.success === true) {
-                        ToastQueue.positive("Adresse ajoutée avec succès !", {timeout: 5000});
-                        navigate("/checkoutAdresse");
-                    } else {
-                        ToastQueue.negative(response.error, {timeout: 5000});
-                    }
-                });
-            } else {
-                ToastQueue.negative("Veuillez remplir correctement tous les champs.", {timeout: 5000});
-            }
-    }
-};
+            Data("panelAdmin", "insert", data).then(response => {
+                if (response.success === true) {
+                    ToastQueue.positive("Adresse ajoutée avec succès !", { timeout: 5000 });
+                    window.location.reload();
+                    navigate("/checkoutAdresse");
+                } else {
+                    ToastQueue.negative(response.error, { timeout: 5000 });
+                }
+            });
+        } else {
+            ToastQueue.negative("Veuillez remplir correctement tous les champs.", {timeout: 5000});
+        }
+    } 
 
-const renderButtons = () => {
-    if (getSelectedAddress === "0") {
-        return (
-            <>
-                <Link to="/" className="form-btn-error">Annuler</Link>
-                <button type="submit" className="form-btn-success">Ajouter</button>
-            </>
-        );
-    } else {
-        return (
-            <>     
-                <div className="checkoutAdresse">      
-                  <Link to="/checkoutPayment" className="btnProduit">Passer au paiement</Link> 
-                </div> 
-            </>
-        );
-    }
-};
+    const renderButtons = () => {
+        if (getSelectedAddress === "0") {
+            return (
+                <>
+                    <Link to="/" className="form-btn-error">Annuler</Link> 
+                    <button type="submit" className="form-btn-success">Ajouter</button>
+                </>
+            );
+        } else {
+            return (
+                <>
+                    <div className="checkoutAdresse">
+                        <Link to={`/checkoutPayment?addressId=${getSelectedAddress}`} className="btnProduit">Passer au paiement</Link>
+                    </div>
+                </>
+            );
+        }
+    };
 
     return (   
         <>
@@ -279,7 +300,7 @@ const renderButtons = () => {
                             value={getAddressName}
                             isReadOnly={getSelectedAddress !== "0"}
                             validationState={getAddressNameValidState === 1 ? "valid" : "invalid"}
-                            errorMessage="Veuillez entrer un nom correct (entre 3 et 50 caractères)."
+                            errorMessage="Veuillez entrer un nom correct (entre 5 et 50 caractères)."
                             width={300}
                         />
                             :
@@ -289,7 +310,7 @@ const renderButtons = () => {
                                 value={getAddressName}
                                 isReadOnly={getSelectedAddress !== "0"}
                                 validationState={getAddressNameValidState === 1 ? "valid" : "invalid"}
-                                errorMessage="Veuillez entrer un nom correct (entre 3 et 50 caractères)."
+                                errorMessage="Veuillez entrer un nom correct (entre 5 et 50 caractères)."
                                 width={300}
                             />
                         }
@@ -499,7 +520,7 @@ const renderButtons = () => {
                     <div className="buttons">
                         {renderButtons()}
                     </div> 
-                    </form>                            
+                </form>                            
             </div>
         </>
     );

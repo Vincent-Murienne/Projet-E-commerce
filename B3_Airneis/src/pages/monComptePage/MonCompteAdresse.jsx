@@ -9,7 +9,7 @@ import { TextField } from "@adobe/react-spectrum";
 const MonCompteAdresse = () => {
     const { pullData } = useContext(UserContext);
     const [getUserAddresses, setUserAddresses] = useState([]);
-    const [getSelectedAddress, setSelectedAddress] = useState(null); 
+    const [getSelectedAddress, setSelectedAddress] = useState("0"); 
     const [isDeleting, setIsDeleting] = useState(false);
 
     const [getAddressName, setAddressName] = useState(undefined);
@@ -70,6 +70,7 @@ const MonCompteAdresse = () => {
             navigate("/");
             return;
         }
+        setUserId(userData.id);
 
         userId = userData.id;
 
@@ -81,8 +82,10 @@ const MonCompteAdresse = () => {
         Data("panelAdmin", "getAddresses", addressData).then(response => {
             if (response.success === true) {
                 setUserAddresses(response.data);  
-                setSelectedAddress(0);
-                setSelectedAddress(response.data[0].id.toString());
+                if (response.data.length === 0) {
+                    setSelectedAddress("0");
+                } else {
+                    setSelectedAddress(response.data[0].id.toString());          
                 setAddressName(response.data[0].address_name);           
                 setFirstName(response.data[0].first_name);
                 setLastName(response.data[0].last_name);
@@ -93,6 +96,7 @@ const MonCompteAdresse = () => {
                 setCountry(response.data[0].country);
                 setPhone(response.data[0].phone_number);
                 setUserId(userId);
+                }
             } else {
                 ToastQueue.negative(response.error, {timeout: 5000});
             }
@@ -275,7 +279,7 @@ const MonCompteAdresse = () => {
                 setIsDeleting(false);
                 if (response.success === true) {
                     ToastQueue.positive("Suppression réussie avec succès !", {timeout: 5000});
-                    navigate("/monCompte");        
+                    window.location.reload();        
                 } else {
                     ToastQueue.negative(response.error, { timeout: 5000 });
                 }
@@ -340,7 +344,7 @@ const MonCompteAdresse = () => {
                                 onChange={setAddressName}
                                 value={getAddressName} 
                                 validationState="invalid"
-                                errorMessage="Veuillez entrer un nom correct (entre 3 et 50 caractères)."
+                                errorMessage="Veuillez entrer un nom correct (entre 5 et 50 caractères)."
                                 width={300}
                             />
                         }

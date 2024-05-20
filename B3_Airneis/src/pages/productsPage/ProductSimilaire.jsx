@@ -27,7 +27,7 @@ const ProductSimilaire = ({ categoryId, productId }) => {
         <>  
             <section className="categoriePage">               
                 <section className="top-produits">
-                    <h1 className="heading">SIMILAR PRODUCTS</h1>
+                    <h1 className="heading">PRODUITS SIMILAIRES</h1>
                     <div className="box-container">
                         {getTopProducts && getTopProducts.map((product) => (
                             // Check if the product is different from the current product
