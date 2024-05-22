@@ -32,6 +32,9 @@ import MonCompteEdit from "../pages/monComptePage/MonCompteEdit"
 import CheckoutAdresse from "../pages/checkoutPage/CheckoutAdresse"
 import CheckoutPayment from "../pages/checkoutPage/CheckoutPayment"
 import CheckoutConfirmer from "../pages/checkoutPage/CheckoutConfirmer";
+import CguPage from "../pages/reglementationPage/CguPage";
+import MentionsLegales from "../pages/reglementationPage/MentionsLegales";
+import ContactPage from "../pages/reglementationPage/ContactPage";
 
 
 const router = createBrowserRouter([
@@ -102,6 +105,18 @@ const router = createBrowserRouter([
             {
                 path: "checkoutConfirmer", 
                 element: <CheckoutConfirmer/>
+            },
+            {
+                path: "cguPage", 
+                element: <CguPage/>
+            },
+            {
+                path: "mentionsLegales",
+                element: <MentionsLegales/>
+            },
+            {
+                path: "contactPage",
+                element: <ContactPage/>
             },
         ]
     },

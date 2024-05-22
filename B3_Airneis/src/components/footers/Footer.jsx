@@ -6,7 +6,7 @@ const Footer = () => {
         <>
             <footer>
                 <div>
-                    <p><Link to="/">CGU</Link> - <Link to="/">Mentions légales</Link> - <Link to="/">Contact</Link></p>
+                    <p><Link to="/cguPage">CGU</Link> - <Link to="/mentionsLegales">Mentions légales</Link> - <Link to="/contactPage">Contact</Link></p>
                 </div>
                 <div className="reseaux">
                     <Link to="/"><FaFacebookF className="scale_on_hover"/></Link>
