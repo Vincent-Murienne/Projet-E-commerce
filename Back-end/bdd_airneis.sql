@@ -15,7 +15,7 @@ CREATE TABLE `payments` (
   `card_name` varchar(50),
   `card_owner` varchar(50),
   `card_number` varchar(16),
-  `expiration_date` timestamp NOT NULL default CURRENT_TIMESTAMP,
+ `expiration_date` date NOT NULL,
   `cvv` integer
 );
 
