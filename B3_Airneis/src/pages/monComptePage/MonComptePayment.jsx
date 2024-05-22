@@ -10,7 +10,7 @@ const MonComptePayment = () => {
     const { pullData } = useContext(UserContext);
 
     const [getUserPayment, setUserPayment] = useState([]);
-    const [getSelectedPayment, setSelectedPayment] = useState(null); 
+    const [getSelectedPayment, setSelectedPayment] = useState("0"); 
     const [getCardName, setCardName] = useState(undefined);
     const [getCardOwner, setCardOwner] = useState(undefined);
     const [getCardNumber, setCardNumber] = useState(undefined);
@@ -22,19 +22,6 @@ const MonComptePayment = () => {
     const [getExpirationDateValidState, setExpirationDateValidState] = useState(1);
     const [getCvvValidState, setCvvValidState] = useState(1);
     const [isDeleting, setIsDeleting] = useState(false);
-
-
-    // useEffect(() => {
-    //     getUserPayment.forEach(payment => {
-    //         if(getSelectedPayment.toString() === payment.id.toString()){ 
-    //             setCardName(payment.card_name);
-    //             setCardOwner(payment.card_owner);
-    //             setCardNumber(payment.card_number);
-    //             setExpirationDate(payment.expiration_date);
-    //             setCvv(payment.cvv);          
-    //         }          
-    //     }) 
-    // }, [getSelectedPayment]);
 
     useEffect(() => {
         if (getSelectedPayment === "0") {
@@ -66,6 +53,7 @@ const MonComptePayment = () => {
             navigate("/");
             return;
         }
+        setUserId(userData.id);
 
         userId = userData.id;
 
@@ -77,13 +65,17 @@ const MonComptePayment = () => {
         Data("panelAdmin", "getAddresses", paymentData).then(response => {
             if (response.success === true) {
                 setUserPayment(response.data);  
-                setSelectedPayment(response.data[0].id.toString());
-                setCardName(response.data[0].card_name);           
-                setCardOwner(response.data[0].card_owner);
-                setCardNumber(response.data[0].card_number);
-                setExpirationDate(response.data[0].expiration_date);
-                setCvv(response.data[0].cvv);
-                setUserId(userId);
+                if (response.data.length === 0) {
+                    setSelectedPayment("0");
+                } else {
+                    setSelectedPayment(response.data[0].id.toString());  
+                    setCardName(response.data[0].card_name);           
+                    setCardOwner(response.data[0].card_owner);
+                    setCardNumber(response.data[0].card_number);
+                    setExpirationDate(response.data[0].expiration_date);
+                    setCvv(response.data[0].cvv);
+                    setUserId(userId);
+                }
             } else {
                 ToastQueue.negative(response.error, {timeout: 5000});
             }
@@ -151,9 +143,6 @@ const MonComptePayment = () => {
             }
         }
     }, [getExpirationDate]);
-    
-    
-    
 
     useEffect(() => {
         if(getCvv !== undefined) {        
@@ -195,32 +184,32 @@ const MonComptePayment = () => {
                 ToastQueue.negative("Veuillez remplir correctement tous les champs.", {timeout: 5000});
             }
         } else {
-        if(getCardNameValidState === 1 && getCardOwnerValidState === 1 && getCardNumberValidState === 1 && getExpirationDateValidState === 1 && getCvvValidState === 1) {           
-            let data = {
-                "table": "payments",
-                "id": getSelectedPayment,
-                "data": {
-                    "card_name": getCardName,
-                    "card_owner": getCardOwner,
-                    "card_number": getCardNumber,
-                    "expiration_date": getExpirationDate,
-                    "cvv": getCvv,               
-                }             
-            };
-      
-            Data("panelAdmin", "update", data).then(response => {
-                if (response.success === true) {
-                    ToastQueue.positive("Modification réussie avec succès !", {timeout: 5000});
-                    navigate("/monCompte");
-                } else {
-                    ToastQueue.negative(response.error, {timeout: 5000});
-                }
-            });
-        } else {
-            ToastQueue.negative("Veuillez remplir correctement tous les champs.", {timeout: 5000});
+            if(getCardNameValidState === 1 && getCardOwnerValidState === 1 && getCardNumberValidState === 1 && getExpirationDateValidState === 1 && getCvvValidState === 1) {           
+                let data = {
+                    "table": "payments",
+                    "id": getSelectedPayment,
+                    "data": {
+                        "card_name": getCardName,
+                        "card_owner": getCardOwner,
+                        "card_number": getCardNumber,
+                        "expiration_date": getExpirationDate,
+                        "cvv": getCvv,               
+                    }             
+                };
+          
+                Data("panelAdmin", "update", data).then(response => {
+                    if (response.success === true) {
+                        ToastQueue.positive("Modification réussie avec succès !", {timeout: 5000});
+                        window.location.reload(); 
+                    } else {
+                        ToastQueue.negative(response.error, {timeout: 5000});
+                    }
+                });
+            } else {
+                ToastQueue.negative("Veuillez remplir correctement tous les champs.", {timeout: 5000});
+            }
         }
-    };
-}
+    }
 
     const handleDelete = () => {
         setIsDeleting(true);
@@ -234,7 +223,7 @@ const MonComptePayment = () => {
             Data("panelAdmin", "delete", data).then(response => {
                 setIsDeleting(false);
                 if (response.success === true) {
-                    saveData("message", {type: "success", body: "Suppression réussite avec succès !"}); // This line is used to store the message into the cookies to display it after the reload of the page
+                    ToastQueue.positive("Suppression réussie avec succès !", {timeout: 5000});
                     window.location.reload();                
                 } else {
                     ToastQueue.negative(response.error, { timeout: 5000 });

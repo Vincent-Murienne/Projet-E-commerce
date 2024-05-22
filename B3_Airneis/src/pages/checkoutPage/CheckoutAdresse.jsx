@@ -6,11 +6,10 @@ import { ToastQueue } from "@react-spectrum/toast";
 import { Picker, Item } from '@react-spectrum/picker';
 import { TextField } from "@adobe/react-spectrum";
 
-const MonCompteAdresse = () => {
+const CheckoutAdresse = () => {
     const { pullData } = useContext(UserContext);
     const [getUserAddresses, setUserAddresses] = useState([]);
     const [getSelectedAddress, setSelectedAddress] = useState("0"); 
-    const [isDeleting, setIsDeleting] = useState(false);
 
     const [getAddressName, setAddressName] = useState(undefined);
     const [getFirstName, setFirstName] = useState(undefined);
@@ -31,7 +30,6 @@ const MonCompteAdresse = () => {
     const [getRegionValidState, setRegionValidState] = useState(1);
     const [getCountryValidState, setCountryValidState] = useState(1);
     const [getPhoneValidState, setPhoneValidState] = useState(1);
-
     useEffect(() => {
         if (getSelectedAddress === "0") {
             setAddressName("");
@@ -85,7 +83,7 @@ const MonCompteAdresse = () => {
                 if (response.data.length === 0) {
                     setSelectedAddress("0");
                 } else {
-                    setSelectedAddress(response.data[0].id.toString());          
+                    setSelectedAddress(response.data[0].id.toString());  
                 setAddressName(response.data[0].address_name);           
                 setFirstName(response.data[0].first_name);
                 setLastName(response.data[0].last_name);
@@ -201,108 +199,73 @@ const MonCompteAdresse = () => {
             }
         }
     }, [getPhone]);
+
+    const isFormValid = () => {
+        return (
+          getAddressNameValidState === 1 &&
+          getFirstNameValidState === 1 &&
+          getLastNameValidState === 1 &&
+          getAddressValidState === 1 &&
+          getCityValidState === 1 &&
+          getZipCodeValidState === 1 &&
+          getRegionValidState === 1 &&
+          getCountryValidState === 1 &&
+          getPhoneValidState === 1
+        );
+      };
+      
     
     const FormSubmitted = async (e) => {
         e.preventDefault();
-
-        if(getSelectedAddress === "0") { // If 'Add a new address' is selected
-            if(getFirstNameValidState === 1 && getLastNameValidState === 1 && getAddressValidState === 1 && getCityValidState === 1 && getZipCodeValidState === 1 && getRegionValidState === 1 && getCountryValidState === 1 && getPhoneValidState === 1) {           
-                let data = {
-                    "table": "addresses",
-                    "data": {
-                        "user_id": getUserId,
-                        "address_name": getAddressName,
-                        "first_name": getFirstName,
-                        "last_name": getLastName,
-                        "address": getAddress,
-                        "city": getCity,
-                        "zip_code": getZipCode,
-                        "region": getRegion,
-                        "country": getCountry,
-                        "phone_number": getPhone
-                    }             
-                };
-          
-                Data("panelAdmin", "insert", data).then(response => {
-                    if (response.success === true) {
-                        ToastQueue.positive("Adresse ajoutée avec succès !", {timeout: 5000});
-                        navigate("/monCompte");
-                    } else {
-                        ToastQueue.negative(response.error, {timeout: 5000});
-                    }
-                });
-            } else {
-                ToastQueue.negative("Veuillez remplir correctement tous les champs.", {timeout: 5000});
-            }
-        } else { // If an existing address is selected, then it's an update
-            if(getFirstNameValidState === 1 && getLastNameValidState === 1 && getAddressValidState === 1 && getCityValidState === 1 && getZipCodeValidState === 1 && getRegionValidState === 1 && getCountryValidState === 1 && getPhoneValidState === 1) {           
-                let data = {
-                    "table": "addresses",
-                    "id": getSelectedAddress,
-                    "data": {
-                        "address_name": getAddressName,
-                        "first_name": getFirstName,
-                        "last_name": getLastName,
-                        "address": getAddress,
-                        "city": getCity,
-                        "zip_code": getZipCode,
-                        "region": getRegion,
-                        "country": getCountry,
-                        "phone_number": getPhone
-                    }             
-                };
-          
-                Data("panelAdmin", "update", data).then(response => {
-                    if (response.success === true) {
-                        ToastQueue.positive("Modification réussie avec succès !", {timeout: 5000});
-                        navigate("/monCompte");
-                    } else {
-                        ToastQueue.negative(response.error, {timeout: 5000});
-                    }
-                });
-            } else {
-                ToastQueue.negative("Veuillez remplir correctement tous les champs.", {timeout: 5000});
-            }
-        }
-    };
-
-    const handleDelete = () => {
-        setIsDeleting(true);
-        const confirmed = window.confirm("Voulez-vous vraiment supprimer cette adresse ?");
-        if (confirmed) {
-            const data = {
+        if (!isFormValid()) {
+            ToastQueue.negative("Veuillez remplir correctement tous les champs.", { timeout: 5000 });
+            return;
+          }
+        if (getSelectedAddress === "0") {
+            let data = {
                 "table": "addresses",
-                "id": getSelectedAddress 
+                "data": {
+                    "user_id": getUserId,
+                    "address_name": getAddressName,
+                    "first_name": getFirstName,
+                    "last_name": getLastName,
+                    "address": getAddress,
+                    "city": getCity,
+                    "zip_code": getZipCode,
+                    "region": getRegion,
+                    "country": getCountry,
+                    "phone_number": getPhone
+                }
             };
 
-            Data("panelAdmin", "delete", data).then(response => {
-                setIsDeleting(false);
+            Data("panelAdmin", "insert", data).then(response => {
                 if (response.success === true) {
-                    ToastQueue.positive("Suppression réussie avec succès !", {timeout: 5000});
-                    window.location.reload();        
+                    ToastQueue.positive("Adresse ajoutée avec succès !", { timeout: 5000 });
+                    window.location.reload();
+                    navigate("/checkoutAdresse");
                 } else {
                     ToastQueue.negative(response.error, { timeout: 5000 });
                 }
             });
         } else {
-            setIsDeleting(false);
+            ToastQueue.negative("Veuillez remplir correctement tous les champs.", {timeout: 5000});
         }
-    };
+    } 
 
     const renderButtons = () => {
         if (getSelectedAddress === "0") {
             return (
                 <>
-                    <Link to="/monCompte" className="form-btn-error">Annuler</Link>
+                    <Link to="/" className="form-btn-error">Annuler</Link> 
                     <button type="submit" className="form-btn-success">Ajouter</button>
                 </>
             );
         } else {
             return (
                 <>
-                    <Link to="/monCompte" className="form-btn-error">Annuler</Link>
-                    <button type="submit" className="form-btn-success">Modifier</button>
-                    <button type="button" className="form-btn-delete" onClick={handleDelete} disabled={isDeleting}>Supprimer</button>
+                    <div className="checkoutAdresse">
+                        <Link to={`/checkoutPayment?addressId=${getSelectedAddress}`} className="btnProduit">Passer au paiement</Link>
+                    </div>
                 </>
             );
         }
@@ -310,9 +273,10 @@ const MonCompteAdresse = () => {
 
     return (   
         <>
-            <div className="monComptePageAdresse">
-                <form onSubmit={FormSubmitted}>
-                    <h1 className="formTitle">Modifier votre adresse</h1>
+            <div className="panelAdminAddElement">
+            <form onSubmit={FormSubmitted}>
+                    <h2 className="formTitle">Veuillez ajouter ou choisir une adresse de livraison</h2>
+
                     <div className="picker-container">
                         <Picker
                             label="Choisir une adresse"
@@ -325,25 +289,27 @@ const MonCompteAdresse = () => {
                         >
                             {item => <Item key={item.id}>{item.address_name}</Item>}
                         </Picker>
-
                     </div> 
                     <div>                                               
                         {
                             (getAddressNameValidState === 1)
                             ?
-                            <TextField
-                                label="Nom d'adresse"
-                                onChange={setAddressName}
-                                value={getAddressName} 
-                                validationState="valid"
-                                width={300}
-                            />
+                        <TextField
+                            label="Nom d'adresse"
+                            onChange={setAddressName}
+                            value={getAddressName}
+                            isReadOnly={getSelectedAddress !== "0"}
+                            validationState={getAddressNameValidState === 1 ? "valid" : "invalid"}
+                            errorMessage="Veuillez entrer un nom correct (entre 5 et 50 caractères)."
+                            width={300}
+                        />
                             :
                             <TextField
                                 label="Nom d'adresse"
                                 onChange={setAddressName}
-                                value={getAddressName} 
-                                validationState="invalid"
+                                value={getAddressName}
+                                isReadOnly={getSelectedAddress !== "0"}
+                                validationState={getAddressNameValidState === 1 ? "valid" : "invalid"}
                                 errorMessage="Veuillez entrer un nom correct (entre 5 et 50 caractères)."
                                 width={300}
                             />
@@ -356,16 +322,19 @@ const MonCompteAdresse = () => {
                             <TextField
                                 label="Prénom"
                                 onChange={setFirstName}
-                                value={getFirstName} 
-                                validationState="valid"
+                                value={getFirstName}
+                                isReadOnly={getSelectedAddress !== "0"}
+                                validationState={getFirstNameValidState === 1 ? "valid" : "invalid"}
+                                errorMessage="Veuillez entrer un nom correct (entre 3 et 50 caractères)."
                                 width={300}
                             />
                             :
-                            <TextField
+                           <TextField
                                 label="Prénom"
                                 onChange={setFirstName}
                                 value={getFirstName}
-                                validationState="invalid"
+                                isReadOnly={getSelectedAddress !== "0"}
+                                validationState={getFirstNameValidState === 1 ? "valid" : "invalid"}
                                 errorMessage="Veuillez entrer un nom correct (entre 3 et 50 caractères)."
                                 width={300}
                             />
@@ -379,7 +348,9 @@ const MonCompteAdresse = () => {
                                 label="Nom"
                                 onChange={setLastName}
                                 value={getLastName}
-                                validationState="valid"
+                                isReadOnly={getSelectedAddress !== "0"}
+                                validationState={getLastNameValidState === 1 ? "valid" : "invalid"}
+                                errorMessage="Veuillez entrer un nom correct (entre 3 et 50 caractères)."
                                 width={300}
                             />
                             :
@@ -387,8 +358,9 @@ const MonCompteAdresse = () => {
                                 label="Nom"
                                 onChange={setLastName}
                                 value={getLastName}
-                                validationState="invalid"
-                                errorMessage="Veuillez entrer un nom correct (entre 5 et 50 caractères)."
+                                isReadOnly={getSelectedAddress !== "0"}
+                                validationState={getLastNameValidState === 1 ? "valid" : "invalid"}
+                                errorMessage="Veuillez entrer un nom correct (entre 3 et 50 caractères)."
                                 width={300}
                             />
                         }
@@ -401,7 +373,9 @@ const MonCompteAdresse = () => {
                                 label="Adresse"
                                 onChange={setAddress}
                                 value={getAddress}
-                                validationState="valid"
+                                isReadOnly={getSelectedAddress !== "0"}
+                                validationState={getAddressValidState === 1 ? "valid" : "invalid"}
+                                errorMessage="Veuillez entrer une address valide."
                                 width={300}
                             />
                             :
@@ -409,7 +383,8 @@ const MonCompteAdresse = () => {
                                 label="Adresse"
                                 onChange={setAddress}
                                 value={getAddress}
-                                validationState="invalid"
+                                isReadOnly={getSelectedAddress !== "0"}
+                                validationState={getAddressValidState === 1 ? "valid" : "invalid"}
                                 errorMessage="Veuillez entrer une address valide."
                                 width={300}
                             />
@@ -423,7 +398,9 @@ const MonCompteAdresse = () => {
                                 label="Ville"
                                 onChange={setCity}
                                 value={getCity}
-                                validationState="valid"
+                                isReadOnly={getSelectedAddress !== "0"}
+                                validationState={getCityValidState === 1 ? "valid" : "invalid"}
+                                errorMessage="Veuillez entrer un nom valide."
                                 width={300}
                             />
                             :
@@ -431,7 +408,8 @@ const MonCompteAdresse = () => {
                                 label="Ville"
                                 onChange={setCity}
                                 value={getCity}
-                                validationState="invalid"
+                                isReadOnly={getSelectedAddress !== "0"}
+                                validationState={getCityValidState === 1 ? "valid" : "invalid"}
                                 errorMessage="Veuillez entrer un nom valide."
                                 width={300}
                             />
@@ -445,7 +423,9 @@ const MonCompteAdresse = () => {
                                 label="Code postal"
                                 onChange={setZipCode}
                                 value={getZipCode}
-                                validationState="valid"
+                                isReadOnly={getSelectedAddress !== "0"}
+                                validationState={getZipCodeValidState === 1 ? "valid" : "invalid"}
+                                errorMessage="Veuillez entrer un code postal valide."
                                 width={300}
                             />
                             :
@@ -453,7 +433,8 @@ const MonCompteAdresse = () => {
                                 label="Code postal"
                                 onChange={setZipCode}
                                 value={getZipCode}
-                                validationState="invalid"
+                                isReadOnly={getSelectedAddress !== "0"}
+                                validationState={getZipCodeValidState === 1 ? "valid" : "invalid"}
                                 errorMessage="Veuillez entrer un code postal valide."
                                 width={300}
                             />
@@ -467,7 +448,9 @@ const MonCompteAdresse = () => {
                                 label="Région"
                                 onChange={setRegion}
                                 value={getRegion}
-                                validationState="valid"
+                                isReadOnly={getSelectedAddress !== "0"}
+                                validationState={getRegionValidState === 1 ? "valid" : "invalid"}
+                                errorMessage="Veuillez entrer une region valide."
                                 width={300}
                             />
                             :
@@ -475,7 +458,8 @@ const MonCompteAdresse = () => {
                                 label="Région"
                                 onChange={setRegion}
                                 value={getRegion}
-                                validationState="invalid"
+                                isReadOnly={getSelectedAddress !== "0"}
+                                validationState={getRegionValidState === 1 ? "valid" : "invalid"}
                                 errorMessage="Veuillez entrer une region valide."
                                 width={300}
                             />
@@ -489,7 +473,9 @@ const MonCompteAdresse = () => {
                                 label="Pays"
                                 onChange={setCountry}
                                 value={getCountry}
-                                validationState="valid"
+                                isReadOnly={getSelectedAddress !== "0"}
+                                validationState={getCountryValidState === 1 ? "valid" : "invalid"}
+                                errorMessage="Veuillez entrer un pays valide."
                                 width={300}
                             />
                             :
@@ -497,7 +483,8 @@ const MonCompteAdresse = () => {
                                 label="Pays"
                                 onChange={setCountry}
                                 value={getCountry}
-                                validationState="invalid"
+                                isReadOnly={getSelectedAddress !== "0"}
+                                validationState={getCountryValidState === 1 ? "valid" : "invalid"}
                                 errorMessage="Veuillez entrer un pays valide."
                                 width={300}
                             />
@@ -511,7 +498,9 @@ const MonCompteAdresse = () => {
                                 label="Téléphone"
                                 onChange={setPhone}
                                 value={getPhone}
-                                validationState="valid"
+                                isReadOnly={getSelectedAddress !== "0"}
+                                validationState={getPhoneValidState === 1 ? "valid" : "invalid"}
+                                errorMessage="Veuillez entrer un numero valide."
                                 width={300}
                             />
                             :
@@ -519,7 +508,8 @@ const MonCompteAdresse = () => {
                                 label="Téléphone"
                                 onChange={setPhone}
                                 value={getPhone}
-                                validationState="invalid"
+                                isReadOnly={getSelectedAddress !== "0"}
+                                validationState={getPhoneValidState === 1 ? "valid" : "invalid"}
                                 errorMessage="Veuillez entrer un numero valide."
                                 width={300}
                             />
@@ -529,11 +519,11 @@ const MonCompteAdresse = () => {
                     
                     <div className="buttons">
                         {renderButtons()}
-                    </div>                               
-                </form>                   
+                    </div> 
+                </form>                            
             </div>
         </>
     );
 };
 
-export default MonCompteAdresse;
+export default CheckoutAdresse;

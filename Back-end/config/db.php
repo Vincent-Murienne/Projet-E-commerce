@@ -241,4 +241,88 @@ class Database {
 
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    // Cette méthode recherche le titre des produits en fonction des critères fournis avec priorité
+    public function searchProductNameWithPriority($name) 
+    {   
+        $sql = "SELECT products.id, products.name AS 'produits_nom', products.description, products.price, image_table.name AS 'image_name'
+            FROM products 
+            LEFT JOIN (
+                SELECT product_id, MIN(id) AS min_image_id, name FROM images GROUP BY product_id
+            ) AS image_table
+            ON products.id = image_table.product_id  
+            WHERE (products.name = :name OR products.description = :name)
+            OR (SUBSTRING(products.name, 1, 1) <> SUBSTRING(:name, 1, 1) AND SUBSTRING(products.name, 2) = SUBSTRING(:name, 2) AND products.description = :name)
+            OR (products.name LIKE CONCAT(:name, '%') OR products.description LIKE CONCAT(:name, '%'))
+            OR (products.name LIKE CONCAT('%', :name, '%') OR products.description LIKE CONCAT('%', :name, '%'))";
+
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue('name', $name, PDO::PARAM_STR);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Cette méthode recherche les produits en fonction des critères fournis
+    public function searchProductNameWithFilter($prix_min, $prix_max, $materiaux, $categories, $en_stock) 
+    {   
+        $sql = "SELECT products.name AS 'produits_nom', products.description, products.price, image_table.name AS 'image_name'
+            FROM products 
+            LEFT JOIN (
+                SELECT product_id, MIN(id) AS min_image_id, name FROM images GROUP BY product_id
+            ) AS image_table
+            ON products.id = image_table.product_id
+            INNER JOIN categories ON products.category_id = categories.id
+            INNER JOIN products_materials ON products.id = products_materials.product_id
+            INNER JOIN materials_list ON products_materials.materials_list_id = materials_list.id
+            WHERE 
+                (:prix_min IS NULL OR products.price >= :prix_min) -- Prix minimum
+                AND (:prix_max IS NULL OR products.price <= :prix_max) -- Prix maximum
+                AND (:materiaux IS NULL OR materials_list.name IN (:materiaux)) -- Matériaux
+                AND (:categories IS NULL OR categories.name IN (:categories)) -- Catégories
+                AND (:en_stock = 0 OR products.quantity > 0)";
+
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue('prix_min', $prix_min, PDO::PARAM_INT);
+        $query->bindValue('prix_max', $prix_max, PDO::PARAM_INT);
+        $query->bindValue('materiaux', $materiaux, PDO::PARAM_STR);
+        $query->bindValue('categories', $categories, PDO::PARAM_STR);
+        $query->bindValue('en_stock', $en_stock, PDO::PARAM_INT);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getProductBasket($user_id)
+    {
+        $sql = "SELECT p.id, p.name, SUM(b.quantity) AS quantity, p.price, p.description, 
+        (SELECT i.name FROM images i WHERE i.product_id = p.id LIMIT 1) AS image_name
+        FROM baskets b
+        LEFT JOIN products p ON b.product_id = p.id
+        WHERE b.user_id = :user_id
+        GROUP BY p.id, p.name, p.price, p.description";
+
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue('user_id', $user_id, PDO::PARAM_INT);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function deleteProductBasket($user_id, $product_id)
+    {
+        $sql = "DELETE FROM baskets WHERE user_id = :user_id AND product_id = :product_id";
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue('user_id', $user_id, PDO::PARAM_INT);
+        $query->bindValue('product_id', $product_id, PDO::PARAM_INT);
+        return $query->execute();
+    }
+
+    public function updateProductQuantity($user_id, $product_id, $quantity)
+    {
+        $sql = "UPDATE baskets SET quantity = :quantity WHERE user_id = :user_id AND product_id = :product_id";
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue('user_id', $user_id, PDO::PARAM_INT);
+        $query->bindValue('product_id', $product_id, PDO::PARAM_INT);
+        $query->bindValue('quantity', $quantity, PDO::PARAM_INT);
+        return $query->execute();
+    }
+    
 }
