@@ -35,6 +35,7 @@ import CheckoutConfirmer from "../pages/checkoutPage/CheckoutConfirmer";
 import CguPage from "../pages/reglementationPage/CguPage";
 import MentionsLegales from "../pages/reglementationPage/MentionsLegales";
 import ContactPage from "../pages/reglementationPage/ContactPage";
+import AirneisDesc from "../pages/reglementationPage/AirneisDesc"
 
 
 const router = createBrowserRouter([
@@ -117,6 +118,10 @@ const router = createBrowserRouter([
             {
                 path: "contactPage",
                 element: <ContactPage/>
+            },
+            {
+                path: "airneisDesc",
+                element: <AirneisDesc/>
             },
         ]
     },
