@@ -127,26 +127,28 @@ const CheckoutPayment = () => {
     useEffect(() => {
         if (getExpirationDate !== undefined) {
             // Check if the expiration date is in the format YYYY-MM-DD
-            const expirationDateRegex = /^(\d{4})-(\d{2})-(\d{2})\s(\d{2}):(\d{2}):(\d{2})$/;
+            const expirationDateRegex = /^(\d{4})-(\d{2})-(\d{2})$/;
             const match = getExpirationDate.match(expirationDateRegex);
     
             if (match) {
                 const expYear = parseInt(match[1], 10);
                 const expMonth = parseInt(match[2], 10);
                 const expDay = parseInt(match[3], 10);
-                const expDate = new Date(expYear, expMonth - 1, expDay); // Months are 0-indexed in JavaScript Date
+                const expDate = new Date(expYear, expMonth - 1, expDay); 
                 const currentDate = new Date();
     
-                // Check if the expiration date is at the beginning of the given day and in the future
-                const isFutureDate = expDate > currentDate && expDate.getHours() === 0 && expDate.getMinutes() === 0 && expDate.getSeconds() === 0;
+                // Check if the expiration date is in the future and is a valid date
+                const isValidDate = expDate.getFullYear() === expYear &&
+                                    expDate.getMonth() === expMonth - 1 &&
+                                    expDate.getDate() === expDay;
     
-                if (isFutureDate) {
-                    setExpirationDateValidState(1); 
+                if (isValidDate && expDate > currentDate) {
+                    setExpirationDateValidState(1); // Valid state
                 } else {
-                    setExpirationDateValidState(2); 
+                    setExpirationDateValidState(2); // Invalid state, date is in the past, not at the beginning of the day, or invalid date
                 }
             } else {
-                setExpirationDateValidState(2); 
+                setExpirationDateValidState(2); // Invalid state, format is incorrect
             }
         }
     }, [getExpirationDate]);

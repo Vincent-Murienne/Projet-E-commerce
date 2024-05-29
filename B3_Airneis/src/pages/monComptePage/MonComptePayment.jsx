@@ -21,7 +21,6 @@ const MonComptePayment = () => {
     const [getCardNumberValidState, setCardNumberValidState] = useState(1);
     const [getExpirationDateValidState, setExpirationDateValidState] = useState(1);
     const [getCvvValidState, setCvvValidState] = useState(1);
-    const [isDeleting, setIsDeleting] = useState(false);
 
     useEffect(() => {
         if (getSelectedPayment === "0") {
@@ -133,7 +132,7 @@ const MonComptePayment = () => {
                                     expDate.getMonth() === expMonth - 1 &&
                                     expDate.getDate() === expDay;
     
-                if (isValidDate && expDate > currentDate && expDate.getHours() === 0 && expDate.getMinutes() === 0 && expDate.getSeconds() === 0) {
+                if (isValidDate && expDate > currentDate) {
                     setExpirationDateValidState(1); // Valid state
                 } else {
                     setExpirationDateValidState(2); // Invalid state, date is in the past, not at the beginning of the day, or invalid date
@@ -212,7 +211,6 @@ const MonComptePayment = () => {
     }
 
     const handleDelete = () => {
-        setIsDeleting(true);
         const confirmed = window.confirm("Voulez-vous vraiment supprimer cette méthode de paiement ?");
         if (confirmed) {
             const data = {
@@ -221,7 +219,6 @@ const MonComptePayment = () => {
             };
 
             Data("panelAdmin", "delete", data).then(response => {
-                setIsDeleting(false);
                 if (response.success === true) {
                     ToastQueue.positive("Suppression réussie avec succès !", {timeout: 5000});
                     window.location.reload();                
@@ -229,9 +226,7 @@ const MonComptePayment = () => {
                     ToastQueue.negative(response.error, { timeout: 5000 });
                 }
             });
-        } else {
-            setIsDeleting(false);
-        }
+        } 
     };
 
     const renderButtons = () => {
@@ -247,7 +242,7 @@ const MonComptePayment = () => {
                 <>
                     <Link to="/monCompte" className="form-btn-error">Annuler</Link>
                     <button type="submit" className="form-btn-success">Modifier</button>
-                    <button type="button" className="form-btn-delete" onClick={handleDelete} disabled={isDeleting}>Supprimer</button>
+                    <button type="button" className="form-btn-delete" onClick={handleDelete}>Supprimer</button>
                 </>
             );
         }

@@ -10,8 +10,6 @@ const MonCompteAdresse = () => {
     const { pullData } = useContext(UserContext);
     const [getUserAddresses, setUserAddresses] = useState([]);
     const [getSelectedAddress, setSelectedAddress] = useState("0"); 
-    const [isDeleting, setIsDeleting] = useState(false);
-
     const [getAddressName, setAddressName] = useState(undefined);
     const [getFirstName, setFirstName] = useState(undefined);
     const [getLastName, setLastName] = useState(undefined);
@@ -267,7 +265,6 @@ const MonCompteAdresse = () => {
     };
 
     const handleDelete = () => {
-        setIsDeleting(true);
         const confirmed = window.confirm("Voulez-vous vraiment supprimer cette adresse ?");
         if (confirmed) {
             const data = {
@@ -276,17 +273,14 @@ const MonCompteAdresse = () => {
             };
 
             Data("panelAdmin", "delete", data).then(response => {
-                setIsDeleting(false);
                 if (response.success === true) {
                     ToastQueue.positive("Suppression réussie avec succès !", {timeout: 5000});
-                    window.location.reload();        
+                    window.location.reload();     
                 } else {
                     ToastQueue.negative(response.error, { timeout: 5000 });
                 }
             });
-        } else {
-            setIsDeleting(false);
-        }
+        } 
     };
 
     const renderButtons = () => {
@@ -302,7 +296,7 @@ const MonCompteAdresse = () => {
                 <>
                     <Link to="/monCompte" className="form-btn-error">Annuler</Link>
                     <button type="submit" className="form-btn-success">Modifier</button>
-                    <button type="button" className="form-btn-delete" onClick={handleDelete} disabled={isDeleting}>Supprimer</button>
+                    <button type="button" className="form-btn-delete" onClick={handleDelete}>Supprimer</button>
                 </>
             );
         }
