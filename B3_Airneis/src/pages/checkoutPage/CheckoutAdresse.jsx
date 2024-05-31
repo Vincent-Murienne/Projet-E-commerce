@@ -191,7 +191,7 @@ const CheckoutAdresse = () => {
     
     useEffect(() => {
         if(getPhone !== undefined) {
-            const phoneRegex = /^\d{9}$/; 
+            const phoneRegex = /^\d{10}$/; 
             if(phoneRegex.test(getPhone)) {
                 setPhoneValidState(1); 
             } else {

@@ -126,26 +126,31 @@ const CheckoutPayment = () => {
 
     useEffect(() => {
         if (getExpirationDate !== undefined) {
-            // Check if the expiration date is in the format YYYY-MM-DD
-            const expirationDateRegex = /^(\d{4})-(\d{2})-(\d{2})$/;
+            // Check if the expiration date is in the format MM/AAAA
+            const expirationDateRegex = /^(\d{2})\/(\d{4})$/;
             const match = getExpirationDate.match(expirationDateRegex);
     
             if (match) {
-                const expYear = parseInt(match[1], 10);
-                const expMonth = parseInt(match[2], 10);
-                const expDay = parseInt(match[3], 10);
-                const expDate = new Date(expYear, expMonth - 1, expDay); 
-                const currentDate = new Date();
+                const expMonth = parseInt(match[1], 10);
+                const expYear = parseInt(match[2], 10);
     
-                // Check if the expiration date is in the future and is a valid date
-                const isValidDate = expDate.getFullYear() === expYear &&
-                                    expDate.getMonth() === expMonth - 1 &&
-                                    expDate.getDate() === expDay;
+                if (expMonth <= 12) {
+                    const expDate = new Date(expYear, expMonth, 0); 
     
-                if (isValidDate && expDate > currentDate) {
-                    setExpirationDateValidState(1); // Valid state
+                    const currentDate = new Date();
+                    currentDate.setHours(0, 0, 0, 0); 
+    
+                    // Check if the expiration date is in the future
+                    const isValidDate = expDate.getTime() > currentDate.getTime();
+    
+                    if (isValidDate) {
+                        setExpirationDateValidState(1); // Valid state
+    
+                    } else {
+                        setExpirationDateValidState(2); // Invalid state, date is in the past or invalid date
+                    }
                 } else {
-                    setExpirationDateValidState(2); // Invalid state, date is in the past, not at the beginning of the day, or invalid date
+                    setExpirationDateValidState(2); // Invalid state, month is greater than 12
                 }
             } else {
                 setExpirationDateValidState(2); // Invalid state, format is incorrect
@@ -225,7 +230,8 @@ const CheckoutPayment = () => {
                 "data": {
                     "user_id": getUserId,
                     "address_id": getSelectedAddressId,
-                    "payment_id": getSelectedPayment
+                    "payment_id": getSelectedPayment,
+                    "order_state": "Livré"
                 }
             };
 
@@ -373,7 +379,7 @@ const CheckoutPayment = () => {
                                 value={getExpirationDate}
                                 isReadOnly={getSelectedPayment !== "0"}
                                 validationState={getExpirationDateValidState === 1 ? "valid" : "invalid"}
-                                errorMessage="Le format de la date AAAA-MM-JJ 00:00:00."
+                                errorMessage="Le format de la date d'expiration MM-AAAA "
                                 width={300}
                             />
                             :
@@ -383,7 +389,7 @@ const CheckoutPayment = () => {
                                 value={getExpirationDate}
                                 isReadOnly={getSelectedPayment !== "0"}
                                 validationState={getExpirationDateValidState === 1 ? "valid" : "invalid"}
-                                errorMessage="Le format de la date AAAA-MM-JJ 00:00:00."
+                                errorMessage="Le format de la date d'expiration MM-AAAA"
                                 width={300}
                             />
                         }

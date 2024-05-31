@@ -110,6 +110,7 @@ html::-webkit-scrollbar{
     border-radius: .4rem;
     background-color: green;
     color: var(--white);
+    cursor: pointer;
 }
 
 .form-btn-error {

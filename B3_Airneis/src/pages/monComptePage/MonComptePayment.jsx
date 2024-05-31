@@ -116,38 +116,39 @@ const MonComptePayment = () => {
 
     useEffect(() => {
         if (getExpirationDate !== undefined) {
-            // Check if the expiration date is in the format MM/YY
-            const expirationDateRegex = /^(\d{2})\/(\d{2})$/;
+            // Check if the expiration date is in the format MM/AAAA
+            const expirationDateRegex = /^(\d{2})\/(\d{4})$/;
             const match = getExpirationDate.match(expirationDateRegex);
     
             if (match) {
                 const expMonth = parseInt(match[1], 10);
-                const expYear = parseInt('20' + match[2], 10); // Convert to full year (e.g., '26' to 2026)
-                const expDate = new Date(expYear, expMonth, 1); // Set to the first day of the month following expiration
+                const expYear = parseInt(match[2], 10);
     
-                const currentDate = new Date();
-                currentDate.setHours(0, 0, 0, 0); // Normalize current date to start of day for comparison
+                if (expMonth <= 12) {
+                    const expDate = new Date(expYear, expMonth, 0); 
     
-                // Check if the expiration date is at the end of the expiration month and in the future
-                const isValidDate = expDate.getFullYear() === expYear &&
-                                    expDate.getMonth() === expMonth;
+                    const currentDate = new Date();
+                    currentDate.setHours(0, 0, 0, 0); 
     
-                if (isValidDate && expDate > currentDate) {
-                    setExpirationDateValidState(1); // Valid state
+                    // Check if the expiration date is in the future
+                    const isValidDate = expDate.getTime() > currentDate.getTime();
     
-                    // Format the date as YYYY-MM-DD for the database
-                    const formattedExpirationDate = `${expYear}-${String(expMonth).padStart(2, '0')}-01`;
+                    if (isValidDate) {
+                        setExpirationDateValidState(1); // Valid state
     
-
-    
+                    } else {
+                        setExpirationDateValidState(2); // Invalid state, date is in the past or invalid date
+                    }
                 } else {
-                    setExpirationDateValidState(2); // Invalid state, date is in the past or invalid date
+                    setExpirationDateValidState(2); // Invalid state, month is greater than 12
                 }
             } else {
                 setExpirationDateValidState(2); // Invalid state, format is incorrect
             }
         }
     }, [getExpirationDate]);
+    
+    
 
     useEffect(() => {
         if(getCvv !== undefined) {        
@@ -356,7 +357,7 @@ const MonComptePayment = () => {
                                 onChange={setExpirationDate}
                                 value={getExpirationDate}
                                 validationState="invalid"
-                                errorMessage="Le format de la date AAAA-MM-JJ."
+                                errorMessage="Le format de la date d'expiration MM-AAAA"
                                 width={300}
                             />
                         }
