@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { BsPencilSquare } from 'react-icons/bs';
 import { TextField } from "@adobe/react-spectrum";
 import { Link, useNavigate } from 'react-router-dom';
 import { Data } from "../../services/api";
@@ -7,7 +6,7 @@ import { UserContext } from '../../context/UserProvider';
 import { ToastQueue } from "@react-spectrum/toast";
 
 const MonComptePage = () => {
-    const { pullData } = useContext(UserContext);
+    const { pullData, handleLogout } = useContext(UserContext);
     const [getUserName, setUserName] = useState([]);
     const [getUserMail, setUserMail] = useState([]);
     const [getUserPassword, setUserPassword] = useState([]);
@@ -25,6 +24,7 @@ const MonComptePage = () => {
         }
 
         userId = userData.id;
+        setUserId(userId);
 
         let data = {
             "table": "users",
@@ -41,6 +41,26 @@ const MonComptePage = () => {
             }
         });
     }, []);
+
+    const handleDeleteAccount = () => {
+        const confirmed = window.confirm("Voulez-vous vraiment supprimer votre compte ? Cette action est irréversible.");
+        if (confirmed) {
+            const data = {
+                "table": "users",
+                "id": getUserId,
+            };
+            Data("panelAdmin", "deleteUser", data).then(response => {
+                if (response.success) {
+                    ToastQueue.positive("Compte supprimé avec succès.", {timeout: 5000});
+                    handleLogout();
+                    navigate("/");      
+                    window.location.reload();               
+                } else {
+                    ToastQueue.negative(response.error, {timeout: 5000});
+                }
+            });
+        }
+    };
 
     return (   
         <>
@@ -106,7 +126,7 @@ const MonComptePage = () => {
                 <div className="buttons-container">
                     <button className="submit" type="submit">Télécharger mes données</button>
                     <Link to="/monCompteEdit" className="submitModify">Modifier mes données</Link>
-                    <button className="submitDelete" type="submit">Supprimer mon compte</button>
+                    <button className="submitDelete" type="submit" onClick={handleDeleteAccount}>Supprimer mon compte</button>
                 </div>
             </section>
         </>

@@ -30,7 +30,7 @@ CREATE TABLE `addresses` (
   `zip_code` integer,
   `region` varchar(50),
   `country` varchar(30),
-  `phone_number` integer
+  `phone_number` varchar(10)
 );
 
 CREATE TABLE `categories` (

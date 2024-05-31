@@ -116,26 +116,32 @@ const MonComptePayment = () => {
 
     useEffect(() => {
         if (getExpirationDate !== undefined) {
-            // Check if the expiration date is in the format YYYY-MM-DD
-            const expirationDateRegex = /^(\d{4})-(\d{2})-(\d{2})$/;
+            // Check if the expiration date is in the format MM/YY
+            const expirationDateRegex = /^(\d{2})\/(\d{2})$/;
             const match = getExpirationDate.match(expirationDateRegex);
     
             if (match) {
-                const expYear = parseInt(match[1], 10);
-                const expMonth = parseInt(match[2], 10);
-                const expDay = parseInt(match[3], 10);
-                const expDate = new Date(expYear, expMonth - 1, expDay); 
-                const currentDate = new Date();
+                const expMonth = parseInt(match[1], 10);
+                const expYear = parseInt('20' + match[2], 10); // Convert to full year (e.g., '26' to 2026)
+                const expDate = new Date(expYear, expMonth, 1); // Set to the first day of the month following expiration
     
-                // Check if the expiration date is in the future and is a valid date
+                const currentDate = new Date();
+                currentDate.setHours(0, 0, 0, 0); // Normalize current date to start of day for comparison
+    
+                // Check if the expiration date is at the end of the expiration month and in the future
                 const isValidDate = expDate.getFullYear() === expYear &&
-                                    expDate.getMonth() === expMonth - 1 &&
-                                    expDate.getDate() === expDay;
+                                    expDate.getMonth() === expMonth;
     
                 if (isValidDate && expDate > currentDate) {
                     setExpirationDateValidState(1); // Valid state
+    
+                    // Format the date as YYYY-MM-DD for the database
+                    const formattedExpirationDate = `${expYear}-${String(expMonth).padStart(2, '0')}-01`;
+    
+
+    
                 } else {
-                    setExpirationDateValidState(2); // Invalid state, date is in the past, not at the beginning of the day, or invalid date
+                    setExpirationDateValidState(2); // Invalid state, date is in the past or invalid date
                 }
             } else {
                 setExpirationDateValidState(2); // Invalid state, format is incorrect
@@ -211,21 +217,17 @@ const MonComptePayment = () => {
     }
 
     const handleDelete = () => {
-        const confirmed = window.confirm("Voulez-vous vraiment supprimer cette méthode de paiement ?");
+        const confirmed = window.confirm("Voulez-vous vraiment supprimer cette adresse ?");
         if (confirmed) {
-            const data = {
-                "table": "payments",
-                "id": getSelectedPayment 
-            };
-
-            Data("panelAdmin", "delete", data).then(response => {
-                if (response.success === true) {
-                    ToastQueue.positive("Suppression réussie avec succès !", {timeout: 5000});
-                    window.location.reload();                
-                } else {
-                    ToastQueue.negative(response.error, { timeout: 5000 });
-                }
-            });
+            Data("panelAdmin", "deletePayment", {"id": getSelectedPayment })
+                .then(response => {
+                    if (response.success === true) {
+                        ToastQueue.positive("Suppression réussie avec succès !", { timeout: 5000 });
+                        window.location.reload();
+                    } else {
+                        ToastQueue.negative(response.error, { timeout: 5000 });
+                    }
+                });
         } 
     };
 

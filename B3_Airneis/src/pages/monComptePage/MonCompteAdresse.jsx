@@ -191,7 +191,7 @@ const MonCompteAdresse = () => {
     
     useEffect(() => {
         if(getPhone !== undefined) {
-            const phoneRegex = /^\d{9}$/; 
+            const phoneRegex = /^\d{10}$/; 
             if(phoneRegex.test(getPhone)) {
                 setPhoneValidState(1); 
             } else {
@@ -267,22 +267,18 @@ const MonCompteAdresse = () => {
     const handleDelete = () => {
         const confirmed = window.confirm("Voulez-vous vraiment supprimer cette adresse ?");
         if (confirmed) {
-            const data = {
-                "table": "addresses",
-                "id": getSelectedAddress 
-            };
-
-            Data("panelAdmin", "delete", data).then(response => {
-                if (response.success === true) {
-                    ToastQueue.positive("Suppression réussie avec succès !", {timeout: 5000});
-                    window.location.reload();     
-                } else {
-                    ToastQueue.negative(response.error, { timeout: 5000 });
-                }
-            });
+            Data("panelAdmin", "deleteAddress", {"id": getSelectedAddress })
+                .then(response => {
+                    if (response.success === true) {
+                        ToastQueue.positive("Suppression réussie avec succès !", { timeout: 5000 });
+                        window.location.reload();
+                    } else {
+                        ToastQueue.negative(response.error, { timeout: 5000 });
+                    }
+                });
         } 
     };
-
+    
     const renderButtons = () => {
         if (getSelectedAddress === "0") {
             return (

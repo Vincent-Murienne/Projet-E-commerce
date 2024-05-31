@@ -32,6 +32,11 @@ const UserProvider = ({ children }) => {
         Cookies.remove(key);
     };
 
+        const handleLogout = () => {
+        removeData("user");
+        Cookies.remove("user");
+    }
+
     // Function to force the reload of some useEffects
     const changeReload = () => {
         if(reloadData === true){
@@ -43,7 +48,7 @@ const UserProvider = ({ children }) => {
 
     return (
         <>
-        <UserContext.Provider value={{ pullData, saveData, removeData, reloadData }}>
+        <UserContext.Provider value={{ pullData, saveData, removeData, reloadData, handleLogout }}>
             {children}
         </UserContext.Provider>
         </>
