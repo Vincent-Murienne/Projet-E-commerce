@@ -2,8 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import DefaultLayout from "../components/layouts/DefaultLayout";
 import AdminLayout from "../components/layouts/AdminLayout";
 import HomePage from "../pages/homePage/HomePage";
-import LoginPage from "../pages/loginPage/LoginPage";
-import RegisterPage from "../pages/registerPage/RegisterPage";
+import LoginPage from "../pages/login-register/LoginPage";
+import RegisterPage from "../pages/login-register/RegisterPage";
 import HomePageManager from "../pages/admin/homePage/HomePageManager";
 import CategorieDetails from "../pages/categoriePage/CategorieDetails";
 import CategorieList from "../pages/categoriePage/CategorieList";
@@ -14,7 +14,7 @@ import ImageEdit from "../pages/admin/ImageManager/ImageEdit";
 import CategoryList from "../pages/admin/CategoryManager/CategoryList";
 import CategoryAdd from "../pages/admin/CategoryManager/CategoryAdd";
 import CategoryEdit from "../pages/admin/CategoryManager/CategoryEdit";
-import ProductSearchPage from "../pages/productSearchPage/ProductSearchPage";
+import ProductSearchPage from "../pages/searchPage/ProductSearchPage";
 import ProductPage from "../pages/productsPage/ProductPage";
 import ProductEdit from "../pages/admin/ProductManager/ProductEdit";
 import ProductAdd from "../pages/admin/ProductManager/ProductAdd";
@@ -28,6 +28,8 @@ import MonCompteAdresse from "../pages/monComptePage/MonCompteAdresse";
 import MonComptePayment from "../pages/monComptePage/MonComptePayment";
 import MonCompteEdit from "../pages/monComptePage/MonCompteEdit";
 import BasketPage from  "../pages/basketPage/BasketPage";
+import ForgetPasswordPage from "../pages/login-register/ForgetPasswordPage";
+import ResetPasswordPage from "../pages/login-register/ResetPasswordPage";
 
 const router = createBrowserRouter([
     {
@@ -86,6 +88,14 @@ const router = createBrowserRouter([
                 path: "monCompteEdit", 
                 element: <MonCompteEdit/>
             },
+            {
+                path: "forgetpassword", 
+                element: <ForgetPasswordPage/>
+            },
+            {
+                path: "resetpassword/:token", 
+                element: <ResetPasswordPage/>
+            }
         ]
     },
     {

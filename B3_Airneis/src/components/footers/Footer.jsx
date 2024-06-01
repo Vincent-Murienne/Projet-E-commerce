@@ -9,10 +9,10 @@ const Footer = () => {
                     <p><Link to="/">CGU</Link> - <Link to="/">Mentions légales</Link> - <Link to="/">Contact</Link></p>
                 </div>
                 <div className="reseaux">
-                    <Link to="/"><FaFacebookF className="scale_on_hover"/></Link>
-                    <Link to="/"><FaTwitter className="scale_on_hover"/></Link>
-                    <Link to="/"><FaInstagram className="scale_on_hover"/></Link>
-                    <Link to="/"><FaLinkedin className="scale_on_hover"/></Link>
+                    <Link to="https://www.facebook.com/profile.php?id=61560438473857"><FaFacebookF className="scale_on_hover"/></Link>
+                    <Link to="https://x.com/airneiscommerce"><FaTwitter className="scale_on_hover"/></Link>
+                    <Link to="https://www.instagram.com/airneis.commerce/"><FaInstagram className="scale_on_hover"/></Link>
+                    <Link to="https://www.linkedin.com/in/%C3%A0irneis-%C3%A0irneis-b16433310/"><FaLinkedin className="scale_on_hover"/></Link>
                 </div>
             </footer>
         </>

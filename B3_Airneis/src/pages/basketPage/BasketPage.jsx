@@ -38,7 +38,7 @@ const BasketPage = () => {
             "product_id": product_id
         };
 
-        Data("basket", "deleteProduct", JSON.stringify(basketsData)).then(response => {
+        Data("basket", "deleteProduct", basketsData).then(response => {
             if (response.success === true) {
                 setProducts(currentProducts => {
                     const updatedProducts = currentProducts.filter(product => product.id !== product_id);
@@ -71,8 +71,6 @@ const BasketPage = () => {
                     calculateTotalPrice(updatedProducts);
                     return updatedProducts;
                 });
-            } else {
-                ToastQueue.negative(response.error, { timeout: 5000 });
             }
         });
     };
@@ -97,20 +95,22 @@ const BasketPage = () => {
                             <p className="product-description">{product.description}</p>
                             <p className="product-quantity">Quantité :
                                 <input
-                                type="number"
-                                min="1"
-                                value={product.quantity}
-                                onChange={(e) => handleQuantityChange(product.id, parseInt(e.target.value))}
-                                onKeyDown={(e) => {
-                                    // Prevent the default action if the key pressed is an arrow key
-                                    if (e.key === 'Backspace') {
-                                        e.preventDefault();
-                                    }
-                                }}
-                                className="quantity-input"/>
+                                    type="number"
+                                    min="1"
+                                    value={product.quantity}
+                                    onChange={(e) => handleQuantityChange(product.id, parseInt(e.target.value))}
+                                    onKeyDown={(e) => {
+                                        // Allow navigation keys: backspace, tab, end, home, left arrow, right arrow
+                                        const allowedKeys = ['Backspace', 'Tab', 'End', 'Home', 'ArrowLeft', 'ArrowRight'];
+                                        if (!allowedKeys.includes(e.key)) {
+                                            e.preventDefault();
+                                        }
+                                    }}
+                                    className="quantity-input"
+                                />
                             </p>
                             <p className="product-price">Prix : {product.price} €</p>
-                            <button onClick={() => handleDelete(product.id) + console.log(product.id)}  className="delete-button">Supprimer</button>
+                            <button onClick={() => handleDelete(product.id)}  className="delete-button">Supprimer</button>
                         </div>
                     </div>
                 ))}
@@ -118,7 +118,15 @@ const BasketPage = () => {
             <div className="checkout-area">
                 <div className="total-price">Prix total : {totalPrice.toFixed(2)} €</div>
                 <div className="tva-price">TVA : {(totalPrice.toFixed(2) * tva).toFixed(2)} €</div>
-                <div className="checkout-button" onClick={() => {/* handle checkout */}}>
+                <div
+                    className={`checkout-button ${!userId ? 'disabled' : ''}`}
+                    onClick={() => {
+                        if (userId) {
+                            // handle checkout
+                        }
+                    }}
+                    disabled={!userId}
+                >
                     Passer la commande
                 </div>
             </div>

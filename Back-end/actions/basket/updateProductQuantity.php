@@ -12,8 +12,6 @@ if($isAllowed) {
             $response["success"] = true;
             $response["data"] = $data;
         }
-    } else {
-        $response["error"] = "Une erreur est survenue lors de la mise à jour de la quantité.";
     }
 } else {
     $response["error"] = "La clé API n'est pas fournie ou est incorrecte.";

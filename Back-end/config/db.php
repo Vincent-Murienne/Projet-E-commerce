@@ -83,7 +83,7 @@ class Database {
         } else if($table == "images") {
             $sql = "SELECT * FROM images WHERE `order` IS NOT NULL ORDER BY `order`";
         }
-         else {
+        else {
             $sql = "";
         }
         $query = $this->pdo->prepare($sql);
@@ -324,5 +324,14 @@ class Database {
         $query->bindValue('quantity', $quantity, PDO::PARAM_INT);
         return $query->execute();
     }
+
+    public function getToken($token)
+    {
+        $sql = "SELECT * FROM password_reset WHERE token = :token'";
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue("token", $token, PDO::PARAM_STR);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    } 
     
 }

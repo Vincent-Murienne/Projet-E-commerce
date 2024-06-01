@@ -72,6 +72,7 @@ const LoginPage = () => {
               </div>
             </div>
             {error && <div className="error-message">{error}</div>}
+            <Link to="/forgetpassword" className="forgot-password">Mot de passe oublié ?</Link>
             <Link to= "/register" className="forgot-password">Pas de compte ? <span>Inscrivez-vous</span></Link>
             <div className="submit-container">
               <button className="submit" type="submit">Se connecter</button>
