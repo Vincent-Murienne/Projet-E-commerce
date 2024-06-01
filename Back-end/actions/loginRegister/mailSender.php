@@ -14,14 +14,17 @@ class MailSender {
     }
 
     private function setup() {
+        $config = require '../../config/configSecure.php';
+        $smtp = $config['smtp'];
+
         // Configuration du serveur SMTP
-        $this->mail->isSMTP();                                      // Utiliser SMTP
-        $this->mail->Host = 'smtp.gmail.com';                     // Serveur SMTP
-        $this->mail->SMTPAuth = true;                               // Activer l'authentification SMTP
-        $this->mail->Username = 'airneis.commerce@gmail.com';                 // Nom d'utilisateur SMTP
-        $this->mail->Password = 'efkybbusrlsuozgx';                           // Mot de passe SMTP
-        $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;      // Activer le chiffrement TLS, `ssl` également accepté
-        $this->mail->Port = 465;                                    // Port TCP pour se connecter
+        $this->mail->isSMTP();
+        $this->mail->Host = $smtp['host'];
+        $this->mail->SMTPAuth = true;
+        $this->mail->Username = $smtp['username'];
+        $this->mail->Password = $smtp['password'];
+        $this->mail->SMTPSecure = $smtp['secure'];
+        $this->mail->Port = $smtp['port'];
     }
 
     public function sendResetLink($email, $resetLink) {
@@ -88,3 +91,4 @@ class MailSender {
         }
     }
 }
+?>
