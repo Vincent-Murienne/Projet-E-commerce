@@ -10,7 +10,7 @@ const MonComptePayment = () => {
     const { pullData } = useContext(UserContext);
 
     const [getUserPayment, setUserPayment] = useState([]);
-    const [getSelectedPayment, setSelectedPayment] = useState(null); 
+    const [getSelectedPayment, setSelectedPayment] = useState("0"); 
     const [getCardName, setCardName] = useState(undefined);
     const [getCardOwner, setCardOwner] = useState(undefined);
     const [getCardNumber, setCardNumber] = useState(undefined);
@@ -21,20 +21,6 @@ const MonComptePayment = () => {
     const [getCardNumberValidState, setCardNumberValidState] = useState(1);
     const [getExpirationDateValidState, setExpirationDateValidState] = useState(1);
     const [getCvvValidState, setCvvValidState] = useState(1);
-    const [isDeleting, setIsDeleting] = useState(false);
-
-
-    // useEffect(() => {
-    //     getUserPayment.forEach(payment => {
-    //         if(getSelectedPayment.toString() === payment.id.toString()){ 
-    //             setCardName(payment.card_name);
-    //             setCardOwner(payment.card_owner);
-    //             setCardNumber(payment.card_number);
-    //             setExpirationDate(payment.expiration_date);
-    //             setCvv(payment.cvv);          
-    //         }          
-    //     }) 
-    // }, [getSelectedPayment]);
 
     useEffect(() => {
         if (getSelectedPayment === "0") {
@@ -66,6 +52,7 @@ const MonComptePayment = () => {
             navigate("/");
             return;
         }
+        setUserId(userData.id);
 
         userId = userData.id;
 
@@ -77,13 +64,17 @@ const MonComptePayment = () => {
         Data("panelAdmin", "getAddresses", paymentData).then(response => {
             if (response.success === true) {
                 setUserPayment(response.data);  
-                setSelectedPayment(response.data[0].id.toString());
-                setCardName(response.data[0].card_name);           
-                setCardOwner(response.data[0].card_owner);
-                setCardNumber(response.data[0].card_number);
-                setExpirationDate(response.data[0].expiration_date);
-                setCvv(response.data[0].cvv);
-                setUserId(userId);
+                if (response.data.length === 0) {
+                    setSelectedPayment("0");
+                } else {
+                    setSelectedPayment(response.data[0].id.toString());  
+                    setCardName(response.data[0].card_name);           
+                    setCardOwner(response.data[0].card_owner);
+                    setCardNumber(response.data[0].card_number);
+                    setExpirationDate(response.data[0].expiration_date);
+                    setCvv(response.data[0].cvv);
+                    setUserId(userId);
+                }
             } else {
                 ToastQueue.negative(response.error, {timeout: 5000});
             }
@@ -125,30 +116,38 @@ const MonComptePayment = () => {
 
     useEffect(() => {
         if (getExpirationDate !== undefined) {
-            // Check if the expiration date is in the format YYYY-MM-DD
-            const expirationDateRegex = /^(\d{4})-(\d{2})-(\d{2})\s(\d{2}):(\d{2}):(\d{2})$/;
+            // Check if the expiration date is in the format MM/AAAA
+            const expirationDateRegex = /^(\d{2})\/(\d{4})$/;
             const match = getExpirationDate.match(expirationDateRegex);
     
             if (match) {
-                const expYear = parseInt(match[1], 10);
-                const expMonth = parseInt(match[2], 10);
-                const expDay = parseInt(match[3], 10);
-                const expDate = new Date(expYear, expMonth - 1, expDay); // Months are 0-indexed in JavaScript Date
-                const currentDate = new Date();
+                const expMonth = parseInt(match[1], 10);
+                const expYear = parseInt(match[2], 10);
     
-                // Check if the expiration date is at the beginning of the given day and in the future
-                const isFutureDate = expDate > currentDate && expDate.getHours() === 0 && expDate.getMinutes() === 0 && expDate.getSeconds() === 0;
+                if (expMonth <= 12) {
+                    const expDate = new Date(expYear, expMonth, 0); 
     
-                if (isFutureDate) {
-                    setExpirationDateValidState(1); // Valid state
+                    const currentDate = new Date();
+                    currentDate.setHours(0, 0, 0, 0); 
+    
+                    // Check if the expiration date is in the future
+                    const isValidDate = expDate.getTime() > currentDate.getTime();
+    
+                    if (isValidDate) {
+                        setExpirationDateValidState(1); // Valid state
+    
+                    } else {
+                        setExpirationDateValidState(2); // Invalid state, date is in the past or invalid date
+                    }
                 } else {
-                    setExpirationDateValidState(2); // Invalid state, date is in the past or not at the beginning of the day
+                    setExpirationDateValidState(2); // Invalid state, month is greater than 12
                 }
             } else {
                 setExpirationDateValidState(2); // Invalid state, format is incorrect
             }
         }
     }, [getExpirationDate]);
+    
     
 
     useEffect(() => {
@@ -191,54 +190,46 @@ const MonComptePayment = () => {
                 ToastQueue.negative("Veuillez remplir correctement tous les champs.", {timeout: 5000});
             }
         } else {
-        if(getCardNameValidState === 1 && getCardOwnerValidState === 1 && getCardNumberValidState === 1 && getExpirationDateValidState === 1 && getCvvValidState === 1) {           
-            let data = {
-                "table": "payments",
-                "id": getSelectedPayment,
-                "data": {
-                    "card_name": getCardName,
-                    "card_owner": getCardOwner,
-                    "card_number": getCardNumber,
-                    "expiration_date": getExpirationDate,
-                    "cvv": getCvv,               
-                }             
-            };
-      
-            Data("panelAdmin", "update", data).then(response => {
-                if (response.success === true) {
-                    ToastQueue.positive("Modification réussie avec succès !", {timeout: 5000});
-                    navigate("/monCompte");
-                } else {
-                    ToastQueue.negative(response.error, {timeout: 5000});
-                }
-            });
-        } else {
-            ToastQueue.negative("Veuillez remplir correctement tous les champs.", {timeout: 5000});
+            if(getCardNameValidState === 1 && getCardOwnerValidState === 1 && getCardNumberValidState === 1 && getExpirationDateValidState === 1 && getCvvValidState === 1) {           
+                let data = {
+                    "table": "payments",
+                    "id": getSelectedPayment,
+                    "data": {
+                        "card_name": getCardName,
+                        "card_owner": getCardOwner,
+                        "card_number": getCardNumber,
+                        "expiration_date": getExpirationDate,
+                        "cvv": getCvv,               
+                    }             
+                };
+          
+                Data("panelAdmin", "update", data).then(response => {
+                    if (response.success === true) {
+                        ToastQueue.positive("Modification réussie avec succès !", {timeout: 5000});
+                        window.location.reload(); 
+                    } else {
+                        ToastQueue.negative(response.error, {timeout: 5000});
+                    }
+                });
+            } else {
+                ToastQueue.negative("Veuillez remplir correctement tous les champs.", {timeout: 5000});
+            }
         }
-    };
-}
+    }
 
     const handleDelete = () => {
-        setIsDeleting(true);
-        const confirmed = window.confirm("Voulez-vous vraiment supprimer cette méthode de paiement ?");
+        const confirmed = window.confirm("Voulez-vous vraiment supprimer cette adresse ?");
         if (confirmed) {
-            const data = {
-                "table": "payments",
-                "id": getSelectedPayment 
-            };
-
-            Data("panelAdmin", "delete", data).then(response => {
-                setIsDeleting(false);
-                if (response.success === true) {
-                    saveData("message", {type: "success", body: "Suppression réussite avec succès !"}); // This line is used to store the message into the cookies to display it after the reload of the page
-                    window.location.reload();                
-                } else {
-                    ToastQueue.negative(response.error, { timeout: 5000 });
-                }
-            });
-        } else {
-            setIsDeleting(false);
-        }
+            Data("panelAdmin", "deletePayment", {"id": getSelectedPayment })
+                .then(response => {
+                    if (response.success === true) {
+                        ToastQueue.positive("Suppression réussie avec succès !", { timeout: 5000 });
+                        window.location.reload();
+                    } else {
+                        ToastQueue.negative(response.error, { timeout: 5000 });
+                    }
+                });
+        } 
     };
 
     const renderButtons = () => {
@@ -254,7 +245,7 @@ const MonComptePayment = () => {
                 <>
                     <Link to="/monCompte" className="form-btn-error">Annuler</Link>
                     <button type="submit" className="form-btn-success">Modifier</button>
-                    <button type="button" className="form-btn-delete" onClick={handleDelete} disabled={isDeleting}>Supprimer</button>
+                    <button type="button" className="form-btn-delete" onClick={handleDelete}>Supprimer</button>
                 </>
             );
         }
@@ -366,7 +357,7 @@ const MonComptePayment = () => {
                                 onChange={setExpirationDate}
                                 value={getExpirationDate}
                                 validationState="invalid"
-                                errorMessage="Le format de la date AAAA-MM-JJ 00:00:00."
+                                errorMessage="Le format de la date d'expiration MM-AAAA"
                                 width={300}
                             />
                         }

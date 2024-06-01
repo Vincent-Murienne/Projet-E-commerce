@@ -14,9 +14,10 @@ $apiKey = getenv("API_KEY");
 // We compare the apiKey from the one received to see if it is legitimate
 $isAllowed = false;
 $json = json_decode(file_get_contents("php://input"), true);
+
 // $json = [
 //     "apiKey" => $apiKey,
-//     "table" => "categories"
+//     "id" => 2,
 // ];
 
 if(isset($json["apiKey"]) && $json["apiKey"] == $apiKey) {

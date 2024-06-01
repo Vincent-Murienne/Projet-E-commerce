@@ -1,0 +1,210 @@
+.cgu-container {
+    margin: 20px auto;
+    max-width: 800px;
+    font-family: Arial, sans-serif;
+    color: #000000;
+}
+
+.cgu-container h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #000000;
+}
+
+.cgu-container h2 {
+    font-size: 1.5em;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #000000;
+}
+
+.cgu-container p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.cgu-container section {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.cgu-container section:last-child {
+    border-bottom: none;
+}
+
+@media (max-width: 768px) {
+    .cgu-container {
+        padding: 10px;
+    }
+
+    .cgu-container h1 {
+        font-size: 2em;
+    }
+
+    .cgu-container h2 {
+        font-size: 1.2em;
+    }
+}
+
+.mentions-legales-container {
+    margin: 20px auto;
+    max-width: 800px;
+    font-family: Arial, sans-serif;
+    color: #000000;
+}
+
+.mentions-legales-container h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #000000;
+}
+
+.mentions-legales-container h2 {
+    font-size: 1.5em;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #000000;
+}
+
+.mentions-legales-container p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.mentions-legales-container section {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.mentions-legales-container section:last-child {
+    border-bottom: none;
+}
+
+.contact-container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.contact-info {
+    margin-bottom: 20px;
+}
+
+.contact-info h2 {
+    margin-top: 0;
+}
+
+.contact-info ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.contact-info li {
+    margin-bottom: 10px;
+}
+
+.contact-form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form h2 {
+    margin-top: 0;
+}
+
+.contact-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.contact-form input,
+.contact-form textarea {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.contact-form button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: #16253F;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.contact-form button:hover {
+    background-color: #101c2f;
+}
+
+.about-us-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Arial, sans-serif';
+    color: #333;
+}
+
+.about-us-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+.about-us-content {
+    background-color: #ecf0f1;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.about-us-content p {
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.about-us-content h2 {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.about-us-content ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.about-us-content ul li {
+    margin-bottom: 10px;
+}
+
+
+
+@media (max-width: 768px) {
+    .mentions-legales-container {
+        padding: 10px;
+    }
+
+    .mentions-legales-container h1 {
+        font-size: 2em;
+    }
+
+    .mentions-legales-container h2 {
+        font-size: 1.2em;
+    }
+}
+

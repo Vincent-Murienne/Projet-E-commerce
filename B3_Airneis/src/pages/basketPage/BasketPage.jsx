@@ -2,6 +2,8 @@ import { useContext, useState, useEffect } from 'react';
 import { Data } from '../../services/api';
 import { ToastQueue } from "@react-spectrum/toast";
 import { UserContext } from '../../context/UserProvider';
+import { useNavigate } from 'react-router-dom';
+
 
 const BasketPage = () => {
     const { pullData } = useContext(UserContext);
@@ -12,6 +14,7 @@ const BasketPage = () => {
     const tva = 0.17;
     const totalAPayer = totalPrice + (totalPrice * tva);
 
+    const navigate = useNavigate();
 
     useEffect(() => {
         const userData = pullData("user");
@@ -83,6 +86,10 @@ const BasketPage = () => {
         setTotalPrice(parseFloat(total.toFixed(2)));
     };
 
+    const handleCheckout = () => {
+        navigate('/checkoutAdresse');
+    };
+    
     return (
         <div className="basket-page">
             <div className="basket-title">Votre panier</div>

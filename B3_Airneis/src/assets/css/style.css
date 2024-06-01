@@ -12,6 +12,8 @@
 @import url("./monComptePage.css");
 @import url("./forgetPassword.css");
 @import url("./resetPassword.css");
+@import url("./checkout.css");
+@import url("./reglementationPage.css");
 
 @font-face {
     font-family: "Circular Std Book";
@@ -110,6 +112,7 @@ html::-webkit-scrollbar{
     border-radius: .4rem;
     background-color: green;
     color: var(--white);
+    cursor: pointer;
 }
 
 .form-btn-error {

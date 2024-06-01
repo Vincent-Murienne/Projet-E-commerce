@@ -26,8 +26,17 @@ import TrackSales from "../pages/admin/trackSales/TrackSales";
 import MonComptePage from "../pages/monComptePage/MonComptePage"
 import MonCompteAdresse from "../pages/monComptePage/MonCompteAdresse";
 import MonComptePayment from "../pages/monComptePage/MonComptePayment";
-import MonCompteEdit from "../pages/monComptePage/MonCompteEdit";
+
 import BasketPage from  "../pages/basketPage/BasketPage";
+import MonCompteEdit from "../pages/monComptePage/MonCompteEdit"
+import CheckoutAdresse from "../pages/checkoutPage/CheckoutAdresse"
+import CheckoutPayment from "../pages/checkoutPage/CheckoutPayment"
+import CheckoutConfirmer from "../pages/checkoutPage/CheckoutConfirmer";
+import CguPage from "../pages/reglementationPage/CguPage";
+import MentionsLegales from "../pages/reglementationPage/MentionsLegales";
+import ContactPage from "../pages/reglementationPage/ContactPage";
+import AirneisDesc from "../pages/reglementationPage/AirneisDesc"
+
 import ForgetPasswordPage from "../pages/login-register/ForgetPasswordPage";
 import ResetPasswordPage from "../pages/login-register/ResetPasswordPage";
 
@@ -96,6 +105,34 @@ const router = createBrowserRouter([
                 path: "resetpassword/:token", 
                 element: <ResetPasswordPage/>
             }
+            {
+                path: "checkoutAdresse", 
+                element: <CheckoutAdresse/>
+            },
+            {
+                path: "checkoutPayment", 
+                element: <CheckoutPayment/>
+            },
+            {
+                path: "checkoutConfirmer", 
+                element: <CheckoutConfirmer/>
+            },
+            {
+                path: "cguPage", 
+                element: <CguPage/>
+            },
+            {
+                path: "mentionsLegales",
+                element: <MentionsLegales/>
+            },
+            {
+                path: "contactPage",
+                element: <ContactPage/>
+            },
+            {
+                path: "airneisDesc",
+                element: <AirneisDesc/>
+            },
         ]
     },
     {

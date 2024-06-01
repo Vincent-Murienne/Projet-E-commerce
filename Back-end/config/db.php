@@ -160,6 +160,11 @@ class Database {
     // This method is specific, it receives the id of a user and will then delete this id from the table users and also deletes every data linked to that user in the other tables
     public function deleteUser(string $id):bool 
     {
+        $sql = "UPDATE orders SET address_id = null, payment_id = null, user_id = null WHERE user_id = :id";       
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue("id", $id, PDO::PARAM_INT);
+        $query->execute();
+        
         $sql1 = "DELETE FROM addresses WHERE user_id = :id";
         $query1 = $this->pdo->prepare($sql1);
         $query1->bindValue("id", $id, PDO::PARAM_INT);
@@ -180,6 +185,34 @@ class Database {
         $query4->bindValue("id", $id, PDO::PARAM_INT);
         
         return $query4->execute();
+    }
+
+    public function deleteAddress(string $id):bool 
+    {
+        $sql = "UPDATE orders SET address_id = null WHERE address_id = :id";
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue("id", $id, PDO::PARAM_INT);
+        $query->execute();
+        
+        $sql1 = "DELETE FROM addresses WHERE id = :id";
+        $query1 = $this->pdo->prepare($sql1);
+        $query1->bindValue("id", $id, PDO::PARAM_INT); 
+        
+        return $query1->execute();
+    }
+
+    public function deletePayment(string $id):bool 
+    {
+        $sql = "UPDATE orders SET payment_id = null WHERE payment_id = :id";
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue("id", $id, PDO::PARAM_INT);
+        $query->execute();
+        
+        $sql1 = "DELETE FROM payments WHERE id = :id";
+        $query1 = $this->pdo->prepare($sql1);
+        $query1->bindValue("id", $id, PDO::PARAM_INT); 
+        
+        return $query1->execute();
     }
 
     // This method will return you the id of the last inserted things into the database. Useful to get the id of the last new user (to add it to the session to prevent the user to have to re login after signing in)
@@ -333,5 +366,21 @@ class Database {
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
     } 
+    
+    function updateOrder(string $table, array $data, int $id) {
+        if (array_key_exists('adresse_id', $data)) {
+            $data['adresse_id'] = null;
+        }
+        
+        $sqlFields = [];
+        foreach ($data as $key => $value){
+            $sqlFields[] = "$key = :$key";
+        }
+        $query = $this->pdo->prepare("UPDATE $table SET " . implode(', ', $sqlFields) .
+            " WHERE id = :id");
+    
+        return $query->execute(array_merge($data, ['id' => $id]));
+    }
+
     
 }
