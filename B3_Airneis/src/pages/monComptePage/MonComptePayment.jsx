@@ -357,7 +357,7 @@ const MonComptePayment = () => {
                                 onChange={setExpirationDate}
                                 value={getExpirationDate}
                                 validationState="invalid"
-                                errorMessage="Le format de la date d'expiration MM-AAAA"
+                                errorMessage="Le format de la date d'expiration MM/AAAA"
                                 width={300}
                             />
                         }
