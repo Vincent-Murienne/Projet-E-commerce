@@ -61,9 +61,10 @@ const ProductSearchPage = () => {
 
   return (
     <>
+      {filtering && <div className="overlay"></div>}
       {/* ProductPage */}
       <section className="categoriePage">
-        <div className={`product-page ${showSearchPage ? 'inactive' : ''}`}>
+        <div className={`product-page ${filtering ? 'inactive' : ''}`}>
           {showResults ? (
               <>
                   <h1>Résultat</h1>

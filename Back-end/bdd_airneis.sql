@@ -91,6 +91,13 @@ CREATE TABLE `lots_of_product` (
   `quantity` integer
 );
 
+CREATE TABLE `password_reset` (
+  `id` integer PRIMARY KEY AUTO_INCREMENT,
+  `email` varchar(255) NOT NULL,
+  `token` varchar(100) NOT NULL,
+  `expiry` integer NOT NULL
+);
+
 ALTER TABLE `payments` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 ALTER TABLE `addresses` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
