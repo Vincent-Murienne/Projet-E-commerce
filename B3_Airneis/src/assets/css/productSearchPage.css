@@ -1,10 +1,56 @@
 .rectangle {
-  position: absolute;
+  position: fixed; /* Changed from absolute to fixed to take full height */
+  margin-top: 50px;
   right: 0;
+  top: 0; /* Added to align the top of the rectangle with the page */
+  bottom: 0; /* Added to make the rectangle take full height */
   background-color: var(--white);
   width: 30%;
-  height: auto;
+  height: 100%; /* Changed to 100% to take full height */
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  overflow-y: auto; /* Added to enable scrolling within the filter panel */
+  z-index: 1000; /* Ensure the filter panel is above other content */
+}
+
+/* Adjustments for different screen sizes remain the same */
+
+.product-page {
+  position: relative; /* Changed from absolute to relative */
+  padding-top: 100px; /* Added padding to ensure the top content is visible */
+  width: 100%;    
+  height: auto; /* Changed to auto to accommodate varying content sizes */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Changed to flex-start to align content to the top */
+}
+
+.product-page > * {
+  margin-bottom: 20px;
+}
+  
+.product-page > *:last-child {
+  margin-bottom: 0;
+}
+  
+.product-page.inactive {
+  opacity: 0.2;
+}
+
+/* Additional styles for the product container and cards */
+.box-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+  width: calc(100% - 30%); /* Adjust width to account for the filter panel */
+  margin-left: auto; /* Align the grid to the right */
+}
+
+@media (max-width: 1024px) {
+  .rectangle {
+    width: auto;
+  }
 }
 
 /* Pour les tablettes et écrans plus petits (smartphones) */
@@ -22,33 +68,23 @@
   }
 }
 
-/* Pour les écrans de 1025px à 1650px */
-@media (min-width: 1025px) and (max-width: 1535px) {
-  .rectangle {
-    width: auto;
-  }
-}
+/* Add responsive styles for the cards as previously provided */
 
-.product-page {
-  position: absolute;
+/* Ajoutez ce style pour créer un effet de grisé sur la page */
+.overlay {
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100%;    
-  height: 100%;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* Couleur de fond semi-transparente */
+  z-index: 999; /* Assurez-vous qu'il est en dessous de .rectangle mais au-dessus des autres contenus */
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
-.product-page > * {
-  margin-bottom: 20px;
-}
-  
-.product-page > *:last-child {
-  margin-bottom: 0;
-}
-  
-.product-page.inactive {
-  opacity: 0.2;
+/* Style pour désactiver les interactions avec les éléments sous l'overlay */
+.inactive * {
+  pointer-events: none;
 }

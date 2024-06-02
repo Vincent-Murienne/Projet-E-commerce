@@ -15,7 +15,7 @@ CREATE TABLE `payments` (
   `card_name` varchar(50),
   `card_owner` varchar(50),
   `card_number` varchar(16),
- `expiration_date` date NOT NULL,
+  `expiration_date` date NOT NULL,
   `cvv` integer
 );
 
@@ -89,6 +89,13 @@ CREATE TABLE `lots_of_product` (
   `order_id` integer,
   `product_id` integer,
   `quantity` integer
+);
+
+CREATE TABLE `password_reset` (
+  `id` integer PRIMARY KEY AUTO_INCREMENT,
+  `email` varchar(255) NOT NULL,
+  `token` varchar(100) NOT NULL,
+  `expiry` integer NOT NULL
 );
 
 ALTER TABLE `payments` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);

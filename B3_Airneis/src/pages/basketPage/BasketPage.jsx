@@ -129,7 +129,7 @@ const BasketPage = () => {
                     className={`checkout-button ${!userId ? 'disabled' : ''}`}
                     onClick={() => {
                         if (userId) {
-                            // handle checkout
+                            handleCheckout();
                         }
                     }}
                     disabled={!userId}
