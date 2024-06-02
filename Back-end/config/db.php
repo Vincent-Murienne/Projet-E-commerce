@@ -382,5 +382,18 @@ class Database {
         return $query->execute(array_merge($data, ['id' => $id]));
     }
 
-    
+    function getAllOrdersByUser($userId) {
+        $sql = "SELECT o.id AS order_id, o.date AS order_date, o.order_state AS order_status, SUM(lop.quantity) AS total_items, SUM(p.price * lop.quantity) AS total_price
+        FROM orders o
+        JOIN lots_of_product lop ON o.id = lop.order_id
+        JOIN products p ON lop.product_id = p.id
+        WHERE o.user_id = :userId
+        GROUP BY o.id, o.date, o.order_state
+        ORDER BY o.date DESC";
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue(":userId", $userId, PDO::PARAM_INT);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }

@@ -1,4 +1,4 @@
-const CommandePage = () => {
+const OrderPage = () => {
 
     return (
         <div>
@@ -7,4 +7,4 @@ const CommandePage = () => {
     )
 }
 
-export default CommandePage;
+export default OrderPage;

@@ -70,10 +70,10 @@ const MonCompteParametres = () => {
                 <div className="input-group">
                     <div className="input-container">
                         <TextField
-                           label="Nom complet"
-                           value={getUserName}
+                            label="Nom complet"
+                            value={getUserName}
                             width={300}
-                           disabled // To prevent editing the field
+                            disabled // To prevent editing the field
                         />
                     </div>
                 </div>
@@ -101,23 +101,23 @@ const MonCompteParametres = () => {
                     </div>
                 </div>
                 
-                   <div className="input-group">
-                        <h4 className="addresses-title">Mes adresses</h4>
-                        <div className="bordered-button">
-                            <Link to="/MonCompteAddresse" className="custom-link">
-                                <button type="button" className="custom-button">
-                                    Voir mes adresses
-                                </button>
-                            </Link>
-                        </div>
+                <div className="input-group">
+                    <h4 className="addresses-title">Mes adresses</h4>
+                    <div className="bordered-button">
+                        <Link to="/MonCompteAddresse" className="custom-link">
+                            <button type="button" className="custom-button">
+                                Voir mes adresses
+                            </button>
+                        </Link>
                     </div>
+                </div>
 
                 <div className="input-group">
                     <h4 className="payement-title">Méthode de payement</h4>
                         <div className="bordered-button">
                             <Link to="/MonComptePayment" className="custom-link">
                                 <button type="button" className="custom-button">
-                                Les méthodes de paiement
+                                    Les méthodes de paiement
                                 </button>
                             </Link>     
                     </div>

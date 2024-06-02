@@ -231,7 +231,7 @@ const CheckoutPayment = () => {
                     "user_id": getUserId,
                     "address_id": getSelectedAddressId,
                     "payment_id": getSelectedPayment,
-                    "order_state": "Livré"
+                    "order_state": "LIVRÉE"
                 }
             };
 

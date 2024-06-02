@@ -5,7 +5,7 @@ const MonComptePage = () => {
     };
 
     const goToMesCommandesPages = () => {
-        window.location.href = "/mesCommandesPages";
+        window.location.href = "/myOrdersPage";
     } 
 
     return (

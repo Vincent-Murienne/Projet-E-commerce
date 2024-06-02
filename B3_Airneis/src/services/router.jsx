@@ -27,8 +27,8 @@ import MonCompteParametres from "../pages/monComptePage/MonCompteParametres";
 import MonCompteAdresse from "../pages/monComptePage/MonCompteAdresse";
 import MonComptePayment from "../pages/monComptePage/MonComptePayment";
 import MonComptePage from "../pages/monComptePage/MonComptePage";
-import MesCommandesPage from "../pages/commandesPage/MesCommandesPage";
-import CommandePage from "../pages/commandesPage/CommandePage";
+import OrderPage from "../pages/ordersPage/OrderPage";
+import MyOrdersPage from "../pages/ordersPage/MyOrdersPage";
 
 import BasketPage from  "../pages/basketPage/BasketPage";
 import MonCompteEdit from "../pages/monComptePage/MonCompteEdit"
@@ -141,12 +141,12 @@ const router = createBrowserRouter([
                 element: <AirneisDesc/>
             },
             {
-                path: "mesCommandesPages",
-                element: <MesCommandesPage/>
+                path: "myOrdersPage",
+                element: <MyOrdersPage/>
             },
             {
-                path: "commandePage",
-                element: <CommandePage/>
+                path: "orderPage/:orderId",
+                element: <OrderPage/>
             }
         ]
     },
