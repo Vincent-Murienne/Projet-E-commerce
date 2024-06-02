@@ -9,11 +9,13 @@
 @import url("./productsPage.css");
 @import url("./admin/trackSales.css");
 @import url("./basketPage.css");
-@import url("./monComptePage.css");
+@import url("./monCompteParametres.css");
 @import url("./forgetPassword.css");
 @import url("./resetPassword.css");
 @import url("./checkout.css");
 @import url("./reglementationPage.css");
+@import url("./monComptePage.css");
+@import url("./mesCommandesPage.css");
 
 @font-face {
     font-family: "Circular Std Book";

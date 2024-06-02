@@ -124,7 +124,7 @@ const MonCompteEdit = () => {
             Data("panelAdmin", "update", data).then(response => {
                 if (response.success === true) {
                     ToastQueue.positive("Modification réussie avec succès !", {timeout: 5000});
-                    navigate("/monCompte");
+                    navigate("/monCompteParametres");
                 } else {
                     ToastQueue.negative(response.error, {timeout: 5000});
                 }
@@ -238,7 +238,7 @@ const MonCompteEdit = () => {
                         <> </>
                     }
                     <div className="buttons">
-                        <Link to="/monCompte" className="form-btn-error">Annuler</Link>
+                        <Link to="/monCompteParametres" className="form-btn-error">Annuler</Link>
                         <button type="submit" className="form-btn-success" onClick={FormSubmitted}>Modifier</button>
                     </div>                 
                 </form>                   

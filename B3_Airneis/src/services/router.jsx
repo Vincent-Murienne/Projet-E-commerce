@@ -23,9 +23,12 @@ import UserEdit from "../pages/admin/UserManager/UserEdit";
 import UserAdd from "../pages/admin/UserManager/UserAdd";
 import UserList from "../pages/admin/UserManager/UserList";
 import TrackSales from "../pages/admin/trackSales/TrackSales";
-import MonComptePage from "../pages/monComptePage/MonComptePage"
+import MonCompteParametres from "../pages/monComptePage/MonCompteParametres";
 import MonCompteAdresse from "../pages/monComptePage/MonCompteAdresse";
 import MonComptePayment from "../pages/monComptePage/MonComptePayment";
+import MonComptePage from "../pages/monComptePage/MonComptePage";
+import MesCommandesPage from "../pages/commandesPage/MesCommandesPage";
+import CommandePage from "../pages/commandesPage/CommandePage";
 
 import BasketPage from  "../pages/basketPage/BasketPage";
 import MonCompteEdit from "../pages/monComptePage/MonCompteEdit"
@@ -82,15 +85,19 @@ const router = createBrowserRouter([
                 element: <ProductPage/>
             },
             {
-                path: "monCompte", 
+                path: "monComptePage",
                 element: <MonComptePage/>
+            },
+            {
+                path: "monCompteParametres", 
+                element: <MonCompteParametres/>
             },
             {
                 path: "monCompteAddresse", 
                 element: <MonCompteAdresse/>
             },
             {
-                path: "monComptepayment", 
+                path: "monComptePayment", 
                 element: <MonComptePayment/>
             },
             {
@@ -98,7 +105,7 @@ const router = createBrowserRouter([
                 element: <MonCompteEdit/>
             },
             {
-                path: "forgetpassword", 
+                path: "forgetPassword", 
                 element: <ForgetPasswordPage/>
             },
             {
@@ -133,6 +140,14 @@ const router = createBrowserRouter([
                 path: "airneisDesc",
                 element: <AirneisDesc/>
             },
+            {
+                path: "mesCommandesPages",
+                element: <MesCommandesPage/>
+            },
+            {
+                path: "commandePage",
+                element: <CommandePage/>
+            }
         ]
     },
     {
