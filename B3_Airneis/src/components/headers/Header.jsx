@@ -127,7 +127,7 @@ const Header = () => {
                     <ul className="middle-nav">
                         <li><Link to="/" className="hover-underline-animation">Accueil</Link></li>
                         <li><Link to="/categories" className="hover-underline-animation">Catégories</Link></li>
-                        <li><Link to="/" className="hover-underline-animation">Contact</Link></li>
+                        <li><Link to="/contactPage" className="hover-underline-animation">Contact</Link></li>
                         {
                             (user.isAdmin)
                             ?
@@ -161,7 +161,7 @@ const Header = () => {
                                     (user.isConnected)
                                     ?
                                         <>
-                                            <li><Link to="/monCompte" className="hover-underline-animation">Paramètre</Link></li>
+                                            <li><Link to="/monComptePage" className="hover-underline-animation">Mon compte</Link></li>
                                             <li><div className='separator'></div></li>
                                             <li><Link to="/" className="hover-underline-animation" onClick={handleLogout}>Se déconnecter</Link></li>
                                         </>
@@ -198,7 +198,7 @@ const Header = () => {
                                     (user.isConnected)
                                     ?
                                         <>
-                                            <li><Link to="/monCompte" className="hover-underline-animation">Paramètre</Link></li>
+                                            <li><Link to="/monComptePage" className="hover-underline-animation">Mon compte</Link></li>
                                             <li><div className="separator"></div></li>
                                             <li><Link to="/" className="hover-underline-animation" onClick={handleLogout}>Se déconnecter</Link></li>
                                         </>

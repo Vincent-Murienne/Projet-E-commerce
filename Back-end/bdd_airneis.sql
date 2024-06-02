@@ -91,6 +91,13 @@ CREATE TABLE `lots_of_product` (
   `quantity` integer
 );
 
+CREATE TABLE `password_reset` (
+  `id` integer PRIMARY KEY AUTO_INCREMENT,
+  `email` varchar(255) NOT NULL,
+  `token` varchar(100) NOT NULL,
+  `expiry` integer NOT NULL
+);
+
 ALTER TABLE `payments` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 ALTER TABLE `addresses` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
@@ -255,3 +262,11 @@ INSERT INTO `addresses` (`user_id`, `address_name`, `first_name`, `last_name`, `
 INSERT INTO `payments` (`user_id`, `card_name`, `card_owner`, `card_number`, `expiration_date`, `cvv`) VALUES 
 (2, 'Mastercard', 'Neriman Her', '1111111111111234', TIMESTAMP('2026-05-01'), 123),
 (2, 'Visa', 'Neriman Her', '1111111111115364', TIMESTAMP('2025-09-01'), 456);
+
+INSERT INTO `materials_list` (`id`, `name`) VALUES
+(1, 'Bois'),
+(2, 'Fer'),
+(3, 'Cuivre'),
+(4, 'Bronze'),
+(5, 'Papier'),
+(6, 'Coton');

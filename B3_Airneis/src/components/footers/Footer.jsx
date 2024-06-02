@@ -6,7 +6,7 @@ const Footer = () => {
         <>
             <footer>
                 <div>
-                    <p><Link to="/cguPage">CGU</Link> - <Link to="/mentionsLegales">Mentions légales</Link> - <Link to="/contactPage">Contact</Link> - <Link to="/airneisDesc">A propos d'Airneis</Link></p>
+                    <p><Link to="/cguPage">CGU</Link> - <Link to="/mentionsLegales">Mentions légales</Link> - <Link to="/airneisDesc">A propos d'Airneis</Link></p>
                 </div>
                 <div className="reseaux">
                     <Link to="https://www.facebook.com/profile.php?id=61560438473857"><FaFacebookF className="scale_on_hover"/></Link>

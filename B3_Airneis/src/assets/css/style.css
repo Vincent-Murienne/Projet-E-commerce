@@ -1,19 +1,22 @@
 @import url("./header.css");
 @import url("./footer.css");
-@import url("./homePage.css");
-@import url("./login-register.css");
-@import url("./admin/homePageManager.css");
-@import url("./categoriePage.css");
-@import url("./admin/ImageManager.css");
-@import url("./productSearchPage.css");
-@import url("./productsPage.css");
-@import url("./admin/trackSales.css");
-@import url("./basketPage.css");
-@import url("./monComptePage.css");
-@import url("./forgetPassword.css");
-@import url("./resetPassword.css");
+@import url("./home.css");
+@import url("./categorie.css");
+@import url("./productSearch.css");
+@import url("./products.css");
+@import url("./basket.css");
 @import url("./checkout.css");
-@import url("./reglementationPage.css");
+@import url("./reglementation.css");
+@import url("./admin/homePageManager.css");
+@import url("./admin/ImageManager.css");
+@import url("./admin/trackSales.css");
+@import url("./loginRegister/loginRegister.css");
+@import url("./loginRegister/forgetPassword.css");
+@import url("./loginRegister/resetPassword.css");
+@import url("./myAccount/myAccountSettings.css");
+@import url("./myAccount/myAccount.css");
+@import url("./orders/myOrders.css");
+@import url("./orders/orderDetails.css");
 
 @font-face {
     font-family: "Circular Std Book";

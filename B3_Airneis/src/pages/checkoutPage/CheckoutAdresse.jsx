@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { Data } from "../../services/api";
 import { UserContext } from '../../context/UserProvider';
@@ -202,25 +202,25 @@ const CheckoutAdresse = () => {
 
     const isFormValid = () => {
         return (
-          getAddressNameValidState === 1 &&
-          getFirstNameValidState === 1 &&
-          getLastNameValidState === 1 &&
-          getAddressValidState === 1 &&
-          getCityValidState === 1 &&
-          getZipCodeValidState === 1 &&
-          getRegionValidState === 1 &&
-          getCountryValidState === 1 &&
-          getPhoneValidState === 1
+            getAddressNameValidState === 1 &&
+            getFirstNameValidState === 1 &&
+            getLastNameValidState === 1 &&
+            getAddressValidState === 1 &&
+            getCityValidState === 1 &&
+            getZipCodeValidState === 1 &&
+            getRegionValidState === 1 &&
+            getCountryValidState === 1 &&
+            getPhoneValidState === 1
         );
-      };
-      
+    };
+    
     
     const FormSubmitted = async (e) => {
         e.preventDefault();
         if (!isFormValid()) {
             ToastQueue.negative("Veuillez remplir correctement tous les champs.", { timeout: 5000 });
             return;
-          }
+        }
         if (getSelectedAddress === "0") {
             let data = {
                 "table": "addresses",
@@ -329,7 +329,7 @@ const CheckoutAdresse = () => {
                                 width={300}
                             />
                             :
-                           <TextField
+                            <TextField
                                 label="Prénom"
                                 onChange={setFirstName}
                                 value={getFirstName}

@@ -181,7 +181,7 @@ const MonComptePayment = () => {
                 Data("panelAdmin", "insert", data).then(response => {
                     if (response.success === true) {
                         ToastQueue.positive("Adresse ajoutée avec succès !", {timeout: 5000});
-                        navigate("/monCompte");
+                        navigate("/monCompteParametres");
                     } else {
                         ToastQueue.negative(response.error, {timeout: 5000});
                     }
@@ -236,14 +236,14 @@ const MonComptePayment = () => {
         if (getSelectedPayment === "0") {
             return (
                 <>
-                    <Link to="/monCompte" className="form-btn-error">Annuler</Link>
+                    <Link to="/monCompteParametres" className="form-btn-error">Annuler</Link>
                     <button type="submit" className="form-btn-success">Ajouter</button>
                 </>
             );
         } else {
             return (
                 <>
-                    <Link to="/monCompte" className="form-btn-error">Annuler</Link>
+                    <Link to="/monCompteParametres" className="form-btn-error">Annuler</Link>
                     <button type="submit" className="form-btn-success">Modifier</button>
                     <button type="button" className="form-btn-delete" onClick={handleDelete}>Supprimer</button>
                 </>

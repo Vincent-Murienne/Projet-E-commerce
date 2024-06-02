@@ -1,0 +1,70 @@
+.mainMonCompte{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f7f7f7;
+    font-family: 'Arial', sans-serif;
+}
+
+.buttons-container-monCompte {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.btn-monCompte {
+    padding: 15px 30px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px; 
+    font-size: 18px;
+    font-weight: bold; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    transition: transform 0.2s ease, box-shadow 0.2s ease; 
+}
+
+.btn-monCompte:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); 
+}
+
+.btn-primary-monCompte {
+    background-color: #0056b3;
+    color: white;
+    border: 1px solid transparent; 
+}
+
+.btn-primary-monCompte:hover {
+    background-color: #003d82;
+    border-color: #002855;
+}
+
+.btn-secondary-monCompte {
+    background-color: #6c757d;
+    color: white;
+    border: 1px solid transparent; 
+}
+
+.btn-secondary-monCompte:hover {
+    background-color: #545b62; 
+    border-color: #3e444b; 
+}
+
+
+@media (max-width: 768px) {
+    .buttons-container-monCompte {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-around; 
+        flex-wrap: wrap;
+    }
+
+    .btn-monCompte {
+        margin: 10px;
+        flex-grow: 1; 
+        max-width: 300px; 
+    }
+}
+

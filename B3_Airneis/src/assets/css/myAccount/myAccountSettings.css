@@ -10,7 +10,7 @@
 
 .link-container {
     margin-top: 20px;
-  }
+}
 
 .comptePage input[type="text"],
 .comptePage input[type="password"] {
@@ -26,11 +26,11 @@
     margin:0;
 }
 
-   #container{
+#container{
     width:400px;
     margin:0 auto;
     margin-top:10%;
-   }
+}
    /* Bordered form */
 .comptePage form {
     width:100%;
@@ -38,13 +38,13 @@
     border: 1px solid #f1f1f1;
     background: #fff;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-   }
+}
 .comptePage #container h1{
     width: 38%;
     margin: 0 auto;
     padding-bottom: 10px;
-   }
-   
+}
+
    /* Full-width inputs */
 .comptePage input[type=text], .comptePage input[type=password] {
     width: 100%;
@@ -53,7 +53,7 @@
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
-   }  
+}  
 
 .comptePage.submit-container{
     display: flex;
