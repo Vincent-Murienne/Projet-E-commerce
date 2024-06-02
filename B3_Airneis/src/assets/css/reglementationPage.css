@@ -137,6 +137,9 @@
     border-radius: 4px;
 }
 
+.contact-form textarea {
+    resize: none;
+}
 .contact-form button {
     padding: 10px 15px;
     border: none;
