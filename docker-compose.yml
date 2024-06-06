@@ -1,0 +1,39 @@
+services:
+  front-end:
+    build:
+      context: ./B3_Airneis
+    ports:
+      - "5173:5173"
+    depends_on:
+      - back-end
+    volumes:
+      - "./B3_Airneis:/app"
+      - "/app/node_modules"
+
+  back-end:
+    build:
+      context: ./Back-end
+    environment:
+      - DB_HOST=db
+      - DB_NAME=airneis_e_commerce
+      - DB_USERNAME=root
+      - DB_PASSWORD=
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+
+  db:
+    image: mysql:5.7
+    command: mysqld --sql_mode=""
+    environment:
+      MYSQL_DATABASE: airneis_e_commerce
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    ports:
+      - "3307:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./Back-end/bdd_airneis.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  db-data:
