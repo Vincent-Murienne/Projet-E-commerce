@@ -16,6 +16,9 @@ if($isAllowed) {
             $response["success"] = true;
             $response["data"] = $data;
         }
+        else{
+            $response["error"] = "Il n'existe pas d'éléments mis en avant.";
+        }
     } else {
         $response["error"] = "Veuillez indiquer dans les données envoyés la table dans laquelle faire cette recherche.";
     }

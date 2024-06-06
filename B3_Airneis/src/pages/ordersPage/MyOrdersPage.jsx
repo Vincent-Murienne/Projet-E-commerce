@@ -56,7 +56,7 @@ const MyOrdersPage = () => {
                                     <p>Date de commande: <strong>{order.order_date}</strong></p>
                                     <p>Statut de la commande: <strong>{order.order_status}</strong></p>
                                     <p>Nombre total d'articles: <strong>{order.total_items}</strong></p>
-                                    <p>Prix total: <strong>{(order.total_price + order.total_price * tva).toFixed(2)}€</strong></p>
+                                    <p>Prix total: <strong>{(Number(order.total_price) + Number(order.total_price) * tva).toFixed(2)}€</strong></p>
                                 </Link>
                             </li>
                         ))}
