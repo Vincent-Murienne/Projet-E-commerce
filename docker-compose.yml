@@ -13,11 +13,6 @@ services:
   back-end:
     build:
       context: ./Back-end
-    environment:
-      - DB_HOST=db
-      - DB_NAME=airneis_e_commerce
-      - DB_USERNAME=root
-      - DB_PASSWORD=
     ports:
       - "8080:80"
     depends_on:
