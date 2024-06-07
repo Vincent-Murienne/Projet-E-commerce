@@ -185,7 +185,7 @@ const Header = () => {
                             <div className="dropdown-burger-content">
                                 <li><Link to="/" className="hover-underline-animation">Accueil</Link></li>
                                 <li><Link to="/categories" className="hover-underline-animation">Catégories</Link></li>
-                                <li><Link to="/" className="hover-underline-animation">Contact</Link></li>
+                                <li><Link to="/contactPage" className="hover-underline-animation">Contact</Link></li>
                                 {
                                     (user.isAdmin)
                                     ?

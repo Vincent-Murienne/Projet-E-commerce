@@ -90,7 +90,7 @@ const ResetPasswordPage = () => {
             <div className='underline'></div>
           </div>
           <div className='inputs-reset'>
-            <div className='input-group'>
+            <div className='input-group-reset'>
               <input
                 type={showPassword ? 'text' : 'password'}
                 id="password"
@@ -99,11 +99,11 @@ const ResetPasswordPage = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
-              <span className="password-toggle-icon" onClick={togglePasswordVisibility}>
+              <span className="password-toggle-icon-reset" onClick={togglePasswordVisibility}>
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </span>
             </div>
-            <div className='input-group'>
+            <div className='input-group-reset'>
               <input
                 type={showConfirmPassword ? 'text' : 'password'}
                 id="confirmPassword"
@@ -112,7 +112,7 @@ const ResetPasswordPage = () => {
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
               />
-              <span className="password-toggle-icon" onClick={toggleConfirmPasswordVisibility}>
+              <span className="password-toggle-icon-reset" onClick={toggleConfirmPasswordVisibility}>
                 {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
               </span>
             </div>
