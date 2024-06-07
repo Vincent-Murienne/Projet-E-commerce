@@ -60,7 +60,7 @@
     display: inline-block;
     top: -2.3rem;
     transition: background-color 0.6s ease;
-    box-shadow: rgba(0, 0, 0, 0.3) 2px 2px 2px;;
+    box-shadow: rgba(0, 0, 0, 0.3) 2px 2px 2px;
 }
 
 .sliderProduct .active, .sliderProduct .dot:hover {
@@ -170,10 +170,77 @@
     to {opacity: 1}
 }
 
-/* Media query */
-@media (max-width: 500px) {
+/* Media queries for responsiveness */
+@media (max-width: 1200px) {
+    .sliderProduct {
+        width: 70%;
+    }
+
+    .product-text h3:first-child {
+        margin-left: 0;
+        font-size: 18px;
+    }
+
+    .product-text h3:last-child {
+        margin-top: 15px;
+    }
+
+    .product-text h2 {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 900px) {
+    .sliderProduct {
+        width: 85%;
+    }
+
+    .product-text h3:first-child {
+        font-size: 16px;
+    }
+
+    .product-text h2 {
+        font-size: 26px;
+    }
+
+    .btnProduit {
+        padding: 10px 20%;
+    }
+}
+
+@media (max-width: 600px) {
     .sliderProduct {
         width: 100%;
         height: calc(100vh - 70.63px);
+    }
+
+    .slider-and-text {
+        flex-direction: column;
+    }
+
+    .product-text {
+        padding-left: 0;
+    }
+
+    .product-text h2 {
+        font-size: 24px;
+    }
+
+    .btnProduit {
+        padding: 10px 10%;
+    }
+}
+
+@media (max-width: 400px) {
+    .product-text h2 {
+        font-size: 20px;
+    }
+
+    .product-text h3:first-child {
+        font-size: 14px;
+    }
+
+    .btnProduit {
+        padding: 10px 5%;
     }
 }
