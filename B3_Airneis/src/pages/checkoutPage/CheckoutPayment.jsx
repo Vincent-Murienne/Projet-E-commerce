@@ -144,7 +144,7 @@ const CheckoutPayment = () => {
                     const isValidDate = expDate.getTime() > currentDate.getTime();
     
                     if (isValidDate) {
-                        setExpirationDateValidState(1); // Valid state
+                        setExpirationDateValidState(1);
     
                     } else {
                         setExpirationDateValidState(2); // Invalid state, date is in the past or invalid date

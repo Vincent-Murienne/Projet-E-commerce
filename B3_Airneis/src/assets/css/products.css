@@ -74,22 +74,22 @@
 
 .slider-and-text {
     display: flex;
-    justify-content: space-between; /* Align items at both ends */
-    align-items: center; /* Center items vertically */
-    padding: 0 20px; /* Add space on the sides */
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 0 20px; 
 }
 
 .product-text {
     display: flex;
-    flex-direction: column; /* Align items vertically */
-    align-items: flex-start; /* Align items horizontally to the left */
-    margin-top: 20px; /* Add top margin to separate from "Add to Cart" button */
+    flex-direction: column; 
+    align-items: flex-start; 
+    margin-top: 20px; 
     padding-left: 3%;
 }
 
 .stock h3 {
-    color: gray; /* Text color for in-stock */
-    font-size: 5px; /* Font size for in-stock */
+    color: gray; 
+    font-size: 5px; 
     padding-left: 50px;
 }
 
@@ -105,18 +105,19 @@
 /* Button style */
 .btnProduit {
     display: flex;
-    padding: 10px 30%; /* Adjust padding as needed */
-    background-color: #FADBD8; /* Button background color */
-    color: black; /* Button text color */
+    padding: 10px 30%; 
+    background-color: #FADBD8; 
+    color: black; 
     text-decoration: none; /* Remove link underline */
     border: 4px solid black;
     font-weight: bold;
+    cursor: pointer;
 }
 
-/* Button hover style */
+
 .btnProduit:hover {
-    background-color: var(--dark-blue); /* Button background color on hover */
-    color: black; /* Button text color on hover */
+    background-color: var(--dark-blue); 
+    color: black; 
 }
 
 /* Button active style */

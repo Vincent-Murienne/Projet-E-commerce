@@ -13,7 +13,7 @@ if($isAllowed) {
         // Create new instance of class Database to interact with the database
         $db = new Database();
 
-        //Check si la quantité de chaque produits est présente dans la base de donnée
+        // Check if the quantity of each product is available in the database
         $data = $db->selectWhere("baskets",["user_id" => $json["data"]["user_id"]]);
         foreach($data as $element){
             $getProductDetails = $db->selectWhere("products", ["id" => $element["product_id"]]);
@@ -44,13 +44,13 @@ if($isAllowed) {
         
                             $insertProduct = $db->insertLotsOfProduct($tab);
     
-                            //update la quantité dans la table products
+                            // Update the quantity in the products table
                             $new_quantity = (int)$getProductDetails[0]["quantity"]-(int)$element["quantity"];
                             $updateQuantity = $db->update("products", ["quantity" => $new_quantity], $element["product_id"]);
                         }
                     }
     
-                    //Supprimer le panier de l'utilisateur
+                    // Delete the user's basket
                     $orderId = $db->deleteBasket($json["data"]["user_id"]);
                     $response["success"] = true;
                 }
