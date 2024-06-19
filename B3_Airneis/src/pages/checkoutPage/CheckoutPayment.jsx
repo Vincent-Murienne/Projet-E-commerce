@@ -235,7 +235,7 @@ const CheckoutPayment = () => {
                 }
             };
 
-            Data("panelAdmin", "insert", orderData).then(response => {
+            Data("orders", "insertOrder", orderData).then(response => {
                 if (response.success === true) {
                     ToastQueue.positive("Commande passée avec succès !", { timeout: 5000 });
                     navigate("/CheckoutConfirmer");
