@@ -44,6 +44,7 @@ const ProductPage = () => {
             ToastQueue.negative("Veuillez vous connecter pour ajouter des produits au panier.", { timeout: 5000 });
             return;
         }
+        
 
         const data = {
             table: "baskets",
