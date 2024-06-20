@@ -215,6 +215,15 @@ class Database {
         return $query1->execute();
     }
 
+    public function deleteBasket(int $user_id):bool 
+    {
+        $sql = "DELETE FROM baskets WHERE user_id = :user_id";
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue("user_id", $user_id, PDO::PARAM_INT); 
+        
+        return $query->execute();
+    }
+
     // This method will return you the id of the last inserted things into the database. Useful to get the id of the last new user (to add it to the session to prevent the user to have to re login after signing in)
     public function getLastIdInserted()
     {
@@ -394,6 +403,16 @@ class Database {
         $query->bindValue(":userId", $userId, PDO::PARAM_INT);
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function insertLotsOfProduct($data) {
+        $sql = "INSERT INTO lots_of_product (order_id, product_id, quantity) VALUES (:order_id, :product_id, :quantity)";
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue("order_id", $data["order_id"], PDO::PARAM_INT);
+        $query->bindValue("product_id", $data["product_id"], PDO::PARAM_INT);
+        $query->bindValue("quantity", $data["quantity"], PDO::PARAM_INT);
+        $query->execute();
+        return $query->rowCount();
     }
 
 }
