@@ -2,9 +2,10 @@ import { Link } from "react-router-dom";
 import { Data } from '../../services/api';
 import { useEffect, useState } from "react";
 import { ToastQueue } from "@react-spectrum/toast";
+import { useTranslation } from 'react-i18next';
 
 const TopProduits = () => {
-
+    const { t } = useTranslation();
     const [getTopProducts, setTopProducts] = useState([]);
 
     let data = {
@@ -28,14 +29,14 @@ const TopProduits = () => {
         <>
             <section className="top-produits">
 
-                <h1 className="heading">Les <span>Highlanders</span> du moment</h1>
+                <h1 className="heading">{t('titleTopProduits')}</h1>
 
                 <div className="box-container">
                     {getTopProducts && getTopProducts.map((product) => (
                         <div key={product.product_id} className="box">
                         <img src={`/img/${product.image_name}`} alt=""/>
                         <h3>{product.product_name}</h3>
-                        <Link to="" className="btn">Voir plus</Link>
+                        <Link to="" className="btn">{t('seeMore')}</Link>
                     </div>
                     ))}
                 </div>

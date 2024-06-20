@@ -30,6 +30,7 @@ const ProductSearchPage = () => {
   };
 
   useEffect(() => {
+    console.log("test");
     Data("searchProduct", "getProductByPriority", { "name": searchQuery, "table": "products" }).then(response => {
       if (response.success === true) {
         setProduits(response.data);
@@ -38,14 +39,9 @@ const ProductSearchPage = () => {
         ToastQueue.negative(response.error, {timeout: 5000});
       }
     });
-  }, [searchQuery]);
+  }, []);
 
-  // J'aimerai que cette fonction soit appelée lorsque l'utilisateur clique sur le bouton de filtrage
-  // les informations de filtrage sont récupérées dans le composant SearchPage
-  // et sont envoyées à la fonction handleSearch
-  // handleSearch doit ensuite appeler la fonction Data pour récupérer les produits filtrés
-  // et les afficher dans la liste des produits
-
+  /* HandleSearch à mettre dans SearchPage*/
   const handleSearch = (searchData) => {
     console.log(searchData);
     Data("searchProduct", "getProductByFilter", searchData).then(response => {
@@ -62,7 +58,6 @@ const ProductSearchPage = () => {
   return (
     <>
       {filtering && <div className="overlay"></div>}
-      {/* ProductPage */}
       <section className="categoriePage">
         <div className={`product-page ${filtering ? 'inactive' : ''}`}>
           {showResults ? (
@@ -107,7 +102,6 @@ const ProductSearchPage = () => {
           )}
         </div>
   
-        {/* SearchPage */}
         {showSearchPage && (
           <div className="rectangle">
             <Grid

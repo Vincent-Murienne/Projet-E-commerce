@@ -1,5 +1,4 @@
 <?php
-
 require_once "../../config/security.php";
 require_once "../../config/db.php";
 
@@ -11,14 +10,14 @@ if ($isAllowed) {
         $db = new Database();
 
         $email = $json["email"];
-        $password = hash("sha512", $json["password"]);
+        $password = $json["password"]; // Ne pas hacher le mot de passe ici
 
         // Récupérer l'utilisateur avec l'email fourni
         $user = $db->selectWhere("users", ["email" => $email], false, null);
 
         if ($user) {
-            // Vérifier si le mot de passe haché correspond
-            if ($password == $user[0]["password"]) {
+            // Vérifier si le mot de passe correspond
+            if (password_verify($password, $user[0]["password"])) {
                 // Mot de passe correct, connexion réussie
                 $response["success"] = true;
                 $response["user"] = $user;
@@ -40,3 +39,4 @@ if ($isAllowed) {
 }
 
 echo json_encode($response);
+?>

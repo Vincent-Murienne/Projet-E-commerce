@@ -126,13 +126,13 @@ const BasketPage = () => {
                 <div className="total-price">Prix total : {totalPrice.toFixed(2)} €</div>
                 <div className="tva-price">TVA : {(totalPrice.toFixed(2) * tva).toFixed(2)} €</div>
                 <div
-                    className={`checkout-button ${!userId ? 'disabled' : ''}`}
+                    className={`checkout-button ${!userId || products.length === 0 ? 'disabled' : ''}`}
                     onClick={() => {
-                        if (userId) {
+                        if (userId && products.length > 0) {
                             handleCheckout();
                         }
                     }}
-                    disabled={!userId}
+                    disabled={!userId || products.length === 0}
                 >
                     Passer la commande
                 </div>

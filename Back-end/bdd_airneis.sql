@@ -227,13 +227,13 @@ INSERT INTO images (product_id, category_id, name, `order`) VALUES
 (22, null, '22-3-Poubelle de bureau en acier inoxydable.jpg', null);
 
 INSERT INTO orders (date, user_id, order_state) VALUES
-(STR_TO_DATE("11/05/2024", "%d/%m/%Y"), 1, "En cours"),
-(STR_TO_DATE("10/05/2024", "%d/%m/%Y"), 1, "En cours"),
-(STR_TO_DATE("05/05/2024", "%d/%m/%Y"), 1, "Livré"),
-(STR_TO_DATE("05/05/2024", "%d/%m/%Y"), 1, "Livré"),
-(STR_TO_DATE("05/05/2024", "%d/%m/%Y"), 1, "Livré"),
-(STR_TO_DATE("28/04/2024", "%d/%m/%Y"), 1, "Livré"),
-(STR_TO_DATE("28/04/2024", "%d/%m/%Y"), 1, "Livré");
+(STR_TO_DATE("11/05/2024", "%d/%m/%Y"), 1, "EN COURS"),
+(STR_TO_DATE("10/05/2024", "%d/%m/%Y"), 1, "EN COURS"),
+(STR_TO_DATE("05/05/2024", "%d/%m/%Y"), 1, "LIVRÉE"),
+(STR_TO_DATE("05/05/2024", "%d/%m/%Y"), 1, "LIVRÉE"),
+(STR_TO_DATE("05/05/2024", "%d/%m/%Y"), 1, "LIVRÉE"),
+(STR_TO_DATE("28/04/2024", "%d/%m/%Y"), 1, "LIVRÉE"),
+(STR_TO_DATE("28/04/2024", "%d/%m/%Y"), 1, "LIVRÉE");
 
 INSERT INTO lots_of_product (order_id, product_id, quantity) VALUES
 (1, 1, 2),

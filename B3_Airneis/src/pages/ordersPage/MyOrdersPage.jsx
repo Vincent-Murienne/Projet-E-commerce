@@ -15,8 +15,13 @@ const MyOrdersPage = () => {
         const userData = pullData("user");
         if (userData) {
             setUserId(userData.id);
+        }
+    }, [pullData]);
+
+    useEffect(() => {
+        if (userId) {
             const OrdersData = {
-                "user_id": userData.id
+                "user_id": userId
             };
 
             Data("orders", "getAllOrdersByUser", OrdersData).then(response => {
@@ -28,7 +33,7 @@ const MyOrdersPage = () => {
                 }
             });
         }
-    }, []);
+    }, [userId]);
 
     const groupOrdersByYear = (orders) => {
         const ordersByYear = {};

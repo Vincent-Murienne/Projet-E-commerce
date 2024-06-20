@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate} from 'react-router-dom';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { ToastQueue } from '@react-spectrum/toast';
+import { fullNameRegex, emailRegex, passwordRegex } from '../../utils/regexes';
 
 const ResetPasswordPage = () => {
   const [password, setPassword] = useState('');
@@ -12,6 +14,9 @@ const ResetPasswordPage = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const { token } = useParams(); // Récupérer le token de l'URL
   const navigate = useNavigate();
+  const [errors, setErrors] = useState({
+    password: ''
+  });
 
 
   useEffect(() => {
@@ -53,8 +58,17 @@ const ResetPasswordPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrors({
+      password: '',
+    });
+
+    if (!passwordRegex.test(password)) {
+      setErrors(prevErrors => ({ ...prevErrors, password: 'Le mot de passe doit comporter au moins 12 caractères alphanumériques' }));
+      return;
+    }
+
     if (password !== confirmPassword) {
-        alert('Les mots de passe ne correspondent pas.');
+        ToastQueue.negative("Les mots de passe ne correspondent pas.", { timeout: 5000 });
         return;
     }
 
@@ -70,14 +84,14 @@ const ResetPasswordPage = () => {
 
         const data = await response.json();
         if (data.success) {
-            alert('Votre mot de passe a été modifié avec succès.');
+            ToastQueue.positive("Votre mot de passe a été modifié avec succès.", { timeout: 5000 });
             navigate('/login');
         } else {
             alert(data.message);
         }
     } catch (error) {
         console.error('Error:', error);
-        alert('Une erreur est survenue lors de la modification du mot de passe.');
+        ToastQueue.negative("Une erreur est survenue lors de la modification du mot de passe.", { timeout: 5000 });
     }
   };
 
@@ -116,6 +130,7 @@ const ResetPasswordPage = () => {
                 {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
               </span>
             </div>
+            {errors.password && <div className="error-message">{errors.password}</div>}
           </div>
           <br />
           <div className="submit-container-reset">

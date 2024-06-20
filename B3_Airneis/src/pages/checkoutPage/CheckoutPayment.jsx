@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate, useLocation  } from "react-router-dom";
 import { Data } from "../../services/api";
 import { UserContext } from '../../context/UserProvider';
@@ -178,7 +178,7 @@ const CheckoutPayment = () => {
             getExpirationDateValidState === 1 &&
             getCvvValidState === 1 
         );
-      };
+    };
 
 
     
@@ -187,7 +187,7 @@ const CheckoutPayment = () => {
         if (!isFormValid()) {
             ToastQueue.negative("Veuillez remplir correctement tous les champs.", { timeout: 5000 });
             return;
-          }
+        }
         if (getSelectedPayment === "0") {
             if (validateForm()) {
                 let data = {
@@ -231,17 +231,27 @@ const CheckoutPayment = () => {
                     "user_id": getUserId,
                     "address_id": getSelectedAddressId,
                     "payment_id": getSelectedPayment,
-                    "order_state": "LIVRÉE"
+                    "order_state": "EN COURS"
                 }
             };
-
+    
             Data("panelAdmin", "insert", orderData).then(response => {
                 if (response.success === true) {
                     ToastQueue.positive("Commande passée avec succès !", { timeout: 5000 });
                     navigate("/CheckoutConfirmer");
-                } else {
-                    ToastQueue.negative(response.error, { timeout: 5000 });
-                }
+                    fetch('updateOrderByStatus.php')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Erreur lors de la mise à jour du statut de la commande');
+                        }
+                        console.log('Statut de la commande mis à jour avec succès');
+                    })
+                    .catch(error => {
+                        console.error('Erreur :', error);
+                    });
+            } else {
+                ToastQueue.negative(response.error, { timeout: 5000 });
+            }
             });
         } else {
             ToastQueue.negative("Veuillez sélectionner une adresse de livraison et un mode de paiement.", { timeout: 5000 });
