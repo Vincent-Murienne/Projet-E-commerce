@@ -34,10 +34,10 @@ const TopProduits = () => {
                 <div className="box-container">
                     {getTopProducts && getTopProducts.map((product) => (
                         <div key={product.product_id} className="box">
-                        <img src={`/img/${product.image_name}`} alt=""/>
-                        <h3>{product.product_name}</h3>
-                        <Link to="" className="btn">{t('seeMore')}</Link>
-                    </div>
+                            <img src={`/img/${product.image_name}`} alt=""/>
+                            <h3>{product.product_name}</h3>
+                            <Link to={`/product/${product.product_id}`} className="btn">{t('seeMore')}</Link>
+                        </div>
                     ))}
                 </div>
             </section>

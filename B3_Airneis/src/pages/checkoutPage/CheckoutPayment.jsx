@@ -144,7 +144,7 @@ const CheckoutPayment = () => {
                     const isValidDate = expDate.getTime() > currentDate.getTime();
     
                     if (isValidDate) {
-                        setExpirationDateValidState(1); // Valid state
+                        setExpirationDateValidState(1);
     
                     } else {
                         setExpirationDateValidState(2); // Invalid state, date is in the past or invalid date
@@ -234,8 +234,8 @@ const CheckoutPayment = () => {
                     "order_state": "EN COURS"
                 }
             };
-    
-            Data("panelAdmin", "insert", orderData).then(response => {
+
+            Data("orders", "insertOrder", orderData).then(response => {
                 if (response.success === true) {
                     ToastQueue.positive("Commande passée avec succès !", { timeout: 5000 });
                     navigate("/CheckoutConfirmer");
