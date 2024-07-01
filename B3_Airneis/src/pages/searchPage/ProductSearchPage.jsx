@@ -41,7 +41,6 @@ const ProductSearchPage = () => {
     });
   }, []);
 
-  /* HandleSearch à mettre dans SearchPage*/
   const handleSearch = (searchData) => {
     console.log(searchData);
     Data("searchProduct", "getProductByFilter", searchData).then(response => {

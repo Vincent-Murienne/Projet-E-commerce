@@ -13,6 +13,7 @@
   "dependencies": {
     "@adobe/react-spectrum": "^3.34.1",
     "@react-spectrum/toast": "^3.0.0-beta.10",
+    "@stripe/stripe-js": "^4.0.0",
     "axios": "^1.6.8",
     "echarts": "^5.5.0",
     "i18next": "^23.11.5",

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import { Data } from '../../services/api';
 import { ToastQueue } from '@react-spectrum/toast';
 

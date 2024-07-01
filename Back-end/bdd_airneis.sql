@@ -270,3 +270,11 @@ INSERT INTO `materials_list` (`id`, `name`) VALUES
 (4, 'Bronze'),
 (5, 'Papier'),
 (6, 'Coton');
+
+INSERT INTO `products_materials` (`product_id`, `materials_list_id`) VALUES
+(7, 1),
+(1, 5),
+(2, 1),
+(2, 6),
+(3, 2),
+(4, 2);

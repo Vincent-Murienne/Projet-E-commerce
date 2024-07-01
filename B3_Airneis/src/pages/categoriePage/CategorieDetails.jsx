@@ -1,8 +1,11 @@
 import { Link, useParams } from "react-router-dom"; // Importing useParams to retrieve URL parameters
 import { Data } from '../../services/api';
 import { useEffect, useState } from "react";
+import { ToastQueue } from "@react-spectrum/toast";
+import { useTranslation } from 'react-i18next';
 
 const CategorieDetails = () => {
+    const { t } = useTranslation();
     const { categoryId } = useParams(); // Retrieving the category ID from URL parameters
     const [getTopProducts, setTopProducts] = useState([]);
     const [getCategoryImage, setCategoryImage] = useState([]);
@@ -36,16 +39,12 @@ const CategorieDetails = () => {
             <section className="categoriePage">
                 <img src={`/img/${getCategoryImage}`} alt="Image de catégorie" className="categoriePage-image"/>
                 <div className="description-centre">
-                    <h1>Bienvenue dans la boutique "Àirneis" de la catégorie {getCategoryName}:</h1>
-                    <p>
-                        Quels que soient vos préférences, vous trouverez des produits originaux et colorés qui rehausseront votre décoration.
-                    </p>
-                    <p>
-                        Passez commande dès maintenant sur notre site et recevez vos {getCategoryName.toLowerCase()} chez vous !
-                    </p>
+                    <h1>{t('categorieTitle')} {getCategoryName}:</h1>
+                    <p>{t('categorieDescription1')}</p>
+                    <p>{t('categorieDescription2')} {getCategoryName.toLowerCase()} !</p>
                 </div>
                 <section className="top-produits">
-                    <h1 className="heading">Découvrez ici notre gamme de {getCategoryName.toLowerCase()} :</h1>
+                    <h1 className="heading">{t('highlightedCategorieTitle')} {getCategoryName.toLowerCase()} :</h1>
                     <div className="box-container">
                         {getTopProducts && getTopProducts.map((product) => (
                             <div key={product.id} className="box" >
@@ -54,7 +53,7 @@ const CategorieDetails = () => {
                                     <h4>{product.name}</h4>
                                     <h4>{product.price}€</h4>
                                 </div>
-                                <Link to={`/product/${product.id}`} className="btn">Voir plus</Link>                            </div>
+                                <Link to={`/product/${product.id}`} className="btn">{t('seeMore')}</Link>                            </div>
                         ))}
                     </div>
                 </section>

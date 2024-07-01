@@ -18,6 +18,7 @@ const SearchPage = ({ onSearch }) => {
     const [materials, setMaterials] = useState([]);
     const [categories, setCategories] = useState([]);
     const [enStock, setEnStock] = useState(false);
+    const [produits, setProduits] = useState([]);
 
     const handleMinPriceChange = (value) => {
         setMinPrice(value);
@@ -30,17 +31,32 @@ const SearchPage = ({ onSearch }) => {
     const handleEnStockChange = (value) => {
         setEnStock(value);
     };
-
     const handleSearch = () => {
+        const selectedMaterials = materials.filter(material => material.isSelected);
+        const selectedCategories = categories.filter(category => category.isSelected);
+      
         const searchData = {
-            prix_min: minPrice,
-            prix_max: maxPrice,
-            materiaux: materials.map(material => material.id),
-            categories: categories.map(category => category.id),
-            en_stock: enStock ? 1 : 0
+          prix_min: minPrice || '',
+          prix_max: maxPrice || '',
+          materiaux: selectedMaterials.length > 0 ? selectedMaterials.map(material => material.id) : [],
+          categories: selectedCategories.length > 0 ? selectedCategories.map(category => category.id) : [],
+          en_stock: enStock ? 1 : 0
         };
+      
         onSearch(searchData);
-    };
+      };
+      
+    /*const handleSearch = (searchData) => {
+        console.log(searchData);
+        Data("searchProduct", "getProductByFilter", searchData).then(response => {
+        if (response.success === true) {
+            setProduits(response.data);
+            console.log("tqt", produits);
+        } else {
+            ToastQueue.negative(response.error, {timeout: 5000});
+        }
+        });
+    }*/
 
     let dataCategories = {
         "table": "categories"
@@ -52,20 +68,21 @@ const SearchPage = ({ onSearch }) => {
 
     useEffect(() => {
         Data("panelAdmin", "getAllFromTable", dataCategories).then(response => {
-            if (response.success === true) {
-                setCategories(response.data);
-            } else {
-                ToastQueue.negative(response.error, {timeout: 5000});
-            }
+          if (response.success === true) {
+            setCategories(response.data.map(category => ({ ...category, isSelected: false })));
+          } else {
+            ToastQueue.negative(response.error, {timeout: 5000});
+          }
         });
+      
         Data("panelAdmin", "getAllFromTable", dataMaterials).then(response => {
-            if (response.success === true) {
-                setMaterials(response.data);
-            } else {
-                ToastQueue.negative(response.error, {timeout: 5000});
-            }
+          if (response.success === true) {
+            setMaterials(response.data.map(material => ({ ...material, isSelected: false })));
+          } else {
+            ToastQueue.negative(response.error, {timeout: 5000});
+          }
         });
-    }, []); // Pass an empty array as dependency to useEffect to execute it once after initial render
+      }, []);// Pass an empty array as dependency to useEffect to execute it once after initial render
 
     return (
         <>

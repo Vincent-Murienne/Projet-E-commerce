@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom"; 
+import { Link} from "react-router-dom"; 
 import { Data } from '../../services/api';
 import { useEffect, useState } from "react";
 import { ToastQueue } from "@react-spectrum/toast";
@@ -7,8 +7,8 @@ import { ToastQueue } from "@react-spectrum/toast";
 const CategorieList = () => {
 
     const [categories, setCategories] = useState([]);
-  
-      useEffect(() => {
+
+    useEffect(() => {
         Data("category", "getAllCategories", { "table": "categories" }).then(response => {
             if (response.success === true)
             {

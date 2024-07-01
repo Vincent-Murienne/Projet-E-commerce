@@ -2,6 +2,8 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import frTranslation from '../locales/fr.json';
 import enTranslation from '../locales/en.json';
+import esTranslation from '../locales/es.json';
+import ruTranslation from '../locales/ru.json';
 import arTranslation from '../locales/ar.json';
 import heTranslation from '../locales/he.json';
 
@@ -14,6 +16,12 @@ i18n
             },
             en: {
                 translation: enTranslation
+            },
+            es: {
+                translation: esTranslation
+            },
+            ru: {
+                translation: ruTranslation
             },
             ar: {
                 translation: arTranslation

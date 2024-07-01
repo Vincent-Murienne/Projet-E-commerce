@@ -1,52 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useState} from 'react';
 import { useParams, useNavigate} from 'react-router-dom';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { ToastQueue } from '@react-spectrum/toast';
-import { fullNameRegex, emailRegex, passwordRegex } from '../../utils/regexes';
+import { passwordRegex } from '../../utils/regexes';
 
 const ResetPasswordPage = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [isValidToken, setIsValidToken] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [errorMessage, setErrorMessage] = useState('');
   const { token } = useParams(); // Récupérer le token de l'URL
   const navigate = useNavigate();
   const [errors, setErrors] = useState({
     password: ''
   });
-
-
-  useEffect(() => {
-    const verifyToken = async () => {
-      try {
-        const response = await fetch('http://localhost:8000/actions/loginRegister/verifyToken.php', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ token }),
-        });
-
-        const data = await response.json();
-
-        if (data.success) {
-          setIsValidToken(true);
-        } else {
-          setErrorMessage(data.message || 'Le token est invalide ou a expiré.');
-          navigate('/login'); // Rediriger l'utilisateur si le token n'est pas valide
-        }
-      } catch (error) {
-        setErrorMessage('Une erreur est survenue lors de la vérification du token.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    verifyToken();
-  }, [token, navigate]);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -87,7 +54,7 @@ const ResetPasswordPage = () => {
             ToastQueue.positive("Votre mot de passe a été modifié avec succès.", { timeout: 5000 });
             navigate('/login');
         } else {
-            alert(data.message);
+          ToastQueue.negative("Lien expiré ou invalide.", { timeout: 5000 });
         }
     } catch (error) {
         console.error('Error:', error);
