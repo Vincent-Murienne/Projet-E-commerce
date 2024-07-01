@@ -19,8 +19,7 @@ const ProductPage = () => {
                 const response = await Data("product", "getProductDetail", { table: "products", id: productId });
                 if (response.success === true) {
                     setProduct(response.data[0]);
-                    setCartCount(1);
-                    
+                    setCartCount(1);           
                 } else {
                     ToastQueue.negative(response.error, {timeout: 5000});
                 }
@@ -44,18 +43,12 @@ const ProductPage = () => {
             ToastQueue.negative("Veuillez vous connecter pour ajouter des produits au panier.", { timeout: 5000 });
             return;
         }
-        
-
         const data = {
-            table: "baskets",
-            data: {
-                user_id: user.id,
-                product_id: productId,
-                quantity: cartCount
-            }
+            user_id: user.id,
+            product_id: productId,
+            quantity: cartCount           
         };
-
-        Data("panelAdmin", "insert", data).then(response => {
+        Data("basket", "insertBasket", data).then(response => {
             if (response.success === true) {
                 ToastQueue.positive("L'élément a bien été ajouté au panier.", { timeout: 5000 });
                 setCartCount(1);

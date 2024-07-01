@@ -51,8 +51,9 @@ if($isAllowed) {
                     }
     
                     // Delete the user's basket
-                    $orderId = $db->deleteBasket($json["data"]["user_id"]);
+                    $db->deleteBasket($json["data"]["user_id"]);
                     $response["success"] = true;
+                    $response["order_id"] = $orderId["LAST_INSERT_ID()"];
                 }
             }
         }

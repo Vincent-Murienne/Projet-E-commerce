@@ -13,7 +13,7 @@ if ($isAllowed) {
         $db = new Database();
 
         // Perform search using the defined criteria
-        $searchResults = $db->searchProductNameWithPriority($json["name"]);
+        $searchResults = $db->searchProductNameWithPriority(htmlspecialchars($json["name"]));
 
         // Check if any results are found
         if ($searchResults !== null) {

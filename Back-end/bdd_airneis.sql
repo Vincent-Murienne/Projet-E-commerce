@@ -256,12 +256,8 @@ INSERT INTO lots_of_product (order_id, product_id, quantity) VALUES
 (7, 11, 1);
 
 INSERT INTO `addresses` (`user_id`, `address_name`, `first_name`, `last_name`, `address`, `city`, `zip_code`, `region`, `country`, `phone_number`) VALUES
-(2, 'Maison de neri', 'neri', 'her', '123 Rue de la Liberté', 'Paris', 75001, 'Île-de-France', 'France', 723456789),
-(2, 'Maison de neri 2', 'neri', 'her', '456 Business Boulevard', 'Paris', 75002, 'Île-de-France', 'France', 723456789);
-
-INSERT INTO `payments` (`user_id`, `card_name`, `card_owner`, `card_number`, `expiration_date`, `cvv`) VALUES 
-(2, 'Mastercard', 'Neriman Her', '1111111111111234', TIMESTAMP('2026-05-01'), 123),
-(2, 'Visa', 'Neriman Her', '1111111111115364', TIMESTAMP('2025-09-01'), 456);
+(2, 'Maison de neri', 'neri', 'her', '123 Rue de la Liberté', 'Paris', 75001, 'Île-de-France', 'France', 0723456789),
+(2, 'Maison de neri 2', 'neri', 'her', '456 Business Boulevard', 'Paris', 75002, 'Île-de-France', 'France', 0723456789);
 
 INSERT INTO `materials_list` (`id`, `name`) VALUES
 (1, 'Bois'),

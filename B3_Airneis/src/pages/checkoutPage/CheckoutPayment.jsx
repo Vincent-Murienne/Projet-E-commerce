@@ -237,8 +237,10 @@ const CheckoutPayment = () => {
 
             Data("orders", "insertOrder", orderData).then(response => {
                 if (response.success === true) {
+                    const orderId = response.order_id;
+                    console.log('Order ID:', orderId);
                     ToastQueue.positive("Commande passée avec succès !", { timeout: 5000 });
-                    navigate("/CheckoutConfirmer");
+                    navigate(`/CheckoutConfirmer/${orderId}`);
                 } else {
                     ToastQueue.negative(response.error, { timeout: 5000 });
                 }
