@@ -27,6 +27,8 @@ public class HomeFragment extends Fragment {
 
         View inf = (View) inflater.inflate(R.layout.fragment_home, container, false);
 
+        apiManager = new APIManager(getActivity().getApplicationContext());
+
         APIManager.VolleyResponseListener listener = new APIManager.VolleyResponseListener() {
             @Override
             public void onError(String message) {
@@ -39,7 +41,6 @@ public class HomeFragment extends Fragment {
             }
         };
 
-        apiManager = new APIManager(getActivity().getApplicationContext());
         JSONObject data = new JSONObject();
         try {
             data.put("table", "categories");
