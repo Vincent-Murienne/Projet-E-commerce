@@ -121,7 +121,7 @@ const router = createBrowserRouter([
                 element: <CheckoutPayment/>
             },
             {
-                path: "checkoutConfirmer", 
+                path: "checkoutConfirmer/:orderId", 
                 element: <CheckoutConfirmer/>
             },
             {
