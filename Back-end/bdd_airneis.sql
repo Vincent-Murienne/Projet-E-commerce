@@ -1,6 +1,3 @@
-CREATE DATABASE airneis_e_commerce;
-USE airneis_e_commerce;
-
 CREATE TABLE `users` (
   `id` integer PRIMARY KEY AUTO_INCREMENT,
   `full_name` varchar(100),
