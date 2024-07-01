@@ -12,25 +12,14 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Properties;
-import java.util.Scanner;
 
 public class APIManager {
     public RequestQueue queue;
     private String apiKey = "fizehyvsdbijojiop83Y9049FIEJO:!lI3UFEIHZofez082";
     private String baseURL = "http://10.0.2.2:8000"; // 10.0.2.2 matches localhost from the emulator context
 
-    public APIManager(Context context) throws IOException {
+    public APIManager(Context context) {
         this.queue = Volley.newRequestQueue(context);
-
-        //SetVariables();
-
-        Properties properties = new Properties();
-        properties.load(getClass().getResourceAsStream("./.env"));
-        System.out.println(properties.getProperty("API_KEY"));
     }
 
     public interface VolleyResponseListener {
@@ -57,12 +46,5 @@ public class APIManager {
         });
 
         queue.add(jsonObjectRequest);
-    }
-
-    public void SetVariables() throws IOException {
-        /*File file = new File(".env");
-        Scanner sc = new Scanner(file);
-        System.out.println(sc.next());*/
-
     }
 }

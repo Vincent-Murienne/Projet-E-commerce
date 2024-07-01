@@ -39,11 +39,7 @@ public class HomeFragment extends Fragment {
             }
         };
 
-        try {
-            apiManager = new APIManager(getActivity().getApplicationContext());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        apiManager = new APIManager(getActivity().getApplicationContext());
         JSONObject data = new JSONObject();
         try {
             data.put("table", "categories");
