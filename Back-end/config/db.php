@@ -240,7 +240,6 @@ class Database {
         return $query->fetchAll(PDO::FETCH_ASSOC);       
     }
 
-
     public function getProductSimilaire($id)
     {
         $sql = "SELECT categories.name AS category_name, products.*, product_image.category_id AS product_image_category_id, product_image.name AS product_image_name, category_image.category_id AS category_image_category_id, category_image.name AS category_image_name FROM products INNER JOIN (SELECT product_id, MIN(id) AS min_image_id FROM images GROUP BY product_id) AS first_image ON products.id = first_image.product_id INNER JOIN images AS product_image ON first_image.min_image_id = product_image.id LEFT JOIN images AS category_image ON products.category_id = category_image.category_id AND category_image.category_id = :id LEFT JOIN categories ON products.category_id = categories.id WHERE products.category_id = :id ORDER BY products.quantity DESC";

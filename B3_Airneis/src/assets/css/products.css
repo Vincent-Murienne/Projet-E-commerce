@@ -161,9 +161,9 @@
 }
 
 .quantity-button.disabled {
-    background-color: #f0f2f2; /* Gray background color for disabled buttons */
-    color: #ccc; /* Gray text color for disabled buttons */
-    cursor: not-allowed; /* Not-allowed cursor to indicate button is disabled */
+    background-color: #f0f2f2;  
+    color: #ccc; 
+    cursor: not-allowed; 
 }
 
 @keyframes fade {

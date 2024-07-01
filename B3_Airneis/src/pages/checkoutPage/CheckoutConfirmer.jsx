@@ -6,6 +6,7 @@ import { ToastQueue } from "@react-spectrum/toast";
 const CheckoutConfirmer = () => {
     const { pullData } = useContext(UserContext);
     const [userId, setUserId] = useState(undefined);
+    const { orderId } = useParams();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -23,7 +24,7 @@ const CheckoutConfirmer = () => {
             <form>
                 <h1>Commande effectuée</h1>
                 <h4>Merci de votre achat !</h4>
-                <h4>Votre commande a bien été enregistrée sous le numéro XXXXXX. Vous pouvez suivre son état depuis votre espace client.</h4>
+                <h4>Votre commande a bien été enregistrée sous le numéro {orderId}. Vous pouvez suivre son état depuis votre espace client.</h4>
                 <Link to="/" className="btnProduit">Continuer mes achats</Link> 
             </form> 
         </div>

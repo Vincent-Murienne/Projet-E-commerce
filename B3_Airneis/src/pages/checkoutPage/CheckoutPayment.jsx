@@ -237,21 +237,13 @@ const CheckoutPayment = () => {
 
             Data("orders", "insertOrder", orderData).then(response => {
                 if (response.success === true) {
+                    const orderId = response.order_id;
+                    console.log('Order ID:', orderId);
                     ToastQueue.positive("Commande passée avec succès !", { timeout: 5000 });
-                    navigate("/CheckoutConfirmer");
-                    fetch('updateOrderByStatus.php')
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Erreur lors de la mise à jour du statut de la commande');
-                        }
-                        console.log('Statut de la commande mis à jour avec succès');
-                    })
-                    .catch(error => {
-                        console.error('Erreur :', error);
-                    });
-            } else {
-                ToastQueue.negative(response.error, { timeout: 5000 });
-            }
+                    navigate(`/CheckoutConfirmer/${orderId}`);
+                } else {
+                    ToastQueue.negative(response.error, { timeout: 5000 });
+                }
             });
         } else {
             ToastQueue.negative("Veuillez sélectionner une adresse de livraison et un mode de paiement.", { timeout: 5000 });
