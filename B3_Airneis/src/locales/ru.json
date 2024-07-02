@@ -19,7 +19,7 @@
     "yourBasket": "Ваша корзина",
     "quantity": "Количество",
     "price": "Цена",
-    "soldOut": "Нет в наличии",
+    "notEnoughStock": "Недостаточный запас",
     "delete": "Удалить",
     "totalPrice": "Общая цена",
     "VAT": "НДС",

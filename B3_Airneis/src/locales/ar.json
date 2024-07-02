@@ -19,7 +19,7 @@
     "yourBasket": "سلة التسوق",
     "quantity": "الكمية",
     "price": "السعر",
-    "soldOut": "نفذ المخزون",
+    "notEnoughStock": "مخزون غير كاف",
     "delete": "حذف",
     "totalPrice": "السعر الكلي",
     "VAT": "ضريبة القيمة المضافة",

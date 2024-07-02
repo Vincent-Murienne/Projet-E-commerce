@@ -19,7 +19,7 @@
     "yourBasket": "הסל שלך",
     "quantity": "כמות",
     "price": "מחיר",
-    "soldOut": "אזל המלאי",
+    "notEnoughStock": "מלאי לא מספיק",
     "delete": "מחק",
     "totalPrice": "מחיר סופי",
     "VAT": "מע\"מ",

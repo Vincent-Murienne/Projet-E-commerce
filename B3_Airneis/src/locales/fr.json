@@ -19,7 +19,7 @@
     "yourBasket": "Votre panier",
     "quantity": "Quantité",
     "price": "Prix",
-    "soldOut": "Stock épuisé",
+    "notEnoughStock": "Stock insuffisant",
     "delete": "Supprimer",
     "totalPrice": "Prix total",
     "VAT": "TVA",

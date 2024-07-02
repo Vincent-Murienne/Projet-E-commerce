@@ -19,7 +19,7 @@
     "yourBasket": "Your basket",
     "quantity": "Quantity",
     "price": "Price",
-    "soldOut": "Sold out",
+    "notEnoughStock": "Insufficient stock",
     "delete": "Delete",
     "totalPrice": "Total price",
     "VAT": "VAT",

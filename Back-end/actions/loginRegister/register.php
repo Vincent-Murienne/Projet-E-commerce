@@ -6,9 +6,9 @@ require_once "../../config/db.php";
 $response["success"] = false;
 
 if ($isAllowed) {
-    // Vérification si tous les champs requis sont présents
+    // Check if all needed informations are set
     if (isset($json["full_name"]) && isset($json["email"]) && isset($json["password"])) {
-        // Vérification si tous les champs requis sont non vides
+        // Check if all informations aren't empty
         if (!empty($json["full_name"]) && !empty($json["email"]) && !empty($json["password"])) {
             $db = new Database();
 

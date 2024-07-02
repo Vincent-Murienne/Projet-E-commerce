@@ -19,7 +19,7 @@
     "yourBasket": "Tu cesta",
     "quantity": "Cantidad",
     "price": "Precio",
-    "soldOut": "Agotado",
+    "notEnoughStock": "Stock insuficiente",
     "delete": "Eliminar",
     "totalPrice": "Precio total",
     "VAT": "IVA",

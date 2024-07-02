@@ -10,19 +10,19 @@ if ($isAllowed) {
         $db = new Database();
 
         $email = $json["email"];
-        $password = $json["password"]; // Ne pas hacher le mot de passe ici
+        $password = hash("sha512", $json["password"]);
 
-        // Récupérer l'utilisateur avec l'email fourni
+        // Check if user exist
         $user = $db->selectWhere("users", ["email" => $email], false, null);
 
         if ($user) {
-            // Vérifier si le mot de passe correspond
-            if (password_verify($password, $user[0]["password"])) {
-                // Mot de passe correct, connexion réussie
+            // Check if passwords matches
+            if ($password == $user[0]["password"]) {
+                // passwords matches
                 $response["success"] = true;
                 $response["user"] = $user;
             } else {
-                // Mot de passe incorrect
+                // passwords doesn't match
                 $response["error"] = "Nom d'utilisateur/email ou mot de passe incorrect.";
             }
         } else {

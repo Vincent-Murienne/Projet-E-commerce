@@ -71,19 +71,19 @@ const CheckoutPayment = () => {
             "id": userId
         };
 
-        Data("panelAdmin", "getAddresses", paymentData).then(response => {
+        Data("panelAdmin", "getCheckoutData", paymentData).then(response => {
             if (response.success === true) {
-                setUserPayment(response.data);  
-                if (response.data.length === 0) {
-                    setSelectedPayment("0");
-                } else {
+                if (response.CheckoutDataEmpty === false) {
+                    setUserPayment(response.data);
                     setSelectedPayment(response.data[0].id.toString());  
-                setCardName(response.data[0].card_name);           
-                setCardOwner(response.data[0].card_owner);
-                setCardNumber(response.data[0].card_number);
-                setExpirationDate(response.data[0].expiration_date);
-                setCvv(response.data[0].cvv);
-                setUserId(userId);
+                    setCardName(response.data[0].card_name);           
+                    setCardOwner(response.data[0].card_owner);
+                    setCardNumber(response.data[0].card_number);
+                    setExpirationDate(response.data[0].expiration_date);
+                    setCvv(response.data[0].cvv);
+                    setUserId(userId);
+                } else {
+                    setSelectedPayment("0");
                 }
             } else {
                 ToastQueue.negative(response.error, {timeout: 5000});
@@ -189,48 +189,36 @@ const CheckoutPayment = () => {
             return;
         }
         if (getSelectedPayment === "0") {
-            if (validateForm()) {
-                let data = {
-                    "table": "payments",
-                    "data": {
-                        "user_id": getUserId,
-                        "card_name": getCardName,
-                        "card_owner": getCardOwner,
-                        "card_number": getCardNumber,
-                        "expiration_date": getExpirationDate,
-                        "cvv": getCvv,
-                    }
-                };
+            let data = {
+                "table": "payments",
+                "data": {
+                    "user_id": getUserId,
+                    "card_name": getCardName,
+                    "card_owner": getCardOwner,
+                    "card_number": getCardNumber,
+                    "expiration_date": getExpirationDate,
+                    "cvv": getCvv,
+                }
+            };
 
-                Data("panelAdmin", "insert", data).then(response => {
-                    if (response.success === true) {
-                        ToastQueue.positive("Méthode de paiement ajoutée avec succès !", { timeout: 5000 });
-                        setPaymentAdded(true); 
-                        window.location.reload();
-                        navigate("/checkoutPayment");
-                    } else {
-                        ToastQueue.negative(response.error, { timeout: 5000 });
-                    }
-                });
-            } else {
-                ToastQueue.negative("Veuillez remplir correctement tous les champs.", { timeout: 5000 });
-            }
+            Data("panelAdmin", "insertCheckout", data).then(response => {
+                if (response.success === true) {
+                    insertOrder(response.id);
+                } else {
+                    ToastQueue.negative(response.error, { timeout: 5000 });
+                }
+            });
         }
     };
 
-    const validateForm = () => {
-        // Validate form fields (this function needs to be implemented)
-        return true;
-    };
-
-    const insertOrder = async () => {
-        if (getUserId && getSelectedAddressId && getSelectedPayment !== "0") {
+    const insertOrder = async (selectedPayment) => {
+        if (getUserId && getSelectedAddressId) {
             let orderData = {
                 "table": "orders",
                 "data": {
                     "user_id": getUserId,
                     "address_id": getSelectedAddressId,
-                    "payment_id": getSelectedPayment,
+                    "payment_id": selectedPayment,
                     "order_state": "EN COURS"
                 }
             };
@@ -252,23 +240,21 @@ const CheckoutPayment = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        insertOrder();
+        insertOrder(getSelectedPayment);
     };
 
     const renderButtons = () => {
         if (getSelectedPayment === "0" && !getPaymentAdded) {
             return (
                 <>
-                    <Link to="/" className="form-btn-error">Annuler</Link>
-                    <button type="submit" className="form-btn-success">Ajouter</button>
+                    <Link to="/panier" className="form-btn-error">Retour</Link>
+                    <button type="submit" className="form-btn-success">Payer</button>
                 </>
             );
         } else {
             return (
                 <>
-                    <div className="checkoutAdresse">
-                        <Link to="/checkoutConfirmer" className="btnProduit" onClick={handleSubmit}>Payer</Link>
-                    </div>
+                    <Link to="/checkoutConfirmer" className="form-btn-success" onClick={handleSubmit}>Payer</Link>
                 </>
             );
         }

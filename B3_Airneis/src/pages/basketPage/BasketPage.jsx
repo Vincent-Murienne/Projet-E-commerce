@@ -57,26 +57,30 @@ const BasketPage = () => {
     };
 
     const handleQuantityChange = (product_id, quantity) => {
-        const basketsData = {
-            "user_id": userId,
-            "product_id": product_id,
-            "quantity": quantity
-        };
+        if(quantity === 0) {
+            handleDelete(product_id);
+        } else {
+            const basketsData = {
+                "user_id": userId,
+                "product_id": product_id,
+                "quantity": quantity
+            };
 
-        Data("basket", "updateProductQuantity", basketsData).then(response => {
-            if (response.success === true) {
-                setProducts(currentProducts => {
-                    const updatedProducts = currentProducts.map(product => {
-                        if (product.id === product_id) {
-                            return { ...product, quantity };
-                        }
-                        return product;
+            Data("basket", "updateProductQuantity", basketsData).then(response => {
+                if (response.success === true) {
+                    setProducts(currentProducts => {
+                        const updatedProducts = currentProducts.map(product => {
+                            if (product.id === product_id) {
+                                return { ...product, quantity };
+                            }
+                            return product;
+                        });
+                        calculateTotalPrice(updatedProducts);
+                        return updatedProducts;
                     });
-                    calculateTotalPrice(updatedProducts);
-                    return updatedProducts;
-                });
-            }
-        });
+                }
+            });
+        }
     };
 
     const calculateTotalPrice = (products) => {
@@ -129,7 +133,7 @@ const BasketPage = () => {
                                 />
                             </p>
                             <p className="product-price">{t('price')} : {product.price} €</p>
-                            {product.stock === 0 && <p className="out-of-stock">{t('soldOut')}</p>}
+                            {product.stock < product.quantity ? <p className="out-of-stock">{t('notEnoughStock')}</p> : ""}
                             <button onClick={() => handleDelete(product.id)}  className="delete-button">{t('delete')}</button>
                         </div>
                     </div>
