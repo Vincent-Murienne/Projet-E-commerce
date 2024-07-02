@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.airneis.app-mergeDebugResources-29:/values-hdpi-v4/values-hdpi-v4.xml",
+            "outputFile": "com.example.airneis.app-mergeDebugResources-42:/values-hdpi-v4/values-hdpi-v4.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Jean\\.gradle\\caches\\transforms-4\\2728f3d04f519f8e5dc96745c00d5fee\\transformed\\appcompat-1.7.0\\res\\values-hdpi-v4\\values-hdpi-v4.xml",
+                    "source": "C:\\Users\\Jean\\.gradle\\caches\\transforms-4\\2bee43189beb8439f427ab765b1389cc\\transformed\\appcompat-1.7.0\\res\\values-hdpi-v4\\values-hdpi-v4.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

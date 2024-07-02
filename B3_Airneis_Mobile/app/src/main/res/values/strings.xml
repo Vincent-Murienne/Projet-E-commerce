@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Airneis</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Accueil</string>
+    <string name="title_categories">Catégories</string>
+    <string name="title_contact">Contact</string>
+    <string name="title_account">Mon compte</string>
+</resources>
