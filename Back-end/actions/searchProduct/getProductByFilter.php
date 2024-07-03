@@ -12,11 +12,12 @@ if ($isAllowed) {
 
     // Perform search using the defined criteria
     $searchResults = $db->searchProductNameWithFilter(
-        $_GET["prix_min"],
-        $_GET["prix_max"],
-        $_GET["materiaux"],
-        $_GET["categories"],
-        $_GET["en_stock"]
+        $json["recherche"],
+        $json["prix_min"],
+        $json["prix_max"],
+        $json["materiaux"],
+        $json["categories"],
+        $json["en_stock"]
     );
 
     // Check if any results are found

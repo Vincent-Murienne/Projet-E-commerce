@@ -30,11 +30,9 @@ const ProductSearchPage = () => {
   };
 
   useEffect(() => {
-    console.log("test");
     Data("searchProduct", "getProductByPriority", { "name": searchQuery, "table": "products" }).then(response => {
       if (response.success === true) {
         setProduits(response.data);
-        console.log("tqt", produits);
       } else {
         ToastQueue.negative(response.error, {timeout: 5000});
       }
@@ -42,11 +40,11 @@ const ProductSearchPage = () => {
   }, []);
 
   const handleSearch = (searchData) => {
-    console.log(searchData);
+    handleCloseSearchPage();
+
     Data("searchProduct", "getProductByFilter", searchData).then(response => {
       if (response.success === true) {
         setProduits(response.data);
-        console.log("tqt", produits);
       } else {
         ToastQueue.negative(response.error, {timeout: 5000});
       }
@@ -70,11 +68,11 @@ const ProductSearchPage = () => {
               </>
           )}
           <Flex justifyContent="center" direction="row" gap="size-300" wrap>
-            <ActionButton onClick={handleShowSearchPage} isDisabled={filtering}> 
+            <ActionButton onPress={handleShowSearchPage} isDisabled={filtering}> 
               <Filter />
               <Text>Filtrer</Text>
             </ActionButton>
-            <ComboBox placeholder='Trier par:' isDisabled={filtering}>
+            <ComboBox description="Trier par:" aria-label="Trier par:" isDisabled={filtering}>
               <Item key="prixAsc">prix (asc)</Item>
               <Item key="prixDesc">prix (desc)</Item>
               <Item key="AjoutAsc">Date d'ajout (asc)</Item>
@@ -110,12 +108,12 @@ const ProductSearchPage = () => {
               columns={['2fr', '2fr']}
               rows={['size-1000']}
               rowGap={'size-500'}>
-              <ActionButton onClick={handleCloseSearchPage} gridArea="btnClose" width={'size-1500'} marginTop={'size-400'} justifySelf={'center'}>
+              <ActionButton onPress={handleCloseSearchPage} gridArea="btnClose" width={'size-1500'} marginTop={'size-400'} justifySelf={'center'}>
                 <Close/>
                 <Text>Fermer</Text>
               </ActionButton>
             </Grid>
-            <SearchPage onSearch={handleSearch} />
+            <SearchPage onSearch={handleSearch}/>
           </div>
         )}
       </section>

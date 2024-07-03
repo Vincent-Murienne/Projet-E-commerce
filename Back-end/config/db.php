@@ -331,7 +331,7 @@ class Database {
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }*/
-    public function searchProductNameWithFilter($prix_min, $prix_max, $materiaux, $categories, $en_stock) 
+    public function searchProductNameWithFilter($recherche, $prix_min, $prix_max, $materiaux, $categories, $en_stock) 
     {   
         // Construction de la requête SQL de base
         $sql = "SELECT products.name AS 'produits_nom', products.description, products.price, image_table.name AS 'image_name'
@@ -346,18 +346,42 @@ class Database {
                 WHERE 1=1";
 
         // Ajout des filtres dynamiques
+        if (!is_null($recherche)) {
+            $sql .= " AND (products.name LIKE :recherche OR products.description LIKE :recherche)";
+        }
         if (!is_null($prix_min)) {
             $sql .= " AND products.price >= :prix_min";
         }
         if (!is_null($prix_max)) {
             $sql .= " AND products.price <= :prix_max";
         }
-        if (!is_null($materiaux) && !empty($materiaux)) {
-            $placeholders = implode(',', array_fill(0, count($materiaux), '?'));
+        if (!empty($materiaux)) {
+            $count = 0;
+            $totalMateriaux = count($materiaux);
+            $placeholders = '';
+
+            foreach ($materiaux as $materiel) {
+                $placeholders .= ":mat" . $count;
+                $count++;
+                if ($count < $totalMateriaux) {
+                    $placeholders .= ", ";
+                }
+            }
             $sql .= " AND materials_list.id IN ($placeholders)";
         }
-        if (!is_null($categories) && !empty($categories)) {
-            $placeholders = implode(',', array_fill(0, count($categories), '?'));
+        if (!empty($categories)) {
+            $count = 0;
+            $totalCategories = count($categories);
+            $placeholders = '';
+
+            foreach ($categories as $category) {
+                $placeholders .= ":cat" . $count;
+                $count++;
+                if ($count < $totalCategories) {
+                    $placeholders .= ", ";
+                }
+            }
+
             $sql .= " AND categories.id IN ($placeholders)";
         }
         if ($en_stock) {
@@ -368,20 +392,27 @@ class Database {
 
         // Liaison des valeurs des paramètres
         $paramIndex = 1;
+        if (!is_null($recherche)) {
+            $query->bindValue("recherche", "%" . $recherche . "%", PDO::PARAM_STR);
+        }
         if (!is_null($prix_min)) {
-            $query->bindValue($paramIndex++, $prix_min, PDO::PARAM_INT);
+            $query->bindValue("prix_min", $prix_min, PDO::PARAM_INT);
         }
         if (!is_null($prix_max)) {
-            $query->bindValue($paramIndex++, $prix_max, PDO::PARAM_INT);
+            $query->bindValue("prix_max", $prix_max, PDO::PARAM_INT);
         }
-        if (!is_null($materiaux) && !empty($materiaux)) {
-            foreach ($materiaux as $material) {
-                $query->bindValue($paramIndex++, $material, PDO::PARAM_INT);
+        if (!empty($materiaux)) {
+            $count = 0;
+            foreach ($materiaux as $materiel) {
+                $query->bindValue("mat" . $count, $materiel, PDO::PARAM_INT);
+                $count++;
             }
         }
-        if (!is_null($categories) && !empty($categories)) {
+        if (!empty($categories)) {
+            $count = 0;
             foreach ($categories as $category) {
-                $query->bindValue($paramIndex++, $category, PDO::PARAM_INT);
+                $query->bindValue("cat" . $count, $category, PDO::PARAM_INT);
+                $count++;
             }
         }
 
