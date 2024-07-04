@@ -7,11 +7,17 @@ import { ToastQueue } from "@react-spectrum/toast";
 import {Cell, Column, Row, TableView, TableBody, TableHeader} from '@adobe/react-spectrum'
 import {Grid} from '@adobe/react-spectrum'
 import PropTypes from 'prop-types'; // Importer PropTypes
+import { useLocation } from 'react-router-dom';
 
-const SearchPage = ({ onSearch }) => {
+const SearchPage = ({ searchQuery, onSearch }) => {
     SearchPage.propTypes = {
         onSearch: PropTypes.func.isRequired, // Assurez-vous que onSearch est une fonction et qu'elle est requise
     };
+
+    // Récupération des informations de la barre de recherche
+    // const location = useLocation();
+    // const searchParams = new URLSearchParams(location.search);
+    // let searchQuery = searchParams.get('search');
 
     const [minPrice, setMinPrice] = useState('');
     const [maxPrice, setMaxPrice] = useState('');
@@ -20,7 +26,7 @@ const SearchPage = ({ onSearch }) => {
     const [categories, setCategories] = useState([]);
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [enStock, setEnStock] = useState(false);
-    const [recherche, setRecherche] = useState(null);
+    const [recherche, setRecherche] = useState(searchQuery);
 
     const handleMinPriceChange = (value) => {
         setMinPrice(value);
@@ -111,6 +117,7 @@ const SearchPage = ({ onSearch }) => {
 
                     <TextField
                         label="Recherche"
+                        value={recherche}
                         onChange={setRecherche}
                         type='text'
                         gridArea="recherche"

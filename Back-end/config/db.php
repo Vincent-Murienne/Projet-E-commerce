@@ -303,46 +303,15 @@ class Database {
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Cette méthode recherche les produits en fonction des critères fournis
-    /*public function searchProductNameWithFilter($prix_min, $prix_max, $materiaux, $categories, $en_stock) 
-    {   
-        $sql = "SELECT products.name AS 'produits_nom', products.description, products.price, image_table.name AS 'image_name'
-            FROM products 
-            LEFT JOIN (
-                SELECT product_id, MIN(id) AS min_image_id, name FROM images GROUP BY product_id
-            ) AS image_table
-            ON products.id = image_table.product_id
-            INNER JOIN categories ON products.category_id = categories.id
-            INNER JOIN products_materials ON products.id = products_materials.product_id
-            INNER JOIN materials_list ON products_materials.materials_list_id = materials_list.id
-            WHERE 
-                (:prix_min IS NULL OR products.price >= :prix_min) -- Prix minimum
-                AND (:prix_max IS NULL OR products.price <= :prix_max) -- Prix maximum
-                AND (:materiaux IS NULL OR materials_list.id IN (:materiaux)) -- Matériaux
-                AND (:categories IS NULL OR categories.id IN (:categories)) -- Catégories
-                AND (:en_stock = 0 OR products.quantity > 0)";
-
-        $query = $this->pdo->prepare($sql);
-        $query->bindValue('prix_min', $prix_min, PDO::PARAM_INT);
-        $query->bindValue('prix_max', $prix_max, PDO::PARAM_INT);
-        $query->bindValue('materiaux', $materiaux, PDO::PARAM_INT);
-        $query->bindValue('categories', $categories, PDO::PARAM_INT);
-        $query->bindValue('en_stock', $en_stock, PDO::PARAM_INT);
-        $query->execute();
-        return $query->fetchAll(PDO::FETCH_ASSOC);
-    }*/
     public function searchProductNameWithFilter($recherche, $prix_min, $prix_max, $materiaux, $categories, $en_stock) 
     {   
         // Construction de la requête SQL de base
-        $sql = "SELECT products.name AS 'produits_nom', products.description, products.price, image_table.name AS 'image_name'
-                FROM products 
-                LEFT JOIN (
-                    SELECT product_id, MIN(id) AS min_image_id, name FROM images GROUP BY product_id
-                ) AS image_table
-                ON products.id = image_table.product_id
-                INNER JOIN categories ON products.category_id = categories.id
-                INNER JOIN products_materials ON products.id = products_materials.product_id
-                INNER JOIN materials_list ON products_materials.materials_list_id = materials_list.id
+        $sql = "SELECT products.name AS 'produits_nom', products.description, products.price, images.name AS 'image_name'
+                FROM products
+                LEFT JOIN images ON products.id = images.product_id
+                LEFT JOIN categories ON products.category_id = categories.id
+                LEFT JOIN products_materials ON products.id = products_materials.product_id
+                LEFT JOIN materials_list ON products_materials.materials_list_id = materials_list.id
                 WHERE 1=1";
 
         // Ajout des filtres dynamiques
@@ -388,10 +357,12 @@ class Database {
             $sql .= " AND products.quantity > 0";
         }
 
+        // Add GROUP BY clause to keep each products only once
+        $sql .= " GROUP BY products.name;";
+
         $query = $this->pdo->prepare($sql);
 
         // Liaison des valeurs des paramètres
-        $paramIndex = 1;
         if (!is_null($recherche)) {
             $query->bindValue("recherche", "%" . $recherche . "%", PDO::PARAM_STR);
         }

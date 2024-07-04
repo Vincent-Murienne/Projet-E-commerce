@@ -12,9 +12,8 @@ const ProductSearchPage = () => {
   // Récupération des informations de la barre de recherche
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const searchQuery = searchParams.get('search');
-  const showResults = searchQuery !== null; // Checks if searchQuery is defined
 
+  const [searchQuery, setSearchQuery] = useState(searchParams.get('search') !== null ? searchParams.get('search') : "");
   const [showSearchPage, setShowSearchPage] = useState(false);
   const [filtering, setFiltering] = useState(false);
   const [produits, setProduits] = useState([]);
@@ -30,17 +29,25 @@ const ProductSearchPage = () => {
   };
 
   useEffect(() => {
-    Data("searchProduct", "getProductByPriority", { "name": searchQuery, "table": "products" }).then(response => {
-      if (response.success === true) {
-        setProduits(response.data);
-      } else {
-        ToastQueue.negative(response.error, {timeout: 5000});
-      }
-    });
+    if(searchQuery !== null) {
+      Data("searchProduct", "getProductByPriority", { "name": searchQuery, "table": "products" }).then(response => {
+        if (response.success === true) {
+          setProduits(response.data);
+        } else {
+          ToastQueue.negative(response.error, {timeout: 5000});
+        }
+      });
+    }
   }, []);
 
   const handleSearch = (searchData) => {
     handleCloseSearchPage();
+
+    if(searchData.recherche !== null) {
+      setSearchQuery(searchData.recherche);
+    } else {
+      setSearchQuery("");
+    }
 
     Data("searchProduct", "getProductByFilter", searchData).then(response => {
       if (response.success === true) {
@@ -57,16 +64,8 @@ const ProductSearchPage = () => {
       {filtering && <div className="overlay"></div>}
       <section className="categoriePage">
         <div className={`product-page ${filtering ? 'inactive' : ''}`}>
-          {showResults ? (
-              <>
-                  <h1>Résultat</h1>
-                  <h2>Liste des produits : "{searchQuery}"</h2>
-              </>
-          ) : (
-              <>
-                  <h1>Liste des produits</h1>
-              </>
-          )}
+          <h1>Résultat</h1>
+          <h2>Liste des produits : "{searchQuery}"</h2>
           <Flex justifyContent="center" direction="row" gap="size-300" wrap>
             <ActionButton onPress={handleShowSearchPage} isDisabled={filtering}> 
               <Filter />
@@ -113,7 +112,7 @@ const ProductSearchPage = () => {
                 <Text>Fermer</Text>
               </ActionButton>
             </Grid>
-            <SearchPage onSearch={handleSearch}/>
+            <SearchPage searchQuery={searchQuery} onSearch={handleSearch}/>
           </div>
         )}
       </section>
