@@ -13,4 +13,10 @@
     <color name="white">#FFFFFFFF</color>
     <color name="lavender">#8692F7</color>
     <color name="custom_blue">#FF00BCD4</color>
+    <color name="colorPrimary">#16253F</color>
+    <color name="colorAccent">#2F4F4F</color>
+    <color name="primary_dark">#16253F</color>
+    <color name="primary_light">#2F4F4F</color>
+    <color name="error">#dc3545</color>
+    <color name="link">#1E90FF</color>
 </resources>

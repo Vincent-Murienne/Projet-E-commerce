@@ -5,9 +5,75 @@
     android:layout_height="match_parent"
     tools:context=".fragment.AccountFragment">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="MON COMPTE" />
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_gravity="center">
+
+        <Button
+            android:id="@+id/buttonPanier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Panier"
+            android:layout_marginTop="20dp" />
+
+        <Button
+            android:id="@+id/buttonParametreCompte"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Paramètre du compte" />
+
+        <Button
+            android:id="@+id/buttonMesCommandes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Mes commandes" />
+
+        <Button
+            android:id="@+id/buttonSeConnecter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Se connecter" />
+
+        <Button
+            android:id="@+id/buttonSinscrire"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="S'inscrire" />
+
+        <Button
+            android:id="@+id/buttonSeDeconnecter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Se déconnecter" />
+
+        <Button
+            android:id="@+id/buttonCgu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="CGU" />
+
+        <Button
+            android:id="@+id/buttonMentionsLegales"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Mentions légales" />
+
+        <Button
+            android:id="@+id/buttonAPropos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="A propos d'Àirneis" />
+    </LinearLayout>
 
 </FrameLayout>

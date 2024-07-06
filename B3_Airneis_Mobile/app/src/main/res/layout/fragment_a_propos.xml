@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/about_us_container"
+        android:layout_margin="20dp"
+        android:maxWidth="800dp"
+        android:background="#ffffff">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="À propos de nous"
+            android:textSize="24sp"
+            android:layout_marginBottom="20dp"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:gravity="center" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="10dp"
+            android:layout_marginBottom="20dp"
+            android:elevation="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ÀIRNEIS (“meuble” en gaélique écossais), est une société écossaise, et nous sommes revendeurs de meubles conçus par des designers écossais."
+                android:lineHeight="24dp"
+                android:layout_marginBottom="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jusqu'à présent, nous avons partagé notre passion pour le mobilier en vendant des pièces exceptionnelles par correspondance et via des partenariats avec des magasins locaux."
+                android:lineHeight="24dp"
+                android:layout_marginBottom="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Aujourd'hui, ÀIRNEIS s'apprête à plonger dans l'ère du numérique en créant sa propre solution e-commerce pour atteindre une clientèle internationale mais aussi plus profondément celle que nous possédons déjà localement."
+                android:lineHeight="24dp"
+                android:layout_marginBottom="15dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Notre mission"
+            android:textSize="20sp"
+            android:textColor="#2c3e50"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chez ÀIRNEIS, notre mission est de fournir des meubles de haute qualité, conçus par des designers écossais talentueux, à une clientèle mondiale. Nous nous engageons à offrir un service client exceptionnel et à créer une expérience d'achat en ligne fluide et agréable."
+            android:lineHeight="24dp"
+            android:paddingBottom="10dp"
+            android:layout_marginBottom="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nos valeurs"
+            android:textSize="20sp"
+            android:textColor="#2c3e50"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="• Qualité: Nous ne proposons que des meubles de la plus haute qualité."
+                android:lineHeight="24dp"
+                android:layout_marginBottom="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="• Design: Chaque pièce que nous vendons est conçue avec soin par des designers écossais renommés."
+                android:lineHeight="24dp"
+                android:layout_marginBottom="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="• Service: Nous mettons un point d'honneur à offrir un service client de premier ordre."
+                android:lineHeight="24dp"
+                android:layout_marginBottom="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="• Durabilité: Nous nous engageons à promouvoir des pratiques durables dans tout ce que nous faisons."
+                android:lineHeight="24dp"
+                android:paddingBottom="10dp"
+                android:layout_marginBottom="20dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="120dp"
+            android:background="@drawable/input_background">
+
+            <ImageView
+                android:id="@+id/imageFacebook"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/logo_facebook"
+                android:layout_margin="8dp"
+                android:contentDescription="Facebook" />
+
+            <ImageView
+                android:id="@+id/imageTwitter"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/logo_twitter"
+                android:layout_margin="8dp"
+                android:contentDescription="Twitter" />
+
+            <ImageView
+                android:id="@+id/imageInstagram"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/logo_instagram"
+                android:layout_margin="8dp"
+                android:contentDescription="Instagram" />
+
+            <ImageView
+                android:id="@+id/imageLinkedIn"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/logo_linkedin"
+                android:layout_margin="8dp"
+                android:contentDescription="LinkedIn" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
