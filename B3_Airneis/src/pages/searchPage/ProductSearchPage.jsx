@@ -17,6 +17,12 @@ const ProductSearchPage = () => {
   const [showSearchPage, setShowSearchPage] = useState(false);
   const [filtering, setFiltering] = useState(false);
   const [produits, setProduits] = useState([]);
+  const [prixMin, setPrixMin] = useState(null);
+  const [prixMax, setPrixMax] = useState(null);
+  const [materiaux, setMateriaux] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [enStock, setEnStock] = useState(false);
+  const [orderBy, setOrderBy] = useState("sansTri");
 
   const handleShowSearchPage = () => {
     setShowSearchPage(true);
@@ -29,16 +35,30 @@ const ProductSearchPage = () => {
   };
 
   useEffect(() => {
-    if(searchQuery !== null) {
-      Data("searchProduct", "getProductByPriority", { "name": searchQuery, "table": "products" }).then(response => {
-        if (response.success === true) {
-          setProduits(response.data);
-        } else {
-          ToastQueue.negative(response.error, {timeout: 5000});
-        }
-      });
-    }
+    const searchData = {
+      recherche: searchQuery !== "" ? searchQuery : null,
+      prix_min: prixMin,
+      prix_max: prixMax,
+      materiaux: materiaux,
+      categories: categories,
+      en_stock: enStock
+    };
+
+    handleSearch(searchData);
   }, []);
+
+  useEffect(() => {
+    const searchData = {
+      recherche: searchQuery !== "" ? searchQuery : null,
+      prix_min: prixMin,
+      prix_max: prixMax,
+      materiaux: materiaux,
+      categories: categories,
+      en_stock: enStock
+    };
+
+    handleSearch(searchData);
+  }, [orderBy]);
 
   const handleSearch = (searchData) => {
     handleCloseSearchPage();
@@ -48,6 +68,20 @@ const ProductSearchPage = () => {
     } else {
       setSearchQuery("");
     }
+
+    setPrixMin(searchData.prix_min);
+    setPrixMax(searchData.prix_max);
+    setMateriaux(searchData.materiaux);
+    setCategories(searchData.categories);
+    setEnStock(searchData.en_stock);
+
+    if(orderBy !== "sansTri") {
+      searchData.orderBy = orderBy;
+    } else {
+      searchData.orderBy = null;
+    }
+
+    console.log(searchData);
 
     Data("searchProduct", "getProductByFilter", searchData).then(response => {
       if (response.success === true) {
@@ -71,13 +105,14 @@ const ProductSearchPage = () => {
               <Filter />
               <Text>Filtrer</Text>
             </ActionButton>
-            <ComboBox description="Trier par:" aria-label="Trier par:" isDisabled={filtering}>
+            <ComboBox description="Trier par:" aria-label="Trier par:" isDisabled={filtering} onSelectionChange={setOrderBy} selectedKey={orderBy}>
+              <Item key="sansTri">Aucun tri</Item>
+              <Item key="nomAsc">nom (asc)</Item>
+              <Item key="nomDesc">nom (desc)</Item>
               <Item key="prixAsc">prix (asc)</Item>
               <Item key="prixDesc">prix (desc)</Item>
-              <Item key="AjoutAsc">Date d'ajout (asc)</Item>
-              <Item key="AjoutDesc">Date d'ajout (desc)</Item>
-              <Item key="QuantitéAsc">Quantité en stock (asc)</Item>
-              <Item key="QuantitéDesc">Quantité en stock (desc)</Item>
+              <Item key="QuantiteAsc">Quantité en stock (asc)</Item>
+              <Item key="QuantiteDesc">Quantité en stock (desc)</Item>
             </ComboBox>
           </Flex>
           {produits.length > 0 ? (
@@ -89,7 +124,7 @@ const ProductSearchPage = () => {
                     <h4>{product.produits_nom}</h4>
                     <h4>{product.price}€</h4>
                   </div>
-                  <Link to={`/product/${product.id}`} className="btn">Voir plus</Link>  
+                  <Link to={`/product/${product.produits_id}`} className="btn">Voir plus</Link>  
                 </div>
               ))}
             </div>
@@ -112,7 +147,7 @@ const ProductSearchPage = () => {
                 <Text>Fermer</Text>
               </ActionButton>
             </Grid>
-            <SearchPage searchQuery={searchQuery} onSearch={handleSearch}/>
+            <SearchPage searchQuery={searchQuery} prixMinInput={prixMin} prixMaxInput={prixMax} materiauxInput={materiaux} categoriesInput={categories} enStockInput={enStock} onSearch={handleSearch}/>
           </div>
         )}
       </section>

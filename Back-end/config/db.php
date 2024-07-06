@@ -283,30 +283,10 @@ class Database {
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Cette méthode recherche le titre des produits en fonction des critères fournis avec priorité
-    public function searchProductNameWithPriority($name) 
-    {   
-        $sql = "SELECT products.id, products.name AS 'produits_nom', products.description, products.price, image_table.name AS 'image_name'
-            FROM products 
-            LEFT JOIN (
-                SELECT product_id, MIN(id) AS min_image_id, name FROM images GROUP BY product_id
-            ) AS image_table
-            ON products.id = image_table.product_id  
-            WHERE (products.name = :name OR products.description = :name)
-            OR (SUBSTRING(products.name, 1, 1) <> SUBSTRING(:name, 1, 1) AND SUBSTRING(products.name, 2) = SUBSTRING(:name, 2) AND products.description = :name)
-            OR (products.name LIKE CONCAT(:name, '%') OR products.description LIKE CONCAT(:name, '%'))
-            OR (products.name LIKE CONCAT('%', :name, '%') OR products.description LIKE CONCAT('%', :name, '%'))";
-
-        $query = $this->pdo->prepare($sql);
-        $query->bindValue('name', $name, PDO::PARAM_STR);
-        $query->execute();
-        return $query->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    public function searchProductNameWithFilter($recherche, $prix_min, $prix_max, $materiaux, $categories, $en_stock) 
+    public function searchProductNameWithFilter($recherche, $prix_min, $prix_max, $materiaux, $categories, $en_stock, $orderBy) 
     {   
         // Construction de la requête SQL de base
-        $sql = "SELECT products.name AS 'produits_nom', products.description, products.price, images.name AS 'image_name'
+        $sql = "SELECT products.id AS 'produits_id', products.name AS 'produits_nom', products.description, products.price, images.name AS 'image_name'
                 FROM products
                 LEFT JOIN images ON products.id = images.product_id
                 LEFT JOIN categories ON products.category_id = categories.id
@@ -316,7 +296,7 @@ class Database {
 
         // Ajout des filtres dynamiques
         if (!is_null($recherche)) {
-            $sql .= " AND (products.name LIKE :recherche OR products.description LIKE :recherche)";
+            $sql .= " AND (products.name LIKE CONCAT('%', :recherche, '%') OR products.description LIKE CONCAT('%', :recherche, '%'))";
         }
         if (!is_null($prix_min)) {
             $sql .= " AND products.price >= :prix_min";
@@ -358,13 +338,36 @@ class Database {
         }
 
         // Add GROUP BY clause to keep each products only once
-        $sql .= " GROUP BY products.name;";
+        $sql .= " GROUP BY products.id";
+
+        if (!is_null($orderBy)) {
+            switch($orderBy) {
+                case "nomAsc":
+                    $sql .= " ORDER BY products.name;";
+                    break;
+                case "nomDesc":
+                    $sql .= " ORDER BY products.name DESC;";
+                    break;
+                case "prixAsc":
+                    $sql .= " ORDER BY products.price;";
+                    break;
+                case "prixDesc":
+                    $sql .= " ORDER BY products.price DESC;";
+                    break;
+                case "QuantiteAsc":
+                    $sql .= " ORDER BY products.quantity;";
+                    break;
+                case "QuantiteDesc":
+                    $sql .= " ORDER BY products.quantity DESC;";
+                    break;
+            }
+        }
 
         $query = $this->pdo->prepare($sql);
 
         // Liaison des valeurs des paramètres
         if (!is_null($recherche)) {
-            $query->bindValue("recherche", "%" . $recherche . "%", PDO::PARAM_STR);
+            $query->bindValue("recherche", $recherche, PDO::PARAM_STR);
         }
         if (!is_null($prix_min)) {
             $query->bindValue("prix_min", $prix_min, PDO::PARAM_INT);

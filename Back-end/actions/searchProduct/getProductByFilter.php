@@ -17,7 +17,8 @@ if ($isAllowed) {
         $json["prix_max"],
         $json["materiaux"],
         $json["categories"],
-        $json["en_stock"]
+        $json["en_stock"],
+        $json["orderBy"]
     );
 
     // Check if any results are found

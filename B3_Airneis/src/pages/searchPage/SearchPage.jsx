@@ -7,25 +7,19 @@ import { ToastQueue } from "@react-spectrum/toast";
 import {Cell, Column, Row, TableView, TableBody, TableHeader} from '@adobe/react-spectrum'
 import {Grid} from '@adobe/react-spectrum'
 import PropTypes from 'prop-types'; // Importer PropTypes
-import { useLocation } from 'react-router-dom';
 
-const SearchPage = ({ searchQuery, onSearch }) => {
+const SearchPage = ({ searchQuery, prixMinInput, prixMaxInput, materiauxInput, categoriesInput, enStockInput, onSearch }) => {
     SearchPage.propTypes = {
         onSearch: PropTypes.func.isRequired, // Assurez-vous que onSearch est une fonction et qu'elle est requise
     };
 
-    // Récupération des informations de la barre de recherche
-    // const location = useLocation();
-    // const searchParams = new URLSearchParams(location.search);
-    // let searchQuery = searchParams.get('search');
-
-    const [minPrice, setMinPrice] = useState('');
-    const [maxPrice, setMaxPrice] = useState('');
+    const [minPrice, setMinPrice] = useState(prixMinInput !== null ? prixMinInput : "");
+    const [maxPrice, setMaxPrice] = useState(prixMaxInput !== null ? prixMaxInput : "");
     const [materials, setMaterials] = useState([]);
-    const [selectedMaterials, setSelectedMaterials] = useState([]);
+    const [selectedMaterials, setSelectedMaterials] = useState(materiauxInput);
     const [categories, setCategories] = useState([]);
-    const [selectedCategories, setSelectedCategories] = useState([]);
-    const [enStock, setEnStock] = useState(false);
+    const [selectedCategories, setSelectedCategories] = useState(categoriesInput);
+    const [enStock, setEnStock] = useState(enStockInput);
     const [recherche, setRecherche] = useState(searchQuery);
 
     const handleMinPriceChange = (value) => {
@@ -69,7 +63,20 @@ const SearchPage = ({ searchQuery, onSearch }) => {
         };
 
         onSearch(searchData);
-      };
+    };
+
+    const resetFilter = () => {
+        const searchData = {
+            recherche: null,
+            prix_min: null,
+            prix_max: null,
+            materiaux: [],
+            categories: [],
+            en_stock: false
+        };
+
+        onSearch(searchData);
+    }
 
     let dataCategories = {
         "table": "categories"
@@ -118,6 +125,7 @@ const SearchPage = ({ searchQuery, onSearch }) => {
                     <TextField
                         label="Recherche"
                         value={recherche}
+                        defaultValue={recherche}
                         onChange={setRecherche}
                         type='text'
                         gridArea="recherche"
@@ -128,6 +136,7 @@ const SearchPage = ({ searchQuery, onSearch }) => {
                         label="Prix min€" 
                         maxLength={5}
                         onChange={handleMinPriceChange}
+                        defaultValue={minPrice}
                         type='number'
                         gridArea="prixMin"
                         justifySelf={'center'}
@@ -137,6 +146,7 @@ const SearchPage = ({ searchQuery, onSearch }) => {
                         label="Prix max€" 
                         maxLength={5}
                         onChange={handleMaxPriceChange}
+                        defaultValue={maxPrice}
                         type='number'
                         gridArea="prixMax"
                         justifySelf={'center'}
@@ -151,6 +161,7 @@ const SearchPage = ({ searchQuery, onSearch }) => {
                     <TableView
                         aria-label="Example table with static contents"
                         selectionMode="multiple"
+                        defaultSelectedKeys={materiauxInput.map(id => id.toString())}
                         onSelectionChange={handleMaterialsChange}
                         height={200}
                         position={'relative'}
@@ -160,7 +171,7 @@ const SearchPage = ({ searchQuery, onSearch }) => {
                             <Column>Matériaux</Column>
                         </TableHeader>
                         <TableBody>
-                            {materials.map((material) => (
+                            {materials && materials.map((material) => (
                                 <Row key={material.id} aria-label={material.name}>
                                     <Cell aria-label={material.name}>{material.name}</Cell>
                                 </Row>
@@ -170,6 +181,7 @@ const SearchPage = ({ searchQuery, onSearch }) => {
                     <TableView
                         aria-label="Tableau de catégories"
                         selectionMode="multiple"
+                        defaultSelectedKeys={categoriesInput.map(id => id.toString())}
                         onSelectionChange={handleCategoriesChange}
                         height={200}
                         position={"relative"}
@@ -179,7 +191,7 @@ const SearchPage = ({ searchQuery, onSearch }) => {
                             <Column aria-label="Catégories">Catégories</Column>
                         </TableHeader>
                         <TableBody>
-                            {categories.map((category) => (
+                            {categories && categories.map((category) => (
                                 <Row key={category.id} aria-label={category.name}>
                                     <Cell aria-label={category.name}>{category.name}</Cell>
                                 </Row>
@@ -190,7 +202,7 @@ const SearchPage = ({ searchQuery, onSearch }) => {
                         <Checkmark />
                         <Text>Appliquer</Text>
                     </ActionButton>
-                    <ActionButton type="reset" gridArea="réinitialiser" width={"size-2000"} justifySelf={"center"} aria-label="Réinitialiser"> 
+                    <ActionButton onPress={resetFilter} gridArea="réinitialiser" width={"size-2000"} justifySelf={"center"} aria-label="Réinitialiser"> 
                         <Delete />
                         <Text>Réinitialiser</Text>
                     </ActionButton>

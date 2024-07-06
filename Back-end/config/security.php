@@ -17,11 +17,12 @@ $json = json_decode(file_get_contents("php://input"), true);
 
 // $json = [
 //     "recherche" => "te",
-//     "prix_min" => 15,
+//     "prix_min" => null,
 //     "prix_max" => null,
-//     "materiaux" => [1],
-//     "categories" => [3],
-//     "en_stock" => true,
+//     "materiaux" => [1,3],
+//     "categories" => [],
+//     "en_stock" => false,
+//     "orderBy" => "nomAsc",
 //     "apiKey" => $apiKey
 // ];
 
