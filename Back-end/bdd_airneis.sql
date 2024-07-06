@@ -1,3 +1,6 @@
+CREATE DATABASE airneis_e_commerce;
+USE airneis_e_commerce;
+
 CREATE TABLE `users` (
   `id` integer PRIMARY KEY AUTO_INCREMENT,
   `full_name` varchar(100),
@@ -224,13 +227,13 @@ INSERT INTO images (product_id, category_id, name, `order`) VALUES
 (22, null, '22-3-Poubelle de bureau en acier inoxydable.jpg', null);
 
 INSERT INTO orders (date, user_id, order_state) VALUES
-(STR_TO_DATE("11/05/2024", "%d/%m/%Y"), 1, "En cours"),
-(STR_TO_DATE("10/05/2024", "%d/%m/%Y"), 1, "En cours"),
-(STR_TO_DATE("05/05/2024", "%d/%m/%Y"), 1, "Livré"),
-(STR_TO_DATE("05/05/2024", "%d/%m/%Y"), 1, "Livré"),
-(STR_TO_DATE("05/05/2024", "%d/%m/%Y"), 1, "Livré"),
-(STR_TO_DATE("28/04/2024", "%d/%m/%Y"), 1, "Livré"),
-(STR_TO_DATE("28/04/2024", "%d/%m/%Y"), 1, "Livré");
+(STR_TO_DATE("11/05/2024", "%d/%m/%Y"), 1, "EN COURS"),
+(STR_TO_DATE("10/05/2024", "%d/%m/%Y"), 1, "EN COURS"),
+(STR_TO_DATE("05/05/2024", "%d/%m/%Y"), 1, "LIVRÉE"),
+(STR_TO_DATE("05/05/2024", "%d/%m/%Y"), 1, "LIVRÉE"),
+(STR_TO_DATE("05/05/2024", "%d/%m/%Y"), 1, "LIVRÉE"),
+(STR_TO_DATE("28/04/2024", "%d/%m/%Y"), 1, "LIVRÉE"),
+(STR_TO_DATE("28/04/2024", "%d/%m/%Y"), 1, "LIVRÉE");
 
 INSERT INTO lots_of_product (order_id, product_id, quantity) VALUES
 (1, 1, 2),
@@ -263,3 +266,11 @@ INSERT INTO `materials_list` (`id`, `name`) VALUES
 (4, 'Bronze'),
 (5, 'Papier'),
 (6, 'Coton');
+
+INSERT INTO `products_materials` (`product_id`, `materials_list_id`) VALUES
+(7, 1),
+(1, 5),
+(2, 1),
+(2, 6),
+(3, 2),
+(4, 2);

@@ -303,38 +303,98 @@ class Database {
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Cette méthode recherche les produits en fonction des critères fournis
-    public function searchProductNameWithFilter($prix_min, $prix_max, $materiaux, $categories, $en_stock) 
+    public function searchProductNameWithFilter($recherche, $prix_min, $prix_max, $materiaux, $categories, $en_stock) 
     {   
-        $sql = "SELECT products.name AS 'produits_nom', products.description, products.price, image_table.name AS 'image_name'
-            FROM products 
-            LEFT JOIN (
-                SELECT product_id, MIN(id) AS min_image_id, name FROM images GROUP BY product_id
-            ) AS image_table
-            ON products.id = image_table.product_id
-            INNER JOIN categories ON products.category_id = categories.id
-            INNER JOIN products_materials ON products.id = products_materials.product_id
-            INNER JOIN materials_list ON products_materials.materials_list_id = materials_list.id
-            WHERE 
-                (:prix_min IS NULL OR products.price >= :prix_min) -- Prix minimum
-                AND (:prix_max IS NULL OR products.price <= :prix_max) -- Prix maximum
-                AND (:materiaux IS NULL OR materials_list.name IN (:materiaux)) -- Matériaux
-                AND (:categories IS NULL OR categories.name IN (:categories)) -- Catégories
-                AND (:en_stock = 0 OR products.quantity > 0)";
+        // Construction de la requête SQL de base
+        $sql = "SELECT products.name AS 'produits_nom', products.description, products.price, images.name AS 'image_name'
+                FROM products
+                LEFT JOIN images ON products.id = images.product_id
+                LEFT JOIN categories ON products.category_id = categories.id
+                LEFT JOIN products_materials ON products.id = products_materials.product_id
+                LEFT JOIN materials_list ON products_materials.materials_list_id = materials_list.id
+                WHERE 1=1";
+
+        // Ajout des filtres dynamiques
+        if (!is_null($recherche)) {
+            $sql .= " AND (products.name LIKE :recherche OR products.description LIKE :recherche)";
+        }
+        if (!is_null($prix_min)) {
+            $sql .= " AND products.price >= :prix_min";
+        }
+        if (!is_null($prix_max)) {
+            $sql .= " AND products.price <= :prix_max";
+        }
+        if (!empty($materiaux)) {
+            $count = 0;
+            $totalMateriaux = count($materiaux);
+            $placeholders = '';
+
+            foreach ($materiaux as $materiel) {
+                $placeholders .= ":mat" . $count;
+                $count++;
+                if ($count < $totalMateriaux) {
+                    $placeholders .= ", ";
+                }
+            }
+            $sql .= " AND materials_list.id IN ($placeholders)";
+        }
+        if (!empty($categories)) {
+            $count = 0;
+            $totalCategories = count($categories);
+            $placeholders = '';
+
+            foreach ($categories as $category) {
+                $placeholders .= ":cat" . $count;
+                $count++;
+                if ($count < $totalCategories) {
+                    $placeholders .= ", ";
+                }
+            }
+
+            $sql .= " AND categories.id IN ($placeholders)";
+        }
+        if ($en_stock) {
+            $sql .= " AND products.quantity > 0";
+        }
+
+        // Add GROUP BY clause to keep each products only once
+        $sql .= " GROUP BY products.name;";
 
         $query = $this->pdo->prepare($sql);
-        $query->bindValue('prix_min', $prix_min, PDO::PARAM_INT);
-        $query->bindValue('prix_max', $prix_max, PDO::PARAM_INT);
-        $query->bindValue('materiaux', $materiaux, PDO::PARAM_STR);
-        $query->bindValue('categories', $categories, PDO::PARAM_STR);
-        $query->bindValue('en_stock', $en_stock, PDO::PARAM_INT);
+
+        // Liaison des valeurs des paramètres
+        if (!is_null($recherche)) {
+            $query->bindValue("recherche", "%" . $recherche . "%", PDO::PARAM_STR);
+        }
+        if (!is_null($prix_min)) {
+            $query->bindValue("prix_min", $prix_min, PDO::PARAM_INT);
+        }
+        if (!is_null($prix_max)) {
+            $query->bindValue("prix_max", $prix_max, PDO::PARAM_INT);
+        }
+        if (!empty($materiaux)) {
+            $count = 0;
+            foreach ($materiaux as $materiel) {
+                $query->bindValue("mat" . $count, $materiel, PDO::PARAM_INT);
+                $count++;
+            }
+        }
+        if (!empty($categories)) {
+            $count = 0;
+            foreach ($categories as $category) {
+                $query->bindValue("cat" . $count, $category, PDO::PARAM_INT);
+                $count++;
+            }
+        }
+
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
+
     public function getProductBasket($user_id)
     {
-        $sql = "SELECT p.id, p.name, SUM(b.quantity) AS quantity, p.price, p.description, 
+        $sql = "SELECT p.id, p.name, SUM(b.quantity) AS quantity, p.price, p.description, p.quantity AS stock, 
         (SELECT i.name FROM images i WHERE i.product_id = p.id LIMIT 1) AS image_name
         FROM baskets b
         LEFT JOIN products p ON b.product_id = p.id
@@ -365,16 +425,6 @@ class Database {
         $query->bindValue('quantity', $quantity, PDO::PARAM_INT);
         return $query->execute();
     }
-
-    public function getToken($token)
-    {
-        $sql = "SELECT * FROM password_reset WHERE token = :token'";
-        $query = $this->pdo->prepare($sql);
-        $query->bindValue("token", $token, PDO::PARAM_STR);
-        $query->execute();
-        return $query->fetchAll(PDO::FETCH_ASSOC);
-    } 
-    
     function updateOrder(string $table, array $data, int $id) {
         if (array_key_exists('adresse_id', $data)) {
             $data['adresse_id'] = null;

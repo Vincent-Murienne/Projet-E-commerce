@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { TextField, Checkbox } from "@adobe/react-spectrum";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from '../../context/UserProvider';

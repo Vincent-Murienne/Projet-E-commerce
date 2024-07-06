@@ -19,7 +19,7 @@ if($isAllowed) {
             $getProductDetails = $db->selectWhere("products", ["id" => $element["product_id"]]);
 
             if($getProductDetails){
-                if(!($getProductDetails[0]["quantity"] >= $element["quantity"])){
+                if(!($getProductDetails[0]["quantity"] >= $element["quantity"]) && $getProductDetails[0]["quantity"] != 0){
                     $response["error"] = "Le stock du produit '" . $getProductDetails[0]["name"] . "' n'est pas suffisant pour votre commande.";
                     $orderFailed = True;
                     break;

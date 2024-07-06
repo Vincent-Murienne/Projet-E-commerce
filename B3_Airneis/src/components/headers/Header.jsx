@@ -4,7 +4,9 @@ import { Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/UserProvider";
 import { ToastQueue } from "@react-spectrum/toast";
-
+import LanguageSwitcher from '../../utils/LanguageSwitcher';
+import i18n from '../../utils/i18n';
+import { useTranslation } from 'react-i18next';
 
 const Header = () => {
     const { pullData, removeData, reloadData } = useContext(UserContext);
@@ -105,19 +107,14 @@ const Header = () => {
 
     const handleKeyPress = (e) => {
         if (e.key === 'Enter') {
-          e.preventDefault();
-          navigateToProductPage();
+            e.preventDefault();
+            window.location.href = `/product?search=${searchQuery}`;
         }
-      };
-    
-      const navigateToProductPage = () => {
-        window.location.href = `/product?search=${searchQuery}`;
-      };
-
-    const handleSearchSubmit = (event) => {
-        event.preventDefault();
-        console.log("Recherche soumise :", searchQuery);
     };
+
+    const { t } = useTranslation();
+
+    const [selectedLanguage, setSelectedLanguage] = useState(i18n.language);
 
     return (
         <>
@@ -125,29 +122,39 @@ const Header = () => {
                 <h1>Àirneis</h1>
                 <nav>
                     <ul className="middle-nav">
-                        <li><Link to="/" className="hover-underline-animation">Accueil</Link></li>
-                        <li><Link to="/categories" className="hover-underline-animation">Catégories</Link></li>
-                        <li><Link to="/contactPage" className="hover-underline-animation">Contact</Link></li>
+                        <li><Link to="/" className="hover-underline-animation">{t('home')}</Link></li>
+                        <li><Link to="/categories" className="hover-underline-animation">{t('categories')}</Link></li>
+                        <li><Link to="/contactPage" className="hover-underline-animation">{t('contact')}</Link></li>
                         {
                             (user.isAdmin)
                             ?
-                                <li><Link to="/admin/TrackSales" className="hover-underline-animation">Panel Admin</Link></li>
+                                <li><Link to="/admin/TrackSales" className="hover-underline-animation">{t('adminPanel')}</Link></li>
                             :
                                 <></>
                         }
                     </ul>
                     <ul className="end-nav">
+
+                    <div className="nav-display-none">
+                        <li>
+                            <LanguageSwitcher
+                                selectedLanguage={selectedLanguage}
+                                onLanguageChange={setSelectedLanguage}
+                            />
+                        </li>
+                    </div>
+                        
                         <li><FaSearch size={20} className="scale_on_hover" onClick={toggleSearchBar}/></li> 
 
                         {searchVisible && (
                             <li>
-                                <form onSubmit={handleSearchSubmit}>
+                                <form>
                                     <input
                                         type="text"
                                         value={searchQuery}
                                         onChange={handleSearchInputChange}
                                         onKeyPress={handleKeyPress}
-                                        placeholder="Rechercher un produit ..."
+                                        placeholder={t('productSearch')}
                                     />                                          
                                 </form>
                             </li>
@@ -161,14 +168,14 @@ const Header = () => {
                                     (user.isConnected)
                                     ?
                                         <>
-                                            <li><Link to="/monComptePage" className="hover-underline-animation">Mon compte</Link></li>
+                                            <li><Link to="/monComptePage" className="hover-underline-animation">{t('myAccount')}</Link></li>
                                             <li><div className='separator'></div></li>
-                                            <li><Link to="/" className="hover-underline-animation" onClick={handleLogout}>Se déconnecter</Link></li>
+                                            <li><Link to="/" className="hover-underline-animation" onClick={handleLogout}>{t('logout')}</Link></li>
                                         </>
                                     :
                                         <>
-                                            <li><Link to="/login" className="hover-underline-animation">Se connecter</Link></li>
-                                            <li><Link to="/register" className="hover-underline-animation">S'inscrire</Link></li>
+                                            <li><Link to="/login" className="hover-underline-animation">{t('login')}</Link></li>
+                                            <li><Link to="/register" className="hover-underline-animation">{t('register')}</Link></li>
 
                                         </>
                                 }
@@ -183,13 +190,20 @@ const Header = () => {
                                         <FaBars size={20} className="scale_on_hover" onClick={MenuClicked}/>
                                 }
                             <div className="dropdown-burger-content">
-                                <li><Link to="/" className="hover-underline-animation">Accueil</Link></li>
-                                <li><Link to="/categories" className="hover-underline-animation">Catégories</Link></li>
-                                <li><Link to="/contactPage" className="hover-underline-animation">Contact</Link></li>
+                                <li>
+                                    <LanguageSwitcher
+                                        selectedLanguage={selectedLanguage}
+                                        onLanguageChange={setSelectedLanguage}
+                                    />
+                                </li>
+                                <li><div className="separator"></div></li>
+                                <li><Link to="/" className="hover-underline-animation">{t('home')}</Link></li>
+                                <li><Link to="/categories" className="hover-underline-animation">{t('categories')}</Link></li>
+                                <li><Link to="/contactPage" className="hover-underline-animation">{t('contact')}</Link></li>
                                 {
                                     (user.isAdmin)
                                     ?
-                                        <li><Link to="/admin/TrackSales" className="hover-underline-animation">Panel Admin</Link></li>
+                                        <li><Link to="/admin/TrackSales" className="hover-underline-animation">{t('adminPanel')}</Link></li>
                                     :
                                         <></>
                                 }
@@ -198,14 +212,14 @@ const Header = () => {
                                     (user.isConnected)
                                     ?
                                         <>
-                                            <li><Link to="/monComptePage" className="hover-underline-animation">Mon compte</Link></li>
+                                            <li><Link to="/monComptePage" className="hover-underline-animation">{t('myAccount')}</Link></li>
                                             <li><div className="separator"></div></li>
-                                            <li><Link to="/" className="hover-underline-animation" onClick={handleLogout}>Se déconnecter</Link></li>
+                                            <li><Link to="/" className="hover-underline-animation" onClick={handleLogout}>{t('logout')}</Link></li>
                                         </>
                                     :
                                         <>
-                                            <li><Link to="/login" className="hover-underline-animation">Se connecter</Link></li>
-                                            <li><Link to="/register" className="hover-underline-animation">S'inscrire</Link></li>
+                                            <li><Link to="/login" className="hover-underline-animation">{t('login')}</Link></li>
+                                            <li><Link to="/register" className="hover-underline-animation">{t('register')}</Link></li>
                                         </>
                                 }
                             </div>

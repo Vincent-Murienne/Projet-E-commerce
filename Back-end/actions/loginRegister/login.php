@@ -1,5 +1,4 @@
 <?php
-
 require_once "../../config/security.php";
 require_once "../../config/db.php";
 
@@ -13,17 +12,17 @@ if ($isAllowed) {
         $email = $json["email"];
         $password = hash("sha512", $json["password"]);
 
-        // Récupérer l'utilisateur avec l'email fourni
+        // Check if user exist
         $user = $db->selectWhere("users", ["email" => $email], false, null);
 
         if ($user) {
-            // Vérifier si le mot de passe haché correspond
+            // Check if passwords matches
             if ($password == $user[0]["password"]) {
-                // Mot de passe correct, connexion réussie
+                // passwords matches
                 $response["success"] = true;
                 $response["user"] = $user;
             } else {
-                // Mot de passe incorrect
+                // passwords doesn't match
                 $response["error"] = "Nom d'utilisateur/email ou mot de passe incorrect.";
             }
         } else {
@@ -40,3 +39,4 @@ if ($isAllowed) {
 }
 
 echo json_encode($response);
+?>

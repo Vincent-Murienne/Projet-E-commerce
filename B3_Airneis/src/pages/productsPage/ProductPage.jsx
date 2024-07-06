@@ -32,7 +32,7 @@ const ProductPage = () => {
     }, [productId]);
 
     //Determine the stock status based on the product's available quantity
-    const stockStatus = product && (product.quantity === null || product.quantity === 0) ? "Hors stock" : "En stock";
+    const stockStatus = product && (product.quantity === null || product.quantity <= 0) ? "Hors stock" : "En stock";
 
     const { pullData } = useContext(UserContext);
 

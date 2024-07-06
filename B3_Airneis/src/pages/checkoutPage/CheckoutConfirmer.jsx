@@ -1,7 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from 'react';
+import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from '../../context/UserProvider';
 import { ToastQueue } from "@react-spectrum/toast";
+import { useParams } from 'react-router-dom';
 
 const CheckoutConfirmer = () => {
     const { pullData } = useContext(UserContext);

@@ -13,11 +13,23 @@ if($isAllowed) {
         $db = new Database();
         $productExist = $db->selectWhere("baskets", ["user_id" => $json["user_id"], "product_id" => $json["product_id"]]);
         if($productExist){
+            // Set the new quantity
             $newQuantity = (int)$productExist[0]["quantity"] + (int)$json["quantity"]; 
-            $data = $db->update("baskets", ["quantity" => $newQuantity], $productExist[0]["id"]);
-            if($data) {
-                $response["success"] = true;
-            } 
+
+            // Get product info to see if the quantity isn't bigger than the stock
+            $productInfo = $db->selectWhere("products", ["id" => $json["product_id"]]);
+            if($productInfo){
+                if($newQuantity <= (int)$productInfo[0]["quantity"]){
+                    $data = $db->update("baskets", ["quantity" => $newQuantity], $productExist[0]["id"]);
+                    if($data) {
+                        $response["success"] = true;
+                    } 
+                } else {
+                    $response["error"] = "Nous n'avons pas le stock suffisant pour ajouter ce nombre de produit à votre panier.";
+                }
+            } else {
+                $response["error"] = "Erreur de traitement avec la base de donnée. Veuillez réessayer ultérieurement.";
+            }
         }
         else{
             $data = $db->insert("baskets", ["user_id" => $json["user_id"], "product_id" => $json["product_id"], "quantity" => $json["quantity"]]);

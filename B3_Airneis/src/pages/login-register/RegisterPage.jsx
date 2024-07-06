@@ -5,6 +5,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { Data } from "../../services/api";
 import { UserContext } from "../../context/UserProvider";
 import { ToastQueue } from '@react-spectrum/toast';
+import { fullNameRegex, emailRegex, passwordRegex } from '../../utils/regexes';
 
 const RegisterPage = () => {
   const { saveData } = useContext(UserContext);
@@ -45,19 +46,16 @@ const RegisterPage = () => {
       mentionsLegal: ''
     });
 
-    const fullNameRegex = /^[a-zA-ZÀ-ÿ\s-]{5,50}$/;
     if (!fullNameRegex.test(fullName)) {
       setErrors(prevErrors => ({ ...prevErrors, fullName: 'Veuillez saisir un nom complet (5 caractères minimum)' }));
       return;
     }
-
-    const emailRegex = /^[^\s@]{1,50}@[^\s@]+\.[^\s@]+$/;
+  
     if (!emailRegex.test(email)) {
       setErrors(prevErrors => ({ ...prevErrors, email: 'Veuillez saisir une adresse e-mail valide' }));
       return;
     }
-
-    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d@#$%^&*()-_+=!]{12,30}$/;
+  
     if (!passwordRegex.test(password)) {
       setErrors(prevErrors => ({ ...prevErrors, password: 'Le mot de passe doit comporter au moins 12 caractères alphanumériques' }));
       return;

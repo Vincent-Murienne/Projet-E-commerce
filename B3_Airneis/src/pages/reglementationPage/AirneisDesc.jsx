@@ -1,5 +1,3 @@
-import React from 'react';
-
 const AirneisDesc = () => {
     return (
         <div className="about-us-container">

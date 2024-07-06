@@ -104,6 +104,10 @@ header nav .separator {
         display: none;
     }
 
+    header nav .nav-display-none {
+        display: none;
+    }
+
     header nav .dropdown-user {
         display: none;
     }

@@ -1,47 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useState} from 'react';
 import { useParams, useNavigate} from 'react-router-dom';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { ToastQueue } from '@react-spectrum/toast';
+import { passwordRegex } from '../../utils/regexes';
 
 const ResetPasswordPage = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [isValidToken, setIsValidToken] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [errorMessage, setErrorMessage] = useState('');
   const { token } = useParams(); // Récupérer le token de l'URL
   const navigate = useNavigate();
-
-
-  useEffect(() => {
-    const verifyToken = async () => {
-      try {
-        const response = await fetch('http://localhost:8000/actions/loginRegister/verifyToken.php', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ token }),
-        });
-
-        const data = await response.json();
-
-        if (data.success) {
-          setIsValidToken(true);
-        } else {
-          setErrorMessage(data.message || 'Le token est invalide ou a expiré.');
-          navigate('/login'); // Rediriger l'utilisateur si le token n'est pas valide
-        }
-      } catch (error) {
-        setErrorMessage('Une erreur est survenue lors de la vérification du token.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    verifyToken();
-  }, [token, navigate]);
+  const [errors, setErrors] = useState({
+    password: ''
+  });
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -53,8 +25,17 @@ const ResetPasswordPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrors({
+      password: '',
+    });
+
+    if (!passwordRegex.test(password)) {
+      setErrors(prevErrors => ({ ...prevErrors, password: 'Le mot de passe doit comporter au moins 12 caractères alphanumériques' }));
+      return;
+    }
+
     if (password !== confirmPassword) {
-        alert('Les mots de passe ne correspondent pas.');
+        ToastQueue.negative("Les mots de passe ne correspondent pas.", { timeout: 5000 });
         return;
     }
 
@@ -70,14 +51,14 @@ const ResetPasswordPage = () => {
 
         const data = await response.json();
         if (data.success) {
-            alert('Votre mot de passe a été modifié avec succès.');
+            ToastQueue.positive("Votre mot de passe a été modifié avec succès.", { timeout: 5000 });
             navigate('/login');
         } else {
-            alert(data.message);
+          ToastQueue.negative("Lien expiré ou invalide.", { timeout: 5000 });
         }
     } catch (error) {
         console.error('Error:', error);
-        alert('Une erreur est survenue lors de la modification du mot de passe.');
+        ToastQueue.negative("Une erreur est survenue lors de la modification du mot de passe.", { timeout: 5000 });
     }
   };
 
@@ -116,6 +97,7 @@ const ResetPasswordPage = () => {
                 {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
               </span>
             </div>
+            {errors.password && <div className="error-message">{errors.password}</div>}
           </div>
           <br />
           <div className="submit-container-reset">

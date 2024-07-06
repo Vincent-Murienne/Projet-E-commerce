@@ -7,31 +7,28 @@ $response["success"] = false;
 
 // Check if the API call is legitimate
 if ($isAllowed) {
-    // Check if all required parameters are provided
-    if (isset($_GET["prix_min"]) && isset($_GET["prix_max"]) && isset($_GET["materiaux"]) && isset($_GET["categories"]) && isset($_GET["en_stock"])) {
-        // Create new instance of class Database to interact with the database
-        $db = new Database();
+    // Create new instance of class Database to interact with the database
+    $db = new Database();
 
-        // Perform search using the defined criteria
-        $searchResults = $db->searchProductNameWithFilter(
-            $_GET["prix_min"],
-            $_GET["prix_max"],
-            $_GET["materiaux"],
-            $_GET["categories"],
-            $_GET["en_stock"]
-        );
+    // Perform search using the defined criteria
+    $searchResults = $db->searchProductNameWithFilter(
+        $json["recherche"],
+        $json["prix_min"],
+        $json["prix_max"],
+        $json["materiaux"],
+        $json["categories"],
+        $json["en_stock"]
+    );
 
-        // Check if any results are found
-        if ($searchResults !== null) {
-            $response["success"] = true;
-            $response["data"] = $searchResults;
-        } else {
-            $response["error"] = "Aucun produit correspondant trouvé.";
-        }
+    // Check if any results are found
+    if ($searchResults !== null) {
+        $response["success"] = true;
+        $response["data"] = $searchResults;
     } else {
-        $response["error"] = "Certains paramètres de recherche sont manquants.";
+        $response["error"] = "Aucun produit correspondant trouvé.";
     }
-} else {
+}
+else {
     $response["error"] = "La clé API n'est pas fournie ou est incorrecte.";
 }
 

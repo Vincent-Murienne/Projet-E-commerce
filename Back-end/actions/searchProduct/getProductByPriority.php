@@ -19,8 +19,6 @@ if ($isAllowed) {
         if ($searchResults !== null) {
             $response["success"] = true;
             $response["data"] = $searchResults;
-        } else {
-            $response["error"] = "Aucun produit correspondant trouvé.";
         }
     } else {
         $response["error"] = "Veuillez spécifier un titre pour la recherche.";
