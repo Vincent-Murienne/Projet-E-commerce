@@ -61,7 +61,7 @@ const MonComptePayment = () => {
             "id": userId
         };
 
-        Data("panelAdmin", "getAddresses", paymentData).then(response => {
+        Data("panelAdmin", "getCheckoutData", paymentData).then(response => {
             if (response.success === true) {
                 setUserPayment(response.data);  
                 if (response.data.length === 0) {

@@ -77,23 +77,23 @@ const MonCompteAdresse = () => {
             "id": userId
         };
 
-        Data("panelAdmin", "getAddresses", addressData).then(response => {
+        Data("panelAdmin", "getCheckoutData", addressData).then(response => {
             if (response.success === true) {
                 setUserAddresses(response.data);  
                 if (response.data.length === 0) {
                     setSelectedAddress("0");
                 } else {
                     setSelectedAddress(response.data[0].id.toString());          
-                setAddressName(response.data[0].address_name);           
-                setFirstName(response.data[0].first_name);
-                setLastName(response.data[0].last_name);
-                setAddress(response.data[0].address);
-                setCity(response.data[0].city);
-                setZipCode(response.data[0].zip_code); 
-                setRegion(response.data[0].region);
-                setCountry(response.data[0].country);
-                setPhone(response.data[0].phone_number);
-                setUserId(userId);
+                    setAddressName(response.data[0].address_name);           
+                    setFirstName(response.data[0].first_name);
+                    setLastName(response.data[0].last_name);
+                    setAddress(response.data[0].address);
+                    setCity(response.data[0].city);
+                    setZipCode(response.data[0].zip_code); 
+                    setRegion(response.data[0].region);
+                    setCountry(response.data[0].country);
+                    setPhone(response.data[0].phone_number);
+                    setUserId(userId);
                 }
             } else {
                 ToastQueue.negative(response.error, {timeout: 5000});

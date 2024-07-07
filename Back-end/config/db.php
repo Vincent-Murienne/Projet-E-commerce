@@ -467,4 +467,16 @@ class Database {
         return $query->rowCount();
     }
 
+    public function downloadPersonalData($id) {
+        $sql = "SELECT users.full_name, users.email, payments.card_name, payments.card_owner, payments.card_number, payments.expiration_date, payments.cvv, addresses.address_name, addresses.first_name, addresses.last_name, addresses.address, addresses.city, addresses.zip_code, addresses.region, addresses.country, addresses.phone_number FROM users
+                JOIN payments ON users.id = payments.user_id
+                JOIN addresses ON users.id = addresses.user_id
+                WHERE users.id = :id;";
+
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue("id", $id, PDO::PARAM_INT);
+        $query->execute();
+
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
