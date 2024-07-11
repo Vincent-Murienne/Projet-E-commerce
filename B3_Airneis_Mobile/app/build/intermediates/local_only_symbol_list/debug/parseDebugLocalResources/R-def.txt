@@ -25,6 +25,8 @@ drawable baseline_account_circle_24
 drawable baseline_contact_support_24
 drawable baseline_search_24
 drawable button_background
+drawable chaise1
+drawable chaise_pivotante
 drawable container_background
 drawable gradient_background
 drawable ic_dashboard_black_24dp
