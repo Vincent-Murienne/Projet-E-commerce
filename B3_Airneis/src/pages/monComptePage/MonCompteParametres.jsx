@@ -46,21 +46,6 @@ const MonCompteParametres = () => {
     const handleDownloadData = () => {
         const csvConfig = mkConfig({ useKeysAsHeaders: true });
 
-        // const mockData = [
-        //     {
-        //       name: "Rouky",
-        //       date: "2023-09-01",
-        //       percentage: 0.4,
-        //       quoted: '"Pickles"',
-        //     },
-        //     {
-        //       name: "Keiko",
-        //       date: "2023-09-01",
-        //       percentage: 0.9,
-        //       quoted: '"Cactus"',
-        //     },
-        // ];
-
         Data("monCompte", "downloadPersonalData", {"id": getUserId}).then(response => {
             if (response.success) {
                 const csv = generateCsv(csvConfig)(response.data);

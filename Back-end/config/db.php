@@ -457,6 +457,23 @@ class Database {
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    function getOrderDetail($order_id) {
+        $sql = "SELECT orders.date, orders.order_state, lots_of_product.product_id AS 'product_id', lots_of_product.quantity AS 'quantity', products.name AS 'product_name', products.price AS 'product_price', products.description AS 'product_description', images.name AS 'image_name', payments.card_name, addresses.address_name FROM lots_of_product
+                LEFT JOIN products ON lots_of_product.product_id = products.id
+                LEFT JOIN images ON lots_of_product.product_id = images.product_id
+                LEFT JOIN orders ON lots_of_product.order_id = orders.id
+                LEFT JOIN payments ON orders.payment_id = payments.id
+                LEFT JOIN addresses ON orders.address_id = addresses.id
+                WHERE lots_of_product.order_id = :order_id
+                GROUP BY lots_of_product.product_id;";
+
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue("order_id", $order_id, PDO::PARAM_INT);
+        $query->execute();
+
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function insertLotsOfProduct($data) {
         $sql = "INSERT INTO lots_of_product (order_id, product_id, quantity) VALUES (:order_id, :product_id, :quantity)";
         $query = $this->pdo->prepare($sql);

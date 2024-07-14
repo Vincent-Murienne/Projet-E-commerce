@@ -1,62 +1,74 @@
-import { useContext, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { UserContext } from '../../context/UserProvider';
 import { Data } from '../../services/api';
 import { ToastQueue } from "@react-spectrum/toast";
 
 const OrderPage = () => {
     const { orderId } = useParams();
-    const { pullData } = useContext(UserContext);
-    const [orderDetails, setOrderDetails] = useState(null);
-    const [products, setProducts] = useState([]);
+    const [orderDetails, setOrderDetails] = useState([]);
+    const [orderDate, setOrderDate] = useState("");
+    const [orderState, setOrderState] = useState("");
+    const [orderPayment, setOrderPayment] = useState("");
+    const [orderAddress, setOrderAddress] = useState("");
     const [totalPrice, setTotalPrice] = useState(0);
     const tva = 0.17;
 
     useEffect(() => {
-        const userData = pullData("user");
-        if (userData && orderId) {
+        if (orderId) {
             const orderData = {
-                "user_id": userData.id,
                 "order_id": orderId
             };
 
             Data("orders", "getOrderDetails", orderData).then(response => {
                 if (response.success === true) {
-                    setOrderDetails(response.data.orderDetails);
-                    setProducts(response.data.products);
-                    calculateTotalPrice(response.data.products);
+                    setOrderDetails(response.data);
+                    setOrderDate(response.data[0].date);
+                    setOrderState(response.data[0].order_state);
+                    setOrderPayment(response.data[0].card_name);
+                    setOrderAddress(response.data[0].address_name);
                 } else {
                     ToastQueue.negative(response.error, { timeout: 5000 });
                 }
             });
         }
-    }, [orderId]);
+    }, []);
 
-    const calculateTotalPrice = (products) => {
+    useEffect(() => {
+        calculateTotalPrice();
+    }, [orderDetails]);
+
+    const calculateTotalPrice = () => {
         let total = 0;
-        products.forEach(product => {
-            total += product.price * product.quantity;
+        orderDetails.forEach(product => {
+            total += product.product_price * product.quantity;
         });
+        total = total + total * tva;
         setTotalPrice(parseFloat(total.toFixed(2)));
     };
 
-    // You can reuse handleDelete and handleQuantityChange from BasketPage with some modifications
-    // ...
-
-    if (!orderDetails) {
-        return <div>Loading...</div>;
-    }
-
     return (
-        <div className="order-page">
-            <h1 className="order-title">Détails de la commande n°{orderId}</h1>
-            {/* Display order details */}
-            {/* Display list of products with the ability to update quantity and delete */}
-            {/* You can reuse the product list display from BasketPage with some modifications */}
-            {/* ... */}
-            <div className="total-price">Prix total : {totalPrice.toFixed(2)} €</div>
-            <div className="tva-price">TVA : {(totalPrice * tva).toFixed(2)} €</div>
-            {/* Add any additional order details you want to display */}
+        <div className="container-order">
+            <h1 className="title-order">Mes Commandes</h1>
+            <h2 className="orderDetails">Date de la commande: {orderDate}</h2>
+            <h2 className="orderDetails">Statut de la commande: {orderState}</h2>
+            <h2 className="orderDetails">Prix total de la commande: {totalPrice} €</h2>
+            <h2 className="orderDetails">Moyen de paiement utilisé: {orderPayment}</h2>
+            <h2 className="orderDetails">Adresse de livraison: {orderAddress}</h2>
+            <h2 className="order_separator"></h2>
+            {orderDetails.map(product => (
+                <div key={product.product_id} className="orderDetailsItem">
+                    <div>
+                        <img src={`/img/${product.image_name}`} alt="" className="imageOrder"/>
+                    </div>
+                    <div className="orderDetailsInfos">
+                        <h3>{product.product_name}</h3>
+                        <p><strong>Description:</strong> {product.product_description}</p>
+                        <p><strong>Quantité:</strong> {product.quantity}</p>
+                        <p><strong>Prix total:</strong> {(Number(product.quantity) * Number(product.product_price)).toFixed(2)} €</p>
+                    </div>
+                </div>
+            ))}
+            {orderDetails.length === 0 && <p className="errorMessage-order">Cette commande est vide.</p>}
         </div>
     );
 };

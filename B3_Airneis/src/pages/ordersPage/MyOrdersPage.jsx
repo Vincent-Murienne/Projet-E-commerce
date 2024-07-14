@@ -53,17 +53,18 @@ const MyOrdersPage = () => {
             {Object.keys(groupedOrders).sort().reverse().map(year => (
                 <div key={year}>
                     <h2 className="yearTitle-order">{year}</h2>
+                    <h2 className="order_separator"></h2>
                     <ul className="orderList">
                         {groupedOrders[year].map(order => (
-                            <li key={order.order_id} className="orderItem">
-                                <Link to={`/orderPage/${order.order_id}`}>
+                            <Link to={`/orderPage/${order.order_id}`} key={order.order_id} className="orderItemHover">
+                                <li className="orderItem">
                                     <h3>Commande n°{order.order_id}</h3>
                                     <p>Date de commande: <strong>{order.order_date}</strong></p>
                                     <p>Statut de la commande: <strong>{order.order_status}</strong></p>
                                     <p>Nombre total d'articles: <strong>{order.total_items}</strong></p>
                                     <p>Prix total: <strong>{(Number(order.total_price) + Number(order.total_price) * tva).toFixed(2)}€</strong></p>
-                                </Link>
-                            </li>
+                                </li>
+                            </Link>
                         ))}
                     </ul>
                 </div>
