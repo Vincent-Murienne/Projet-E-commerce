@@ -2134,6 +2134,7 @@ color mtrl_textinput_focused_box_stroke_color
 color mtrl_textinput_hovered_box_stroke_color
 color notification_action_color_filter
 color notification_icon_bg_color
+color primary
 color primary_dark
 color primary_dark_material_dark
 color primary_dark_material_light
@@ -2149,6 +2150,7 @@ color purple_500
 color purple_700
 color ripple_material_dark
 color ripple_material_light
+color secondaryBlack
 color secondary_text_default_material_dark
 color secondary_text_default_material_light
 color secondary_text_disabled_material_dark
@@ -3053,8 +3055,8 @@ drawable abc_vector_test
 drawable avd_hide_password
 drawable avd_show_password
 drawable baseline_account_circle_24
-drawable baseline_contact_support_24
 drawable baseline_search_24
+drawable baseline_shopping_cart_24
 drawable btn_checkbox_checked_mtrl
 drawable btn_checkbox_checked_to_unchecked_mtrl_animation
 drawable btn_checkbox_unchecked_mtrl
@@ -3064,6 +3066,8 @@ drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
 drawable button_background
+drawable chaise1
+drawable chaise_pivotante
 drawable container_background
 drawable design_fab_background
 drawable design_ic_visibility
@@ -3286,11 +3290,11 @@ id bounceStart
 id btnSendResetEmail
 id buttonAPropos
 id buttonCgu
+id buttonContact
 id buttonMentionsLegales
 id buttonMesCommandes
 id buttonPanel
-id buttonPanier
-id buttonParametreCompte
+id buttonParametresCompte
 id buttonSeConnecter
 id buttonSeDeconnecter
 id buttonSinscrire
@@ -3380,6 +3384,7 @@ id endToStart
 id enterAlways
 id enterAlwaysCollapsed
 id error_message
+id error_message_order
 id escape
 id etEmail
 id exitUntilCollapsed
@@ -3531,8 +3536,8 @@ id navigation_bar_item_icon_view
 id navigation_bar_item_labels_group
 id navigation_bar_item_large_label_view
 id navigation_bar_item_small_label_view
+id navigation_basket
 id navigation_categories
-id navigation_contact
 id navigation_fab
 id navigation_header_container
 id navigation_home
@@ -3564,6 +3569,9 @@ id open_search_view_search_prefix
 id open_search_view_status_bar_spacer
 id open_search_view_toolbar
 id open_search_view_toolbar_container
+id order_date
+id order_id
+id order_status
 id outline
 id outward
 id overshoot
@@ -3597,6 +3605,8 @@ id progress_horizontal
 id radio
 id ratio
 id rectangles
+id recycler_view_order_items
+id recycler_view_orders
 id register
 id registerButton
 id report_drawn
@@ -3707,11 +3717,14 @@ id textinput_suffix_text
 id time
 id title
 id titleDividerNoCustom
+id title_order
 id title_template
 id toggle
 id top
 id topPanel
 id totalPrice
+id total_items
+id total_price
 id touch_outside
 id transitionToEnd
 id transitionToStart
@@ -3749,6 +3762,7 @@ id wrap_content
 id wrap_content_constrained
 id x_left
 id x_right
+id year_title_order
 integer abc_config_activityDefaultDur
 integer abc_config_activityShortDur
 integer app_bar_elevation_anim_duration
@@ -3892,9 +3906,12 @@ layout fragment_forget_password
 layout fragment_home
 layout fragment_login
 layout fragment_mentions_legales
+layout fragment_my_orders
 layout fragment_register
 layout ime_base_split_test_activity
 layout ime_secondary_split_test_activity
+layout item_order
+layout item_order_detail
 layout item_product
 layout m3_alert_dialog
 layout m3_alert_dialog_actions
@@ -4146,8 +4163,8 @@ string side_sheet_behavior
 string status_bar_notification_info_overflow
 string title_account
 string title_activity_main
+string title_basket
 string title_categories
-string title_contact
 string title_home
 string totalPrice
 string yourBasket

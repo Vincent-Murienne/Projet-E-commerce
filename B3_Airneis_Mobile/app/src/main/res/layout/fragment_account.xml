@@ -1,79 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment.AccountFragment">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_gravity="start"
         android:gravity="center"
-        android:layout_gravity="center">
-
-        <Button
-            android:id="@+id/buttonPanier"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Panier"
-            android:layout_marginTop="20dp" />
-
-        <Button
-            android:id="@+id/buttonParametreCompte"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Paramètre du compte" />
-
-        <Button
-            android:id="@+id/buttonMesCommandes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Mes commandes" />
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/buttonSeConnecter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Se connecter" />
+            android:layout_marginTop="40dp"
+            android:text="Se connecter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.499"
+            app:layout_constraintStart_toStartOf="parent"
+            android:width="230dp"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/buttonSinscrire"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="S'inscrire" />
+            android:text="S'inscrire"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:width="230dp"
+            app:layout_constraintTop_toBottomOf="@+id/buttonSeConnecter" />
+
+        <Button
+            android:id="@+id/buttonMesCommandes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Mes commandes"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:width="230dp"
+            app:layout_constraintTop_toBottomOf="@+id/buttonSinscrire" />
+
+        <Button
+            android:id="@+id/buttonParametresCompte"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Paramètres du compte"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:width="230dp"
+            app:layout_constraintTop_toBottomOf="@+id/buttonMesCommandes" />
 
         <Button
             android:id="@+id/buttonSeDeconnecter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Se déconnecter" />
+            android:text="Se déconnecter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:width="230dp"
+            app:layout_constraintTop_toBottomOf="@+id/buttonParametresCompte" />
+
+        <Button
+            android:id="@+id/buttonContact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contactez-nous"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:width="230dp"
+            app:layout_constraintTop_toBottomOf="@+id/buttonSeDeconnecter" />
 
         <Button
             android:id="@+id/buttonCgu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="CGU" />
+            android:text="CGU"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:width="230dp"
+            app:layout_constraintTop_toBottomOf="@+id/buttonContact" />
 
         <Button
             android:id="@+id/buttonMentionsLegales"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Mentions légales" />
+            android:text="Mentions légales"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:width="230dp"
+            app:layout_constraintTop_toBottomOf="@+id/buttonCgu" />
 
         <Button
             android:id="@+id/buttonAPropos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="A propos d'Àirneis" />
-    </LinearLayout>
+            android:text="A propos d'Àirneis"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:width="230dp"
+            app:layout_constraintTop_toBottomOf="@+id/buttonMentionsLegales" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
