@@ -18,10 +18,10 @@
             android:id="@+id/categoryImage"
             android:layout_width="240dp"
             android:layout_height="210dp"
-            android:scaleType="centerCrop"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/a1_1_chaise_design_blanc_et_bois_clair"
-            android:background="@drawable/a1_1_chaise_design_blanc_et_bois_clair" />
+            android:background="@drawable/a1_1_chaise_design_blanc_et_bois_clair"
+            android:scaleType="centerCrop"
+            android:src="@drawable/a1_1_chaise_design_blanc_et_bois_clair" />
 
         <TextView
             android:id="@+id/categoryName"
@@ -39,10 +39,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
+            android:background="@drawable/button_border"
             android:text="Voir plus"
             android:textAlignment="center"
             android:textColor="@android:color/black"
-            android:textSize="18sp"
-            android:background="@drawable/button_border" />
+            android:textSize="18sp" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>
