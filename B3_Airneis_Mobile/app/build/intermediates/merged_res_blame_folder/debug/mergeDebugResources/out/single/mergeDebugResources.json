@@ -44,12 +44,21 @@
         "source": "com.example.airneis.app-main-46:/layout/fragment_forget_password.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "com.example.airneis.app-debug-44:/drawable_baseline_contact_support_24.xml.flat",
         "source": "com.example.airneis.app-main-46:/drawable/baseline_contact_support_24.xml"
     },
     {
         "merged": "com.example.airneis.app-debug-44:/drawable_baseline_account_circle_24.xml.flat",
         "source": "com.example.airneis.app-main-46:/drawable/baseline_account_circle_24.xml"
+=======
+        "merged": "com.example.airneis.app-debug-44:/drawable_baseline_account_circle_24.xml.flat",
+        "source": "com.example.airneis.app-main-46:/drawable/baseline_account_circle_24.xml"
+    },
+    {
+        "merged": "com.example.airneis.app-debug-44:/layout_fragment_my_orders.xml.flat",
+        "source": "com.example.airneis.app-main-46:/layout/fragment_my_orders.xml"
+>>>>>>> develop
     },
     {
         "merged": "com.example.airneis.app-debug-44:/mipmap-mdpi_ic_launcher_round.webp.flat",
@@ -84,6 +93,7 @@
         "source": "com.example.airneis.app-main-46:/layout/activity_search.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "com.example.airneis.app-debug-44:/mipmap-hdpi_ic_launcher.webp.flat",
         "source": "com.example.airneis.app-main-46:/mipmap-hdpi/ic_launcher.webp"
     },
@@ -184,6 +194,120 @@
         "source": "com.example.airneis.app-main-46:/drawable/ic_user.xml"
     },
     {
+=======
+        "merged": "com.example.airneis.app-debug-44:/layout_item_order_detail.xml.flat",
+        "source": "com.example.airneis.app-main-46:/layout/item_order_detail.xml"
+    },
+    {
+        "merged": "com.example.airneis.app-debug-44:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "com.example.airneis.app-main-46:/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.airneis.app-debug-44:/layout_fragment_register.xml.flat",
+        "source": "com.example.airneis.app-main-46:/layout/fragment_register.xml"
+    },
+    {
+        "merged": "com.example.airneis.app-debug-44:/layout_item_order.xml.flat",
+        "source": "com.example.airneis.app-main-46:/layout/item_order.xml"
+    },
+    {
+        "merged": "com.example.airneis.app-debug-44:/layout_fragment_login.xml.flat",
+        "source": "com.example.airneis.app-main-46:/layout/fragment_login.xml"
+    },
+    {
+        "merged": "com.example.airneis.app-debug-44:/drawable_baseline_shopping_cart_24.xml.flat",
+        "source": "com.example.airneis.app-main-46:/drawable/baseline_shopping_cart_24.xml"
+    },
+    {
+        "merged": "com.example.airneis.app-debug-44:/layout_fragment_account.xml.flat",
+        "source": "com.example.airneis.app-main-46:/layout/fragment_account.xml"
+    },
+    {
+        "merged": "com.example.airneis.app-debug-44:/drawable_logo_facebook.xml.flat",
+        "source": "com.example.airneis.app-main-46:/drawable/logo_facebook.xml"
+    },
+    {
+        "merged": "com.example.airneis.app-debug-44:/drawable_ic_eye.xml.flat",
+        "source": "com.example.airneis.app-main-46:/drawable/ic_eye.xml"
+    },
+    {
+        "merged": "com.example.airneis.app-debug-44:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.airneis.app-main-46:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.airneis.app-debug-44:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.example.airneis.app-main-46:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.example.airneis.app-debug-44:/drawable_input_background.xml.flat",
+        "source": "com.example.airneis.app-main-46:/drawable/input_background.xml"
+    },
+    {
+        "merged": "com.example.airneis.app-debug-44:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.example.airneis.app-main-46:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.example.airneis.app-debug-44:/drawable_ic_lock.xml.flat",
+        "source": "com.example.airneis.app-main-46:/drawable/ic_lock.xml"
+    },
+    {
+        "merged": "com.example.airneis.app-debug-44:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.example.airneis.app-main-46:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.example.airneis.app-debug-44:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.example.airneis.app-main-46:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.example.airneis.app-debug-44:/xml_network_security_config.xml.flat",
+        "source": "com.example.airneis.app-main-46:/xml/network_security_config.xml"
+    },
+    {
+        "merged": "com.example.airneis.app-debug-44:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.airneis.app-main-46:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.airneis.app-debug-44:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.airneis.app-main-46:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.airneis.app-debug-44:/layout_fragment_categories.xml.flat",
+        "source": "com.example.airneis.app-main-46:/layout/fragment_categories.xml"
+    },
+    {
+        "merged": "com.example.airneis.app-debug-44:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.airneis.app-main-46:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.airneis.app-debug-44:/xml_backup_rules.xml.flat",
+        "source": "com.example.airneis.app-main-46:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.example.airneis.app-debug-44:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.example.airneis.app-main-46:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.airneis.app-debug-44:/drawable_gradient_background.xml.flat",
+        "source": "com.example.airneis.app-main-46:/drawable/gradient_background.xml"
+    },
+    {
+        "merged": "com.example.airneis.app-debug-44:/drawable_logo_linkedin.xml.flat",
+        "source": "com.example.airneis.app-main-46:/drawable/logo_linkedin.xml"
+    },
+    {
+        "merged": "com.example.airneis.app-debug-44:/menu_bottom_nav_menu.xml.flat",
+        "source": "com.example.airneis.app-main-46:/menu/bottom_nav_menu.xml"
+    },
+    {
+        "merged": "com.example.airneis.app-debug-44:/drawable_container_background.xml.flat",
+        "source": "com.example.airneis.app-main-46:/drawable/container_background.xml"
+    },
+    {
+        "merged": "com.example.airneis.app-debug-44:/drawable_ic_user.xml.flat",
+        "source": "com.example.airneis.app-main-46:/drawable/ic_user.xml"
+    },
+    {
+>>>>>>> develop
         "merged": "com.example.airneis.app-debug-44:/mipmap-xxhdpi_ic_launcher.webp.flat",
         "source": "com.example.airneis.app-main-46:/mipmap-xxhdpi/ic_launcher.webp"
     },

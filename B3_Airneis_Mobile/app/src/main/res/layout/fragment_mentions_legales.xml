@@ -2,7 +2,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#ecf0f1">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -10,8 +11,7 @@
         android:orientation="vertical"
         android:id="@+id/cgu_container"
         android:layout_margin="20dp"
-        android:maxWidth="800dp"
-        android:background="#ffffff">
+        android:maxWidth="800dp">
 
         <TextView
             android:id="@+id/title"

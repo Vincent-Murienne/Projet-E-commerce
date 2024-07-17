@@ -3,7 +3,7 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_home">Accueil</string>
     <string name="title_categories">Catégories</string>
-    <string name="title_contact">Contact</string>
+    <string name="title_basket">Panier</string>
     <string name="title_account">Mon compte</string>
     <string name="yourBasket">Votre Panier</string>
     <string name="totalPrice">Prix Total</string>

@@ -31,81 +31,71 @@ public class AccountFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Check login state
+        reloadUI();
+        binding.buttonMesCommandes.setOnClickListener(v -> openFragment("mesCommandes"));
+        binding.buttonContact.setOnClickListener(v -> openFragment("contact"));
+        binding.buttonSeConnecter.setOnClickListener(v -> openFragment("login"));
+        binding.buttonSeDeconnecter.setOnClickListener(v -> logout());
+        binding.buttonSinscrire.setOnClickListener(v -> openFragment("register"));
+        binding.buttonCgu.setOnClickListener(v -> openFragment("cgu"));
+        binding.buttonMentionsLegales.setOnClickListener(v -> openFragment("mentionsLegales"));
+        binding.buttonAPropos.setOnClickListener(v -> openFragment("aPropos"));
+        /*binding.buttonParametresCompte.setOnClickListener(v -> openBasketFragment());
+        binding.buttonMesCommandes.setOnClickListener(v -> openBasketFragment());*/
+    }
+
+    private void reloadUI() {
         SharedPreferences sharedPref = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         boolean isLoggedIn = sharedPref.getBoolean("isLoggedIn", false);
 
         if (isLoggedIn) {
             binding.buttonSeConnecter.setVisibility(View.GONE);
             binding.buttonSinscrire.setVisibility(View.GONE);
-            binding.buttonParametreCompte.setVisibility(View.VISIBLE);
+            binding.buttonParametresCompte.setVisibility(View.VISIBLE);
             binding.buttonMesCommandes.setVisibility(View.VISIBLE);
             binding.buttonSeDeconnecter.setVisibility(View.VISIBLE);
         } else {
             binding.buttonSeConnecter.setVisibility(View.VISIBLE);
             binding.buttonSinscrire.setVisibility(View.VISIBLE);
-            binding.buttonParametreCompte.setVisibility(View.GONE);
+            binding.buttonParametresCompte.setVisibility(View.GONE);
             binding.buttonMesCommandes.setVisibility(View.GONE);
             binding.buttonSeDeconnecter.setVisibility(View.GONE);
         }
-
-        binding.buttonPanier.setOnClickListener(v -> openBasketFragment());
-        binding.buttonSeConnecter.setOnClickListener(v -> openLoginFragment());
-        binding.buttonSeDeconnecter.setOnClickListener(v -> logout());
-        binding.buttonSinscrire.setOnClickListener(v -> openRegisterFragment());
-        binding.buttonCgu.setOnClickListener(v -> openCguFragment());
-        binding.buttonMentionsLegales.setOnClickListener(v -> openMentionsLegalesFragment());
-        binding.buttonAPropos.setOnClickListener(v -> openAProposFragment());
-        /*binding.buttonParametreCompte.setOnClickListener(v -> openBasketFragment());
-        binding.buttonMesCommandes.setOnClickListener(v -> openBasketFragment());*/
     }
 
-    private void openBasketFragment() {
-        BasketFragment basketFragment = new BasketFragment();
-        FragmentTransaction transaction =  getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frameLayout, basketFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
+    private void openFragment(String page) {
+        Fragment fragment = null;
 
-    private void openLoginFragment() {
-        LoginFragment loginFragment = new LoginFragment();
-        FragmentTransaction transaction =  getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frameLayout, loginFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
+        switch(page){
+            case "mesCommandes":
+                fragment = new MyOrdersFragment();
+                break;
+            case "contact":
+                fragment = new ContactFragment();
+                break;
+            case "cgu":
+                fragment = new CguFragment();
+                break;
+            case "login":
+                fragment = new LoginFragment();
+                break;
+            case "register":
+                fragment = new RegisterFragment();
+                break;
+            case "mentionsLegales":
+                fragment = new MentionsLegalesFragment();
+                break;
+            case "aPropos":
+                fragment = new AProposFragment();
+                break;
+        }
 
-    private void openRegisterFragment() {
-        RegisterFragment registerFragment = new RegisterFragment();
-        FragmentTransaction transaction =  getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frameLayout, registerFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
-
-    private void openCguFragment() {
-        CguFragment cguFragment = new CguFragment();
-        FragmentTransaction transaction =  getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frameLayout, cguFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
-
-    private void openMentionsLegalesFragment() {
-        MentionsLegalesFragment mentionsLegalesFragment = new MentionsLegalesFragment();
-        FragmentTransaction transaction =  getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frameLayout, mentionsLegalesFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
-
-    private void openAProposFragment() {
-        AProposFragment aProposFragment = new AProposFragment();
-        FragmentTransaction transaction =  getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frameLayout, aProposFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+        if (fragment != null) {
+            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.frameLayout, fragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        }
     }
 
     private void logout() {
@@ -115,12 +105,8 @@ public class AccountFragment extends Fragment {
         editor.putBoolean("isLoggedIn", false);
         editor.apply();
 
-        // Update UI
-        binding.buttonSeConnecter.setVisibility(View.VISIBLE);
-        binding.buttonSinscrire.setVisibility(View.VISIBLE);
-        binding.buttonSeDeconnecter.setVisibility(View.GONE);
+        reloadUI();
 
-        // Optional: Show logout message
         Toast.makeText(getActivity(), "Déconnexion réussi", Toast.LENGTH_SHORT).show();
     }
 

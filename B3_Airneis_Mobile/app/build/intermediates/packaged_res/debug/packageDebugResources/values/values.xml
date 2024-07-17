@@ -10,11 +10,13 @@
     <color name="error">#dc3545</color>
     <color name="lavender">#8692F7</color>
     <color name="link">#1E90FF</color>
+    <color name="primary">#16253F</color>
     <color name="primary_dark">#16253F</color>
     <color name="primary_light">#2F4F4F</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
+    <color name="secondaryBlack">#000000</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="white">#FFFFFFFF</color>
@@ -37,15 +39,15 @@
     <string name="register">Inscription</string>
     <string name="title_account">Mon compte</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="title_basket">Panier</string>
     <string name="title_categories">Catégories</string>
-    <string name="title_contact">Contact</string>
     <string name="title_home">Accueil</string>
     <string name="totalPrice">Prix Total</string>
     <string name="yourBasket">Votre Panier</string>
     <style name="Theme.Airneis" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/secondaryBlack</item>
         <item name="colorOnPrimary">@color/white</item>
         
         <item name="colorSecondary">@color/teal_200</item>

@@ -17,9 +17,9 @@
         android:title="" />
 
     <item
-        android:id="@+id/navigation_contact"
-        android:icon="@drawable/baseline_contact_support_24"
-        android:title="@string/title_contact" />
+        android:id="@+id/navigation_basket"
+        android:icon="@drawable/baseline_shopping_cart_24"
+        android:title="@string/title_basket" />
 
     <item
         android:id="@+id/navigation_account"
