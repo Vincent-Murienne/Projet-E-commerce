@@ -66,6 +66,11 @@
             android:name="androidx.window.sidecar"
             android:required="false" />
 
+        <provider
+            android:name="com.squareup.picasso.PicassoProvider"
+            android:authorities="com.example.airneis.com.squareup.picasso"
+            android:exported="false" />
+
         <receiver
             android:name="androidx.profileinstaller.ProfileInstallReceiver"
             android:directBootAware="false"

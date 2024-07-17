@@ -1,338 +1,514 @@
 [
     {
-        "merged": "com.example.airneis.app-debug-44:/mipmap-xhdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.airneis.app-main-46:/mipmap-xhdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\ic_launcher_background.xml"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/xml_data_extraction_rules.xml.flat",
-        "source": "com.example.airneis.app-main-46:/xml/data_extraction_rules.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_f2_2_table_de_chevet_suspendue.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\f2_2_table_de_chevet_suspendue.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/drawable_chaise1.jpg.flat",
-        "source": "com.example.airneis.app-main-46:/drawable/chaise1.jpg"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_g3_1_poubelle_de_bureau_en_acier_inoxydable.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\g3_1_poubelle_de_bureau_en_acier_inoxydable.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/layout_activity_main.xml.flat",
-        "source": "com.example.airneis.app-main-46:/layout/activity_main.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_ic_eye.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\ic_eye.xml"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/drawable_button_background.xml.flat",
-        "source": "com.example.airneis.app-main-46:/drawable/button_background.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_g2_3_lampe_de_bureau.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\g2_3_lampe_de_bureau.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/drawable_baseline_search_24.xml.flat",
-        "source": "com.example.airneis.app-main-46:/drawable/baseline_search_24.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_c2_1_canape_lit_avec_rangement.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\c2_1_canape_lit_avec_rangement.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/drawable_chaise_pivotante.jpg.flat",
-        "source": "com.example.airneis.app-main-46:/drawable/chaise_pivotante.jpg"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\mipmap-mdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/drawable_logo_instagram.xml.flat",
-        "source": "com.example.airneis.app-main-46:/drawable/logo_instagram.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\layout_fragment_top_produits.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\layout\\fragment_top_produits.xml"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/drawable_ic_eye_slash.xml.flat",
-        "source": "com.example.airneis.app-main-46:/drawable/ic_eye_slash.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_d3_1_armoire_dressing_avec_miroir.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\d3_1_armoire_dressing_avec_miroir.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/drawable_ic_email.xml.flat",
-        "source": "com.example.airneis.app-main-46:/drawable/ic_email.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_a3_1_chaise_en_metal.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\a3_1_chaise_en_metal.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/layout_fragment_forget_password.xml.flat",
-        "source": "com.example.airneis.app-main-46:/layout/fragment_forget_password.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\layout_fragment_account.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\layout\\fragment_account.xml"
     },
     {
-<<<<<<< HEAD
-        "merged": "com.example.airneis.app-debug-44:/drawable_baseline_contact_support_24.xml.flat",
-        "source": "com.example.airneis.app-main-46:/drawable/baseline_contact_support_24.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\layout_item_order.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\layout\\item_order.xml"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/drawable_baseline_account_circle_24.xml.flat",
-        "source": "com.example.airneis.app-main-46:/drawable/baseline_account_circle_24.xml"
-=======
-        "merged": "com.example.airneis.app-debug-44:/drawable_baseline_account_circle_24.xml.flat",
-        "source": "com.example.airneis.app-main-46:/drawable/baseline_account_circle_24.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_f4_3_table_de_chevet_en_metal_noir.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\f4_3_table_de_chevet_en_metal_noir.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/layout_fragment_my_orders.xml.flat",
-        "source": "com.example.airneis.app-main-46:/layout/fragment_my_orders.xml"
->>>>>>> develop
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/mipmap-mdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.airneis.app-main-46:/mipmap-mdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_b3_1_table_de_cuisine_extensible.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\b3_1_table_de_cuisine_extensible.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/layout_fragment_a_propos.xml.flat",
-        "source": "com.example.airneis.app-main-46:/layout/fragment_a_propos.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_g3_3_poubelle_de_bureau_en_acier_inoxydable.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\g3_3_poubelle_de_bureau_en_acier_inoxydable.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/layout_fragment_basket.xml.flat",
-        "source": "com.example.airneis.app-main-46:/layout/fragment_basket.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_f3_2_table_de_chevet_design_en_verre.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\f3_2_table_de_chevet_design_en_verre.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/mipmap-xhdpi_ic_launcher.webp.flat",
-        "source": "com.example.airneis.app-main-46:/mipmap-xhdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_button_background.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\button_background.xml"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/layout_fragment_cgu.xml.flat",
-        "source": "com.example.airneis.app-main-46:/layout/fragment_cgu.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_e2_2_chaise_longue_de_jardin_pliante.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\e2_2_chaise_longue_de_jardin_pliante.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/drawable_ic_home_black_24dp.xml.flat",
-        "source": "com.example.airneis.app-main-46:/drawable/ic_home_black_24dp.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/drawable_ic_dashboard_black_24dp.xml.flat",
-        "source": "com.example.airneis.app-main-46:/drawable/ic_dashboard_black_24dp.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\layout_fragment_forget_password.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\layout\\fragment_forget_password.xml"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/layout_activity_search.xml.flat",
-        "source": "com.example.airneis.app-main-46:/layout/activity_search.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\layout_top_produits_item.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\layout\\top_produits_item.xml"
     },
     {
-<<<<<<< HEAD
-        "merged": "com.example.airneis.app-debug-44:/mipmap-hdpi_ic_launcher.webp.flat",
-        "source": "com.example.airneis.app-main-46:/mipmap-hdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_a3_3_chaise_en_metal.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\a3_3_chaise_en_metal.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/layout_fragment_register.xml.flat",
-        "source": "com.example.airneis.app-main-46:/layout/fragment_register.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\layout\\activity_main.xml"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/layout_fragment_login.xml.flat",
-        "source": "com.example.airneis.app-main-46:/layout/fragment_login.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_d2_3_armoire_de_rangement_en_bois_de_cerisier.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\d2_3_armoire_de_rangement_en_bois_de_cerisier.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/layout_fragment_account.xml.flat",
-        "source": "com.example.airneis.app-main-46:/layout/fragment_account.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_c1_2_canape_3_places_en_cuir_italien.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\c1_2_canape_3_places_en_cuir_italien.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/drawable_logo_facebook.xml.flat",
-        "source": "com.example.airneis.app-main-46:/drawable/logo_facebook.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_ic_email.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\ic_email.xml"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/drawable_ic_eye.xml.flat",
-        "source": "com.example.airneis.app-main-46:/drawable/ic_eye.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\layout_fragment_top_categories.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\layout\\fragment_top_categories.xml"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.airneis.app-main-46:/mipmap-xxhdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\layout_fragment_contact.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\layout\\fragment_contact.xml"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "com.example.airneis.app-main-46:/mipmap-anydpi-v26/ic_launcher_round.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_b1_3_table_en_chene.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\b1_3_table_en_chene.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/drawable_input_background.xml.flat",
-        "source": "com.example.airneis.app-main-46:/drawable/input_background.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\mipmap-xxxhdpi\\ic_launcher.webp"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/drawable_ic_launcher_background.xml.flat",
-        "source": "com.example.airneis.app-main-46:/drawable/ic_launcher_background.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_input_background.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\input_background.xml"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/drawable_ic_lock.xml.flat",
-        "source": "com.example.airneis.app-main-46:/drawable/ic_lock.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_logo_facebook.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\logo_facebook.xml"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/drawable_ic_launcher_foreground.xml.flat",
-        "source": "com.example.airneis.app-main-46:/drawable/ic_launcher_foreground.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_d2_1_armoire_de_rangement_en_bois_de_cerisier.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\d2_1_armoire_de_rangement_en_bois_de_cerisier.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "com.example.airneis.app-main-46:/mipmap-anydpi-v26/ic_launcher.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\mipmap-hdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/xml_network_security_config.xml.flat",
-        "source": "com.example.airneis.app-main-46:/xml/network_security_config.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_g2_1_lampe_de_bureau.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\g2_1_lampe_de_bureau.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.airneis.app-main-46:/mipmap-xxxhdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_f2_1_table_de_chevet_suspendue.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\f2_1_table_de_chevet_suspendue.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/mipmap-xxxhdpi_ic_launcher.webp.flat",
-        "source": "com.example.airneis.app-main-46:/mipmap-xxxhdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_b1_2_table_en_chene.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\b1_2_table_en_chene.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/layout_fragment_categories.xml.flat",
-        "source": "com.example.airneis.app-main-46:/layout/fragment_categories.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_logo_instagram.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\logo_instagram.xml"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/mipmap-hdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.airneis.app-main-46:/mipmap-hdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_g1_1_organiseur_de_bureau_en_bois.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\g1_1_organiseur_de_bureau_en_bois.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/xml_backup_rules.xml.flat",
-        "source": "com.example.airneis.app-main-46:/xml/backup_rules.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_ic_home_black_24dp.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\ic_home_black_24dp.xml"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/mipmap-mdpi_ic_launcher.webp.flat",
-        "source": "com.example.airneis.app-main-46:/mipmap-mdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_e1_2_ensemble_de_salon_de_jardin.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\e1_2_ensemble_de_salon_de_jardin.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/drawable_gradient_background.xml.flat",
-        "source": "com.example.airneis.app-main-46:/drawable/gradient_background.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\menu_bottom_nav_menu.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\menu\\bottom_nav_menu.xml"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/drawable_logo_linkedin.xml.flat",
-        "source": "com.example.airneis.app-main-46:/drawable/logo_linkedin.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_e3_2_table_de_jardin_avec_parasol.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\e3_2_table_de_jardin_avec_parasol.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/menu_bottom_nav_menu.xml.flat",
-        "source": "com.example.airneis.app-main-46:/menu/bottom_nav_menu.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_c1_3_canape_3_places_en_cuir_italien.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\c1_3_canape_3_places_en_cuir_italien.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/drawable_container_background.xml.flat",
-        "source": "com.example.airneis.app-main-46:/drawable/container_background.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_a1_2_chaise_design_blanc_et_bois_clair.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\a1_2_chaise_design_blanc_et_bois_clair.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/drawable_ic_user.xml.flat",
-        "source": "com.example.airneis.app-main-46:/drawable/ic_user.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\layout_fragment_register.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\layout\\fragment_register.xml"
     },
     {
-=======
-        "merged": "com.example.airneis.app-debug-44:/layout_item_order_detail.xml.flat",
-        "source": "com.example.airneis.app-main-46:/layout/item_order_detail.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_c2_3_canape_lit_avec_rangement.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\c2_3_canape_lit_avec_rangement.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/mipmap-hdpi_ic_launcher.webp.flat",
-        "source": "com.example.airneis.app-main-46:/mipmap-hdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_f1_3_table_chevet_avec_tiroir.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\f1_3_table_chevet_avec_tiroir.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/layout_fragment_register.xml.flat",
-        "source": "com.example.airneis.app-main-46:/layout/fragment_register.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_baseline_search_24.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\baseline_search_24.xml"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/layout_item_order.xml.flat",
-        "source": "com.example.airneis.app-main-46:/layout/item_order.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\layout_activity_search.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\layout\\activity_search.xml"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/layout_fragment_login.xml.flat",
-        "source": "com.example.airneis.app-main-46:/layout/fragment_login.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_baseline_shopping_cart_24.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\baseline_shopping_cart_24.xml"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/drawable_baseline_shopping_cart_24.xml.flat",
-        "source": "com.example.airneis.app-main-46:/drawable/baseline_shopping_cart_24.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_ic_dashboard_black_24dp.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\ic_dashboard_black_24dp.xml"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/layout_fragment_account.xml.flat",
-        "source": "com.example.airneis.app-main-46:/layout/fragment_account.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_ic_eye_slash.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\ic_eye_slash.xml"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/drawable_logo_facebook.xml.flat",
-        "source": "com.example.airneis.app-main-46:/drawable/logo_facebook.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_d1_1_armoire_coulissant.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\d1_1_armoire_coulissant.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/drawable_ic_eye.xml.flat",
-        "source": "com.example.airneis.app-main-46:/drawable/ic_eye.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_f4_1_table_de_chevet_en_metal_noir.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\f4_1_table_de_chevet_en_metal_noir.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.airneis.app-main-46:/mipmap-xxhdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\layout_item_product.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\layout\\item_product.xml"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "com.example.airneis.app-main-46:/mipmap-anydpi-v26/ic_launcher_round.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_e3_3_table_de_jardin_avec_parasol.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\e3_3_table_de_jardin_avec_parasol.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/drawable_input_background.xml.flat",
-        "source": "com.example.airneis.app-main-46:/drawable/input_background.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_c2_2_canape_lit_avec_rangement.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\c2_2_canape_lit_avec_rangement.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/drawable_ic_launcher_background.xml.flat",
-        "source": "com.example.airneis.app-main-46:/drawable/ic_launcher_background.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\layout_fragment_categories.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\layout\\fragment_categories.xml"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/drawable_ic_lock.xml.flat",
-        "source": "com.example.airneis.app-main-46:/drawable/ic_lock.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_a4_1_chaise_de_bar.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\a4_1_chaise_de_bar.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/drawable_ic_launcher_foreground.xml.flat",
-        "source": "com.example.airneis.app-main-46:/drawable/ic_launcher_foreground.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_a1_1_chaise_design_blanc_et_bois_clair.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\a1_1_chaise_design_blanc_et_bois_clair.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "com.example.airneis.app-main-46:/mipmap-anydpi-v26/ic_launcher.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_e1_1_ensemble_de_salon_de_jardin.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\e1_1_ensemble_de_salon_de_jardin.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/xml_network_security_config.xml.flat",
-        "source": "com.example.airneis.app-main-46:/xml/network_security_config.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\layout_top_categories_item.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\layout\\top_categories_item.xml"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.airneis.app-main-46:/mipmap-xxxhdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_a2_1_chaise_pivotante.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\a2_1_chaise_pivotante.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/mipmap-xxxhdpi_ic_launcher.webp.flat",
-        "source": "com.example.airneis.app-main-46:/mipmap-xxxhdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_ic_notifications_black_24dp.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\ic_notifications_black_24dp.xml"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/layout_fragment_categories.xml.flat",
-        "source": "com.example.airneis.app-main-46:/layout/fragment_categories.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\xml_network_security_config.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\xml\\network_security_config.xml"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/mipmap-hdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.airneis.app-main-46:/mipmap-hdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\xml_data_extraction_rules.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\xml\\data_extraction_rules.xml"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/xml_backup_rules.xml.flat",
-        "source": "com.example.airneis.app-main-46:/xml/backup_rules.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_f1_2_table_chevet_avec_tiroir.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\f1_2_table_chevet_avec_tiroir.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/mipmap-mdpi_ic_launcher.webp.flat",
-        "source": "com.example.airneis.app-main-46:/mipmap-mdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\layout_fragment_basket.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\layout\\fragment_basket.xml"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/drawable_gradient_background.xml.flat",
-        "source": "com.example.airneis.app-main-46:/drawable/gradient_background.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\layout_fragment_cgu.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\layout\\fragment_cgu.xml"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/drawable_logo_linkedin.xml.flat",
-        "source": "com.example.airneis.app-main-46:/drawable/logo_linkedin.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_g1_3_organiseur_de_bureau_en_bois.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\g1_3_organiseur_de_bureau_en_bois.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/menu_bottom_nav_menu.xml.flat",
-        "source": "com.example.airneis.app-main-46:/menu/bottom_nav_menu.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\layout_item_order_detail.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\layout\\item_order_detail.xml"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/drawable_container_background.xml.flat",
-        "source": "com.example.airneis.app-main-46:/drawable/container_background.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_e3_1_table_de_jardin_avec_parasol.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\e3_1_table_de_jardin_avec_parasol.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/drawable_ic_user.xml.flat",
-        "source": "com.example.airneis.app-main-46:/drawable/ic_user.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_f4_2_table_de_chevet_en_metal_noir.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\f4_2_table_de_chevet_en_metal_noir.jpg"
     },
     {
->>>>>>> develop
-        "merged": "com.example.airneis.app-debug-44:/mipmap-xxhdpi_ic_launcher.webp.flat",
-        "source": "com.example.airneis.app-main-46:/mipmap-xxhdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_d3_3_armoire_dressing_avec_miroir.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\d3_3_armoire_dressing_avec_miroir.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/drawable_logo_twitter.xml.flat",
-        "source": "com.example.airneis.app-main-46:/drawable/logo_twitter.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_ic_user.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\ic_user.xml"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/layout_fragment_mentions_legales.xml.flat",
-        "source": "com.example.airneis.app-main-46:/layout/fragment_mentions_legales.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_e2_3_chaise_longue_de_jardin_pliante.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\e2_3_chaise_longue_de_jardin_pliante.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/layout_fragment_contact.xml.flat",
-        "source": "com.example.airneis.app-main-46:/layout/fragment_contact.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_e2_1_chaise_longue_de_jardin_pliante.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\e2_1_chaise_longue_de_jardin_pliante.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/drawable_ic_notifications_black_24dp.xml.flat",
-        "source": "com.example.airneis.app-main-46:/drawable/ic_notifications_black_24dp.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_g3_2_poubelle_de_bureau_en_acier_inoxydable.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\g3_2_poubelle_de_bureau_en_acier_inoxydable.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/layout_item_product.xml.flat",
-        "source": "com.example.airneis.app-main-46:/layout/item_product.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_f3_3_table_de_chevet_design_en_verre.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\f3_3_table_de_chevet_design_en_verre.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-44:/layout_fragment_home.xml.flat",
-        "source": "com.example.airneis.app-main-46:/layout/fragment_home.xml"
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_a4_3_chaise_de_bar.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\a4_3_chaise_de_bar.jpg"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_b3_3_table_de_cuisine_extensible.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\b3_3_table_de_cuisine_extensible.jpg"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\mipmap-hdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\layout_fragment_login.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\layout\\fragment_login.xml"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_baseline_account_circle_24.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\baseline_account_circle_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\layout_fragment_mentions_legales.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\layout\\fragment_mentions_legales.xml"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_a3_2_chaise_en_metal.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\a3_2_chaise_en_metal.jpg"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_f3_1_table_de_chevet_design_en_verre.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\f3_1_table_de_chevet_design_en_verre.jpg"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\layout_item_category.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\layout\\item_category.xml"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_a4_2_chaise_de_bar.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\a4_2_chaise_de_bar.jpg"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\mipmap-xhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_g2_2_lampe_de_bureau.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\g2_2_lampe_de_bureau.jpg"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_a2_2_chaise_pivotante.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\a2_2_chaise_pivotante.jpg"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_f1_1_table_chevet_avec_tiroir.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\f1_1_table_chevet_avec_tiroir.jpg"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\mipmap-mdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_ic_lock.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\ic_lock.xml"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_logo_twitter.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\logo_twitter.xml"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_b1_1_table_en_chene.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\b1_1_table_en_chene.jpg"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_c1_1_canape_3_places_en_cuir_italien.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\c1_1_canape_3_places_en_cuir_italien.jpg"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_a1_3_chaise_design_blanc_et_bois_clair.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\a1_3_chaise_design_blanc_et_bois_clair.jpg"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\layout_fragment_my_orders.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\layout\\fragment_my_orders.xml"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_b2_2_table_basse.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\b2_2_table_basse.jpg"
+    },
+    {
+        "merged": "com.example.airneis.app-debug-46:/layout_item_category.xml.flat",
+        "source": "com.example.airneis.app-main-48:/layout/item_category.xml"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\layout_fragment_home.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\layout\\fragment_home.xml"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_g1_2_organiseur_de_bureau_en_bois.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\g1_2_organiseur_de_bureau_en_bois.jpg"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_b2_3_table_basse.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\b2_3_table_basse.jpg"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_b2_1_table_basse.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\b2_1_table_basse.jpg"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_d3_2_armoire_dressing_avec_miroir.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\d3_2_armoire_dressing_avec_miroir.jpg"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_d1_3_armoire_coulissant.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\d1_3_armoire_coulissant.jpg"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\layout_fragment_slider.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\layout\\fragment_slider.xml"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\layout_fragment_a_propos.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\layout\\fragment_a_propos.xml"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\mipmap-xxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_b3_2_table_de_cuisine_extensible.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\b3_2_table_de_cuisine_extensible.jpg"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_a2_3_chaise_pivotante.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\a2_3_chaise_pivotante.jpg"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_logo_linkedin.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\logo_linkedin.xml"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\mipmap-xhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_d1_2_armoire_coulissant.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\d1_2_armoire_coulissant.jpg"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_f2_3_table_de_chevet_suspendue.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\f2_3_table_de_chevet_suspendue.jpg"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_button_border.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\button_border.xml"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_d2_2_armoire_de_rangement_en_bois_de_cerisier.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\d2_2_armoire_de_rangement_en_bois_de_cerisier.jpg"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\xml_backup_rules.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\xml\\backup_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_container_background.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\container_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_e1_3_ensemble_de_salon_de_jardin.jpg.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\e1_3_ensemble_de_salon_de_jardin.jpg"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_gradient_background.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\gradient_background.xml"
     }
 ]

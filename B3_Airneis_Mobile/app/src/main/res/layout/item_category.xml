@@ -20,8 +20,8 @@
             android:layout_height="210dp"
             android:scaleType="centerCrop"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/chaise1"
-            android:background="@drawable/chaise1" />
+            android:src="@drawable/a1_1_chaise_design_blanc_et_bois_clair"
+            android:background="@drawable/a1_1_chaise_design_blanc_et_bois_clair" />
 
         <TextView
             android:id="@+id/categoryName"
