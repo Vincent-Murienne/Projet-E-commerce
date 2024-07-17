@@ -28,7 +28,7 @@ public class TopProduitsAdapter extends RecyclerView.Adapter<TopProduitsAdapter.
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
-        View view = LayoutInflater.from(context).inflate(R.layout.top_produits_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.top_card_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -52,8 +52,8 @@ public class TopProduitsAdapter extends RecyclerView.Adapter<TopProduitsAdapter.
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            productName = itemView.findViewById(R.id.productName);
-            productImage = itemView.findViewById(R.id.productImage);
+            productName = itemView.findViewById(R.id.cardName);
+            productImage = itemView.findViewById(R.id.cardImage);
         }
     }
 }

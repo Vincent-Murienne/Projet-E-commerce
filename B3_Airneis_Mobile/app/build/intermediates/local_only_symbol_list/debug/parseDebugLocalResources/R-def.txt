@@ -125,9 +125,11 @@ id buttonParametresCompte
 id buttonSeConnecter
 id buttonSeDeconnecter
 id buttonSinscrire
+id cardImage
+id cardName
+id cardvoirPlus
 id categoryImage
 id categoryName
-id categoryTitle
 id cgu_container
 id checkoutButton
 id deleteButton
@@ -170,7 +172,6 @@ id personalData2
 id personalData3
 id prevSliderButton
 id productDescription
-id productImage
 id productList
 id productName
 id productPrice
@@ -218,8 +219,7 @@ layout item_category
 layout item_order
 layout item_order_detail
 layout item_product
-layout top_categories_item
-layout top_produits_item
+layout top_card_item
 menu bottom_nav_menu
 mipmap ic_launcher
 mipmap ic_launcher_round

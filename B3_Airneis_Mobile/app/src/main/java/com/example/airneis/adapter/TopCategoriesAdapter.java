@@ -28,7 +28,7 @@ public class TopCategoriesAdapter extends RecyclerView.Adapter<TopCategoriesAdap
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
-        View view = LayoutInflater.from(context).inflate(R.layout.top_categories_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.top_card_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -52,8 +52,8 @@ public class TopCategoriesAdapter extends RecyclerView.Adapter<TopCategoriesAdap
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            categoryName = itemView.findViewById(R.id.categoryName);
-            categoryImage = itemView.findViewById(R.id.categoryImage);
+            categoryName = itemView.findViewById(R.id.cardName);
+            categoryImage = itemView.findViewById(R.id.cardImage);
         }
     }
 }
