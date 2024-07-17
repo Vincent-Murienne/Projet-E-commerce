@@ -105,7 +105,7 @@ public class LoginFragment extends Fragment {
                             editor.apply();
 
                             // Navigate to HomeFragment
-                            Fragment homeFragment = new HomeFragment();
+                            Fragment homeFragment = new SliderFragment();
                             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                             transaction.replace(R.id.frameLayout, homeFragment);
                             transaction.addToBackStack(null);

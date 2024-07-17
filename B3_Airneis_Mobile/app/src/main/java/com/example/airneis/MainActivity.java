@@ -8,7 +8,6 @@ import android.widget.FrameLayout;
 import com.example.airneis.fragment.AccountFragment;
 import com.example.airneis.fragment.BasketFragment;
 import com.example.airneis.fragment.CategoriesFragment;
-import com.example.airneis.fragment.ContactFragment;
 import com.example.airneis.fragment.HomeFragment;
 
 import androidx.appcompat.app.AppCompatActivity;

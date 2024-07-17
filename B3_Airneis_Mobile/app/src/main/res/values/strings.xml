@@ -20,4 +20,5 @@
     <string name="have_account_login">Déjà un compte ? Connectez-vous</string>
     <string name="login">Se connecter</string>
     <string name="register">Inscription</string>
+    <string name="image_desc">Image</string>
 </resources>
