@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.airneis.R;
 import com.example.airneis.manager.APIManager;
-import com.example.airneis.model.Category;
+import com.example.airneis.model.CategoryData;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,7 +26,7 @@ public class CategoriesFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private CategoriesAdapter adapter;
-    private List<Category> categories;
+    private List<CategoryData> categories;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,7 +59,7 @@ public class CategoriesFragment extends Fragment {
                             JSONArray data = response.getJSONArray("data");
                             for (int i = 0; i < data.length(); i++) {
                                 JSONObject categoryJson = data.getJSONObject(i);
-                                Category category = new Category(
+                                CategoryData category = new CategoryData(
                                         categoryJson.getInt("category_id"),
                                         categoryJson.getString("category_name"),
                                         categoryJson.getString("image_name")

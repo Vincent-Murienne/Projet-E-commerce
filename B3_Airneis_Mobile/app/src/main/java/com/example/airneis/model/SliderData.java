@@ -1,6 +1,4 @@
-package com.example.airneis.data;
-
-import android.content.Context;
+package com.example.airneis.model;
 
 public class SliderData {
     private String image;

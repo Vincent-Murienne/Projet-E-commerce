@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.airneis.R;
-import com.example.airneis.data.TopCategoriesData;
+import com.example.airneis.model.TopCategoriesData;
 
 import java.util.ArrayList;
 

@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.example.airneis.R;
-import com.example.airneis.data.SliderData;
+import com.example.airneis.model.SliderData;
 import com.example.airneis.manager.APIManager;
 
 import org.json.JSONArray;

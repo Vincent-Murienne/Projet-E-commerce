@@ -1,4 +1,4 @@
-package com.example.airneis.data;
+package com.example.airneis.model;
 
 public class TopProduitsData {
     private int productId;

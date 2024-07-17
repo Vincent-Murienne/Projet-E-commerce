@@ -11,16 +11,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.airneis.R;
-import com.example.airneis.model.Category;
+import com.example.airneis.model.CategoryData;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.ViewHolder> {
 
-    private List<Category> categories;
+    private List<CategoryData> categories;
 
-    public CategoriesAdapter(List<Category> categories) {
+    public CategoriesAdapter(List<CategoryData> categories) {
         this.categories = categories;
     }
 
@@ -33,7 +33,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Category category = categories.get(position);
+        CategoryData category = categories.get(position);
         holder.categoryName.setText(category.getName());
         Picasso.get().load("http://10.0.2.2:8000/img/" + category.getImageName()).into(holder.categoryImage);
         holder.voirPlus.setOnClickListener(v -> {

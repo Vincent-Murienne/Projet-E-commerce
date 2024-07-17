@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.airneis.R;
 import com.example.airneis.adapter.TopProduitsAdapter;
-import com.example.airneis.data.TopProduitsData;
+import com.example.airneis.model.TopProduitsData;
 import com.example.airneis.manager.APIManager;
 
 import org.json.JSONArray;
