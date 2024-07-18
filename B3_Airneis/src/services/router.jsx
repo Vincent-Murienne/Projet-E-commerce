@@ -31,9 +31,8 @@ import OrderPage from "../pages/ordersPage/OrderPage";
 import MyOrdersPage from "../pages/ordersPage/MyOrdersPage";
 
 import BasketPage from  "../pages/basketPage/BasketPage";
-import MonCompteEdit from "../pages/monComptePage/MonCompteEdit"
-import CheckoutAdresse from "../pages/checkoutPage/CheckoutAdresse"
-import CheckoutPayment from "../pages/checkoutPage/CheckoutPayment"
+import MonCompteEdit from "../pages/monComptePage/MonCompteEdit";
+import CheckoutAdresse from "../pages/checkoutPage/CheckoutAdresse";
 import CheckoutConfirmer from "../pages/checkoutPage/CheckoutConfirmer";
 import CguPage from "../pages/reglementationPage/CguPage";
 import MentionsLegales from "../pages/reglementationPage/MentionsLegales";
@@ -42,6 +41,7 @@ import AirneisDesc from "../pages/reglementationPage/AirneisDesc"
 
 import ForgetPasswordPage from "../pages/login-register/ForgetPasswordPage";
 import ResetPasswordPage from "../pages/login-register/ResetPasswordPage";
+import StripeContainer from "../pages/checkoutPage/StripeContainer";
 
 const router = createBrowserRouter([
     {
@@ -118,7 +118,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "checkoutPayment", 
-                element: <CheckoutPayment/>
+                element: <StripeContainer/>
             },
             {
                 path: "checkoutConfirmer/:orderId", 

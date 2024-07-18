@@ -11,15 +11,15 @@ const CheckoutAdresse = () => {
     const [getUserAddresses, setUserAddresses] = useState([]);
     const [getSelectedAddress, setSelectedAddress] = useState("0"); 
 
-    const [getAddressName, setAddressName] = useState(undefined);
-    const [getFirstName, setFirstName] = useState(undefined);
-    const [getLastName, setLastName] = useState(undefined);
-    const [getAddress, setAddress] = useState(undefined);
-    const [getCity, setCity] = useState(undefined);
-    const [getZipCode, setZipCode] = useState(undefined);
-    const [getRegion, setRegion] = useState(undefined);
-    const [getCountry, setCountry] = useState(undefined);
-    const [getPhone, setPhone] = useState(undefined);
+    const [getAddressName, setAddressName] = useState("");
+    const [getFirstName, setFirstName] = useState("");
+    const [getLastName, setLastName] = useState("");
+    const [getAddress, setAddress] = useState("");
+    const [getCity, setCity] = useState("");
+    const [getZipCode, setZipCode] = useState("");
+    const [getRegion, setRegion] = useState("");
+    const [getCountry, setCountry] = useState("");
+    const [getPhone, setPhone] = useState("");
 
     const [getAddressNameValidState, setAddressNameValidState] = useState(1);
     const [getFirstNameValidState, setFirstNameValidState] = useState(1);
@@ -102,7 +102,7 @@ const CheckoutAdresse = () => {
     }, []);
 
     useEffect(() => {
-        if(getAddressName !== undefined) {
+        if(getAddressName !== undefined && getAddressName !== "") {
             const fullNameRegex = /^[a-zA-ZÀ-ÿ\s\d-]{5,50}$/;
             if(fullNameRegex.test(getAddressName)) {
                 setAddressNameValidState(1);
@@ -113,7 +113,7 @@ const CheckoutAdresse = () => {
     }, [getAddressName]);
 
     useEffect(() => {
-        if(getFirstName !== undefined) {
+        if(getFirstName !== undefined && getFirstName !== "") {
             const fullNameRegex = /^[a-zA-ZÀ-ÿ\s-]{3,50}$/;
             if(fullNameRegex.test(getFirstName)) {
                 setFirstNameValidState(1);
@@ -124,7 +124,7 @@ const CheckoutAdresse = () => {
     }, [getFirstName]);
 
     useEffect(() => {
-        if(getLastName !== undefined) {
+        if(getLastName !== undefined && getLastName !== "") {
             const fullNameRegex = /^[a-zA-ZÀ-ÿ\s-]{3,50}$/;
             if(fullNameRegex.test(getLastName)) {
                 setLastNameValidState(1);
@@ -135,7 +135,7 @@ const CheckoutAdresse = () => {
     }, [getLastName]);
 
     useEffect(() => {
-        if(getAddress !== undefined) {
+        if(getAddress !== undefined && getAddress !== "") {
             const addressRegex = /^.{5,100}$/; 
             if(addressRegex.test(getAddress)) {
                 setAddressValidState(1); 
@@ -146,7 +146,7 @@ const CheckoutAdresse = () => {
     }, [getAddress]);
 
     useEffect(() => {
-        if(getCity !== undefined) {
+        if(getCity !== undefined && getCity !== "") {
             const cityRegex = /^[a-zA-ZÀ-ÿ\s-]{3,50}$/;
             if(cityRegex.test(getCity)) {
                 setCityValidState(1); 
@@ -157,7 +157,7 @@ const CheckoutAdresse = () => {
     }, [getCity]);
     
     useEffect(() => {
-        if(getZipCode !== undefined) {
+        if(getZipCode !== undefined && getZipCode !== "") {
             const zipCodeRegex = /^\d{5}$/; 
             if(zipCodeRegex.test(getZipCode)) {
                 setZipCodeValidState(1); 
@@ -168,7 +168,7 @@ const CheckoutAdresse = () => {
     }, [getZipCode]);
 
     useEffect(() => {
-        if(getRegion !== undefined) {
+        if(getRegion !== undefined && getRegion !== "") {
             const regionRegex = /^[a-zA-ZÀ-ÿ\s-]{3,50}$/; 
             if(regionRegex.test(getRegion)) {
                 setRegionValidState(1); 
@@ -179,7 +179,7 @@ const CheckoutAdresse = () => {
     }, [getRegion]);
     
     useEffect(() => {
-        if(getCountry !== undefined) {
+        if(getCountry !== undefined && getCountry !== "") {
             const countryRegex = /^[a-zA-ZÀ-ÿ\s-]{3,50}$/; 
             if(countryRegex.test(getCountry)) {
                 setCountryValidState(1); 
@@ -190,7 +190,7 @@ const CheckoutAdresse = () => {
     }, [getCountry]);
     
     useEffect(() => {
-        if(getPhone !== undefined) {
+        if(getPhone !== undefined && getPhone !== "") {
             const phoneRegex = /^\d{10}$/; 
             if(phoneRegex.test(getPhone)) {
                 setPhoneValidState(1); 
