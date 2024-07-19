@@ -9,16 +9,6 @@ CREATE TABLE `users` (
   `role` boolean
 );
 
-CREATE TABLE `payments` (
-  `id` integer PRIMARY KEY AUTO_INCREMENT,
-  `user_id` integer,
-  `card_name` varchar(50),
-  `card_owner` varchar(50),
-  `card_number` varchar(16),
- `expiration_date` varchar(7) NOT NULL,
-  `cvv` integer
-);
-
 CREATE TABLE `addresses` (
   `id` integer PRIMARY KEY AUTO_INCREMENT,
   `user_id` integer,
@@ -80,7 +70,6 @@ CREATE TABLE `orders` (
   `date` timestamp NOT NULL default CURRENT_TIMESTAMP,
   `user_id` integer,
   `address_id` integer,
-  `payment_id` integer,
   `order_state` VARCHAR(10)
 );
 
@@ -98,8 +87,6 @@ CREATE TABLE `password_reset` (
   `expiry` integer NOT NULL
 );
 
-ALTER TABLE `payments` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
 ALTER TABLE `addresses` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 ALTER TABLE `products` ADD FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`);
@@ -115,7 +102,6 @@ ALTER TABLE `baskets` ADD FOREIGN KEY (`product_id`) REFERENCES `products` (`id`
 
 ALTER TABLE `orders` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 ALTER TABLE `orders` ADD FOREIGN KEY (`address_id`) REFERENCES `addresses` (`id`);
-ALTER TABLE `orders` ADD FOREIGN KEY (`payment_id`) REFERENCES `payments` (`id`);
 
 ALTER TABLE `lots_of_product` ADD FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`);
 ALTER TABLE `lots_of_product` ADD FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);

@@ -175,11 +175,6 @@ class Database {
         $query2->bindValue("id", $id, PDO::PARAM_INT);
         $query2->execute();
 
-        $sql3 = "DELETE FROM payments WHERE user_id = :id";
-        $query3 = $this->pdo->prepare($sql3);
-        $query3->bindValue("id", $id, PDO::PARAM_INT);
-        $query3->execute();
-
         $sql4 = "DELETE FROM users WHERE id = :id";
         $query4 = $this->pdo->prepare($sql4);
         $query4->bindValue("id", $id, PDO::PARAM_INT);
@@ -195,20 +190,6 @@ class Database {
         $query->execute();
         
         $sql1 = "DELETE FROM addresses WHERE id = :id";
-        $query1 = $this->pdo->prepare($sql1);
-        $query1->bindValue("id", $id, PDO::PARAM_INT); 
-        
-        return $query1->execute();
-    }
-
-    public function deletePayment(string $id):bool 
-    {
-        $sql = "UPDATE orders SET payment_id = null WHERE payment_id = :id";
-        $query = $this->pdo->prepare($sql);
-        $query->bindValue("id", $id, PDO::PARAM_INT);
-        $query->execute();
-        
-        $sql1 = "DELETE FROM payments WHERE id = :id";
         $query1 = $this->pdo->prepare($sql1);
         $query1->bindValue("id", $id, PDO::PARAM_INT); 
         
@@ -458,11 +439,10 @@ class Database {
     }
 
     function getOrderDetail($order_id) {
-        $sql = "SELECT orders.date, orders.order_state, lots_of_product.product_id AS 'product_id', lots_of_product.quantity AS 'quantity', products.name AS 'product_name', products.price AS 'product_price', products.description AS 'product_description', images.name AS 'image_name', payments.card_name, addresses.address_name FROM lots_of_product
+        $sql = "SELECT orders.date, orders.order_state, lots_of_product.product_id AS 'product_id', lots_of_product.quantity AS 'quantity', products.name AS 'product_name', products.price AS 'product_price', products.description AS 'product_description', images.name AS 'image_name', addresses.address_name FROM lots_of_product
                 LEFT JOIN products ON lots_of_product.product_id = products.id
                 LEFT JOIN images ON lots_of_product.product_id = images.product_id
                 LEFT JOIN orders ON lots_of_product.order_id = orders.id
-                LEFT JOIN payments ON orders.payment_id = payments.id
                 LEFT JOIN addresses ON orders.address_id = addresses.id
                 WHERE lots_of_product.order_id = :order_id
                 GROUP BY lots_of_product.product_id;";
@@ -485,8 +465,7 @@ class Database {
     }
 
     public function downloadPersonalData($id) {
-        $sql = "SELECT users.full_name, users.email, payments.card_name, payments.card_owner, payments.card_number, payments.expiration_date, payments.cvv, addresses.address_name, addresses.first_name, addresses.last_name, addresses.address, addresses.city, addresses.zip_code, addresses.region, addresses.country, addresses.phone_number FROM users
-                JOIN payments ON users.id = payments.user_id
+        $sql = "SELECT users.full_name, users.email, addresses.address_name, addresses.first_name, addresses.last_name, addresses.address, addresses.city, addresses.zip_code, addresses.region, addresses.country, addresses.phone_number FROM users
                 JOIN addresses ON users.id = addresses.user_id
                 WHERE users.id = :id;";
 

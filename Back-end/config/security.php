@@ -16,13 +16,8 @@ $isAllowed = false;
 $json = json_decode(file_get_contents("php://input"), true);
 
 // $json = [
-//     "recherche" => "te",
-//     "prix_min" => null,
-//     "prix_max" => null,
-//     "materiaux" => [1,3],
-//     "categories" => [],
-//     "en_stock" => false,
-//     "orderBy" => "nomAsc",
+//     "amount" => 1,
+//     "id" => "pm_1Pe3OnRplliLoCbZytLl5ndi",
 //     "apiKey" => $apiKey
 // ];
 
