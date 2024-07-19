@@ -126,17 +126,6 @@ const MonCompteParametres = () => {
                         </Link>
                     </div>
                 </div>
-
-                <div className="input-group">
-                    <h4 className="payement-title">Méthode de payement</h4>
-                        <div className="bordered-button">
-                            <Link to="/MonComptePayment" className="custom-link">
-                                <button type="button" className="custom-button">
-                                    Les méthodes de paiement
-                                </button>
-                            </Link>     
-                    </div>
-                </div>
         
                 <div className="buttons-container">
                     <button className="submit" type="submit" onClick={handleDownloadData}>Télécharger mes données</button>

@@ -8,7 +8,6 @@ const OrderPage = () => {
     const [orderDetails, setOrderDetails] = useState([]);
     const [orderDate, setOrderDate] = useState("");
     const [orderState, setOrderState] = useState("");
-    const [orderPayment, setOrderPayment] = useState("");
     const [orderAddress, setOrderAddress] = useState("");
     const [totalPrice, setTotalPrice] = useState(0);
     const tva = 0.17;
@@ -24,7 +23,6 @@ const OrderPage = () => {
                     setOrderDetails(response.data);
                     setOrderDate(response.data[0].date);
                     setOrderState(response.data[0].order_state);
-                    setOrderPayment(response.data[0].card_name);
                     setOrderAddress(response.data[0].address_name);
                 } else {
                     ToastQueue.negative(response.error, { timeout: 5000 });
@@ -52,7 +50,6 @@ const OrderPage = () => {
             <h2 className="orderDetails">Date de la commande: {orderDate}</h2>
             <h2 className="orderDetails">Statut de la commande: {orderState}</h2>
             <h2 className="orderDetails">Prix total de la commande: {totalPrice} €</h2>
-            <h2 className="orderDetails">Moyen de paiement utilisé: {orderPayment}</h2>
             <h2 className="orderDetails">Adresse de livraison: {orderAddress}</h2>
             <h2 className="order_separator"></h2>
             {orderDetails.map(product => (

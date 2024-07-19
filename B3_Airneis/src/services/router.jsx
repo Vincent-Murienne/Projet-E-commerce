@@ -25,7 +25,6 @@ import UserList from "../pages/admin/UserManager/UserList";
 import TrackSales from "../pages/admin/trackSales/TrackSales";
 import MonCompteParametres from "../pages/monComptePage/MonCompteParametres";
 import MonCompteAdresse from "../pages/monComptePage/MonCompteAdresse";
-import MonComptePayment from "../pages/monComptePage/MonComptePayment";
 import MonComptePage from "../pages/monComptePage/MonComptePage";
 import OrderPage from "../pages/ordersPage/OrderPage";
 import MyOrdersPage from "../pages/ordersPage/MyOrdersPage";
@@ -95,10 +94,6 @@ const router = createBrowserRouter([
             {
                 path: "monCompteAddresse", 
                 element: <MonCompteAdresse/>
-            },
-            {
-                path: "monComptePayment", 
-                element: <MonComptePayment/>
             },
             {
                 path: "monCompteEdit", 

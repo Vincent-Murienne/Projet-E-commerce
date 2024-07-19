@@ -41,17 +41,16 @@ const CheckoutPayment = () => {
             total += product.price * product.quantity;
         });
 
-        setTotalPrice((total*0.17).toFixed(2));
+        setTotalPrice((total + total*0.17).toFixed(2));
     };
 
-    const insertOrder = async (selectedPayment) => {
+    const insertOrder = async () => {
         if (getUserId && getSelectedAddressId) {
             let orderData = {
                 "table": "orders",
                 "data": {
                     "user_id": getUserId,
                     "address_id": getSelectedAddressId,
-                    "payment_id": selectedPayment,
                     "order_state": "EN COURS"
                 }
             };
@@ -59,7 +58,6 @@ const CheckoutPayment = () => {
             Data("orders", "insertOrder", orderData).then(response => {
                 if (response.success === true) {
                     const orderId = response.order_id;
-                    console.log('Order ID:', orderId);
                     ToastQueue.positive("Commande passée avec succès !", { timeout: 5000 });
                     navigate(`/CheckoutConfirmer/${orderId}`);
                 } else {
@@ -82,11 +80,10 @@ const CheckoutPayment = () => {
         const { token, error } = await stripe.createToken(elements.getElement(CardElement));
 
         if(!error) {
-            console.log("Token généré: ", token);
             Data("stripe", "charge", {amount: getTotalPrice, id: token.id}).then(response => {
                 // If the payment succeed, we add the order to the database
                 if(response.success) {
-                    //insertOrder(getSelectedPayment);
+                    insertOrder();
                 } else {
                     ToastQueue.negative(response.error, { timeout: 5000 });
                 }

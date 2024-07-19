@@ -238,7 +238,7 @@ const CheckoutAdresse = () => {
                 }
             };
 
-            Data("panelAdmin", "insertAddress", data).then(response => {
+            Data("panelAdmin", "insertCheckout", data).then(response => {
                 if (response.success === true) {
                     navigate(`/checkoutPayment?addressId=${response.id}`);
                 } else {
