@@ -60,6 +60,10 @@
         "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\b3_1_table_de_cuisine_extensible.jpg"
     },
     {
+        "merged": "com.example.airneis.app-debug-46:/layout_basket_item.xml.flat",
+        "source": "com.example.airneis.app-main-48:/layout/basket_item.xml"
+    },
+    {
         "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_g3_3_poubelle_de_bureau_en_acier_inoxydable.jpg.flat",
         "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\g3_3_poubelle_de_bureau_en_acier_inoxydable.jpg"
     },
@@ -432,20 +436,12 @@
         "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\g1_2_organiseur_de_bureau_en_bois.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-46:/layout_fragment_top_categories.xml.flat",
-        "source": "com.example.airneis.app-main-48:/layout/fragment_top_categories.xml"
-    },
-    {
         "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_b2_3_table_basse.jpg.flat",
         "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\b2_3_table_basse.jpg"
     },
     {
         "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_b2_1_table_basse.jpg.flat",
         "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\b2_1_table_basse.jpg"
-    },
-    {
-        "merged": "com.example.airneis.app-debug-46:/layout_fragment_top_produits.xml.flat",
-        "source": "com.example.airneis.app-main-48:/layout/fragment_top_produits.xml"
     },
     {
         "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_d3_2_armoire_dressing_avec_miroir.jpg.flat",
@@ -506,6 +502,10 @@
     {
         "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_container_background.xml.flat",
         "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\container_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\layout_basket_item.xml.flat",
+        "source": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\layout\\basket_item.xml"
     },
     {
         "merged": "C:\\Users\\murie\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
