@@ -6,7 +6,7 @@ import { ToastQueue } from "@react-spectrum/toast";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 
 const CheckoutPayment = () => {
-    const { pullData } = useContext(UserContext);
+    const { pullData, saveData } = useContext(UserContext);
     const [getSelectedAddressId, setSelectedAddressId] = useState(undefined);
     const [getUserId, setUserId] = useState(undefined);
     const [getTotalPrice, setTotalPrice] = useState(0);
@@ -89,7 +89,8 @@ const CheckoutPayment = () => {
                 }
             });
         } else {
-            ToastQueue.negative(error, { timeout: 5000 });
+            //saveData("message", {type: "error", body: error.message});
+            ToastQueue.negative(error.message, { timeout: 5000 });
         }
     };
 
