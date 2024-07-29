@@ -6,8 +6,8 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.example.airneis.fragment.AccountFragment;
+import com.example.airneis.fragment.BasketFragment;
 import com.example.airneis.fragment.CategoriesFragment;
-import com.example.airneis.fragment.ContactFragment;
 import com.example.airneis.fragment.HomeFragment;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
                 replaceFragment(new HomeFragment());
             } else if (itemId == R.id.navigation_categories) {
                 replaceFragment(new CategoriesFragment());
-            } else if (itemId == R.id.navigation_contact) {
-                replaceFragment(new ContactFragment());
+            } else if (itemId == R.id.navigation_basket) {
+                replaceFragment(new BasketFragment());
             } else if (itemId == R.id.navigation_account) {
                 replaceFragment(new AccountFragment());
             }

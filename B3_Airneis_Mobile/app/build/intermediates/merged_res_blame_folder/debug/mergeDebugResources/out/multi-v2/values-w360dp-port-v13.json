@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.airneis.app-mergeDebugResources-42:/values-w360dp-port-v13/values-w360dp-port-v13.xml",
+            "outputFile": "com.example.airneis.app-mergeDebugResources-44:/values-w360dp-port-v13/values-w360dp-port-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Jean\\.gradle\\caches\\transforms-4\\4e8a8d98d958ed4d4f43589468b8dfd3\\transformed\\material-1.12.0\\res\\values-w360dp-port-v13\\values-w360dp-port-v13.xml",
+                    "source": "C:\\Users\\Bramelan\\.gradle\\caches\\transforms-4\\bf3584da0d1c7ca47ab3825c79eaa3e4\\transformed\\material-1.12.0\\res\\values-w360dp-port-v13\\values-w360dp-port-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",

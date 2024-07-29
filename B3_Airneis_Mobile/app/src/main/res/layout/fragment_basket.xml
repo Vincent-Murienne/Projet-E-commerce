@@ -1,0 +1,61 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/basketTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Votre panier"
+        android:textSize="24sp"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:textStyle="bold"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="20dp"
+        android:nestedScrollingEnabled="false" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="30dp"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:id="@+id/totalPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Prix total: 0.00 €"
+            android:textSize="18sp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tvaPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TVA: 0.00 €"
+            android:textSize="18sp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp"/>
+
+        <Button
+            android:id="@+id/checkoutButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Passer la commande"
+            android:layout_marginBottom="40dp"
+            android:enabled="false"/>
+    </LinearLayout>
+</LinearLayout>
