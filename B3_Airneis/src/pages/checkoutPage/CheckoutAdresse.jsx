@@ -271,7 +271,7 @@ const CheckoutAdresse = () => {
     return (   
         <>
             <div className="panelAdminAddElement">
-            <form onSubmit={FormSubmitted}>
+                <form onSubmit={FormSubmitted}>
                     <h2 className="formTitle">Veuillez ajouter ou choisir une adresse de livraison</h2>
 
                     <div className="picker-container">

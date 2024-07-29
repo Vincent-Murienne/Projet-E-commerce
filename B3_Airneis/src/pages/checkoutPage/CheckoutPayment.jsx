@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { useNavigate, useLocation  } from "react-router-dom";
+import { useNavigate, useLocation, Link  } from "react-router-dom";
 import { Data } from "../../services/api";
 import { UserContext } from '../../context/UserProvider';
 import { ToastQueue } from "@react-spectrum/toast";
@@ -95,10 +95,13 @@ const CheckoutPayment = () => {
 
     return (   
         <>
-            <div style={{marginTop: "7rem"}}>
+            <div className="stripe-form">
                 <form onSubmit={handleSubmit} style={{maxWidth: 400}}>
-                    <CardElement options={{hidePostalCode: true}} />
-                    <button>Payer</button>
+                    <CardElement className="stripe-card-element" options={{ hidePostalCode: true }}/>
+                    <div className="buttons">
+                        <Link to="/panier" className="form-btn-error">Annuler</Link>
+                        <button type="submit" className="form-btn-success">Payer</button>
+                    </div>
                 </form>
             </div>
         </>

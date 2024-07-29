@@ -9,7 +9,7 @@ $response["success"] = false;
 // Check if the API call is legitimate
 if ($isAllowed) {
     if(isset($json["amount"]) && isset($json["id"])) {
-        \Stripe\Stripe::setApiKey('sk_test_51PdxlIRplliLoCbZ2y5Ire3KzYYqALot3JT0sxbvsEGzCbv0DyGnJ0A5VGySHE9gJ8Hr2Knr3XgthBR0od4ccRAv003KjSHHRj');
+        \Stripe\Stripe::setApiKey(getenv("STRIPE_PRIVATE_KEY"));
 
         $amount = $json["amount"] * 100;
 
