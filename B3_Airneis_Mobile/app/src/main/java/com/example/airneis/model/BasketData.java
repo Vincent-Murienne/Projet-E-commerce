@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 package com.example.airneis.model;
 
 public class BasketData {
@@ -77,7 +76,6 @@ public class BasketData {
     public void setStock(int stock) {
         this.stock = stock;
     }
-=======
-package com.example.airneis.model;public class BasketData {
->>>>>>> Stashed changes
 }
+
+

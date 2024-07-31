@@ -3411,6 +3411,8 @@ id collapseActionView
 id compress
 id confirm_button
 id constraint
+id contact_form
+id contact_info
 id container
 id content
 id contentPanel
@@ -3707,12 +3709,8 @@ id postLayout
 id pressed
 id prevSliderButton
 id productDescription
-<<<<<<< HEAD
-id productList
-id productMaterial
-=======
 id productImage
->>>>>>> develop
+id productMaterial
 id productName
 id productPrice
 id productPriceLabel
@@ -3805,9 +3803,11 @@ id staticPostLayout
 id stockStatus
 id stop
 id stretch
+id subject
 id submenuarrow
 id submit
 id submit_area
+id submit_button
 id subtitle1
 id subtitle2
 id supportScrollUp

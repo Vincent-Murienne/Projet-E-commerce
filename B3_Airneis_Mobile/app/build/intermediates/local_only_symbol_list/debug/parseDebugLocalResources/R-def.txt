@@ -148,6 +148,8 @@ id categoryImage
 id categoryName
 id cgu_container
 id checkoutButton
+id contact_form
+id contact_info
 id decrementButton
 id deleteButton
 id editTextAddress
@@ -190,6 +192,7 @@ id legalInfo5
 id login
 id main
 id mentionsLegalCheckBox
+id message
 id navigation_account
 id navigation_basket
 id navigation_categories
@@ -207,12 +210,8 @@ id personalData2
 id personalData3
 id prevSliderButton
 id productDescription
-<<<<<<< HEAD
-id productList
-id productMaterial
-=======
 id productImage
->>>>>>> develop
+id productMaterial
 id productName
 id productPrice
 id productPriceLabel
@@ -231,7 +230,9 @@ id slider_container
 id spinner_addresses
 id spinner_paiement
 id stockStatus
+id subject
 id submit
+id submit_button
 id subtitle1
 id subtitle2
 id title

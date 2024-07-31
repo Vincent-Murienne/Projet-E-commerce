@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 package com.example.airneis.adapter;
 
 import android.text.Editable;
@@ -27,6 +26,7 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.BasketView
 
     public interface OnItemClickListener {
         void onDeleteClick(int position);
+
         void onQuantityChange(int position, int quantity);
     }
 
@@ -66,10 +66,12 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.BasketView
 
         holder.productQuantity.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
             @Override
             public void afterTextChanged(Editable editable) {
@@ -123,7 +125,5 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.BasketView
             outOfStock = itemView.findViewById(R.id.outOfStock);
         }
     }
-=======
-package com.example.airneis.adapter;public class BasketAdapter {
->>>>>>> Stashed changes
 }
+
