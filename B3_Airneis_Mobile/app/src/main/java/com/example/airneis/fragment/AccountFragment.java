@@ -40,8 +40,8 @@ public class AccountFragment extends Fragment {
         binding.buttonCgu.setOnClickListener(v -> openFragment("cgu"));
         binding.buttonMentionsLegales.setOnClickListener(v -> openFragment("mentionsLegales"));
         binding.buttonAPropos.setOnClickListener(v -> openFragment("aPropos"));
-        /*binding.buttonParametresCompte.setOnClickListener(v -> openBasketFragment());
-        binding.buttonMesCommandes.setOnClickListener(v -> openBasketFragment());*/
+        binding.buttonParametresCompte.setOnClickListener(v -> openFragment("parametreCompte"));
+        /*binding.buttonMesCommandes.setOnClickListener(v -> openBasketFragment());*/
     }
 
     private void reloadUI() {
@@ -87,6 +87,9 @@ public class AccountFragment extends Fragment {
                 break;
             case "aPropos":
                 fragment = new AProposFragment();
+                break;
+            case "parametreCompte":
+                fragment = new ParametreCompteFragment();
                 break;
         }
 

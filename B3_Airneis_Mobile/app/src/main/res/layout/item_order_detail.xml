@@ -1,46 +1,60 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="15dp"
-    android:background="#ffffff"
     android:layout_marginBottom="10dp"
-    android:elevation="2dp">
+    android:background="#ffffff"
+    android:layout_margin="5dp"
+    android:elevation="2dp"
+    android:backgroundTint="#ffffff"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp">
 
     <TextView
         android:id="@+id/order_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:textColor="#333" />
+        android:text="Commande n°"
+        android:textColor="#333"
+        android:textSize="18sp"
+        android:layout_marginBottom="5dp"/>
 
     <TextView
         android:id="@+id/order_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:textColor="#666" />
+        android:text="Date de commande:"
+        android:textColor="#666"
+        android:layout_marginBottom="5dp"/>
 
     <TextView
         android:id="@+id/order_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:textColor="#666" />
+        android:text="Statut de la commande:"
+        android:textColor="#666"
+        android:layout_marginBottom="5dp"/>
 
     <TextView
         android:id="@+id/total_items"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:textColor="#666" />
+        android:text="Nombre total d'articles:"
+        android:textColor="#666"
+        android:layout_marginBottom="5dp"/>
 
     <TextView
         android:id="@+id/total_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:textColor="#666" />
+        android:text="Prix total:"
+        android:textColor="#666"
+        android:layout_marginBottom="5dp"/>
 
 </LinearLayout>

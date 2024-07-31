@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.airneis.R;
 import com.example.airneis.adapter.TopCategoriesAdapter;
+import com.example.airneis.model.ProduitsData;
 import com.example.airneis.model.TopCategoriesData;
 import com.example.airneis.manager.APIManager;
 
@@ -36,7 +37,6 @@ public class CategoriesFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView);
         topCategoriesList = new ArrayList<>();
 
-        // Set GridLayoutManager with 3 columns
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
 
@@ -92,4 +92,5 @@ public class CategoriesFragment extends Fragment {
             e.printStackTrace();
         }
     }
+
 }

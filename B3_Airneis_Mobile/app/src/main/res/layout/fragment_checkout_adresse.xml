@@ -1,0 +1,191 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Veuillez ajouter ou choisir une adresse de livraison"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/black"
+            android:gravity="center_horizontal"/>
+
+        <TextView
+            android:layout_width="302dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Choisir une adresse (requis)"
+            android:textSize="12sp" />
+
+        <Spinner
+            android:id="@+id/spinner_addresses"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:gravity="start"
+            android:text="Nom d'adresse"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/editTextAddressName"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint=""
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/edit_text_border"/>
+
+        <TextView
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:gravity="start"
+            android:text="Prénom"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/editTextFirstName"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint=""
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/edit_text_border"/>
+
+        <TextView
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:gravity="start"
+            android:text="Nom"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/editTextLastName"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint=""
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/edit_text_border"/>
+
+        <TextView
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:gravity="start"
+            android:text="Adresse"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/editTextAddress"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint=""
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/edit_text_border"/>
+
+        <TextView
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:gravity="start"
+            android:text="Ville"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/editTextCity"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint=""
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/edit_text_border"/>
+
+        <TextView
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:gravity="start"
+            android:text="Région"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/editTextRegion"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint=""
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/edit_text_border"/>
+
+        <TextView
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:gravity="start"
+            android:text="Pays"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/editTextCountry"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint=""
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/edit_text_border"/>
+
+        <TextView
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:gravity="start"
+            android:text="Téléphone"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/editTextPhone"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint=""
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/edit_text_border"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="16dp">
+
+            <Button
+                android:id="@+id/buttonRetour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:text="Retour"
+                android:background="@drawable/button_border"
+                android:textColor="@android:color/black"/>
+
+            <Button
+                android:id="@+id/buttonValider"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:text="Valider"
+                android:background="@drawable/button_border"
+                android:textColor="@android:color/black"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

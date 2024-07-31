@@ -1,14 +1,137 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.ContactFragment">
+    android:padding="20dp"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!-- Contact Information Section -->
+    <LinearLayout
+        android:id="@+id/contact_info"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="CONTACT" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:gravity="center_horizontal"
+            android:text="Nous contacter"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pour toute question ou information, notre Service Client est à votre disposition :"
+            android:textSize="16sp"
+            android:paddingBottom="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Par téléphone au +44 123 456 789 (du lundi au vendredi de 9h à 18h)."
+            android:textStyle="bold"
+            android:paddingBottom="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Par e-mail à l'adresse airneis.commerce@gmail.com"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+    <!-- Contact Form Section -->
+    <LinearLayout
+        android:id="@+id/contact_form"
+        android:layout_below="@id/contact_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#F9F9F9"
+        android:padding="20dp"
+        android:elevation="5dp"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Formulaire de contact"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"/>
+        <TextView
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:gravity="start"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:text="E-mail :"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="E-mail"
+            android:inputType="textEmailAddress"
+            android:padding="10dp"
+            android:background="@android:drawable/edit_text"
+            android:layout_marginBottom="15dp"/>
+        <TextView
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:gravity="start"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:text="Sujet :"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/subject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Sujet"
+            android:padding="10dp"
+            android:background="@android:drawable/edit_text"
+            android:layout_marginBottom="15dp"/>
+
+        <TextView
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:gravity="start"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:text="Message :"
+            android:textSize="14sp" />
+
+
+        <EditText
+            android:id="@+id/message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:background="@android:drawable/edit_text"
+            android:hint="Message"
+            android:inputType="textMultiLine"
+            android:minLines="5"
+            android:padding="10dp" />
+
+        <Button
+            android:id="@+id/submit_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Envoyer"
+            android:background="#16253F"
+            android:textColor="#FFFFFF"
+            android:padding="10dp"/>
+    </LinearLayout>
+</RelativeLayout>
