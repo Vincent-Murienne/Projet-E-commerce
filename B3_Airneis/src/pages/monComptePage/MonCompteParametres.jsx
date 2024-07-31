@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Data } from "../../services/api";
 import { UserContext } from '../../context/UserProvider';
 import { ToastQueue } from "@react-spectrum/toast";
+import { mkConfig, generateCsv, download } from "export-to-csv";
 
 const MonCompteParametres = () => {
     const { pullData, handleLogout } = useContext(UserContext);
@@ -41,6 +42,20 @@ const MonCompteParametres = () => {
             }
         });
     }, []);
+
+    const handleDownloadData = () => {
+        const csvConfig = mkConfig({ useKeysAsHeaders: true });
+
+        Data("monCompte", "downloadPersonalData", {"id": getUserId}).then(response => {
+            if (response.success) {
+                const csv = generateCsv(csvConfig)(response.data);
+                download(csvConfig)(csv);
+                ToastQueue.positive("Téléchargement de vos données personnelles réussit.", {timeout: 5000});
+            } else {
+                ToastQueue.negative(response.error, {timeout: 5000});
+            }
+        });
+    };
 
     const handleDeleteAccount = () => {
         const confirmed = window.confirm("Voulez-vous vraiment supprimer votre compte ? Cette action est irréversible.");
@@ -111,20 +126,9 @@ const MonCompteParametres = () => {
                         </Link>
                     </div>
                 </div>
-
-                <div className="input-group">
-                    <h4 className="payement-title">Méthode de payement</h4>
-                        <div className="bordered-button">
-                            <Link to="/MonComptePayment" className="custom-link">
-                                <button type="button" className="custom-button">
-                                    Les méthodes de paiement
-                                </button>
-                            </Link>     
-                    </div>
-                </div>
         
                 <div className="buttons-container">
-                    <button className="submit" type="submit">Télécharger mes données</button>
+                    <button className="submit" type="submit" onClick={handleDownloadData}>Télécharger mes données</button>
                     <Link to="/monCompteEdit" className="submitModify">Modifier mes données</Link>
                     <button className="submitDelete" type="submit" onClick={handleDeleteAccount}>Supprimer mon compte</button>
                 </div>

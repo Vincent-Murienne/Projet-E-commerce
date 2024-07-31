@@ -17,6 +17,7 @@ color primary_light
 color purple_200
 color purple_500
 color purple_700
+color red
 color secondaryBlack
 color teal_200
 color teal_700
@@ -198,6 +199,7 @@ id nextSliderButton
 id order_date
 id order_id
 id order_status
+id outOfStock
 id password
 id passwordEditText
 id personalData1
@@ -205,11 +207,17 @@ id personalData2
 id personalData3
 id prevSliderButton
 id productDescription
+<<<<<<< HEAD
 id productList
 id productMaterial
+=======
+id productImage
+>>>>>>> develop
 id productName
 id productPrice
+id productPriceLabel
 id productQuantity
+id productQuantityLabel
 id productTitle
 id produits_container
 id recyclerView
@@ -244,6 +252,7 @@ id voirPlus
 id year_title_order
 layout activity_main
 layout activity_search
+layout basket_item
 layout fragment_a_propos
 layout fragment_account
 layout fragment_adresses

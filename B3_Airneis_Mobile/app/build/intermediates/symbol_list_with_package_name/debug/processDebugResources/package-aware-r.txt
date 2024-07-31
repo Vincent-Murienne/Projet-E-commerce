@@ -2149,6 +2149,7 @@ color primary_text_disabled_material_light
 color purple_200
 color purple_500
 color purple_700
+color red
 color ripple_material_dark
 color ripple_material_light
 color secondaryBlack
@@ -3679,6 +3680,7 @@ id open_search_view_toolbar_container
 id order_date
 id order_id
 id order_status
+id outOfStock
 id outline
 id outward
 id overshoot
@@ -3705,11 +3707,17 @@ id postLayout
 id pressed
 id prevSliderButton
 id productDescription
+<<<<<<< HEAD
 id productList
 id productMaterial
+=======
+id productImage
+>>>>>>> develop
 id productName
 id productPrice
+id productPriceLabel
 id productQuantity
+id productQuantityLabel
 id productTitle
 id produits_container
 id progress_circular
@@ -4007,6 +4015,7 @@ layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_main
 layout activity_search
+layout basket_item
 layout custom_dialog
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog

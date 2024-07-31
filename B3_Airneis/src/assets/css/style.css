@@ -15,6 +15,7 @@
 @import url("./myAccount/myAccountSettings.css");
 @import url("./myAccount/myAccount.css");
 @import url("./orders/myOrders.css");
+@import url("./checkout.css");
 
 @font-face {
     font-family: "Circular Std Book";

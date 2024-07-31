@@ -30,7 +30,7 @@ if (isset($input['token'], $input['password'])) {
     $resetRecord = $database->selectWhere('password_reset', ['token' => $token]);
     if (!empty($resetRecord) && time() < $resetRecord[0]['expiry']) {
         $email = $resetRecord[0]['email'];
-        $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+        $hashedPassword = hash("sha512", $newPassword);
 
         // Fetch the user ID based on the email
         $userRecord = $database->selectWhere('users', ['email' => $email]);

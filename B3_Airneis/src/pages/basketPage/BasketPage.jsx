@@ -133,7 +133,7 @@ const BasketPage = () => {
                                 />
                             </p>
                             <p className="product-price">{t('price')} : {product.price} €</p>
-                            {product.stock < product.quantity ? <p className="out-of-stock">{t('notEnoughStock')}</p> : ""}
+                            {product.stock == 0 || product.quantity == 0 ? <p className="out-of-stock">{t('notEnoughStock')}</p> : ""}
                             <button onClick={() => handleDelete(product.id)}  className="delete-button">{t('delete')}</button>
                         </div>
                     </div>

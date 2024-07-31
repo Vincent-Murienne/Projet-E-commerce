@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require '../../../vendor/autoload.php';
+require '../../vendor/autoload.php';
 
 $config = require '../../config/configSecure.php';
 
@@ -47,8 +47,8 @@ try {
     $mail->Body    = $message;
 
     $mail->send();
-    echo 'Message has been sent';
+    echo 'Le message a bien été envoyé';
 } catch (Exception $e) {
     http_response_code(500); // Envoyer un code de réponse HTTP 500 pour indiquer une erreur serveur
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    echo "Le message n'a pas pu être envoyé. Erreur du maileur: {$mail->ErrorInfo}";
 }

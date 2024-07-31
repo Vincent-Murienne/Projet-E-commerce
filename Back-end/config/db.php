@@ -175,11 +175,6 @@ class Database {
         $query2->bindValue("id", $id, PDO::PARAM_INT);
         $query2->execute();
 
-        $sql3 = "DELETE FROM payments WHERE user_id = :id";
-        $query3 = $this->pdo->prepare($sql3);
-        $query3->bindValue("id", $id, PDO::PARAM_INT);
-        $query3->execute();
-
         $sql4 = "DELETE FROM users WHERE id = :id";
         $query4 = $this->pdo->prepare($sql4);
         $query4->bindValue("id", $id, PDO::PARAM_INT);
@@ -195,20 +190,6 @@ class Database {
         $query->execute();
         
         $sql1 = "DELETE FROM addresses WHERE id = :id";
-        $query1 = $this->pdo->prepare($sql1);
-        $query1->bindValue("id", $id, PDO::PARAM_INT); 
-        
-        return $query1->execute();
-    }
-
-    public function deletePayment(string $id):bool 
-    {
-        $sql = "UPDATE orders SET payment_id = null WHERE payment_id = :id";
-        $query = $this->pdo->prepare($sql);
-        $query->bindValue("id", $id, PDO::PARAM_INT);
-        $query->execute();
-        
-        $sql1 = "DELETE FROM payments WHERE id = :id";
         $query1 = $this->pdo->prepare($sql1);
         $query1->bindValue("id", $id, PDO::PARAM_INT); 
         
@@ -283,30 +264,10 @@ class Database {
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Cette méthode recherche le titre des produits en fonction des critères fournis avec priorité
-    public function searchProductNameWithPriority($name) 
-    {   
-        $sql = "SELECT products.id, products.name AS 'produits_nom', products.description, products.price, image_table.name AS 'image_name'
-            FROM products 
-            LEFT JOIN (
-                SELECT product_id, MIN(id) AS min_image_id, name FROM images GROUP BY product_id
-            ) AS image_table
-            ON products.id = image_table.product_id  
-            WHERE (products.name = :name OR products.description = :name)
-            OR (SUBSTRING(products.name, 1, 1) <> SUBSTRING(:name, 1, 1) AND SUBSTRING(products.name, 2) = SUBSTRING(:name, 2) AND products.description = :name)
-            OR (products.name LIKE CONCAT(:name, '%') OR products.description LIKE CONCAT(:name, '%'))
-            OR (products.name LIKE CONCAT('%', :name, '%') OR products.description LIKE CONCAT('%', :name, '%'))";
-
-        $query = $this->pdo->prepare($sql);
-        $query->bindValue('name', $name, PDO::PARAM_STR);
-        $query->execute();
-        return $query->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    public function searchProductNameWithFilter($recherche, $prix_min, $prix_max, $materiaux, $categories, $en_stock) 
+    public function searchProductNameWithFilter($recherche, $prix_min, $prix_max, $materiaux, $categories, $en_stock, $orderBy) 
     {   
         // Construction de la requête SQL de base
-        $sql = "SELECT products.name AS 'produits_nom', products.description, products.price, images.name AS 'image_name'
+        $sql = "SELECT products.id AS 'produits_id', products.name AS 'produits_nom', products.description, products.price, images.name AS 'image_name'
                 FROM products
                 LEFT JOIN images ON products.id = images.product_id
                 LEFT JOIN categories ON products.category_id = categories.id
@@ -316,7 +277,7 @@ class Database {
 
         // Ajout des filtres dynamiques
         if (!is_null($recherche)) {
-            $sql .= " AND (products.name LIKE :recherche OR products.description LIKE :recherche)";
+            $sql .= " AND (products.name LIKE CONCAT('%', :recherche, '%') OR products.description LIKE CONCAT('%', :recherche, '%'))";
         }
         if (!is_null($prix_min)) {
             $sql .= " AND products.price >= :prix_min";
@@ -358,13 +319,36 @@ class Database {
         }
 
         // Add GROUP BY clause to keep each products only once
-        $sql .= " GROUP BY products.name;";
+        $sql .= " GROUP BY products.id";
+
+        if (!is_null($orderBy)) {
+            switch($orderBy) {
+                case "nomAsc":
+                    $sql .= " ORDER BY products.name;";
+                    break;
+                case "nomDesc":
+                    $sql .= " ORDER BY products.name DESC;";
+                    break;
+                case "prixAsc":
+                    $sql .= " ORDER BY products.price;";
+                    break;
+                case "prixDesc":
+                    $sql .= " ORDER BY products.price DESC;";
+                    break;
+                case "QuantiteAsc":
+                    $sql .= " ORDER BY products.quantity;";
+                    break;
+                case "QuantiteDesc":
+                    $sql .= " ORDER BY products.quantity DESC;";
+                    break;
+            }
+        }
 
         $query = $this->pdo->prepare($sql);
 
         // Liaison des valeurs des paramètres
         if (!is_null($recherche)) {
-            $query->bindValue("recherche", "%" . $recherche . "%", PDO::PARAM_STR);
+            $query->bindValue("recherche", $recherche, PDO::PARAM_STR);
         }
         if (!is_null($prix_min)) {
             $query->bindValue("prix_min", $prix_min, PDO::PARAM_INT);
@@ -454,6 +438,22 @@ class Database {
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    function getOrderDetail($order_id) {
+        $sql = "SELECT orders.date, orders.order_state, lots_of_product.product_id AS 'product_id', lots_of_product.quantity AS 'quantity', products.name AS 'product_name', products.price AS 'product_price', products.description AS 'product_description', images.name AS 'image_name', addresses.address_name FROM lots_of_product
+                LEFT JOIN products ON lots_of_product.product_id = products.id
+                LEFT JOIN images ON lots_of_product.product_id = images.product_id
+                LEFT JOIN orders ON lots_of_product.order_id = orders.id
+                LEFT JOIN addresses ON orders.address_id = addresses.id
+                WHERE lots_of_product.order_id = :order_id
+                GROUP BY lots_of_product.product_id;";
+
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue("order_id", $order_id, PDO::PARAM_INT);
+        $query->execute();
+
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function insertLotsOfProduct($data) {
         $sql = "INSERT INTO lots_of_product (order_id, product_id, quantity) VALUES (:order_id, :product_id, :quantity)";
         $query = $this->pdo->prepare($sql);
@@ -464,4 +464,15 @@ class Database {
         return $query->rowCount();
     }
 
+    public function downloadPersonalData($id) {
+        $sql = "SELECT users.full_name, users.email, addresses.address_name, addresses.first_name, addresses.last_name, addresses.address, addresses.city, addresses.zip_code, addresses.region, addresses.country, addresses.phone_number FROM users
+                JOIN addresses ON users.id = addresses.user_id
+                WHERE users.id = :id;";
+
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue("id", $id, PDO::PARAM_INT);
+        $query->execute();
+
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

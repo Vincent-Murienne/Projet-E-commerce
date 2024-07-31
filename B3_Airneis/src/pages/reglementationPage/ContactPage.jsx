@@ -1,10 +1,14 @@
+import { ToastQueue } from '@react-spectrum/toast';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 const ContactPage = () => {
     const [formData, setFormData] = useState({
         email: '',
         subject: '',
         message: ''
     });
+
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -25,11 +29,10 @@ const ContactPage = () => {
                 body: JSON.stringify(formData)
             });
             const result = await response.text();
-            console.log(result);
-            alert('Message envoyé avec succès !');
+            ToastQueue.positive(result, { timeout: 5000 });
+            navigate("/");
         } catch (error) {
-            console.error('Erreur lors de l\'envoi du message :', error);
-            alert('Erreur lors de l\'envoi du message.');
+            ToastQueue.negative(error, { timeout: 5000 });
         }
     };
     return (

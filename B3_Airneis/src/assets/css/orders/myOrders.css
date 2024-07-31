@@ -1,4 +1,3 @@
-/* MesCommandesPages.module.css */
 .container-order {
     padding: 20px;
     background-color: #f5f5f5;
@@ -18,6 +17,11 @@
     padding: 15px;
     margin-bottom: 10px;
     border-radius: 4px;
+    transition: 0.2s linear;
+}
+
+.orderItem:hover {
+    border: 1px solid var(--blue);
 }
 
 .orderItem h3 {
@@ -45,9 +49,70 @@
     margin-top: 30px;
     margin-bottom: 10px;
     padding-bottom: 5px;
+    
+}
+
+.order_separator {
     border-bottom: 2px solid #ccc;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.orderDetails {
+    font-size: 1.3em;
 }
 
 .dataBold {
     font-weight: bold;
+}
+
+.orderDetailsItem {
+    width: auto;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.imageOrder {
+    width: 240px;
+    height: 210px;
+    object-fit: cover;
+    padding-right: 1rem;
+    border-right: 1px solid #ccc;
+}
+
+.orderDetailsInfos {
+    margin-left: 1rem;
+}
+
+@media (max-width: 650px) {
+    .orderDetailsInfos {
+        margin-left: 0;
+    }
+
+    .imageOrder {
+        width: 240px;
+        height: 210px;
+        object-fit: cover;
+        padding-right: 0;
+        margin-bottom: .5rem;
+        border-right: none;
+    }
+
+    .orderDetailsItem {
+        width: auto;
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        padding: 15px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }
