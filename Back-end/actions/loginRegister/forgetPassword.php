@@ -2,6 +2,7 @@
 require_once "../../config/security.php";
 require_once "../../config/db.php";
 require_once "../../actions/loginRegister/mailSender.php";
+require_once "../../config/crypto.php";
 
 header('Access-Control-Allow-Origin: http://localhost:5173');
 header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
@@ -17,7 +18,9 @@ $input = json_decode(file_get_contents('php://input'), true);
 
 // Vérifiez si l'e-mail est fourni.
 if (isset($input['email'])) {
-    $email = $input['email'];
+    $crypto = new Crypto();
+
+    $email = $crypto->cryptData($input['email']);
     $database = new Database();
 
     // Vérifiez si l'utilisateur existe.
@@ -39,7 +42,7 @@ if (isset($input['email'])) {
 
         // Envoyez l'e-mail.
         $mailSender = new MailSender();
-        $result = $mailSender->sendResetLink($email, $resetLink);
+        $result = $mailSender->sendResetLink($crypto->decryptData($email), $resetLink);
 
         if ($result['success']) {
             echo json_encode(['success' => true, 'message' => 'Un e-mail de réinitialisation a été envoyé.']);

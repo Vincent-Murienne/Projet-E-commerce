@@ -76,7 +76,7 @@ const RegisterPage = () => {
       Data("loginRegister", "register", data).then(response => {
         if (response.success === true)
         {
-          saveData("user", { isConnected: true, isAdmin: (response.user.role === "1") ? true : false, id: response.user.id, email: email });
+          saveData("user", { isConnected: true, isAdmin: (response.user.role === "1") ? true : false, id: response.user.id });
           saveData("message", {type: "success", body: "Inscription réussite avec succès !"});
           navigate('/');
         }

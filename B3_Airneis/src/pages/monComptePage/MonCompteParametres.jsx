@@ -32,11 +32,11 @@ const MonCompteParametres = () => {
             "id": userId
         };
 
-        Data("panelAdmin", "getWhere", data).then(response => {
+        Data("panelAdmin", "getUserInfo", data).then(response => {
             if (response.success === true) {
-                setUserName(response.data[0].full_name);
-                setUserMail(response.data[0].email);
-                setUserPassword(response.data[0].password);
+                setUserName(response.data.full_name);
+                setUserMail(response.data.email);
+                setUserPassword(response.data.password);
             } else {
                 ToastQueue.negative(response.error, {timeout: 5000});
             }
@@ -108,7 +108,7 @@ const MonCompteParametres = () => {
                     <div className="input-container">
                         <TextField
                             label="Mot de passe"
-                            value={getUserPassword}
+                            value="zgecsudbzgeviuzebfjzhegoifzuebf"
                             type="password"
                             width={300}
                             disabled

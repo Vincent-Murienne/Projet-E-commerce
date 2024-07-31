@@ -12,13 +12,7 @@ if($isAllowed) {
         // Create new instance of class Database to interact with the database
         $db = new Database();
 
-        // Check if table is images
-        // If yes
-        //      We are going to check if category_id is set
-        //      if yes
-        //          We are going to replace into the db the image linked to this category
         // This will prevent to have multiple images linked to one category (because a category only has 1 image)
-
         if($json["table"] == "images") {
             if(isset($json["data"]["category_id"]) && isset($json["data"]["category_id"]) != null) {
                 $data = $db->selectWhere($json["table"], ["category_id" => $json["data"]["category_id"]]);

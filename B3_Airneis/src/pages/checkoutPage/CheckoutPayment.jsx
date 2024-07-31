@@ -89,7 +89,6 @@ const CheckoutPayment = () => {
                 }
             });
         } else {
-            //saveData("message", {type: "error", body: error.message});
             ToastQueue.negative(error.message, { timeout: 5000 });
         }
     };

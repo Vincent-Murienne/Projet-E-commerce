@@ -1,6 +1,7 @@
 <?php
 require_once "../../config/security.php";
 require_once "../../config/db.php";
+require_once "../../config/crypto.php";
 
 // Set default success response to false in case of unlegitimate API call
 $response["success"] = false;
@@ -8,8 +9,9 @@ $response["success"] = false;
 if ($isAllowed) {
     if (isset($json["email"]) && isset($json["password"])) {
         $db = new Database();
+        $crypto = new Crypto();
 
-        $email = $json["email"];
+        $email = $crypto->cryptData($json["email"]);
         $password = hash("sha512", $json["password"]);
 
         // Check if user exist
@@ -20,7 +22,7 @@ if ($isAllowed) {
             if ($password == $user[0]["password"]) {
                 // passwords matches
                 $response["success"] = true;
-                $response["user"] = $user;
+                $response["user"] = ["id" => $user[0]["id"], "role" => $user[0]["role"]];
             } else {
                 // passwords doesn't match
                 $response["error"] = "Nom d'utilisateur/email ou mot de passe incorrect.";

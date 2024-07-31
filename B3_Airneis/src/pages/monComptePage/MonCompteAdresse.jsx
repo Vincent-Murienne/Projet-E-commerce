@@ -221,7 +221,7 @@ const MonCompteAdresse = () => {
                     }             
                 };
           
-                Data("panelAdmin", "insert", data).then(response => {
+                Data("panelAdmin", "insertCheckout", data).then(response => {
                     if (response.success === true) {
                         ToastQueue.positive("Adresse ajoutée avec succès !", {timeout: 5000});
                         navigate("/monCompteParametres");
@@ -250,7 +250,7 @@ const MonCompteAdresse = () => {
                     }             
                 };
           
-                Data("panelAdmin", "update", data).then(response => {
+                Data("panelAdmin", "updateAddress", data).then(response => {
                     if (response.success === true) {
                         ToastQueue.positive("Modification réussie avec succès !", {timeout: 5000});
                         navigate("/monCompteParametres");

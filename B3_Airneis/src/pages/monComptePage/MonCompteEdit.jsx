@@ -39,11 +39,11 @@ const MonCompteEdit = () => {
             "id": userId
         };
 
-        Data("panelAdmin", "getWhere", data).then(response => {
+        Data("panelAdmin", "getUserInfo", data).then(response => {
             if (response.success === true) {
-                setUserName(response.data[0].full_name);
-                setUserMail(response.data[0].email);
-                setUserPassword(response.data[0].password);
+                setUserName(response.data.full_name);
+                setUserMail(response.data.email);
+                setUserPassword(response.data.password);
                 setUserId(userId);
 
             } else {
@@ -121,7 +121,7 @@ const MonCompteEdit = () => {
                     return;
                 }
             }
-            Data("panelAdmin", "update", data).then(response => {
+            Data("panelAdmin", "updateUser", data).then(response => {
                 if (response.success === true) {
                     ToastQueue.positive("Modification réussie avec succès !", {timeout: 5000});
                     navigate("/monCompteParametres");

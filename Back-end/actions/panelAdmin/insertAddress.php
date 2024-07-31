@@ -27,15 +27,7 @@ if($isAllowed) {
 
         $data = $db->insert($json["table"], $insertData);
         if($data) {
-            $id = $db->getLastIdInserted();
-            if($id) {
-                $response["success"] = true;
-                $response["id"] = $id["LAST_INSERT_ID()"];
-            } else {
-                $response["error"] = "Erreur lors du traitement en base de donnée.";
-            }
-        } else {
-            $response["error"] = "Erreur lors du traitement en base de donnée.";
+            $response["success"] = true;
         }
     } else {
         $response["error"] = "Veuillez indiquer toutes les données nécessaires à ce traitement.";

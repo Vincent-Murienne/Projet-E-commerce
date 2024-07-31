@@ -2,6 +2,7 @@
 
 require_once "../../config/security.php";
 require_once "../../config/db.php";
+require_once "../../config/crypto.php";
 
 $response["success"] = false;
 
@@ -11,9 +12,10 @@ if ($isAllowed) {
         // Check if all informations aren't empty
         if (!empty($json["full_name"]) && !empty($json["email"]) && !empty($json["password"])) {
             $db = new Database();
+            $crypto = new Crypto();
 
-            $fullName = $json["full_name"];
-            $email = $json["email"];
+            $fullName = $crypto->cryptData($json["full_name"]);
+            $email = $crypto->cryptData($json["email"]);
             $password = $json["password"];
 
             $hashedPassword = hash("sha512", $password);
@@ -29,7 +31,7 @@ if ($isAllowed) {
 
                     if($user){
                         $response["success"] = true;
-                        $response["user"] = $user;
+                        $response["user"] = ["id" => $user["id"], "role" => $user["role"]];
                     } else {
                         $response["error"] = "Impossible de récupérer les informations de l'utilisateur.";
                     }

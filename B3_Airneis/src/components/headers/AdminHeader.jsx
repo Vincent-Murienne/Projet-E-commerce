@@ -22,8 +22,7 @@ const AdminHeader = () => {
     const [ user, setUser ] = useState({
         isConnected: false,
         isAdmin: false,
-        id: "",
-        email: ""
+        id: ""
     });
 
     const closeMenus = () => {
@@ -97,8 +96,7 @@ const AdminHeader = () => {
         setUser({
             isConnected: false,
             isAdmin: false,
-            id: "",
-            email: ""
+            id: ""
         });
         ToastQueue.positive("Vous vous êtes correctement déconnecté.", {timeout: 5000});
     };

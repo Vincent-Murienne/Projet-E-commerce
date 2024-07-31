@@ -9,14 +9,12 @@ const ForgetPasswordPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // Implémentez la logique pour vérifier si l'email existe et envoyer l'email de réinitialisation
         try {
             let data = {
                 "email": email
             };
 
             const response = await Data("loginRegister", "forgetPassword", data);
-            console.log(response);
             if (response.success) {
                 ToastQueue.positive("Un e-mail de réinitialisation a été envoyé.", { timeout: 5000 });
                 navigate('/login');

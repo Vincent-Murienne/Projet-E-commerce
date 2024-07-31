@@ -3,8 +3,8 @@ USE airneis_e_commerce;
 
 CREATE TABLE `users` (
   `id` integer PRIMARY KEY AUTO_INCREMENT,
-  `full_name` varchar(100),
-  `email` varchar(50),
+  `full_name` varchar(200),
+  `email` varchar(200),
   `password` char(128),
   `role` boolean
 );
@@ -12,15 +12,15 @@ CREATE TABLE `users` (
 CREATE TABLE `addresses` (
   `id` integer PRIMARY KEY AUTO_INCREMENT,
   `user_id` integer,
-  `address_name` varchar(50),
-  `first_name` varchar(50),
-  `last_name` varchar(50),
-  `address` varchar(100),
-  `city` varchar(50),
+  `address_name` varchar(200),
+  `first_name` varchar(200),
+  `last_name` varchar(200),
+  `address` varchar(200),
+  `city` varchar(200),
   `zip_code` integer,
-  `region` varchar(50),
-  `country` varchar(30),
-  `phone_number` varchar(10)
+  `region` varchar(200),
+  `country` varchar(200),
+  `phone_number` varchar(200)
 );
 
 CREATE TABLE `categories` (
@@ -107,8 +107,7 @@ ALTER TABLE `lots_of_product` ADD FOREIGN KEY (`order_id`) REFERENCES `orders` (
 ALTER TABLE `lots_of_product` ADD FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 
 INSERT INTO users (full_name, email, password, role) VALUES
-('ADMIN', 'admin@admin.com', '395bdb57512f444f07f23923cb637b5bba7c38ea967a458a0553199e8615f1a747a468de07a213c259ac42c390e8c12a48d35cec2d255d89a1d8f6f149b5d976', 1),
-('Neriman', 'neri@gmail.com', '53db0fc135fbce6f381cf5acd2c0e1010d7597e32b7f5c91e371f6985945d7f1bad9e7d6468f885d8849450ebb603540cb59080ff376d7030e707c6ee67b3b32', 1);
+('mzKXYyPEMT63P+0ORzlFmY7O0a6w', 'gsyGSS7L9iqQOa5iuFQyvq7u8Y6QwUmaISgBUk7kgw==', '395bdb57512f444f07f23923cb637b5bba7c38ea967a458a0553199e8615f1a747a468de07a213c259ac42c390e8c12a48d35cec2d255d89a1d8f6f149b5d976', 1);
 
 
 INSERT INTO categories (name, `order`) VALUES
@@ -240,10 +239,6 @@ INSERT INTO lots_of_product (order_id, product_id, quantity) VALUES
 (7, 10, 1),
 (7, 10, 1),
 (7, 11, 1);
-
-INSERT INTO `addresses` (`user_id`, `address_name`, `first_name`, `last_name`, `address`, `city`, `zip_code`, `region`, `country`, `phone_number`) VALUES
-(2, 'Maison de neri', 'neri', 'her', '123 Rue de la Liberté', 'Paris', 75001, 'Île-de-France', 'France', 0723456789),
-(2, 'Maison de neri 2', 'neri', 'her', '456 Business Boulevard', 'Paris', 75002, 'Île-de-France', 'France', 0723456789);
 
 INSERT INTO `materials_list` (`id`, `name`) VALUES
 (1, 'Bois'),

@@ -13,8 +13,7 @@ const Header = () => {
     const [ user, setUser ] = useState({
         isConnected: false,
         isAdmin: false,
-        id: "",
-        email: ""
+        id: ""
     });
     const [ isMenuOpen, setIsMenuOpen ] = useState(false);
 
@@ -87,8 +86,7 @@ const Header = () => {
         setUser({
             isConnected: false,
             isAdmin: false,
-            id: "",
-            email: ""
+            id: ""
         });
         ToastQueue.positive("Vous vous êtes correctement déconnecté.", {timeout: 5000});
     };

@@ -1,6 +1,7 @@
 <?php
 require_once "../../config/security.php";
 require_once "../../config/db.php";
+require_once "../../config/crypto.php";
 
 // Set default success response to false in case of unlegitimate API call
 $response["success"] = false;
@@ -13,8 +14,25 @@ if($isAllowed) {
         $db = new Database();
         $data = $db->downloadPersonalData($json["id"]);
         if($data) {
+            $crypto = new Crypto();
+
+            $resultData = [];
+            $index = 0;
+
+            foreach($data as $address) {
+                foreach($address as $key => $value) {
+                    if(!in_array($key, ["zip_code"])) {
+                        $decrypted_value = $crypto->decryptData($value);
+                        $resultData[$index][$key] = $decrypted_value;
+                    } else {
+                        $resultData[$index][$key] = $value;
+                    }
+                }
+                $index++;
+            }
+
             $response["success"] = true;
-            $response["data"] = $data;
+            $response["data"] = $resultData;
         }
     } else {
         $response["error"] = "Veuillez indiquer dans les données envoyés la table dans laquelle faire cette recherche.";

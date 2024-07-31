@@ -9,33 +9,25 @@ $response["success"] = false;
 // Check if the API call is legitimate
 if($isAllowed) {
     // Check if the table to lookup for is given
-    if(isset($json["table"]) && isset($json["data"])) {
+    if(isset($json["table"]) && isset($json["id"]) && isset($json["data"])) {
         // Create new instance of class Database to interact with the database
         $db = new Database();
         $crypto = new Crypto();
 
-        $insertData = [];
+        $updateData = [];
 
         foreach($json["data"] as $key => $value) {
-            if(!in_array($key, ["id", "user_id", "zip_code"])) {
+            if(!in_array($key, ["id", "password", "role"])) {
                 $encrypted_value = $crypto->cryptData($value);
-                $insertData[$key] = $encrypted_value;
+                $updateData[$key] = $encrypted_value;
             } else {
-                $insertData[$key] = $value;
+                $updateData[$key] = $value;
             }
         }
 
-        $data = $db->insert($json["table"], $insertData);
+        $data = $db->update($json["table"], $updateData, $json["id"]);
         if($data) {
-            $id = $db->getLastIdInserted();
-            if($id) {
-                $response["success"] = true;
-                $response["id"] = $id["LAST_INSERT_ID()"];
-            } else {
-                $response["error"] = "Erreur lors du traitement en base de donnée.";
-            }
-        } else {
-            $response["error"] = "Erreur lors du traitement en base de donnée.";
+            $response["success"] = true;
         }
     } else {
         $response["error"] = "Veuillez indiquer toutes les données nécessaires à ce traitement.";
