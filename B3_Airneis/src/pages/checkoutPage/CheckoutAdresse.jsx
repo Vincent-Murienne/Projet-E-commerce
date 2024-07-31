@@ -77,9 +77,9 @@ const CheckoutAdresse = () => {
             "id": userId
         };
 
-        Data("panelAdmin", "getCheckoutData", addressData).then(response => {
+        Data("panelAdmin", "getUserAddresses", addressData).then(response => {
             if (response.success === true) {
-                if(response.CheckoutDataEmpty === false) {
+                if(response.AddressDataEmpty === false) {
                     setUserAddresses(response.data); 
                     setSelectedAddress(response.data[0].id.toString());  
                     setAddressName(response.data[0].address_name);           
@@ -238,7 +238,7 @@ const CheckoutAdresse = () => {
                 }
             };
 
-            Data("panelAdmin", "insertCheckout", data).then(response => {
+            Data("panelAdmin", "insertAddress", data).then(response => {
                 if (response.success === true) {
                     navigate(`/checkoutPayment?addressId=${response.id}`);
                 } else {

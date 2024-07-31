@@ -1,11 +1,11 @@
 <?php
+// We need to put each of these headers to allow api calls from our react project
+header('Access-Control-Allow-Origin: http://localhost:5173');
+header('Access-Control-Allow-Methods: POST');
+header('Access-Control-Allow-Headers: Content-Type');
 
-header('Access-Control-Allow-Origin: http://localhost:5173'); // Autoriser les requêtes provenant de votre application React
-header('Access-Control-Allow-Methods: POST'); // Autoriser uniquement les méthodes POST
-header('Access-Control-Allow-Headers: Content-Type'); // Autoriser les en-têtes de type Content-Type
-
+// Send a success error without doing anything if the REQUEST_METHOD isn't POST
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-    // Aucune action n'est nécessaire, renvoyer simplement une réponse 200 OK
     http_response_code(200);
     exit;
 }
@@ -17,17 +17,16 @@ require '../../vendor/autoload.php';
 
 $config = require '../../config/configSecure.php';
 
-
 $mail = new PHPMailer(true);
 
 try {
-    // Récupération des données POST au format JSON
+    // Initialize variables with data
     $data = json_decode(file_get_contents('php://input'), true);
     $email = $data['email'];
     $subject = $data['subject'];
     $message = $data['message'];
 
-    // Configuration du serveur SMTP
+    // Configure SMTP server
     $mail->isSMTP();
     $mail->Host = $config['smtp']['host'];
     $mail->SMTPAuth = true;
@@ -36,19 +35,17 @@ try {
     $mail->SMTPSecure = $config['smtp']['secure'];
     $mail->Port = $config['smtp']['port'];
 
-    // Destinataires
-    $mail->setFrom($config['smtp']['username'], 'Airneis Commerce'); // Utilisez votre adresse e-mail comme expéditeur
-    $mail->addAddress('airneis.commerce@gmail.com', 'Airneis Commerce'); // Ajouter un destinataire
+    $mail->setFrom($config['smtp']['username'], 'Airneis Commerce'); // Use your email as sender
+    $mail->addAddress('airneis.commerce@gmail.com', 'Airneis Commerce'); // Add a receiver
     $mail->addReplyTo($email);
 
-    // Contenu
-    $mail->isHTML(true); // Définir le format de l'email en HTML
+    $mail->isHTML(true); // Set content as HTML
     $mail->Subject = $subject;
-    $mail->Body    = $message;
+    $mail->Body = $message;
 
     $mail->send();
     echo 'Le message a bien été envoyé';
 } catch (Exception $e) {
-    http_response_code(500); // Envoyer un code de réponse HTTP 500 pour indiquer une erreur serveur
+    http_response_code(500); // Send HTTP code 500 to signal an error
     echo "Le message n'a pas pu être envoyé. Erreur du maileur: {$mail->ErrorInfo}";
 }

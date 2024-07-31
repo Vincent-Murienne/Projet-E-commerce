@@ -8,10 +8,11 @@ $response["success"] = false;
 
 // Check if the API call is legitimate
 if($isAllowed) {
-    // Check if the table to lookup for is given
+    // Check if the input variables are set
     if(isset($json["table"]) && isset($json["data"])) {
-        // Create new instance of class Database to interact with the database
         $db = new Database();
+
+        // The data array contains sensitive information so we have to encrypt them before sending them to the database
         $crypto = new Crypto();
 
         $insertData = [];
@@ -27,7 +28,15 @@ if($isAllowed) {
 
         $data = $db->insert($json["table"], $insertData);
         if($data) {
-            $response["success"] = true;
+            $id = $db->getLastIdInserted(); // Retrieve the id of the address we just created to get back all informations and send them back to front-end
+            if($id) {
+                $response["success"] = true;
+                $response["id"] = $id["LAST_INSERT_ID()"];
+            } else {
+                $response["error"] = "Erreur lors du traitement en base de donnée.";
+            }
+        } else {
+            $response["error"] = "Erreur lors du traitement en base de donnée.";
         }
     } else {
         $response["error"] = "Veuillez indiquer toutes les données nécessaires à ce traitement.";

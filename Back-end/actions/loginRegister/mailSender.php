@@ -5,11 +5,12 @@ use PHPMailer\PHPMailer\Exception;
 
 require '../../vendor/autoload.php';
 
+// This class will be used to send emails to reset a new password or for the contact form
 class MailSender {
     private $mail;
 
     public function __construct() {
-        $this->mail = new PHPMailer(true); // Pass `true` to enable exceptions
+        $this->mail = new PHPMailer(true);
         $this->setup();
     }
 
@@ -17,7 +18,7 @@ class MailSender {
         $config = require '../../config/configSecure.php';
         $smtp = $config['smtp'];
 
-        // Configuration du serveur SMTP
+        // Configure SMTP server
         $this->mail->isSMTP();
         $this->mail->Host = $smtp['host'];
         $this->mail->SMTPAuth = true;
@@ -30,7 +31,7 @@ class MailSender {
     public function sendResetLink($email, $resetLink) {
         try {
             $this->mail->setFrom('airneis.commerce@gmail.com', 'Mailer');
-            $this->mail->addAddress($email); // Add a recipient
+            $this->mail->addAddress($email); // Add a reciever
             $this->mail->isHTML(true); // Set email format to HTML
             $this->mail->Subject = 'Airneis Modification du Mot de Passe';
             $this->mail->Body = <<<EOT

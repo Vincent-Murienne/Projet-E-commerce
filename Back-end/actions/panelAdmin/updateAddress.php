@@ -8,10 +8,11 @@ $response["success"] = false;
 
 // Check if the API call is legitimate
 if($isAllowed) {
-    // Check if the table to lookup for is given
+    // Check if the input variables are set
     if(isset($json["table"]) && isset($json["id"]) && isset($json["data"])) {
-        // Create new instance of class Database to interact with the database
         $db = new Database();
+
+        // The data array contains sensitive information so we have to encrypt them before sending them to the database
         $crypto = new Crypto();
 
         $updateData = [];

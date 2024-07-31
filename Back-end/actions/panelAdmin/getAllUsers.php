@@ -8,12 +8,12 @@ $response["success"] = false;
 
 // Check if the API call is legitimate
 if($isAllowed) {
-    // Check if the table to lookup for is given
+    // Check if the input variables are set
     if(isset($json["table"])) {
-        // Create new instance of class Database to interact with the database
         $db = new Database();
         $data = $db->findAll($json["table"]);
         if($data) {
+            // The data array contains crypted information so we have to decrypt them before sending them back to the front-end
             $crypto = new Crypto();
 
             $resultData = [];

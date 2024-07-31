@@ -10,13 +10,15 @@ header("Access-Control-Allow-Headers: Content-Type");
 // Set default success response to false in case of unlegitimate API call
 $response["success"] = false;
 
-// Check if the table to lookup for is given
+// Check if the input variables are set
 if(isset($_FILES["file"])) {
 
+    // Preparing the path with the image new name (to prevent having another image named identically)
     $upload_directory = "../../../B3_Arneis/public/img/";
     $file_name = time() . "_" . $_FILES["file"]["name"];
     $upload_file = $upload_directory . $file_name;
 
+    // Move the image at the desired path
     if(move_uploaded_file($_FILES["file"]["tmp_name"], $upload_file)) {
         $response["success"] = true;
         $response["imageName"] = $file_name;

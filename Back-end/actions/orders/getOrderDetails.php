@@ -1,22 +1,39 @@
 <?php
 require_once "../../config/security.php";
 require_once "../../config/db.php";
+require_once "../../config/crypto.php";
 
 // Set default success response to false in case of an illegitimate API call
 $response = ["success" => false];
 
 // Check if the API call is legitimate
 if ($isAllowed) {
+    // Check if the input variables are set
     if (isset($json["order_id"])) {
-        // Create a new instance of the Database class to interact with the database
         $db = new Database();
-        // Assuming you have a method getAllOrdersByUser in your Database class
         $orderDetail = $db->getOrderDetail($json["order_id"]);
 
-        // Check if any results are found
         if ($orderDetail) {
+            // The orderDetail array contains crypted information so we have to decrypt them before sending them back to the front-end
+            $crypto = new Crypto();
+
+            $resultData = [];
+            $index = 0;
+
+            foreach($orderDetail as $order) {
+                foreach($order as $key => $value) {
+                    if(in_array($key, ["address_name"])) {
+                        $decrypted_value = $crypto->decryptData($value);
+                        $resultData[$index][$key] = $decrypted_value;
+                    } else {
+                        $resultData[$index][$key] = $value;
+                    }
+                }
+                $index++;
+            }
+
             $response["success"] = true;
-            $response["data"] = $orderDetail;
+            $response["data"] = $resultData;
         } else {
             $response["error"] = "Cette commande est vide.";
         }

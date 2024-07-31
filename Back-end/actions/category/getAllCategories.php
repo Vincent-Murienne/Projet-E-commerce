@@ -7,10 +7,8 @@ $response["success"] = false;
 
 // Check if the API call is legitimate
 if($isAllowed) {
-    // Check if the table to lookup for is given
-    if (isset($json["table"]) && $json["table"] === "categories"){
-
-        // Create new instance of class Database to interact with the database
+    // Check if the input variables are set
+    if (isset($json["table"]) && $json["table"] === "categories") {
         $db = new Database();
         $resData = $db->getAllCategoriesWithImage();
         

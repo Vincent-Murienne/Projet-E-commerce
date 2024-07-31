@@ -19,7 +19,7 @@ class Database {
         $this->pdo = new PDO("mysql:dbname=".$this->db_name.";host=".$this->db_host,$this->db_username, $this->db_password);
     }
 
-    // This methods takes the name of the table and will return you all the data from it
+    // This method takes the name of the table. It returns an array with all different results.
     public function findAll(string $table)
     {
         $query = $this->pdo->prepare("SELECT * FROM $table");
@@ -28,7 +28,7 @@ class Database {
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // This method takes the name of the table and the id of what you wants to get the informations of (assuming the field you want to search in is called id)
+    // This method takes the name of the table and the id of what you want to get the information of (assuming the field you want to search is called id). It returns the first result found
     public function find(string $table, int $id)
     {
         $query = $this->pdo->prepare("SELECT * FROM $table WHERE id = :id ");
@@ -36,7 +36,7 @@ class Database {
         return $query->fetch(PDO::FETCH_ASSOC);
     }
 
-    // This methods takes the name of the table and an array to insert into the database
+    // This method takes the name of the table and an array to insert into the database. It returns the rowCount.
     public function insert($table, $data) {
         $columns = implode(', ', array_keys($data));
         $placeholders = ':' . implode(', :', array_keys($data));
@@ -46,7 +46,7 @@ class Database {
         return $query->rowCount();
     }
 
-    // This methods takes the name of the table, an array and you can also give a field to sort on. It will return you the data to matches the condition given in the array.
+    // This method takes the name of the table, an array and you can also give a field to sort on. It returns an array with all different results.
     public function selectWhere($table, $data, $orderby = false, $orderbyField = null) {
         $sqlFields = [];
         foreach ($data as $key => $value) {
@@ -61,7 +61,7 @@ class Database {
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // This method takes the table an array of data and an integer where to update the data
+    // This method takes the table, an array and the id where to update the data (assuming the field containing the id is called 'id')
     function update(string $table, array $data, int $id) {
         $sqlFields = [];
         foreach ($data as $key => $value){
@@ -92,7 +92,7 @@ class Database {
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // This method is specific, it deletes the order associated to the old element and assigns it to the new top categories/images/products in the database.
+    // This method is specific, it updates the top categories/images/products in the database.
     function updateTop(string $table, int $order, int $id) {
         $query = $this->pdo->prepare("UPDATE $table SET `order` = NULL WHERE `order` = :order");
 
@@ -127,6 +127,7 @@ class Database {
         return $success;
     }
 
+    // This method is specific, it retrieves all the products of a given category. It takes the id of that category.
     public function getProductsFromCategory($id)
     {
     
@@ -138,6 +139,7 @@ class Database {
         return $query->fetchAll(PDO::FETCH_ASSOC);
     } 
     
+    // This method is specific, it retrieves all the categories with an image.
     public function getAllCategoriesWithImage()
     {
         $sql = "SELECT categories.id AS 'category_id', categories.name AS 'category_name', categories.order AS 'category_order', images.name AS 'image_name' FROM categories LEFT JOIN images ON categories.id = images.category_id";
@@ -147,7 +149,7 @@ class Database {
         return $query->fetchAll(PDO::FETCH_ASSOC);
     } 
 
-    // This method is generic, it receives the table and the id and will then delete this id from the table
+    // This method is generic, it receives the table and the id and will then delete this id from the table (assuming the field containing the id is named 'id')
     public function delete(string $table, string $id):bool 
     {
         $sql = "DELETE FROM $table WHERE id = :id";
@@ -182,6 +184,7 @@ class Database {
         return $query4->execute();
     }
 
+    // This method is specific, it deletes the given address. It takes the id of the address to delete.
     public function deleteAddress(string $id):bool 
     {
         $sql = "UPDATE orders SET address_id = null WHERE address_id = :id";
@@ -196,6 +199,7 @@ class Database {
         return $query1->execute();
     }
 
+    // This method is specific, it deletes the basket of a specific user. It takes the id of the user.
     public function deleteBasket(int $user_id):bool 
     {
         $sql = "DELETE FROM baskets WHERE user_id = :user_id";
@@ -211,6 +215,7 @@ class Database {
         return $this->pdo->query("SELECT LAST_INSERT_ID()")->fetch(PDO::FETCH_ASSOC);
     }
 
+    // This method is specific, it retrieves all the information of a specific products. It takes the id of the product.
     public function getProductDetail($id)
     {
         $sql = "SELECT categories.name AS category_name, products.*, images.id AS image_id, images.name AS image_name, materials_list.name AS material FROM products INNER JOIN images ON products.id = images.product_id LEFT JOIN categories ON products.category_id = categories.id LEFT JOIN products_materials ON products.id = products_materials.product_id LEFT JOIN materials_list ON products_materials.materials_list_id = materials_list.id WHERE products.id = :id ORDER BY products.quantity DESC LIMIT 3;";
@@ -221,6 +226,7 @@ class Database {
         return $query->fetchAll(PDO::FETCH_ASSOC);       
     }
 
+    // This method is specific, it retrieves all the similar product of a given product. It takes the id of the product.
     public function getProductSimilaire($id)
     {
         $sql = "SELECT categories.name AS category_name, products.*, product_image.category_id AS product_image_category_id, product_image.name AS product_image_name, category_image.category_id AS category_image_category_id, category_image.name AS category_image_name FROM products INNER JOIN (SELECT product_id, MIN(id) AS min_image_id FROM images GROUP BY product_id) AS first_image ON products.id = first_image.product_id INNER JOIN images AS product_image ON first_image.min_image_id = product_image.id LEFT JOIN images AS category_image ON products.category_id = category_image.category_id AND category_image.category_id = :id LEFT JOIN categories ON products.category_id = categories.id WHERE products.category_id = :id ORDER BY products.quantity DESC";
@@ -231,6 +237,7 @@ class Database {
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // This method is specific, it retrieves all the information of a specific chart. It takes the start date and the end date.
     public function getChart1Data($date_start, $date_end)
     {
         $sql = "SELECT date, ROUND(SUM(lots_of_product.quantity*products.price), 2) AS 'total_price' FROM `orders` JOIN lots_of_product ON `orders`.id = lots_of_product.order_id JOIN products ON lots_of_product.product_id = products.id WHERE date BETWEEN STR_TO_DATE(:date_start, '%e/%c/%Y %H:%i:%s') AND STR_TO_DATE(:date_end, '%e/%c/%Y %H:%i:%s') GROUP BY CAST(orders.date as DATE)";
@@ -242,6 +249,7 @@ class Database {
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // This method is specific, it retrieves all the information of a specific chart. It takes the start date and the end date.
     public function getChart2Data($date_start, $date_end)
     {
         $sql = "SELECT date, categories.name, ROUND(SUM(lots_of_product.quantity*products.price), 2) AS 'total_price' FROM `orders` JOIN lots_of_product ON `orders`.id = lots_of_product.order_id JOIN products ON lots_of_product.product_id = products.id JOIN categories ON products.category_id = categories.id WHERE date BETWEEN STR_TO_DATE(:date_start, '%e/%c/%Y %H:%i:%s') AND STR_TO_DATE(:date_end, '%e/%c/%Y %H:%i:%s') GROUP BY date, categories.name";
@@ -253,6 +261,7 @@ class Database {
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // This method is specific, it retrieves all the information of a specific chart. It takes the start date and the end date.
     public function getChart3Data($date_start, $date_end)
     {
         $sql = "SELECT categories.name, SUM(lots_of_product.quantity) AS 'value' FROM `orders` JOIN lots_of_product ON `orders`.id = lots_of_product.order_id JOIN products ON lots_of_product.product_id = products.id JOIN categories ON products.category_id = categories.id WHERE date BETWEEN STR_TO_DATE(:date_start, '%e/%c/%Y %H:%i:%s') AND STR_TO_DATE(:date_end, '%e/%c/%Y %H:%i:%s') GROUP BY categories.name";
@@ -264,9 +273,10 @@ class Database {
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // This method is specific, it retrieves all the products corresponding to all the giving criterias.
     public function searchProductNameWithFilter($recherche, $prix_min, $prix_max, $materiaux, $categories, $en_stock, $orderBy) 
     {   
-        // Construction de la requête SQL de base
+        // Build of the SQL request
         $sql = "SELECT products.id AS 'produits_id', products.name AS 'produits_nom', products.description, products.price, images.name AS 'image_name'
                 FROM products
                 LEFT JOIN images ON products.id = images.product_id
@@ -275,7 +285,7 @@ class Database {
                 LEFT JOIN materials_list ON products_materials.materials_list_id = materials_list.id
                 WHERE 1=1";
 
-        // Ajout des filtres dynamiques
+        // Add dynamic filters to the sql request
         if (!is_null($recherche)) {
             $sql .= " AND (products.name LIKE CONCAT('%', :recherche, '%') OR products.description LIKE CONCAT('%', :recherche, '%'))";
         }
@@ -346,7 +356,7 @@ class Database {
 
         $query = $this->pdo->prepare($sql);
 
-        // Liaison des valeurs des paramètres
+        // Bind given values 
         if (!is_null($recherche)) {
             $query->bindValue("recherche", $recherche, PDO::PARAM_STR);
         }
@@ -375,7 +385,7 @@ class Database {
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-
+    // This method is specific, it retrieves all the products the basket of a specific user. It takes the id of the user.
     public function getProductBasket($user_id)
     {
         $sql = "SELECT p.id, p.name, SUM(b.quantity) AS quantity, p.price, p.description, p.quantity AS stock, 
@@ -391,6 +401,7 @@ class Database {
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // This method is specific, it deletes a specific product in the basket of a specific user. It takes the id of the user and the product.
     public function deleteProductBasket($user_id, $product_id)
     {
         $sql = "DELETE FROM baskets WHERE user_id = :user_id AND product_id = :product_id";
@@ -400,6 +411,7 @@ class Database {
         return $query->execute();
     }
 
+    // This method is specific, it updates the quantity of a specific product in the basket of a specific user. It takes the id of the user, the product and the new quantity.
     public function updateProductQuantity($user_id, $product_id, $quantity)
     {
         $sql = "UPDATE baskets SET quantity = :quantity WHERE user_id = :user_id AND product_id = :product_id";
@@ -409,21 +421,8 @@ class Database {
         $query->bindValue('quantity', $quantity, PDO::PARAM_INT);
         return $query->execute();
     }
-    function updateOrder(string $table, array $data, int $id) {
-        if (array_key_exists('adresse_id', $data)) {
-            $data['adresse_id'] = null;
-        }
-        
-        $sqlFields = [];
-        foreach ($data as $key => $value){
-            $sqlFields[] = "$key = :$key";
-        }
-        $query = $this->pdo->prepare("UPDATE $table SET " . implode(', ', $sqlFields) .
-            " WHERE id = :id");
-    
-        return $query->execute(array_merge($data, ['id' => $id]));
-    }
 
+    // This method is specific, It retrieves all orders from a specific user. It takes the id of the user.
     function getAllOrdersByUser($userId) {
         $sql = "SELECT o.id AS order_id, o.date AS order_date, o.order_state AS order_status, SUM(lop.quantity) AS total_items, SUM(p.price * lop.quantity) AS total_price
         FROM orders o
@@ -438,6 +437,7 @@ class Database {
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // This method is specific, it retrieves all the details of a specific order. It takes the id of the order
     function getOrderDetail($order_id) {
         $sql = "SELECT orders.date, orders.order_state, lots_of_product.product_id AS 'product_id', lots_of_product.quantity AS 'quantity', products.name AS 'product_name', products.price AS 'product_price', products.description AS 'product_description', images.name AS 'image_name', addresses.address_name FROM lots_of_product
                 LEFT JOIN products ON lots_of_product.product_id = products.id
@@ -454,6 +454,7 @@ class Database {
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // This method is specific, it insert a product from a specific order. It takes an array of data containing the order id, the product id and the quantity
     public function insertLotsOfProduct($data) {
         $sql = "INSERT INTO lots_of_product (order_id, product_id, quantity) VALUES (:order_id, :product_id, :quantity)";
         $query = $this->pdo->prepare($sql);
@@ -464,6 +465,7 @@ class Database {
         return $query->rowCount();
     }
 
+    // This method is specific, it retrieves all personnal datas from a specific user stored in our database. It takes the id of the user. 
     public function downloadPersonalData($id) {
         $sql = "SELECT users.full_name, users.email, addresses.address_name, addresses.first_name, addresses.last_name, addresses.address, addresses.city, addresses.zip_code, addresses.region, addresses.country, addresses.phone_number FROM users
                 JOIN addresses ON users.id = addresses.user_id

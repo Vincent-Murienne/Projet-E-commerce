@@ -8,9 +8,8 @@ $orderFailed = false;
 
 // Check if the API call is legitimate
 if($isAllowed) {
-    // Check if the table to lookup for is given
+    // Check if the input variables are set
     if(isset($json["table"]) && isset($json["data"])) {
-        // Create new instance of class Database to interact with the database
         $db = new Database();
 
         // Check if the quantity of each product is available in the database
@@ -27,10 +26,11 @@ if($isAllowed) {
             }
         }
 
+        // If the order failed because of insuficient quantity in database, we don't continue. Else we create the order and insert it in the database
         if(!$orderFailed){
             $createOrder = $db->insert($json["table"], $json["data"]);
             if($createOrder) {
-                $orderId = $db->getLastIdInserted();
+                $orderId = $db->getLastIdInserted(); // We get the id of the inserted order to use it in our next database interaction
                 if($data){
                     foreach($data as $element){
                         $getProductDetails = $db->selectWhere("products", ["id" => $element["product_id"]]);

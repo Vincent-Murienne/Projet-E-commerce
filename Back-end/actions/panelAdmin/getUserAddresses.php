@@ -8,12 +8,13 @@ $response["success"] = false;
 
 // Check if the API call is legitimate
 if($isAllowed) {
-    // Check if the table to lookup for is given
+    // Check if the input variables are set
     if(isset($json["table"]) && isset($json["id"])) {
-        // Create new instance of class Database to interact with the database
         $db = new Database();
         $data = $db->selectWhere($json["table"], ["user_id" => $json["id"]]);
+
         if($data) {
+            // The data array contains crypted information so we have to decrypt them before sending them back to the front-end
             $crypto = new Crypto();
 
             $resultData = [];
@@ -32,11 +33,11 @@ if($isAllowed) {
             }
 
             $response["success"] = true;
-            $response["CheckoutDataEmpty"] = false;
+            $response["AddressDataEmpty"] = false;
             $response["data"] = $resultData;
         } else {
             $response["success"] = true;
-            $response["CheckoutDataEmpty"] = true;
+            $response["AddressDataEmpty"] = true;
         }
     } else {
         $response["error"] = "Veuillez indiquer toutes les données nécessaires pour faire cette recherche.";

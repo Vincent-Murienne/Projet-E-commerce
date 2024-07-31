@@ -77,12 +77,12 @@ const MonCompteAdresse = () => {
             "id": userId
         };
 
-        Data("panelAdmin", "getCheckoutData", addressData).then(response => {
+        Data("panelAdmin", "getUserAddresses", addressData).then(response => {
             if (response.success === true) {
-                setUserAddresses(response.data);  
-                if (response.data.length === 0) {
+                if (response.AddressDataEmpty === true) {
                     setSelectedAddress("0");
                 } else {
+                    setUserAddresses(response.data);
                     setSelectedAddress(response.data[0].id.toString());          
                     setAddressName(response.data[0].address_name);           
                     setFirstName(response.data[0].first_name);
@@ -102,7 +102,7 @@ const MonCompteAdresse = () => {
     }, []);
 
     useEffect(() => {
-        if(getAddressName !== undefined) {
+        if(getAddressName !== undefined && getAddressName !== "") {
             const fullNameRegex = /^[a-zA-ZÀ-ÿ\s\d-]{5,50}$/;
             if(fullNameRegex.test(getAddressName)) {
                 setAddressNameValidState(1);
@@ -113,7 +113,7 @@ const MonCompteAdresse = () => {
     }, [getAddressName]);
 
     useEffect(() => {
-        if(getFirstName !== undefined) {
+        if(getFirstName !== undefined && getFirstName !== "") {
             const fullNameRegex = /^[a-zA-ZÀ-ÿ\s-]{3,50}$/;
             if(fullNameRegex.test(getFirstName)) {
                 setFirstNameValidState(1);
@@ -124,7 +124,7 @@ const MonCompteAdresse = () => {
     }, [getFirstName]);
 
     useEffect(() => {
-        if(getLastName !== undefined) {
+        if(getLastName !== undefined && getLastName !== "") {
             const fullNameRegex = /^[a-zA-ZÀ-ÿ\s-]{3,50}$/;
             if(fullNameRegex.test(getLastName)) {
                 setLastNameValidState(1);
@@ -135,7 +135,7 @@ const MonCompteAdresse = () => {
     }, [getLastName]);
 
     useEffect(() => {
-        if(getAddress !== undefined) {
+        if(getAddress !== undefined && getAddress !== "") {
             const addressRegex = /^.{5,100}$/; 
             if(addressRegex.test(getAddress)) {
                 setAddressValidState(1); 
@@ -146,7 +146,7 @@ const MonCompteAdresse = () => {
     }, [getAddress]);
 
     useEffect(() => {
-        if(getCity !== undefined) {
+        if(getCity !== undefined && getCity !== "") {
             const cityRegex = /^[a-zA-ZÀ-ÿ\s-]{3,50}$/;
             if(cityRegex.test(getCity)) {
                 setCityValidState(1); 
@@ -157,7 +157,7 @@ const MonCompteAdresse = () => {
     }, [getCity]);
     
     useEffect(() => {
-        if(getZipCode !== undefined) {
+        if(getZipCode !== undefined && getZipCode !== "") {
             const zipCodeRegex = /^\d{5}$/; 
             if(zipCodeRegex.test(getZipCode)) {
                 setZipCodeValidState(1); 
@@ -168,7 +168,7 @@ const MonCompteAdresse = () => {
     }, [getZipCode]);
 
     useEffect(() => {
-        if(getRegion !== undefined) {
+        if(getRegion !== undefined && getRegion !== "") {
             const regionRegex = /^[a-zA-ZÀ-ÿ\s-]{3,50}$/; 
             if(regionRegex.test(getRegion)) {
                 setRegionValidState(1); 
@@ -179,7 +179,7 @@ const MonCompteAdresse = () => {
     }, [getRegion]);
     
     useEffect(() => {
-        if(getCountry !== undefined) {
+        if(getCountry !== undefined && getCountry !== "") {
             const countryRegex = /^[a-zA-ZÀ-ÿ\s-]{3,50}$/; 
             if(countryRegex.test(getCountry)) {
                 setCountryValidState(1); 
@@ -190,7 +190,7 @@ const MonCompteAdresse = () => {
     }, [getCountry]);
     
     useEffect(() => {
-        if(getPhone !== undefined) {
+        if(getPhone !== undefined && getPhone !== "") {
             const phoneRegex = /^\d{10}$/; 
             if(phoneRegex.test(getPhone)) {
                 setPhoneValidState(1); 
@@ -221,7 +221,7 @@ const MonCompteAdresse = () => {
                     }             
                 };
           
-                Data("panelAdmin", "insertCheckout", data).then(response => {
+                Data("panelAdmin", "insertAddress", data).then(response => {
                     if (response.success === true) {
                         ToastQueue.positive("Adresse ajoutée avec succès !", {timeout: 5000});
                         navigate("/monCompteParametres");

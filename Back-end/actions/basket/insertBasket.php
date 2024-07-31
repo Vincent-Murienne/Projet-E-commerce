@@ -7,10 +7,10 @@ $response["success"] = false;
 
 // Check if the API call is legitimate
 if($isAllowed) {
-    // Check if the table to lookup for is given
+    // Check if the input variables are set
     if(isset($json["user_id"]) && isset($json["product_id"]) && isset($json["quantity"])) {
-        // Create new instance of class Database to interact with the database
         $db = new Database();
+        // Check if the product is already in the basket. If yes, we update it. Else we create it
         $productExist = $db->selectWhere("baskets", ["user_id" => $json["user_id"], "product_id" => $json["product_id"]]);
         if($productExist){
             // Set the new quantity

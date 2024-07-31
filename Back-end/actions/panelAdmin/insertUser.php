@@ -4,14 +4,18 @@ require_once "../../config/security.php";
 require_once "../../config/db.php";
 require_once "../../config/crypto.php";
 
+// Set default success response to false in case of unlegitimate API call
 $response["success"] = false;
 
+// Check if the API call is legitimate
 if ($isAllowed) {
-    // Check if all needed informations are set
+    // Check if the input variables are set
     if (isset($json["data"]["full_name"]) && isset($json["data"]["email"]) && isset($json["data"]["password"]) && isset($json["data"]["role"])) {
         // Check if all informations aren't empty
         if (!empty($json["data"]["full_name"]) && !empty($json["data"]["email"]) && !empty($json["data"]["password"])) {
             $db = new Database();
+
+            // The data array contains sensitive information so we have to encrypt them before sending them to the database
             $crypto = new Crypto();
 
             $fullName = $crypto->cryptData($json["data"]["full_name"]);
@@ -19,8 +23,9 @@ if ($isAllowed) {
             $password = $json["data"]["password"];
             $role = $json["data"]["role"];
 
-            $hashedPassword = hash("sha512", $password);
+            $hashedPassword = hash("sha512", $password); // Hash the password
 
+            // Check if the email already exists in the database
             $existingUser = $db->selectWhere("users", ["email" => $email], false, null);
 
             if (!$existingUser) {
@@ -44,5 +49,6 @@ if ($isAllowed) {
     $response["error"] = "La clé API n'est pas fournie ou est incorrecte.";
 }
 
+// Print the response in the json format
 echo json_encode($response);
 ?>

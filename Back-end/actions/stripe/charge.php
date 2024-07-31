@@ -13,6 +13,7 @@ if ($isAllowed) {
 
         $amount = $json["amount"] * 100;
 
+        // We create a charge event to complete the paiement. It will automatically send all infos to Stripe to process the paiement.
         try {
             $charge = \Stripe\Charge::create([
                 "amount" => $amount,

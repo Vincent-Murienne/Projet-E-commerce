@@ -19,6 +19,7 @@ const OrderPage = () => {
             };
 
             Data("orders", "getOrderDetails", orderData).then(response => {
+                console.log(response);
                 if (response.success === true) {
                     setOrderDetails(response.data);
                     setOrderDate(response.data[0].date);

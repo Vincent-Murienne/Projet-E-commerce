@@ -7,9 +7,8 @@ $response["success"] = false;
 
 // Check if the API call is legitimate
 if($isAllowed) {
-    // Check if the table to lookup for is given
+    // Check if the input variables are set
     if(isset($json["table"]) && isset($json["id"]) && isset($json["data"])) {
-        // Create new instance of class Database to interact with the database
         $db = new Database();
 
         // This will prevent to have multiple images linked to one category (because a category only has 1 image)

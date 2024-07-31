@@ -7,7 +7,6 @@ $response["success"] = false;
 
 // Check if the API call is legitimate
 if ($isAllowed) {
-    // Create new instance of class Database to interact with the database
     $db = new Database();
 
     // Perform search using the defined criteria

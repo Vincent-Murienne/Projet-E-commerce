@@ -7,11 +7,11 @@ $response["success"] = false;
 
 // Check if the API call is legitimate
 if($isAllowed) {
-    // Check if the table to lookup for is given
+    // Check if the input variables are set
     if(isset($json["user_id"]) && isset($json["product_id"])) {
-        // Create new instance of class Database to interact with the database
         $db = new Database();
         $data = $db->deleteProductBasket($json["user_id"], $json["product_id"]);
+
         if($data) {
             $response["success"] = true;
             $response["data"] = $data;
@@ -23,6 +23,7 @@ if($isAllowed) {
     $response["error"] = "La clé API n'est pas fournie ou est incorrecte.";
 }
 
+// Print the response in the JSON format
 echo json_encode($response);
 ?>
 
