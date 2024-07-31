@@ -17,13 +17,15 @@
      php -v
      ```
 
-2. **Activer PDO et MySQL**
+2. **Activer PDO pour MySQL et Sodium**
    - Naviguez vers le chemin d'installation de PHP.
    - Trouvez les fichiers `php.ini-development` et `php.ini-production`.
    - Renommez l'un d'eux en `php.ini` pour le rendre actif.
    - Ouvrez le fichier `php.ini` et éditez-le.
    - Activez l'extension `pdo_mysql` en recherchant la chaîne de caractères `pdo_mysql` (utilisez `CTRL+F` dans l'éditeur).
    - Supprimez le `;` devant la ligne contenant `pdo_mysql`.
+   - Activez l'extension `sodium` en recherchant la chaîne de caractères `sodium` (utilisez `CTRL+F` dans l'éditeur).
+   - Supprimez le `;` devant la ligne contenant `sodium`.
    - Enregistrez le fichier.
 
 ## Mise en place du back-end
