@@ -160,7 +160,7 @@ class Database {
     // This method is specific, it receives the id of a user and will then delete this id from the table users and also deletes every data linked to that user in the other tables
     public function deleteUser(string $id):bool 
     {
-        $sql = "UPDATE orders SET address_id = null, payment_id = null, user_id = null WHERE user_id = :id";       
+        $sql = "UPDATE orders SET address_id = null, user_id = null WHERE user_id = :id";       
         $query = $this->pdo->prepare($sql);
         $query->bindValue("id", $id, PDO::PARAM_INT);
         $query->execute();

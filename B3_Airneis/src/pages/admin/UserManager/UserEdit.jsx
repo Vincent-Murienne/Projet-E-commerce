@@ -24,12 +24,12 @@ const UserEdit = () => {
     };
 
     useEffect(() => {
-        Data("panelAdmin", "getWhere", data).then(response => {
+        Data("panelAdmin", "getUserInfo", data).then(response => {
             if (response.success === true)
             {
-                setUserName(response.data[0].full_name);
-                setEmail(response.data[0].email);
-                setIsAdmin((response.data[0].role === 1 || response.data[0].role === "1") ? true : false);
+                setUserName(response.data.full_name);
+                setEmail(response.data.email);
+                setIsAdmin((response.data.role === 1 || response.data.role === "1") ? true : false);
             }
             else
             {
@@ -107,7 +107,7 @@ const UserEdit = () => {
                 }
             }
     
-            Data("panelAdmin", "update", data).then(response => {
+            Data("panelAdmin", "updateUser", data).then(response => {
                 if (response.success === true)
                 {
                     ToastQueue.positive("Modification réussite avec succès !", {timeout: 5000});

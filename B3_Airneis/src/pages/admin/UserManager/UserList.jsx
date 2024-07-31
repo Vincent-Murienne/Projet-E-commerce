@@ -17,7 +17,7 @@ function UserList() {
     let list = useAsyncList({
         async load() {
             try {
-                const response = await Data("panelAdmin", "getAllFromTable", data);
+                const response = await Data("panelAdmin", "getAllUsers", data);
                 if (response.success === true) {
                     return {
                         items: response.data

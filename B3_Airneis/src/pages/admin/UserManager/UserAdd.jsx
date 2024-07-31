@@ -66,7 +66,7 @@ const UserAdd = () => {
                 }
             };
 
-            Data("panelAdmin", "insert", data).then(response => {
+            Data("panelAdmin", "insertUser", data).then(response => {
                 if (response.success === true)
                 {
                     ToastQueue.positive("Création réussite avec succès !", {timeout: 5000});
