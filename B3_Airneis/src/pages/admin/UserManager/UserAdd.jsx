@@ -3,10 +3,12 @@ import { Data } from "../../../services/api";
 import { Checkbox, TextField } from "@adobe/react-spectrum";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastQueue } from "@react-spectrum/toast";
+import { fullNameRegex, emailRegex, passwordRegex } from '../../../utils/regexes';
 
 
 const UserAdd = () => {
 
+    // Setting use states
     const [getUserName, setUserName] = useState(null);
     const [getUserNameValidState, setUserNameValidState] = useState(0);
     const [getEmail, setEmail] = useState(null);
@@ -15,9 +17,9 @@ const UserAdd = () => {
     const [getPasswordValidState, setPasswordValidState] = useState(0);
     const [isAdmin, setIsAdmin] = useState(false);
 
+    // Check the validation of the inputs
     useEffect(() => {
         if(getUserName !== null) {
-            const fullNameRegex = /^[a-zA-ZÀ-ÿ\s-]{5,50}$/;
             if(fullNameRegex.test(getUserName)) {
                 setUserNameValidState(1);
             } else {
@@ -28,7 +30,6 @@ const UserAdd = () => {
 
     useEffect(() => {
         if(getEmail !== null) {
-            const emailRegex = /^[^\s@]{1,50}@[^\s@]+\.[^\s@]+$/;
             if(emailRegex.test(getEmail)) {
                 setEmailValidState(1);
             } else {
@@ -39,7 +40,6 @@ const UserAdd = () => {
 
     useEffect(() => {
         if(getPassword !== null) {
-            const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d@#$%^&*()-_+=!]{12,30}$/;
             if(passwordRegex.test(getPassword)) {
                 setPasswordValidState(1);
             } else {

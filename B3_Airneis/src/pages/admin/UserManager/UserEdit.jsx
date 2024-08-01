@@ -4,10 +4,12 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { ToastQueue } from "@react-spectrum/toast";
 import { Checkbox, TextField } from "@adobe/react-spectrum";
 import { sha512 } from 'js-sha512';
+import { fullNameRegex, emailRegex, passwordRegex } from '../../../utils/regexes';
 
 
 const UserEdit = () => {
 
+    // Setting use states
     const [getUserName, setUserName] = useState(undefined);
     const [getUserNameValidState, setUserNameValidState] = useState(1);
     const [getEmail, setEmail] = useState(undefined);
@@ -18,6 +20,8 @@ const UserEdit = () => {
     const [ChangePassword, setChangePassword] = useState(false);
 
     const { userId } = useParams(); // Retrieving the product ID from URL parameters
+
+    // Make an API call to get the user informations
     let data = {
         "table": "users",
         "id": userId
@@ -38,9 +42,9 @@ const UserEdit = () => {
         });
     }, []);
 
+    // Check the validation of the inputs
     useEffect(() => {
         if(getUserName !== undefined) {
-            const fullNameRegex = /^[a-zA-ZÀ-ÿ\s-]{5,50}$/;
             if(fullNameRegex.test(getUserName)) {
                 setUserNameValidState(1);
             } else {
@@ -51,7 +55,6 @@ const UserEdit = () => {
 
     useEffect(() => {
         if(getEmail !== undefined) {
-            const emailRegex = /^[^\s@]{1,50}@[^\s@]+\.[^\s@]+$/;
             if(emailRegex.test(getEmail)) {
                 setEmailValidState(1);
             } else {
@@ -62,7 +65,6 @@ const UserEdit = () => {
 
     useEffect(() => {
         if(getPassword !== undefined) {
-            const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d@#$%^&*()-_+=!]{12,30}$/;
             if(passwordRegex.test(getPassword)) {
                 setPasswordValidState(1);
             } else {

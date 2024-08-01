@@ -4,6 +4,7 @@ import { Data } from '../../services/api';
 import { ToastQueue } from "@react-spectrum/toast";
 
 const OrderPage = () => {
+    // Setting use states
     const { orderId } = useParams();
     const [orderDetails, setOrderDetails] = useState([]);
     const [orderDate, setOrderDate] = useState("");
@@ -12,6 +13,7 @@ const OrderPage = () => {
     const [totalPrice, setTotalPrice] = useState(0);
     const tva = 0.17;
 
+    // Make an API call to get all the order details
     useEffect(() => {
         if (orderId) {
             const orderData = {
@@ -19,7 +21,6 @@ const OrderPage = () => {
             };
 
             Data("orders", "getOrderDetails", orderData).then(response => {
-                console.log(response);
                 if (response.success === true) {
                     setOrderDetails(response.data);
                     setOrderDate(response.data[0].date);
@@ -32,6 +33,7 @@ const OrderPage = () => {
         }
     }, []);
 
+    // Calculate the total price including TVA
     useEffect(() => {
         calculateTotalPrice();
     }, [orderDetails]);

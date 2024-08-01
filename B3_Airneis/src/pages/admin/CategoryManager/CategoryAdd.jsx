@@ -7,9 +7,11 @@ import { ToastQueue } from "@react-spectrum/toast";
 
 const CategoryAdd = () => {
 
+    // Setting use states
     const [getCategoryName, setCategoryName] = useState(null);
     const [validState, setValidState] = useState(0);
 
+    // Check the validation of the inputs
     useEffect(() => {
         if(getCategoryName !== null) {
             if(getCategoryName.length < 2 || getCategoryName.length > 49) {

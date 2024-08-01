@@ -5,13 +5,14 @@ import { ToastQueue } from "@react-spectrum/toast";
 import { useParams } from 'react-router-dom';
 
 const CheckoutConfirmer = () => {
+    // Setting use states
     const { pullData } = useContext(UserContext);
-    const [userId, setUserId] = useState(undefined);
     const { orderId } = useParams();
     const navigate = useNavigate();
 
+    // Check if user is connected. If not, redirect him to the home page with an error
     useEffect(() => {
-        let userData = pullData("user");
+        let userData = pullData("user"); // Get user information from the cookies   
         if (userData === undefined) {
             ToastQueue.negative("Veuillez vous connecter afin de pouvoir accéder à cette page.", { timeout: 5000 });
             navigate("/");

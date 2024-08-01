@@ -6,13 +6,14 @@ import Checkmark from '@spectrum-icons/workflow/Checkmark';
 import { ToastQueue } from "@react-spectrum/toast";
 import {Cell, Column, Row, TableView, TableBody, TableHeader} from '@adobe/react-spectrum'
 import {Grid} from '@adobe/react-spectrum'
-import PropTypes from 'prop-types'; // Importer PropTypes
+import PropTypes from 'prop-types';
 
 const SearchPage = ({ searchQuery, prixMinInput, prixMaxInput, materiauxInput, categoriesInput, enStockInput, onSearch }) => {
     SearchPage.propTypes = {
-        onSearch: PropTypes.func.isRequired, // Assurez-vous que onSearch est une fonction et qu'elle est requise
+        onSearch: PropTypes.func.isRequired, // Check that onSearch is set and is a function
     };
 
+    // Setting use states
     const [minPrice, setMinPrice] = useState(prixMinInput !== null ? prixMinInput : "");
     const [maxPrice, setMaxPrice] = useState(prixMaxInput !== null ? prixMaxInput : "");
     const [materials, setMaterials] = useState([]);
@@ -22,6 +23,7 @@ const SearchPage = ({ searchQuery, prixMinInput, prixMaxInput, materiauxInput, c
     const [enStock, setEnStock] = useState(enStockInput);
     const [recherche, setRecherche] = useState(searchQuery);
 
+    // Handling form changes
     const handleMinPriceChange = (value) => {
         setMinPrice(value);
     };
@@ -78,6 +80,7 @@ const SearchPage = ({ searchQuery, prixMinInput, prixMaxInput, materiauxInput, c
         onSearch(searchData);
     }
 
+    // Make an API call to get all needed informations
     let dataCategories = {
         "table": "categories"
     };
@@ -102,7 +105,7 @@ const SearchPage = ({ searchQuery, prixMinInput, prixMaxInput, materiauxInput, c
             ToastQueue.negative(response.error, {timeout: 5000});
           }
         });
-      }, []); // Pass an empty array as dependency to useEffect to execute it once after initial render
+      }, []);
 
     return (
         <>

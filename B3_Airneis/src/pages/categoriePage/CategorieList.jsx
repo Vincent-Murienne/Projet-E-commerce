@@ -6,8 +6,10 @@ import { ToastQueue } from "@react-spectrum/toast";
 
 const CategorieList = () => {
 
+    // Setting use states
     const [categories, setCategories] = useState([]);
 
+    // Make an API call to get all the categories
     useEffect(() => {
         Data("category", "getAllCategories", { "table": "categories" }).then(response => {
             if (response.success === true)

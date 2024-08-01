@@ -7,6 +7,7 @@ import { ToastQueue } from "@react-spectrum/toast";
 
 const ProductAdd = () => {
 
+    // Setting use states
     const [getProductName, setProductName] = useState(null);
     const [getProductNameValidState, setProductNameValidState] = useState(0);
     const [getPrice, setPrice] = useState(null);
@@ -18,7 +19,6 @@ const ProductAdd = () => {
     const [getCategoryId, setCategoryId] = useState(null);
 
     // Lets make an API call to retrieve each categories
-
     let data = {
         "table": "categories"
     };
@@ -37,6 +37,7 @@ const ProductAdd = () => {
         });
     }, []);
 
+    // Handle the validation of each input
     useEffect(() => {
         if(getProductName !== null) {
             if(getProductName.length < 2 || getProductName.length > 49) {

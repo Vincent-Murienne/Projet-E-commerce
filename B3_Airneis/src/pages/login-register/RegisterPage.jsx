@@ -10,6 +10,7 @@ import { fullNameRegex, emailRegex, passwordRegex } from '../../utils/regexes';
 const RegisterPage = () => {
   const { saveData } = useContext(UserContext);
 
+  // Setting use states
   const [action, setAction] = useState('Inscription');
   const [showPassword, setShowPassword] = useState(false);
   const [fullName, setFullName] = useState('');
@@ -24,10 +25,12 @@ const RegisterPage = () => {
   const [isChecked, setIsChecked] = useState(false);
   const navigate = useNavigate();
 
+  // Handle the change of visibility of the password
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
+  // Handle form changes
   const handleFullNameChange = (e) => {
     setFullName(e.target.value.toUpperCase());
   };

@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { Data } from '../../services/api';
 import { useEffect, useState } from "react";
+import { ToastQueue } from "@react-spectrum/toast";
 
 const ProductSimilaire = ({ categoryId, productId }) => {
+    // Setting use states
     const [getTopProducts, setTopProducts] = useState([]);
     
     useEffect(() => {
@@ -16,7 +18,7 @@ const ProductSimilaire = ({ categoryId, productId }) => {
                     ToastQueue.negative(response.error, {timeout: 5000});
                 }
             } catch (error) {
-                console.error('Une erreur est survenue lors de la récupération des produits similaires:', error);
+                ToastQueue.negative("Une erreur est survenue lors de la récupération des données du produit.", {timeout: 5000});
             }
         };
 

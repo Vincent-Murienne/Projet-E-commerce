@@ -8,6 +8,8 @@ import { useTranslation } from 'react-i18next';
 const BasketPage = () => {
     const { t } = useTranslation();
     const { pullData } = useContext(UserContext);
+
+    // Setting use states
     const [products, setProducts] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
     const [userId, setUserId] = useState(null);
@@ -17,8 +19,9 @@ const BasketPage = () => {
 
     const navigate = useNavigate();
 
+    // Make an API call to get all the products of the user baskets
     useEffect(() => {
-        const userData = pullData("user");
+        const userData = pullData("user"); // Get user information from the cookies   
         if (userData) {
             setUserId(userData.id);
             const basketsData = {
@@ -36,6 +39,7 @@ const BasketPage = () => {
         }
     }, []);
 
+    // Handles the deletion of a product from the basket of the user
     const handleDelete = (product_id) => {
         const basketsData = {
             "user_id": userId,
@@ -56,6 +60,7 @@ const BasketPage = () => {
         });
     };
 
+    // Handles the change of the quantity of a product from the basket of the user
     const handleQuantityChange = (product_id, quantity) => {
         if(quantity === 0) {
             handleDelete(product_id);
@@ -83,6 +88,7 @@ const BasketPage = () => {
         }
     };
 
+    // Calculate the total price
     const calculateTotalPrice = (products) => {
         let total = 0;
         const updatedProducts = products.map(product => {
@@ -101,9 +107,11 @@ const BasketPage = () => {
         return products.some(product => product.stock > 0);
     };
 
+    // Go to the beginning of the paiement process
     const handleCheckout = () => {
         navigate('/checkoutAdresse');
     };
+
     return (
         <div className="basket-page">
             <div className="basket-title">{t('yourBasket')}</div>

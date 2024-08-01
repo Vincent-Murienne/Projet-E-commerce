@@ -6,8 +6,10 @@ import { useTranslation } from 'react-i18next';
 
 const TopProduits = () => {
     const { t } = useTranslation();
+    // Setting use states
     const [getTopProducts, setTopProducts] = useState([]);
 
+    // Make an API call to get the top products
     let data = {
         "table": "products"
     };

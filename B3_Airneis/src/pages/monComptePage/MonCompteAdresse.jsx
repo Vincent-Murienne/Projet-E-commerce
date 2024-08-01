@@ -5,8 +5,10 @@ import { UserContext } from '../../context/UserProvider';
 import { ToastQueue } from "@react-spectrum/toast";
 import { Picker, Item } from '@react-spectrum/picker';
 import { TextField } from "@adobe/react-spectrum";
+import { fullNameRegex, firstNameRegex, addressRegex, zipCodeRegex, phoneRegex } from '../../utils/regexes';
 
 const MonCompteAdresse = () => {
+    // Setting use states
     const { pullData } = useContext(UserContext);
     const [getUserAddresses, setUserAddresses] = useState([]);
     const [getSelectedAddress, setSelectedAddress] = useState("0"); 
@@ -30,6 +32,7 @@ const MonCompteAdresse = () => {
     const [getCountryValidState, setCountryValidState] = useState(1);
     const [getPhoneValidState, setPhoneValidState] = useState(1);
 
+    // On change of the selected address, we change the address informations displayed
     useEffect(() => {
         if (getSelectedAddress === "0") {
             setAddressName("");
@@ -61,8 +64,9 @@ const MonCompteAdresse = () => {
     let userId;
     const navigate = useNavigate();
 
+    // Make an API call to get all the user addresses. If his not connected, sends him back to the homepage with an error
     useEffect(() => {
-        let userData = pullData("user");       
+        let userData = pullData("user"); // Get user information from the cookies     
         if(userData === undefined){
             ToastQueue.negative("Veuillez vous connecter afin de pouvoir accéder à cette page.", {timeout: 5000});
             navigate("/");
@@ -101,9 +105,9 @@ const MonCompteAdresse = () => {
         });
     }, []);
 
+    // Check the validation of the inputs
     useEffect(() => {
         if(getAddressName !== undefined && getAddressName !== "") {
-            const fullNameRegex = /^[a-zA-ZÀ-ÿ\s\d-]{5,50}$/;
             if(fullNameRegex.test(getAddressName)) {
                 setAddressNameValidState(1);
             } else {
@@ -114,8 +118,7 @@ const MonCompteAdresse = () => {
 
     useEffect(() => {
         if(getFirstName !== undefined && getFirstName !== "") {
-            const fullNameRegex = /^[a-zA-ZÀ-ÿ\s-]{3,50}$/;
-            if(fullNameRegex.test(getFirstName)) {
+            if(firstNameRegex.test(getFirstName)) {
                 setFirstNameValidState(1);
             } else {
                 setFirstNameValidState(2);
@@ -125,8 +128,7 @@ const MonCompteAdresse = () => {
 
     useEffect(() => {
         if(getLastName !== undefined && getLastName !== "") {
-            const fullNameRegex = /^[a-zA-ZÀ-ÿ\s-]{3,50}$/;
-            if(fullNameRegex.test(getLastName)) {
+            if(firstNameRegex.test(getLastName)) {
                 setLastNameValidState(1);
             } else {
                 setLastNameValidState(2);
@@ -136,7 +138,6 @@ const MonCompteAdresse = () => {
 
     useEffect(() => {
         if(getAddress !== undefined && getAddress !== "") {
-            const addressRegex = /^.{5,100}$/; 
             if(addressRegex.test(getAddress)) {
                 setAddressValidState(1); 
             } else {
@@ -147,8 +148,7 @@ const MonCompteAdresse = () => {
 
     useEffect(() => {
         if(getCity !== undefined && getCity !== "") {
-            const cityRegex = /^[a-zA-ZÀ-ÿ\s-]{3,50}$/;
-            if(cityRegex.test(getCity)) {
+            if(firstNameRegex.test(getCity)) {
                 setCityValidState(1); 
             } else {
                 setCityValidState(2); 
@@ -158,7 +158,6 @@ const MonCompteAdresse = () => {
     
     useEffect(() => {
         if(getZipCode !== undefined && getZipCode !== "") {
-            const zipCodeRegex = /^\d{5}$/; 
             if(zipCodeRegex.test(getZipCode)) {
                 setZipCodeValidState(1); 
             } else {
@@ -169,8 +168,7 @@ const MonCompteAdresse = () => {
 
     useEffect(() => {
         if(getRegion !== undefined && getRegion !== "") {
-            const regionRegex = /^[a-zA-ZÀ-ÿ\s-]{3,50}$/; 
-            if(regionRegex.test(getRegion)) {
+            if(firstNameRegex.test(getRegion)) {
                 setRegionValidState(1); 
             } else {
                 setRegionValidState(2); 
@@ -180,8 +178,7 @@ const MonCompteAdresse = () => {
     
     useEffect(() => {
         if(getCountry !== undefined && getCountry !== "") {
-            const countryRegex = /^[a-zA-ZÀ-ÿ\s-]{3,50}$/; 
-            if(countryRegex.test(getCountry)) {
+            if(firstNameRegex.test(getCountry)) {
                 setCountryValidState(1); 
             } else {
                 setCountryValidState(2); 
@@ -191,7 +188,6 @@ const MonCompteAdresse = () => {
     
     useEffect(() => {
         if(getPhone !== undefined && getPhone !== "") {
-            const phoneRegex = /^\d{10}$/; 
             if(phoneRegex.test(getPhone)) {
                 setPhoneValidState(1); 
             } else {
@@ -200,10 +196,11 @@ const MonCompteAdresse = () => {
         }
     }, [getPhone]);
     
+    // Form submission
     const FormSubmitted = async (e) => {
         e.preventDefault();
 
-        if(getSelectedAddress === "0") { // If 'Add a new address' is selected
+        if(getSelectedAddress === "0") { // If 'Add a new address' is selected, then we will create one
             if(getFirstNameValidState === 1 && getLastNameValidState === 1 && getAddressValidState === 1 && getCityValidState === 1 && getZipCodeValidState === 1 && getRegionValidState === 1 && getCountryValidState === 1 && getPhoneValidState === 1) {           
                 let data = {
                     "table": "addresses",
@@ -264,6 +261,7 @@ const MonCompteAdresse = () => {
         }
     };
 
+    // Handling the deletion of the address.
     const handleDelete = () => {
         const confirmed = window.confirm("Voulez-vous vraiment supprimer cette adresse ?");
         if (confirmed) {
@@ -279,6 +277,7 @@ const MonCompteAdresse = () => {
         } 
     };
     
+    // Render different buttons depending of which address is currently selected
     const renderButtons = () => {
         if (getSelectedAddress === "0") {
             return (

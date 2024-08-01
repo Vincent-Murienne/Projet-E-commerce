@@ -5,16 +5,18 @@ import { ToastQueue } from '@react-spectrum/toast';
 import { passwordRegex } from '../../utils/regexes';
 
 const ResetPasswordPage = () => {
+  // Setting use states
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const { token } = useParams(); // Récupérer le token de l'URL
+  const { token } = useParams();
   const navigate = useNavigate();
   const [errors, setErrors] = useState({
     password: ''
   });
 
+  // Handle the change of visibility of the passwords
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -23,6 +25,7 @@ const ResetPasswordPage = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
 
+  // Form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors({
@@ -40,7 +43,6 @@ const ResetPasswordPage = () => {
     }
 
     try {
-      console.log(JSON.stringify({ token, password }));
       const response = await fetch('http://localhost:8000/actions/loginRegister/resetPassword.php', {
             method: 'POST',
             headers: {
@@ -57,7 +59,6 @@ const ResetPasswordPage = () => {
           ToastQueue.negative("Lien expiré ou invalide.", { timeout: 5000 });
         }
     } catch (error) {
-        console.error('Error:', error);
         ToastQueue.negative("Une erreur est survenue lors de la modification du mot de passe.", { timeout: 5000 });
     }
   };

@@ -10,6 +10,7 @@ const LoginPage = () => {
 
   const { saveData } = useContext(UserContext);
 
+  // Setting use states
   const [action, setAction] = useState('Connexion');
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');

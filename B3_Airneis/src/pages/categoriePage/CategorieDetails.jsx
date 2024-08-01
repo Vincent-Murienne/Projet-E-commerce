@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom"; // Importing useParams to retrieve URL parameters
+import { Link, useParams } from "react-router-dom";
 import { Data } from '../../services/api';
 import { useEffect, useState } from "react";
 import { ToastQueue } from "@react-spectrum/toast";
@@ -7,6 +7,8 @@ import { useTranslation } from 'react-i18next';
 const CategorieDetails = () => {
     const { t } = useTranslation();
     const { categoryId } = useParams(); // Retrieving the category ID from URL parameters
+
+    // Setting use states
     const [getTopProducts, setTopProducts] = useState([]);
     const [getCategoryImage, setCategoryImage] = useState([]);
     const [getCategoryName, setCategoryName] = useState("");
@@ -20,14 +22,12 @@ const CategorieDetails = () => {
                 if (response.success === true) {
                     setTopProducts(response.data);
                     setCategoryImage(response.data[0].category_image_name); 
-                    setCategoryName(response.data[0].category_name);       
-                    
+                    setCategoryName(response.data[0].category_name);
                 } else {
                     ToastQueue.negative(response.error, {timeout: 5000});
                 }
             } catch (error) {
-                console.error('Une erreur est survenue lors de la récupération des données de la catégorie:', error);
-
+                ToastQueue.negative("Une erreur est survenue lors de la récupération des données de la catégorie", {timeout: 5000});
             }
         };
 

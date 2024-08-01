@@ -3,6 +3,7 @@ import { Data } from '../../services/api';
 import { ToastQueue } from '@react-spectrum/toast';
 
 export default function SliderProduct({ productId }) {
+    // Setting use states
     const [currentIndex, setCurrentIndex] = useState(0);
     const [getSliderImages, setSliderImages] = useState([]);
 

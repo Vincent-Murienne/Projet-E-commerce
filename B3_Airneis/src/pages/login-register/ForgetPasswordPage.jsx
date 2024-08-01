@@ -4,9 +4,11 @@ import { Data } from '../../services/api';
 import { ToastQueue } from '@react-spectrum/toast';
 
 const ForgetPasswordPage = () => {
+    // Setting use states
     const [email, setEmail] = useState('');
     const navigate = useNavigate();
 
+    // Form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {

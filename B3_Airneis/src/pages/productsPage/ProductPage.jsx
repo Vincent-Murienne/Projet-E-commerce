@@ -7,12 +7,13 @@ import { UserContext } from "../../context/UserProvider";
 import { ToastQueue } from "@react-spectrum/toast";
 
 const ProductPage = () => {
+    // Setting use states
     const [product, setProduct] = useState(null);
     const [isIncrementDesactivated, setIsIncrementDesactivated] = useState(false);
     const [isDecrementDesactivated, setIsDecrementDesactivated] = useState(true);
-
     const [cartCount, setCartCount] = useState(1);
     const { productId } = useParams(); 
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -24,20 +25,21 @@ const ProductPage = () => {
                     ToastQueue.negative(response.error, {timeout: 5000});
                 }
             } catch (error) {
-                console.error('Une erreur est survenue lors de la récupération des données du produit:', error);
+                ToastQueue.negative("Une erreur est survenue lors de la récupération des données du produit.", {timeout: 5000});
             }
         };
 
         fetchData();
     }, [productId]);
 
-    //Determine the stock status based on the product's available quantity
+    // Determine the stock status based on the product's available quantity
     const stockStatus = product && (product.quantity === null || product.quantity <= 0) ? "Hors stock" : "En stock";
 
     const { pullData } = useContext(UserContext);
 
+    // Add product to cart if the user is connected
     const addToCart = async () => {
-        let user = pullData("user");
+        let user = pullData("user"); // Get user information from the cookies
 
         if (!user) {
             ToastQueue.negative("Veuillez vous connecter pour ajouter des produits au panier.", { timeout: 5000 });
@@ -59,8 +61,8 @@ const ProductPage = () => {
         });
     };
 
+    // Decrement the quantity of this product to add to cart (can't go under 1)
     const decrementCartCount = () => {
-        
         if (cartCount > 1) {
             if ((cartCount - 1) === 1){
                 setIsDecrementDesactivated(true);
@@ -70,6 +72,7 @@ const ProductPage = () => {
         }       
     };
 
+    // Increment the quantity of this product to add to cart (can't go over the stock in the database)
     const incrementCartCount = () => {
         if(product && product.quantity > 0 && cartCount < product.quantity) {
             if((cartCount + 1) === product.quantity){

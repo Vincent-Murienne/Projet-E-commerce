@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import i18n from './i18n';
 
+// This component is used to change the language of the website
 const LanguageSwitcher = ({ selectedLanguage, onLanguageChange }) => {
     const { t } = useTranslation();
 

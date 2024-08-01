@@ -30,9 +30,9 @@ i18n
                 translation: heTranslation
             }
         },
-        lng: 'fr', // langue par défaut
-        fallbackLng: 'en', // langue de repli si la traduction n'est pas disponible
-        interpolation: { escapeValue: false } // réagir aux valeurs échappées
+        lng: 'fr', // Default language
+        fallbackLng: 'en', // Callback language if the default one isn't available
+        interpolation: { escapeValue: false }
     });
 
 export default i18n;

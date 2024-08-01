@@ -5,8 +5,10 @@ import { UserContext } from '../../context/UserProvider';
 import { Data } from "../../services/api";
 import { ToastQueue } from "@react-spectrum/toast";
 import { sha512 } from 'js-sha512';
+import { fullNameRegex, emailRegex, passwordRegex } from '../../utils/regexes';
 
 const MonCompteEdit = () => {
+    // Setting use states
     const { pullData } = useContext(UserContext);
     const [getUserNameValidState, setUserNameValidState] = useState(1);
     const [getUserMailValidState, setUserMailValidState] = useState(1);
@@ -24,8 +26,9 @@ const MonCompteEdit = () => {
     let userId;
     const navigate = useNavigate();
 
+    // Make an API call to get all the user information. If his not connected, sends him back to the homepage with an error
     useEffect(() => {
-        let userData = pullData("user");       
+        let userData = pullData("user"); // Get user information from the cookies       
         if(userData === undefined){
             ToastQueue.negative("Veuillez vous connecter afin de pouvoir accéder à cette page.", {timeout: 5000});
             navigate("/");
@@ -52,9 +55,9 @@ const MonCompteEdit = () => {
         });
     }, []);
 
+    // Check the validation of the inputs
     useEffect(() => {
         if(getUserName !== undefined) {
-            const fullNameRegex = /^[a-zA-ZÀ-ÿ\s-]{5,50}$/;
             if(fullNameRegex.test(getUserName)) {
                 setUserNameValidState(1);
             } else {
@@ -65,7 +68,6 @@ const MonCompteEdit = () => {
 
     useEffect(() => {
         if(getUserMail !== undefined) {
-            const emailRegex = /^[^\s@]{1,50}@[^\s@]+\.[^\s@]+$/;
             if(emailRegex.test(getUserMail)) {
                 setUserMailValidState(1);
             } else {
@@ -76,7 +78,6 @@ const MonCompteEdit = () => {
 
     useEffect(() => {
         if(getNewPassword !== undefined){
-            const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d@#$%^&*()-_+=!]{12,30}$/;
             if(passwordRegex.test(getNewPassword)) {
                 setPasswordValidState(1);
             } else {
@@ -85,6 +86,7 @@ const MonCompteEdit = () => {
         } 
     }, [getNewPassword]);
 
+    // Form submission
     const FormSubmitted = async (e) => {
         e.preventDefault();
 

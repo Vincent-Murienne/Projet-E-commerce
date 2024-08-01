@@ -17,6 +17,7 @@ const Header = () => {
     });
     const [ isMenuOpen, setIsMenuOpen ] = useState(false);
 
+    // This is used to close the navigation menu
     const closeMenus = () => {
         let dropdownBurgerContent = document.querySelector('.dropdown-burger-content');
         let dropdownUserContent = document.querySelector('.dropdown-user-content');
@@ -30,6 +31,7 @@ const Header = () => {
         }
     };
 
+    // This is used for debug reason, if we need to reload the data
     useEffect(()=>{
         closeMenus();
         let data = pullData("user");
@@ -91,6 +93,7 @@ const Header = () => {
         ToastQueue.positive("Vous vous êtes correctement déconnecté.", {timeout: 5000});
     };
 
+    // This part handles the searchbar
     const [searchVisible, setSearchVisible] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
 
@@ -98,7 +101,6 @@ const Header = () => {
         setSearchVisible(!searchVisible);
     };
     
-
     const handleSearchInputChange = (event) => {
         setSearchQuery(event.target.value);
     };

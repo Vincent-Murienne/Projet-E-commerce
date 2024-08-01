@@ -6,6 +6,7 @@ import { ToastQueue } from "@react-spectrum/toast";
 
 const TrackSales = () => {
 
+    // Creating start and end dates for the timeframe of the chart
     const getDateStartEnd = (chart) => {
         let week;
         if(chart === 1) {
@@ -27,6 +28,7 @@ const TrackSales = () => {
         return [date_start, date_start_string, date_end, date_end_string];
     };
 
+    // From the date start, get the next 7 days date into an array
     const getDateArray = (date_start) => {
         const array = [];
         for(let i = 0; i < 7; i++) {
@@ -41,7 +43,7 @@ const TrackSales = () => {
         return array;
     };
 
-    // Initialisation of use states
+    // Setting use states
     const chart1Dom = useRef(null);
     const [getWeekChart1, setWeekChart1] = useState(0);
     const [getChart1Data, setChart1Data] = useState(undefined);
@@ -58,7 +60,7 @@ const TrackSales = () => {
     const [getWeekChart3, setWeekChart3] = useState(0);
     const [getChart3Data, setChart3Data] = useState(undefined);
 
-    // Creating the value array to match the dates array
+    // Format correctly the values for the first chart 
     useEffect(() => {
         if(getChart1Data !== undefined) {
             const values = [];
@@ -74,6 +76,7 @@ const TrackSales = () => {
         }
     }, [getChart1Data]);
 
+    // Format correctly the values for the second chart 
     useEffect(() => {
         if(getChart2Data !== undefined) {
             const values = [];
@@ -126,6 +129,7 @@ const TrackSales = () => {
         }
     }, [getChart2Data]);
 
+    // Make an API call to get the data for the first chart
     useEffect(() => {
         // Retrieve the data from the database with the right dates
         const dates = getDateStartEnd(1);
@@ -159,6 +163,7 @@ const TrackSales = () => {
         });
     }, [getWeekChart1]);
 
+    // Make an API call to get the data for the second chart
     useEffect(() => {
         // Retrieve the data from the database with the right dates
         const dates = getDateStartEnd(2);
@@ -196,6 +201,7 @@ const TrackSales = () => {
         });
     }, [getWeekChart2]);
 
+    // Make an API call to get the data for the third chart
     useEffect(() => {
         // Retrieve the data from the database with the right dates
         const dates = getDateStartEnd(3);
@@ -218,6 +224,7 @@ const TrackSales = () => {
         });
     }, [getWeekChart3]);
 
+    // Go one week further the dates
     const addOneWeek = (chart) => {
         if(chart === 1) {
             if(getWeekChart1 < 4) {
@@ -234,6 +241,7 @@ const TrackSales = () => {
         }
     };
 
+    // Go one week back into the dates
     const removeOneWeek = (chart) => {
         if(chart === 1) {
             if(getWeekChart1 > 0) {
@@ -250,7 +258,7 @@ const TrackSales = () => {
         }
     };
 
-    // Setting the chart options
+    // Setting the first chart options
     useEffect(() => {
         const myChart = echarts.init(chart1Dom.current);
         const options = {
@@ -277,6 +285,7 @@ const TrackSales = () => {
         myChart.setOption(options);
     }, [getDatesArrayChart1, getValuesChart1]);
 
+    // Format correctly the data of the second chart
     useEffect(() => {
         const myChart = echarts.init(chart2Dom.current);
         var series;
@@ -345,6 +354,7 @@ const TrackSales = () => {
         myChart.setOption(options);
     }, [getDatesArrayChart2, getValuesChart2]);
 
+    // Format correctly the values for the third chart 
     useEffect(() => {
         const myChart = echarts.init(chart3Dom.current);
         let chartData = [];

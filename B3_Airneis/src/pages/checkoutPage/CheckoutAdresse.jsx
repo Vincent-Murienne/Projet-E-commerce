@@ -5,8 +5,10 @@ import { UserContext } from '../../context/UserProvider';
 import { ToastQueue } from "@react-spectrum/toast";
 import { Picker, Item } from '@react-spectrum/picker';
 import { TextField } from "@adobe/react-spectrum";
+import { fullNameRegex, firstNameRegex, addressRegex, zipCodeRegex, phoneRegex } from '../../utils/regexes';
 
 const CheckoutAdresse = () => {
+    // Setting use states
     const { pullData } = useContext(UserContext);
     const [getUserAddresses, setUserAddresses] = useState([]);
     const [getSelectedAddress, setSelectedAddress] = useState("0"); 
@@ -30,6 +32,8 @@ const CheckoutAdresse = () => {
     const [getRegionValidState, setRegionValidState] = useState(1);
     const [getCountryValidState, setCountryValidState] = useState(1);
     const [getPhoneValidState, setPhoneValidState] = useState(1);
+
+    // On change of the selected address, we change the address informations displayed
     useEffect(() => {
         if (getSelectedAddress === "0") {
             setAddressName("");
@@ -61,8 +65,9 @@ const CheckoutAdresse = () => {
     let userId;
     const navigate = useNavigate();
 
+    // Make an API call to get all the user addresses. If his not connected, sends him back to the homepage with an error
     useEffect(() => {
-        let userData = pullData("user");       
+        let userData = pullData("user"); // Get user information from the cookies        
         if(userData === undefined){
             ToastQueue.negative("Veuillez vous connecter afin de pouvoir accéder à cette page.", {timeout: 5000});
             navigate("/");
@@ -101,9 +106,9 @@ const CheckoutAdresse = () => {
         });
     }, []);
 
+    // Check the validation of the inputs
     useEffect(() => {
         if(getAddressName !== undefined && getAddressName !== "") {
-            const fullNameRegex = /^[a-zA-ZÀ-ÿ\s\d-]{5,50}$/;
             if(fullNameRegex.test(getAddressName)) {
                 setAddressNameValidState(1);
             } else {
@@ -114,8 +119,7 @@ const CheckoutAdresse = () => {
 
     useEffect(() => {
         if(getFirstName !== undefined && getFirstName !== "") {
-            const fullNameRegex = /^[a-zA-ZÀ-ÿ\s-]{3,50}$/;
-            if(fullNameRegex.test(getFirstName)) {
+            if(firstNameRegex.test(getFirstName)) {
                 setFirstNameValidState(1);
             } else {
                 setFirstNameValidState(2);
@@ -125,8 +129,7 @@ const CheckoutAdresse = () => {
 
     useEffect(() => {
         if(getLastName !== undefined && getLastName !== "") {
-            const fullNameRegex = /^[a-zA-ZÀ-ÿ\s-]{3,50}$/;
-            if(fullNameRegex.test(getLastName)) {
+            if(firstNameRegex.test(getLastName)) {
                 setLastNameValidState(1);
             } else {
                 setLastNameValidState(2);
@@ -136,7 +139,6 @@ const CheckoutAdresse = () => {
 
     useEffect(() => {
         if(getAddress !== undefined && getAddress !== "") {
-            const addressRegex = /^.{5,100}$/; 
             if(addressRegex.test(getAddress)) {
                 setAddressValidState(1); 
             } else {
@@ -147,8 +149,7 @@ const CheckoutAdresse = () => {
 
     useEffect(() => {
         if(getCity !== undefined && getCity !== "") {
-            const cityRegex = /^[a-zA-ZÀ-ÿ\s-]{3,50}$/;
-            if(cityRegex.test(getCity)) {
+            if(firstNameRegex.test(getCity)) {
                 setCityValidState(1); 
             } else {
                 setCityValidState(2); 
@@ -158,7 +159,6 @@ const CheckoutAdresse = () => {
     
     useEffect(() => {
         if(getZipCode !== undefined && getZipCode !== "") {
-            const zipCodeRegex = /^\d{5}$/; 
             if(zipCodeRegex.test(getZipCode)) {
                 setZipCodeValidState(1); 
             } else {
@@ -169,8 +169,7 @@ const CheckoutAdresse = () => {
 
     useEffect(() => {
         if(getRegion !== undefined && getRegion !== "") {
-            const regionRegex = /^[a-zA-ZÀ-ÿ\s-]{3,50}$/; 
-            if(regionRegex.test(getRegion)) {
+            if(firstNameRegex.test(getRegion)) {
                 setRegionValidState(1); 
             } else {
                 setRegionValidState(2); 
@@ -180,8 +179,7 @@ const CheckoutAdresse = () => {
     
     useEffect(() => {
         if(getCountry !== undefined && getCountry !== "") {
-            const countryRegex = /^[a-zA-ZÀ-ÿ\s-]{3,50}$/; 
-            if(countryRegex.test(getCountry)) {
+            if(firstNameRegex.test(getCountry)) {
                 setCountryValidState(1); 
             } else {
                 setCountryValidState(2); 
@@ -191,7 +189,6 @@ const CheckoutAdresse = () => {
     
     useEffect(() => {
         if(getPhone !== undefined && getPhone !== "") {
-            const phoneRegex = /^\d{10}$/; 
             if(phoneRegex.test(getPhone)) {
                 setPhoneValidState(1); 
             } else {
@@ -200,6 +197,7 @@ const CheckoutAdresse = () => {
         }
     }, [getPhone]);
 
+    // Check if all the inputs of the form are valid
     const isFormValid = () => {
         return (
             getAddressNameValidState === 1 &&
@@ -214,42 +212,40 @@ const CheckoutAdresse = () => {
         );
     };
     
-    
+    // Form submission
     const FormSubmitted = async (e) => {
         e.preventDefault();
         if (!isFormValid()) {
             ToastQueue.negative("Veuillez remplir correctement tous les champs.", { timeout: 5000 });
             return;
         }
-        if (getSelectedAddress === "0") {
-            let data = {
-                "table": "addresses",
-                "data": {
-                    "user_id": getUserId,
-                    "address_name": getAddressName,
-                    "first_name": getFirstName,
-                    "last_name": getLastName,
-                    "address": getAddress,
-                    "city": getCity,
-                    "zip_code": getZipCode,
-                    "region": getRegion,
-                    "country": getCountry,
-                    "phone_number": getPhone
-                }
-            };
 
-            Data("panelAdmin", "insertAddress", data).then(response => {
-                if (response.success === true) {
-                    navigate(`/checkoutPayment?addressId=${response.id}`);
-                } else {
-                    ToastQueue.negative(response.error, { timeout: 5000 });
-                }
-            });
-        } else {
-            ToastQueue.negative("Veuillez remplir correctement tous les champs.", {timeout: 5000});
-        }
+        let data = {
+            "table": "addresses",
+            "data": {
+                "user_id": getUserId,
+                "address_name": getAddressName,
+                "first_name": getFirstName,
+                "last_name": getLastName,
+                "address": getAddress,
+                "city": getCity,
+                "zip_code": getZipCode,
+                "region": getRegion,
+                "country": getCountry,
+                "phone_number": getPhone
+            }
+        };
+
+        Data("panelAdmin", "insertAddress", data).then(response => {
+            if (response.success === true) {
+                navigate(`/checkoutPayment?addressId=${response.id}`);
+            } else {
+                ToastQueue.negative(response.error, { timeout: 5000 });
+            }
+        });
     } 
 
+    // Render different buttons depending of which address is currently selected
     const renderButtons = () => {
         if (getSelectedAddress === "0") {
             return (

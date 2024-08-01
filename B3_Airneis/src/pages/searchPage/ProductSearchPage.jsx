@@ -9,10 +9,11 @@ import { ToastQueue } from "@react-spectrum/toast";
 import {Grid} from '@adobe/react-spectrum'
 
 const ProductSearchPage = () => {
-  // Récupération des informations de la barre de recherche
+  // Get URL informations
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
 
+  // Setting use states
   const [searchQuery, setSearchQuery] = useState(searchParams.get('search') !== null ? searchParams.get('search') : "");
   const [showSearchPage, setShowSearchPage] = useState(false);
   const [filtering, setFiltering] = useState(false);
@@ -24,6 +25,7 @@ const ProductSearchPage = () => {
   const [enStock, setEnStock] = useState(false);
   const [orderBy, setOrderBy] = useState("sansTri");
 
+  // Handling form changes
   const handleShowSearchPage = () => {
     setShowSearchPage(true);
     setFiltering(true);
@@ -60,6 +62,7 @@ const ProductSearchPage = () => {
     handleSearch(searchData);
   }, [orderBy]);
 
+  // Form submission
   const handleSearch = (searchData) => {
     handleCloseSearchPage();
 
@@ -80,8 +83,6 @@ const ProductSearchPage = () => {
     } else {
       searchData.orderBy = null;
     }
-
-    console.log(searchData);
 
     Data("searchProduct", "getProductByFilter", searchData).then(response => {
       if (response.success === true) {

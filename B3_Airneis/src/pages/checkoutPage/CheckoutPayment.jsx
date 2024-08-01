@@ -6,6 +6,7 @@ import { ToastQueue } from "@react-spectrum/toast";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 
 const CheckoutPayment = () => {
+    // Setting use states
     const { pullData, saveData } = useContext(UserContext);
     const [getSelectedAddressId, setSelectedAddressId] = useState(undefined);
     const [getUserId, setUserId] = useState(undefined);
@@ -14,8 +15,9 @@ const CheckoutPayment = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
+    // Make an API call to get all the order details. If the user is not connected, sends him back to the homepage with an error
     useEffect(() => {
-        let userData = pullData("user");       
+        let userData = pullData("user"); // Get user information from the cookies    
         if(userData === undefined){
             ToastQueue.negative("Veuillez vous connecter afin de pouvoir accéder à cette page.", {timeout: 5000});
             navigate("/");
@@ -35,6 +37,7 @@ const CheckoutPayment = () => {
         });
     });
 
+    // Calculate the total price including TVA
     const calculateTotalPrice = (products) => {
         let total = 0;
         products.map(product => {
@@ -44,6 +47,7 @@ const CheckoutPayment = () => {
         setTotalPrice((total + total*0.17).toFixed(2));
     };
 
+    // Add the order in the database
     const insertOrder = async () => {
         if (getUserId && getSelectedAddressId) {
             let orderData = {
@@ -73,6 +77,7 @@ const CheckoutPayment = () => {
     const stripe = useStripe();
     const elements = useElements();
 
+    // Form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
 

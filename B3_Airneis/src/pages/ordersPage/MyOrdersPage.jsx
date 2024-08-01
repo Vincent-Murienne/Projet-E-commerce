@@ -5,6 +5,7 @@ import { ToastQueue } from "@react-spectrum/toast";
 import { Link } from 'react-router-dom';
 
 const MyOrdersPage = () => {
+    // Setting use states
     const { pullData } = useContext(UserContext);
     const [orders, setOrders] = useState([]);
     const [groupedOrders, setGroupedOrders] = useState({});
@@ -12,12 +13,13 @@ const MyOrdersPage = () => {
     const tva = 0.17;
 
     useEffect(() => {
-        const userData = pullData("user");
+        const userData = pullData("user"); // Get user information from the cookies
         if (userData) {
             setUserId(userData.id);
         }
     }, [pullData]);
 
+    // Make an API call to get all the orders of the current user
     useEffect(() => {
         if (userId) {
             const OrdersData = {
@@ -35,6 +37,7 @@ const MyOrdersPage = () => {
         }
     }, [userId]);
 
+    // Group all the orders by years 
     const groupOrdersByYear = (orders) => {
         const ordersByYear = {};
         orders.forEach(order => {
@@ -55,6 +58,7 @@ const MyOrdersPage = () => {
                     <h2 className="yearTitle-order">{year}</h2>
                     <h2 className="order_separator"></h2>
                     <ul className="orderList">
+                        {/* Display all the orders of the user by years (decreasing) */}
                         {groupedOrders[year].map(order => (
                             <Link to={`/orderPage/${order.order_id}`} key={order.order_id} className="orderItemHover">
                                 <li className="orderItem">

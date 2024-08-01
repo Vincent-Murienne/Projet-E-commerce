@@ -1,7 +1,9 @@
 import { ToastQueue } from '@react-spectrum/toast';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 const ContactPage = () => {
+    // Setting use states
     const [formData, setFormData] = useState({
         email: '',
         subject: '',
@@ -10,6 +12,7 @@ const ContactPage = () => {
 
     const navigate = useNavigate();
 
+    // Handling form changes
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prevState => ({
@@ -18,6 +21,7 @@ const ContactPage = () => {
         }));
     };
 
+    // Form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {

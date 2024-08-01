@@ -16,7 +16,7 @@ footer .reseaux {
     gap: 1rem;
 }
 
-/* Média query */
+/* Media query */
 @media (max-width: 500px) {
     footer {
         display: none;

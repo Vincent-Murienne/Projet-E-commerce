@@ -7,6 +7,7 @@ import { Item, NumberField, Picker, TextArea, TextField } from "@adobe/react-spe
 
 const ProductEdit = () => {
 
+    // Setting use states
     const [getProductName, setProductName] = useState(undefined);
     const [getProductNameValidState, setProductNameValidState] = useState(1);
     const [getPrice, setPrice] = useState(undefined);
@@ -18,6 +19,8 @@ const ProductEdit = () => {
     const [getCategoryId, setCategoryId] = useState(undefined);
 
     const { productId } = useParams(); // Retrieving the product ID from URL parameters
+
+    // Make an API call to get the product informations
     let data = {
         "table": "products",
         "id": productId
@@ -41,7 +44,6 @@ const ProductEdit = () => {
     }, []);
 
     // Lets make an API call to retrieve each categories
-
     let data2 = {
         "table": "categories"
     };
@@ -59,6 +61,7 @@ const ProductEdit = () => {
         });
     }, []);
 
+    // Handle the validation of each input
     useEffect(() => {
         if(getProductName !== undefined && (getProductName.length < 2 || getProductName.length > 49)) {
             setProductNameValidState(2);

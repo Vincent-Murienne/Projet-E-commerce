@@ -7,17 +7,18 @@ import { ToastQueue } from "@react-spectrum/toast";
 import { mkConfig, generateCsv, download } from "export-to-csv";
 
 const MonCompteParametres = () => {
+    // Setting use states
     const { pullData, handleLogout } = useContext(UserContext);
     const [getUserName, setUserName] = useState([]);
     const [getUserMail, setUserMail] = useState([]);
-    const [getUserPassword, setUserPassword] = useState([]);
 
     const [getUserId, setUserId] = useState(undefined);
     let userId;
     const navigate = useNavigate();
 
+    // Make an API call to get all the user information. If his not connected, sends him back to the homepage with an error
     useEffect(() => {
-        let userData = pullData("user");       
+        let userData = pullData("user"); // Get user information from the cookies   
         if(userData === undefined){
             ToastQueue.negative("Veuillez vous connecter afin de pouvoir accéder à cette page.", {timeout: 5000});
             navigate("/");
@@ -36,13 +37,13 @@ const MonCompteParametres = () => {
             if (response.success === true) {
                 setUserName(response.data.full_name);
                 setUserMail(response.data.email);
-                setUserPassword(response.data.password);
             } else {
                 ToastQueue.negative(response.error, {timeout: 5000});
             }
         });
     }, []);
 
+    // Make an API call to get all personnal informations relative to this user and force the download of the file on his browser
     const handleDownloadData = () => {
         const csvConfig = mkConfig({ useKeysAsHeaders: true });
 
@@ -57,6 +58,7 @@ const MonCompteParametres = () => {
         });
     };
 
+    // Make an API call to delete the user account. By precaution, there is a confirm window that will pop to prevent missclicks
     const handleDeleteAccount = () => {
         const confirmed = window.confirm("Voulez-vous vraiment supprimer votre compte ? Cette action est irréversible.");
         if (confirmed) {
