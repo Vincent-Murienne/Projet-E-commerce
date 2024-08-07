@@ -15,6 +15,8 @@ if($isAllowed) {
             $response["success"] = true;
             $response["data"] = $data;
         }
+    } else {
+        $response["error"] = "Veuillez indiquer toutes les données nécessaires à ce traitement.";
     }
 } else {
     $response["error"] = "La clé API n'est pas fournie ou est incorrecte.";

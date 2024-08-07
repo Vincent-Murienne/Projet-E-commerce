@@ -3264,6 +3264,7 @@ int id SHOW_ALL 0x7f080008
 int id SHOW_PATH 0x7f080009
 int id SHOW_PROGRESS 0x7f08000a
 int id SYM 0x7f08000b
+int id SeeMoreButton 0x7f080285
 int id TOP_END 0x7f08000c
 int id TOP_START 0x7f08000d
 int id about_us_container 0x7f08000e
@@ -3382,9 +3383,7 @@ int id callMeasure 0x7f08007e
 int id cancel_button 0x7f08007f
 int id cardImage 0x7f080080
 int id cardName 0x7f080081
-int id cardVoirPlus 0x7f080082
 int id carryVelocity 0x7f080083
-int id cartCount 0x7f080084
 int id categoryImage 0x7f080085
 int id categoryName 0x7f080086
 int id center 0x7f080087
@@ -3429,7 +3428,6 @@ int id date_picker_actions 0x7f0800ad
 int id decelerate 0x7f0800ae
 int id decelerateAndComplete 0x7f0800af
 int id decor_content_parent 0x7f0800b0
-int id decrementButton 0x7f0800b1
 int id default_activity_button 0x7f0800b2
 int id deleteButton 0x7f0800b3
 int id deltaRelative 0x7f0800b4
@@ -3545,7 +3543,6 @@ int id imageLinkedIn 0x7f080121
 int id imageTwitter 0x7f080122
 int id immediateStop 0x7f080123
 int id included 0x7f080124
-int id incrementButton 0x7f080125
 int id indeterminate 0x7f080126
 int id info 0x7f080127
 int id invisible 0x7f080128
@@ -3886,7 +3883,6 @@ int id view_tree_view_model_store_owner 0x7f080276
 int id visible 0x7f080277
 int id visible_removing_fragment_view_tag 0x7f080278
 int id voirAdresse 0x7f080279
-int id voirPlus 0x7f08027a
 int id west 0x7f08027b
 int id withText 0x7f08027c
 int id with_icon 0x7f08027d
@@ -4014,7 +4010,6 @@ int layout abc_select_dialog_material 0x7f0b001a
 int layout abc_tooltip 0x7f0b001b
 int layout activity_main 0x7f0b001c
 int layout activity_search 0x7f0b001d
-int layout basket_item 0x7f0b001e
 int layout custom_dialog 0x7f0b001f
 int layout design_bottom_navigation_item 0x7f0b0020
 int layout design_bottom_sheet_dialog 0x7f0b0021
@@ -4048,20 +4043,19 @@ int layout fragment_login 0x7f0b003c
 int layout fragment_mentions_legales 0x7f0b003d
 int layout fragment_my_orders 0x7f0b003e
 int layout fragment_parametre_compte 0x7f0b003f
-int layout fragment_product_details 0x7f0b0040
+int layout fragment_product_detail 0x7f0b008e
 int layout fragment_register 0x7f0b0041
 int layout fragment_slider 0x7f0b0042
 int layout fragment_top_categories 0x7f0b0043
 int layout fragment_top_produits 0x7f0b0044
 int layout ime_base_split_test_activity 0x7f0b0045
 int layout ime_secondary_split_test_activity 0x7f0b0046
+int layout item_basket 0x7f0b008f
 int layout item_categories_details 0x7f0b0047
-int layout item_categories_product_details 0x7f0b0048
-int layout item_category 0x7f0b0049
-int layout item_order 0x7f0b004a
 int layout item_order_detail 0x7f0b004b
+int layout item_order_year 0x7f0b0090
 int layout item_product 0x7f0b004c
-int layout item_product_details 0x7f0b004d
+int layout item_top_card_item 0x7f0b008d
 int layout m3_alert_dialog 0x7f0b004e
 int layout m3_alert_dialog_actions 0x7f0b004f
 int layout m3_alert_dialog_title 0x7f0b0050
@@ -4123,7 +4117,6 @@ int layout select_dialog_item_material 0x7f0b0087
 int layout select_dialog_multichoice_material 0x7f0b0088
 int layout select_dialog_singlechoice_material 0x7f0b0089
 int layout support_simple_spinner_dropdown_item 0x7f0b008a
-int layout top_card_item 0x7f0b008b
 int menu bottom_nav_menu 0x7f0d0000
 int mipmap ic_launcher 0x7f0e0000
 int mipmap ic_launcher_round 0x7f0e0001
@@ -4187,6 +4180,7 @@ int string fab_transformation_scrim_behavior 0x7f100037
 int string fab_transformation_sheet_behavior 0x7f100038
 int string forgot_password 0x7f100039
 int string have_account_login 0x7f10003a
+int string hello_blank_fragment 0x7f1000bf
 int string hide_bottom_view_on_scroll_behavior 0x7f10003b
 int string icon_content_description 0x7f10003c
 int string image_desc 0x7f10003d

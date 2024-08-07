@@ -5,10 +5,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.example.airneis.fragment.AccountFragment;
-import com.example.airneis.fragment.BasketFragment;
-import com.example.airneis.fragment.CategoriesFragment;
-import com.example.airneis.fragment.HomeFragment;
+import com.example.airneis.fragment.myAccount.AccountFragment;
+import com.example.airneis.fragment.basket.BasketFragment;
+import com.example.airneis.fragment.categories.CategoryListFragment;
+import com.example.airneis.fragment.homePage.HomeFragment;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
             if (itemId == R.id.navigation_home) {
                 replaceFragment(new HomeFragment());
             } else if (itemId == R.id.navigation_categories) {
-                replaceFragment(new CategoriesFragment());
+                replaceFragment(new CategoryListFragment());
             } else if (itemId == R.id.navigation_basket) {
                 replaceFragment(new BasketFragment());
             } else if (itemId == R.id.navigation_account) {
