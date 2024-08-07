@@ -55,3 +55,4 @@
      ```sh
      php -S 0.0.0.0:8000
      ```
+   - La deuxième façon de lancer le back-end permet également d'utiliser en simultanée l'application mobile et l'application web. Cependant, on remarque une certaine latence avec cette méthode pour l'application web.

@@ -21,6 +21,9 @@
 4. **Lancer l'application**
    - Une fois l'appareil installé, lancez l'application. Elle devrait automatiquement se lancer dans votre appareil virtuel.
 
+5. **VolleyError**
+   - Si vous avez ouvert le projet Android avant de lancer le back-end, il se peut que vous rencontriez une erreur de Volley qui n'arrive pas à accéder au back-end. Pour résoudre cela, il vous suffit simplement de relancer Android Studio. Si l'erreur persiste, fermer tout Android Studio, Visual Studio Code ou si vous avez lancé le serveur PHP depuis un simple terminal le terminal en question. Puis relancer le serveur PHP et seulement après, Android Studio.
+
 ## Back-end
 
 - Vous devrez aussi lancer le back-end pour que l'application fonctionne entièrement. Pour cela, veuillez vous référer au fichier README présent dans le dossier `Back-end`.
