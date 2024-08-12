@@ -115,10 +115,20 @@ drawable logo_facebook
 drawable logo_instagram
 drawable logo_linkedin
 drawable logo_twitter
+id AddressError
+id AddressNameError
+id CityError
+id CountryError
+id FirstNameError
+id LastNameError
+id PhoneError
+id RegionError
 id SeeMoreButton
+id ZipCodeError
 id about_us_container
 id achatButton
 id addToCartButton
+id backButton
 id basketTitle
 id bottomAppBar
 id bottomNavigationView
@@ -140,7 +150,6 @@ id buttonSinscrire
 id buttonSupprimer
 id buttonSupprimerCompte
 id buttonTelechargerDonnees
-id buttonValider
 id cardImage
 id cardName
 id categoryImage
@@ -166,6 +175,7 @@ id editTextRegion
 id editTextUserEmail
 id editTextUserName
 id editTextUserPassword
+id editTextZipCode
 id email
 id emailEditText
 id error_message
@@ -245,6 +255,7 @@ id tv_order_confirmed
 id tv_order_id
 id tv_thank_you
 id tvaPrice
+id validateButton
 id voirAdresse
 id year_title_order
 layout activity_main
@@ -264,7 +275,7 @@ layout fragment_forget_password
 layout fragment_home
 layout fragment_login
 layout fragment_mentions_legales
-layout fragment_my_orders
+layout fragment_orders
 layout fragment_parametre_compte
 layout fragment_product_detail
 layout fragment_register

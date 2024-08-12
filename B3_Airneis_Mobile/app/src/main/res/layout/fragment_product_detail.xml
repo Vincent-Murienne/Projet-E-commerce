@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:layout_marginBottom="84dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="16dp"
-        android:layout_marginBottom="70dp">
+        android:padding="16dp">
 
         <!-- Slider Section -->
         <FrameLayout
@@ -116,35 +116,6 @@
                     android:textColor="@color/black"
                     android:textStyle="bold" />
             </LinearLayout>
-            <!--<LinearLayout
-                android:layout_width="239dp"
-                android:layout_height="40dp"
-                android:layout_marginBottom="16dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/decrementButton"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:textColor="@color/black"
-                    android:text="-" />
-
-                <TextView
-                    android:id="@+id/cartCount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
-                    android:text="Quantité : 1"
-                    android:textSize="18sp" />
-
-                <Button
-                    android:id="@+id/incrementButton"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:text="+" />
-            </LinearLayout> -->
 
             <Button
                 android:id="@+id/addToCartButton"

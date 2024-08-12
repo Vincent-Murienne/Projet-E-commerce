@@ -1,8 +1,11 @@
-#Wed Aug 07 22:32:08 CEST 2024
+#Mon Aug 12 23:32:13 CEST 2024
 base.0=C\:\\Users\\Jean\\Desktop\\Programmation\\Projet-E-commerce\\B3_Airneis_Mobile\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 base.1=C\:\\Users\\Jean\\Desktop\\Programmation\\Projet-E-commerce\\B3_Airneis_Mobile\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
 base.10=C\:\\Users\\Jean\\Desktop\\Programmation\\Projet-E-commerce\\B3_Airneis_Mobile\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\3\\classes.dex
 base.11=C\:\\Users\\Jean\\Desktop\\Programmation\\Projet-E-commerce\\B3_Airneis_Mobile\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\5\\classes.dex
+base.12=C\:\\Users\\Jean\\Desktop\\Programmation\\Projet-E-commerce\\B3_Airneis_Mobile\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\13\\classes.dex
+base.13=C\:\\Users\\Jean\\Desktop\\Programmation\\Projet-E-commerce\\B3_Airneis_Mobile\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\6\\classes.dex
+base.14=C\:\\Users\\Jean\\Desktop\\Programmation\\Projet-E-commerce\\B3_Airneis_Mobile\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\7\\classes.dex
 base.2=C\:\\Users\\Jean\\Desktop\\Programmation\\Projet-E-commerce\\B3_Airneis_Mobile\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\11\\classes.dex
 base.3=C\:\\Users\\Jean\\Desktop\\Programmation\\Projet-E-commerce\\B3_Airneis_Mobile\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\12\\classes.dex
 base.4=C\:\\Users\\Jean\\Desktop\\Programmation\\Projet-E-commerce\\B3_Airneis_Mobile\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\14\\classes.dex
@@ -15,6 +18,9 @@ path.0=classes.dex
 path.1=0/classes.dex
 path.10=3/classes.dex
 path.11=5/classes.dex
+path.12=13/classes.dex
+path.13=6/classes.dex
+path.14=7/classes.dex
 path.2=11/classes.dex
 path.3=12/classes.dex
 path.4=14/classes.dex
@@ -27,6 +33,9 @@ renamed.0=classes.dex
 renamed.1=classes2.dex
 renamed.10=classes11.dex
 renamed.11=classes12.dex
+renamed.12=classes13.dex
+renamed.13=classes14.dex
+renamed.14=classes15.dex
 renamed.2=classes3.dex
 renamed.3=classes4.dex
 renamed.4=classes5.dex

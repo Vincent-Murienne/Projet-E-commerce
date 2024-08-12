@@ -4,24 +4,32 @@
         "source": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\f3_3_table_de_chevet_design_en_verre.jpg"
     },
     {
-        "merged": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_e1_3_ensemble_de_salon_de_jardin.jpg.flat",
-        "source": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\e1_3_ensemble_de_salon_de_jardin.jpg"
-    },
-    {
         "merged": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\menu_bottom_nav_menu.xml.flat",
         "source": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\menu\\bottom_nav_menu.xml"
     },
     {
-        "merged": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_ic_dashboard_black_24dp.xml.flat",
-        "source": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\ic_dashboard_black_24dp.xml"
+        "merged": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_e1_3_ensemble_de_salon_de_jardin.jpg.flat",
+        "source": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\e1_3_ensemble_de_salon_de_jardin.jpg"
+    },
+    {
+        "merged": "com.example.airneis.app-debug-46:/layout_fragment_checkout_adresse.xml.flat",
+        "source": "com.example.airneis.app-main-48:/layout/fragment_checkout_adresse.xml"
     },
     {
         "merged": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_f3_1_table_de_chevet_design_en_verre.jpg.flat",
         "source": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\f3_1_table_de_chevet_design_en_verre.jpg"
     },
     {
+        "merged": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_ic_dashboard_black_24dp.xml.flat",
+        "source": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\ic_dashboard_black_24dp.xml"
+    },
+    {
         "merged": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_g2_1_lampe_de_bureau.jpg.flat",
         "source": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\g2_1_lampe_de_bureau.jpg"
+    },
+    {
+        "merged": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\layout_fragment_orders.xml.flat",
+        "source": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\layout\\fragment_orders.xml"
     },
     {
         "merged": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_a1_3_chaise_design_blanc_et_bois_clair.jpg.flat",
@@ -40,16 +48,12 @@
         "source": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\e3_1_table_de_jardin_avec_parasol.jpg"
     },
     {
-        "merged": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_c2_1_canape_lit_avec_rangement.jpg.flat",
-        "source": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\c2_1_canape_lit_avec_rangement.jpg"
-    },
-    {
         "merged": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_ic_notifications_black_24dp.xml.flat",
         "source": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\ic_notifications_black_24dp.xml"
     },
     {
-        "merged": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\layout_top_card_item.xml.flat",
-        "source": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\layout\\top_card_item.xml"
+        "merged": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_c2_1_canape_lit_avec_rangement.jpg.flat",
+        "source": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\c2_1_canape_lit_avec_rangement.jpg"
     },
     {
         "merged": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_c1_3_canape_3_places_en_cuir_italien.jpg.flat",
@@ -72,20 +76,12 @@
         "source": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\g3_2_poubelle_de_bureau_en_acier_inoxydable.jpg"
     },
     {
-        "merged": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\layout_item_product_basket.xml.flat",
-        "source": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\layout\\item_product_basket.xml"
-    },
-    {
-        "merged": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_d1_1_armoire_coulissant.jpg.flat",
-        "source": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\d1_1_armoire_coulissant.jpg"
-    },
-    {
         "merged": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\layout_fragment_a_propos.xml.flat",
         "source": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\layout\\fragment_a_propos.xml"
     },
     {
-        "merged": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\layout_basket_item.xml.flat",
-        "source": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\layout\\basket_item.xml"
+        "merged": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_d1_1_armoire_coulissant.jpg.flat",
+        "source": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\d1_1_armoire_coulissant.jpg"
     },
     {
         "merged": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_g1_3_organiseur_de_bureau_en_bois.jpg.flat",
@@ -320,10 +316,6 @@
         "source": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\c2_2_canape_lit_avec_rangement.jpg"
     },
     {
-        "merged": "com.example.airneis.app-debug-46:/layout_fragment_my_orders.xml.flat",
-        "source": "com.example.airneis.app-main-48:/layout/fragment_my_orders.xml"
-    },
-    {
         "merged": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_g3_3_poubelle_de_bureau_en_acier_inoxydable.jpg.flat",
         "source": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\g3_3_poubelle_de_bureau_en_acier_inoxydable.jpg"
     },
@@ -338,10 +330,6 @@
     {
         "merged": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_e3_3_table_de_jardin_avec_parasol.jpg.flat",
         "source": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\e3_3_table_de_jardin_avec_parasol.jpg"
-    },
-    {
-        "merged": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\layout_fragment_product_details.xml.flat",
-        "source": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\layout\\fragment_product_details.xml"
     },
     {
         "merged": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_a4_2_chaise_de_bar.jpg.flat",
@@ -402,10 +390,6 @@
     {
         "merged": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_f1_1_table_chevet_avec_tiroir.jpg.flat",
         "source": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\f1_1_table_chevet_avec_tiroir.jpg"
-    },
-    {
-        "merged": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\layout_item_categories_product_details.xml.flat",
-        "source": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\layout\\item_categories_product_details.xml"
     },
     {
         "merged": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\layout_fragment_parametre_compte.xml.flat",
@@ -508,16 +492,8 @@
         "source": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\ic_user.xml"
     },
     {
-        "merged": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\layout_item_product_details.xml.flat",
-        "source": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\layout\\item_product_details.xml"
-    },
-    {
         "merged": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_f1_3_table_chevet_avec_tiroir.jpg.flat",
         "source": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\f1_3_table_chevet_avec_tiroir.jpg"
-    },
-    {
-        "merged": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\layout_item_category.xml.flat",
-        "source": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\layout\\item_category.xml"
     },
     {
         "merged": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_b3_3_table_de_cuisine_extensible.jpg.flat",
@@ -542,10 +518,6 @@
     {
         "merged": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_input_background.xml.flat",
         "source": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\drawable\\input_background.xml"
-    },
-    {
-        "merged": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\layout_item_order.xml.flat",
-        "source": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-main-48:\\layout\\item_order.xml"
     },
     {
         "merged": "C:\\Users\\Jean\\.gradle\\daemon\\8.6\\com.example.airneis.app-debug-46:\\drawable_f2_3_table_de_chevet_suspendue.jpg.flat",

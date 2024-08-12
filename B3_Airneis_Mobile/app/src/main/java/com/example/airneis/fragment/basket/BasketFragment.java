@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,12 +15,15 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.airneis.R;
 import com.example.airneis.adapter.BasketAdapter;
+import com.example.airneis.fragment.checkout.CheckoutAddressFragment;
+import com.example.airneis.fragment.myAccount.orders.OrderDetailFragment;
 import com.example.airneis.manager.APIManager;
 import com.example.airneis.model.BasketData;
 
@@ -33,8 +37,8 @@ public class BasketFragment extends Fragment {
     private RecyclerView recyclerView;
     private BasketAdapter basketAdapter;
     private ArrayList<BasketData> basketList;
-    private TextView totalPriceView;
-    private TextView tvaPriceView;
+    private TextView totalPriceView, tvaPriceView;
+    private Button checkoutButton;
     private double totalPrice;
     private final double tva = 0.17;
     private int userId;
@@ -47,6 +51,7 @@ public class BasketFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView);
         totalPriceView = view.findViewById(R.id.totalPrice);
         tvaPriceView = view.findViewById(R.id.tvaPrice);
+        checkoutButton = view.findViewById(R.id.checkoutButton);
         basketList = new ArrayList<>();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -81,6 +86,29 @@ public class BasketFragment extends Fragment {
 
         fetchBasketProducts();
 
+        checkoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean canContinue = true;
+                for (BasketData product : basketList) {
+                    if(!(product.getQuantity() <= product.getStock() && product.getStock() != 0)) {
+                        canContinue = false;
+                    }
+                }
+
+                if(canContinue) {
+                    // Navigate to CheckoutAddressFragment
+                    Fragment checkoutAddressFragment = new CheckoutAddressFragment();
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.frameLayout, checkoutAddressFragment);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+                } else {
+                    Toast.makeText(getContext(), "Un des produits présent dans votre panier n'est plus en stock suffisant pour être commandé.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         return view;
     }
 
@@ -102,7 +130,6 @@ public class BasketFragment extends Fragment {
 
             @Override
             public void onResponse(JSONObject response) {
-                Log.d("API Response", response.toString());
                 try {
                     if (response.getBoolean("success")) {
                         JSONArray products = response.getJSONArray("data");
@@ -116,6 +143,10 @@ public class BasketFragment extends Fragment {
                             int quantity = product.getInt("quantity");
                             double price = product.getDouble("price");
                             int stock = product.getInt("stock");
+                            if(stock < quantity) {
+                                quantity = stock;
+                                updateProductQuantity(id, quantity);
+                            }
                             basketList.add(new BasketData(id, name, description, imageName, quantity, price, stock));
                         }
                         basketAdapter.notifyDataSetChanged();
@@ -157,7 +188,6 @@ public class BasketFragment extends Fragment {
 
             @Override
             public void onResponse(JSONObject response) {
-                Log.d("API Response", response.toString());
                 try {
                     if (response.getBoolean("success")) {
                         basketList.remove(position);
@@ -201,7 +231,6 @@ public class BasketFragment extends Fragment {
 
             @Override
             public void onResponse(JSONObject response) {
-                Log.d("API Response", response.toString());
                 try {
                     if (response.getBoolean("success")) {
                         updateTotalPriceAndTva();

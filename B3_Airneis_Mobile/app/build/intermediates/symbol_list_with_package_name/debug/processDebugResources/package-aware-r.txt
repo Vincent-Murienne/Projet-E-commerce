@@ -3254,12 +3254,20 @@ drawable test_level_drawable
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
 id ALT
+id AddressError
+id AddressNameError
 id BOTTOM_END
 id BOTTOM_START
 id CTRL
+id CityError
+id CountryError
 id FUNCTION
+id FirstNameError
+id LastNameError
 id META
 id NO_DEBUG
+id PhoneError
+id RegionError
 id SHIFT
 id SHOW_ALL
 id SHOW_PATH
@@ -3268,6 +3276,7 @@ id SYM
 id SeeMoreButton
 id TOP_END
 id TOP_START
+id ZipCodeError
 id about_us_container
 id accelerate
 id accessibility_action_clickable_span
@@ -3345,6 +3354,7 @@ id auto
 id autoComplete
 id autoCompleteToEnd
 id autoCompleteToStart
+id backButton
 id barrier
 id baseline
 id basketTitle
@@ -3378,7 +3388,6 @@ id buttonSinscrire
 id buttonSupprimer
 id buttonSupprimerCompte
 id buttonTelechargerDonnees
-id buttonValider
 id cache_measures
 id callMeasure
 id cancel_button
@@ -3476,6 +3485,7 @@ id editTextRegion
 id editTextUserEmail
 id editTextUserName
 id editTextUserPassword
+id editTextZipCode
 id edit_query
 id edit_text_id
 id elastic
@@ -3874,6 +3884,7 @@ id uniform
 id unlabeled
 id up
 id useLogo
+id validateButton
 id vertical_only
 id view_offset_helper
 id view_transition
@@ -4042,7 +4053,7 @@ layout fragment_forget_password
 layout fragment_home
 layout fragment_login
 layout fragment_mentions_legales
-layout fragment_my_orders
+layout fragment_orders
 layout fragment_parametre_compte
 layout fragment_product_detail
 layout fragment_register

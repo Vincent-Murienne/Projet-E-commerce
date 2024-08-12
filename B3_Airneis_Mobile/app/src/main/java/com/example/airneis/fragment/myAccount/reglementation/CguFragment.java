@@ -16,8 +16,8 @@ public class CguFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View inf = (View) inflater.inflate(R.layout.fragment_cgu, container, false);
+        View view = (View) inflater.inflate(R.layout.fragment_cgu, container, false);
 
-        return inf;
+        return view;
     }
 }

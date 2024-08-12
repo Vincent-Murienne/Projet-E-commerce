@@ -229,8 +229,10 @@ public class ProductDetailFragment extends Fragment {
                             String imageName = product.getString("product_image_name");
                             String productName = product.getString("name");
                             double productPrice = product.getDouble("price");
-                            int productId = product.getInt("id");
-                            productModelList.add(new ProductModel(productId, productName, imageName, productPrice));
+                            int product_id = product.getInt("id");
+                            if(product_id != productId) {
+                                productModelList.add(new ProductModel(product_id, productName, imageName, productPrice));
+                            }
                         }
                         productsListAdapter.notifyDataSetChanged();
                     } else {
