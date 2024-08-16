@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.airneis.app-mergeDebugResources-44:/values-hdpi-v4/values-hdpi-v4.xml",
+            "outputFile": "com.example.airneis.app-mergeDebugResources-46:/values-hdpi-v4/values-hdpi-v4.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Jean\\.gradle\\caches\\transforms-4\\b959c312ae53a6fab93220ce3db301bf\\transformed\\appcompat-1.7.0\\res\\values-hdpi-v4\\values-hdpi-v4.xml",
@@ -12,6 +12,24 @@
                         "endLines": "6",
                         "endColumns": "13",
                         "endOffsets": "327"
+                    },
+                    "to": {
+                        "startLines": "3",
+                        "startColumns": "4",
+                        "startOffsets": "112",
+                        "endLines": "7",
+                        "endColumns": "13",
+                        "endOffsets": "384"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Jean\\.gradle\\caches\\transforms-4\\6cc9ea5713ba8743f302ab84f19445b8\\transformed\\stripe-android-14.4.1\\res\\values-hdpi-v4\\values-hdpi-v4.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "56",
+                        "endOffsets": "107"
                     }
                 }
             ]

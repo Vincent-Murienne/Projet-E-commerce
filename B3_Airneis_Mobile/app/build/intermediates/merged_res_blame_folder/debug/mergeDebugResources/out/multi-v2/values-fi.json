@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.airneis.app-mergeDebugResources-44:/values-fi/values-fi.xml",
+            "outputFile": "com.example.airneis.app-mergeDebugResources-46:/values-fi/values-fi.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Jean\\.gradle\\caches\\transforms-4\\bf3584da0d1c7ca47ab3825c79eaa3e4\\transformed\\material-1.12.0\\res\\values-fi\\values-fi.xml",
@@ -54,6 +54,23 @@
                         "startOffsets": "3392,3488,3590,3688,3793,3898,4010,9977",
                         "endColumns": "95,101,97,104,104,111,115,100",
                         "endOffsets": "3483,3585,3683,3788,3893,4005,4121,10073"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Jean\\.gradle\\caches\\transforms-4\\56ef346e149285a5d51ee2ca89314dba\\transformed\\stripe-3ds2-android-2.7.8\\res\\values-fi\\values-fi.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,123,186,254,310,394,494,560,630,695,770",
+                        "endColumns": "67,62,67,55,83,99,65,69,64,74,68",
+                        "endOffsets": "118,181,249,305,389,489,555,625,690,765,834"
+                    },
+                    "to": {
+                        "startLines": "119,120,121,122,123,124,125,126,127,128,129",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "10078,10146,10209,10277,10333,10417,10517,10583,10653,10718,10793",
+                        "endColumns": "67,62,67,55,83,99,65,69,64,74,68",
+                        "endOffsets": "10141,10204,10272,10328,10412,10512,10578,10648,10713,10788,10857"
                     }
                 },
                 {

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.airneis.app-mergeDebugResources-44:/values-zh-rHK/values-zh-rHK.xml",
+            "outputFile": "com.example.airneis.app-mergeDebugResources-46:/values-zh-rHK/values-zh-rHK.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Jean\\.gradle\\caches\\transforms-4\\03a680d27d83bb74cc172f7ad54625a5\\transformed\\core-1.13.0\\res\\values-zh-rHK\\values-zh-rHK.xml",
@@ -18,6 +18,23 @@
                         "startOffsets": "3195,3287,3386,3480,3574,3667,3760,9044",
                         "endColumns": "91,98,93,93,92,92,95,100",
                         "endOffsets": "3282,3381,3475,3569,3662,3755,3851,9140"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Jean\\.gradle\\caches\\transforms-4\\56ef346e149285a5d51ee2ca89314dba\\transformed\\stripe-3ds2-android-2.7.8\\res\\values-zh-rHK\\values-zh-rHK.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,123,187,255,311,386,470,535,601,661,723",
+                        "endColumns": "67,63,67,55,74,83,64,65,59,61,61",
+                        "endOffsets": "118,182,250,306,381,465,530,596,656,718,780"
+                    },
+                    "to": {
+                        "startLines": "119,120,121,122,123,124,125,126,127,128,129",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "9145,9213,9277,9345,9401,9476,9560,9625,9691,9751,9813",
+                        "endColumns": "67,63,67,55,74,83,64,65,59,61,61",
+                        "endOffsets": "9208,9272,9340,9396,9471,9555,9620,9686,9746,9808,9870"
                     }
                 },
                 {

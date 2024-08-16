@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.airneis.app-mergeDebugResources-44:/values-fr-rCA/values-fr-rCA.xml",
+            "outputFile": "com.example.airneis.app-mergeDebugResources-46:/values-fr-rCA/values-fr-rCA.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Jean\\.gradle\\caches\\transforms-4\\aa88d0b0a9240d55f7b230005a6670ac\\transformed\\navigation-ui-2.6.0\\res\\values-fr-rCA\\values-fr-rCA.xml",
@@ -71,6 +71,23 @@
                         "startOffsets": "333,444,551,661,748,854,984,1069,1149,1240,1333,1431,1526,1626,1719,1812,1907,1998,2089,2175,2285,2396,2499,2610,2718,2825,2984,10037",
                         "endColumns": "110,106,109,86,105,129,84,79,90,92,97,94,99,92,92,94,90,90,85,109,110,102,110,107,106,158,98,86",
                         "endOffsets": "439,546,656,743,849,979,1064,1144,1235,1328,1426,1521,1621,1714,1807,1902,1993,2084,2170,2280,2391,2494,2605,2713,2820,2979,3078,10119"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Jean\\.gradle\\caches\\transforms-4\\56ef346e149285a5d51ee2ca89314dba\\transformed\\stripe-3ds2-android-2.7.8\\res\\values-fr-rCA\\values-fr-rCA.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,123,187,255,311,401,507,574,642,707,782",
+                        "endColumns": "67,63,67,55,89,105,66,67,64,74,67",
+                        "endOffsets": "118,182,250,306,396,502,569,637,702,777,845"
+                    },
+                    "to": {
+                        "startLines": "119,120,121,122,123,124,125,126,127,128,129",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "10470,10538,10602,10670,10726,10816,10922,10989,11057,11122,11197",
+                        "endColumns": "67,63,67,55,89,105,66,67,64,74,67",
+                        "endOffsets": "10533,10597,10665,10721,10811,10917,10984,11052,11117,11192,11260"
                     }
                 }
             ]

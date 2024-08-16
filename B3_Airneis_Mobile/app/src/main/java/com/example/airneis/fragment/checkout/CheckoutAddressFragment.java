@@ -202,10 +202,16 @@ public class CheckoutAddressFragment extends Fragment {
         lastNameEt.setText(currentAddress.getLastName());
         addressEt.setText(currentAddress.getAddress());
         cityEt.setText(currentAddress.getCity());
-        zipCodeEt.setText(currentAddress.getZipCode() == -1 ? "" : String.valueOf(currentAddress.getZipCode()));
+        zipCodeEt.setText(currentAddress.getZipCode() == -1 ? "" : formatZipCode(String.valueOf(currentAddress.getZipCode())));
         regionEt.setText(currentAddress.getRegion());
         countryEt.setText(currentAddress.getCountry());
         phoneEt.setText(currentAddress.getPhone());
+    }
+
+    private String formatZipCode(String zipCode) {
+        zipCode = "00000" + zipCode;
+
+        return String.valueOf(zipCode.charAt(zipCode.length()-5)) + String.valueOf(zipCode.charAt(zipCode.length()-4)) + String.valueOf(zipCode.charAt(zipCode.length()-3)) + String.valueOf(zipCode.charAt(zipCode.length()-2)) + String.valueOf(zipCode.charAt(zipCode.length()-1));
     }
 
     private void createSpinnerList() {
@@ -408,7 +414,6 @@ public class CheckoutAddressFragment extends Fragment {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            Log.d("debug", response.toString());
                             if (response.getBoolean("success")) {
                                 int addressId = response.getInt("id");
 

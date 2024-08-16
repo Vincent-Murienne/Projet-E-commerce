@@ -1,7 +1,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:layout_marginBottom="84dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -47,12 +48,22 @@
             android:layout_height="wrap_content"
             android:inputType="text"
             android:hint=""
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="5dp"
             android:background="@drawable/edit_text_border"/>
+
+        <TextView
+            android:id="@+id/AddressNameError"
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:textColor="@color/red"
+            android:textSize="14sp"
+            android:visibility="gone"/>
 
         <TextView
             android:layout_width="301dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
             android:gravity="start"
             android:text="Prénom"
@@ -64,12 +75,22 @@
             android:layout_height="wrap_content"
             android:inputType="text"
             android:hint=""
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="5dp"
             android:background="@drawable/edit_text_border"/>
+
+        <TextView
+            android:id="@+id/FirstNameError"
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:textColor="@color/red"
+            android:textSize="14sp"
+            android:visibility="gone"/>
 
         <TextView
             android:layout_width="301dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
             android:gravity="start"
             android:text="Nom"
@@ -81,12 +102,22 @@
             android:layout_height="wrap_content"
             android:inputType="text"
             android:hint=""
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="5dp"
             android:background="@drawable/edit_text_border"/>
+
+        <TextView
+            android:id="@+id/LastNameError"
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:textColor="@color/red"
+            android:textSize="14sp"
+            android:visibility="gone"/>
 
         <TextView
             android:layout_width="301dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
             android:gravity="start"
             android:text="Adresse"
@@ -98,12 +129,22 @@
             android:layout_height="wrap_content"
             android:inputType="text"
             android:hint=""
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="5dp"
             android:background="@drawable/edit_text_border"/>
+
+        <TextView
+            android:id="@+id/AddressError"
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:textColor="@color/red"
+            android:textSize="14sp"
+            android:visibility="gone"/>
 
         <TextView
             android:layout_width="301dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
             android:gravity="start"
             android:text="Ville"
@@ -115,12 +156,22 @@
             android:layout_height="wrap_content"
             android:inputType="text"
             android:hint=""
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="5dp"
             android:background="@drawable/edit_text_border"/>
+
+        <TextView
+            android:id="@+id/CityError"
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:textColor="@color/red"
+            android:textSize="14sp"
+            android:visibility="gone"/>
 
         <TextView
             android:layout_width="301dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
             android:gravity="start"
             android:text="Code postal"
@@ -132,12 +183,22 @@
             android:layout_height="wrap_content"
             android:inputType="number"
             android:hint=""
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="5dp"
             android:background="@drawable/edit_text_border"/>
+
+        <TextView
+            android:id="@+id/ZipCodeError"
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:textColor="@color/red"
+            android:textSize="14sp"
+            android:visibility="gone"/>
 
         <TextView
             android:layout_width="301dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
             android:gravity="start"
             android:text="Région"
@@ -149,12 +210,22 @@
             android:layout_height="wrap_content"
             android:inputType="text"
             android:hint=""
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="5dp"
             android:background="@drawable/edit_text_border"/>
+
+        <TextView
+            android:id="@+id/RegionError"
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:textColor="@color/red"
+            android:textSize="14sp"
+            android:visibility="gone"/>
 
         <TextView
             android:layout_width="301dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
             android:gravity="start"
             android:text="Pays"
@@ -166,12 +237,22 @@
             android:layout_height="wrap_content"
             android:inputType="text"
             android:hint=""
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="5dp"
             android:background="@drawable/edit_text_border"/>
+
+        <TextView
+            android:id="@+id/CountryError"
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:textColor="@color/red"
+            android:textSize="14sp"
+            android:visibility="gone"/>
 
         <TextView
             android:layout_width="301dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
             android:gravity="start"
             android:text="Téléphone"
@@ -181,20 +262,38 @@
             android:id="@+id/editTextPhone"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:inputType="text"
             android:hint=""
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="5dp"
             android:background="@drawable/edit_text_border"/>
+
+        <TextView
+            android:id="@+id/PhoneError"
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:textColor="@color/red"
+            android:textSize="14sp"
+            android:visibility="gone"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_horizontal"
-            android:layout_marginTop="16dp">
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="80dp">
 
             <Button
-                android:id="@+id/buttonModifier"
+                android:id="@+id/backButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:text="Annuler"
+                android:background="@drawable/button_border"
+                android:textColor="@android:color/black"/>
+
+            <Button
+                android:id="@+id/validateButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="8dp"
@@ -203,21 +302,13 @@
                 android:textColor="@android:color/black"/>
 
             <Button
-                android:id="@+id/buttonSupprimer"
+                android:id="@+id/deleteButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="8dp"
                 android:text="Supprimer"
                 android:background="@drawable/button_border"
                 android:textColor="@android:color/black"/>
 
-            <Button
-                android:id="@+id/buttonAnnuler"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Annuler"
-                android:background="@drawable/button_border"
-                android:textColor="@android:color/black"/>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

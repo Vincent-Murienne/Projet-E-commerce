@@ -53,7 +53,7 @@ const CheckoutAdresse = () => {
                 setLastName(selectedAddress.last_name);
                 setAddress(selectedAddress.address);
                 setCity(selectedAddress.city);
-                setZipCode(selectedAddress.zip_code);
+                setZipCode(formatZipCode(selectedAddress.zip_code));
                 setRegion(selectedAddress.region);
                 setCountry(selectedAddress.country);
                 setPhone(selectedAddress.phone_number);
@@ -92,7 +92,7 @@ const CheckoutAdresse = () => {
                     setLastName(response.data[0].last_name);
                     setAddress(response.data[0].address);
                     setCity(response.data[0].city);
-                    setZipCode(response.data[0].zip_code); 
+                    setZipCode(formatZipCode(response.data[0].zip_code)); 
                     setRegion(response.data[0].region);
                     setCountry(response.data[0].country);
                     setPhone(response.data[0].phone_number);
@@ -105,6 +105,12 @@ const CheckoutAdresse = () => {
             }
         });
     }, []);
+
+    const formatZipCode = (zipCode) => {
+        zipCode = "00000" + zipCode;
+
+        return zipCode[zipCode.length-5] + zipCode[zipCode.length-4] + zipCode[zipCode.length-3] + zipCode[zipCode.length-2] + zipCode[zipCode.length-1];
+    }
 
     // Check the validation of the inputs
     useEffect(() => {

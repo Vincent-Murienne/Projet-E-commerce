@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.airneis.app-mergeDebugResources-44:/values-ru/values-ru.xml",
+            "outputFile": "com.example.airneis.app-mergeDebugResources-46:/values-ru/values-ru.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Jean\\.gradle\\caches\\transforms-4\\bf3584da0d1c7ca47ab3825c79eaa3e4\\transformed\\material-1.12.0\\res\\values-ru\\values-ru.xml",
@@ -71,6 +71,23 @@
                         "startOffsets": "3577,3675,3777,3878,3979,4084,4187,10305",
                         "endColumns": "97,101,100,100,104,102,116,100",
                         "endOffsets": "3670,3772,3873,3974,4079,4182,4299,10401"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Jean\\.gradle\\caches\\transforms-4\\56ef346e149285a5d51ee2ca89314dba\\transformed\\stripe-3ds2-android-2.7.8\\res\\values-ru\\values-ru.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,123,189,257,313,399,502,569,636,700,787",
+                        "endColumns": "67,65,67,55,85,102,66,66,63,86,71",
+                        "endOffsets": "118,184,252,308,394,497,564,631,695,782,854"
+                    },
+                    "to": {
+                        "startLines": "121,122,123,124,125,126,127,128,129,130,131",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "10406,10474,10540,10608,10664,10750,10853,10920,10987,11051,11138",
+                        "endColumns": "67,65,67,55,85,102,66,66,63,86,71",
+                        "endOffsets": "10469,10535,10603,10659,10745,10848,10915,10982,11046,11133,11205"
                     }
                 }
             ]

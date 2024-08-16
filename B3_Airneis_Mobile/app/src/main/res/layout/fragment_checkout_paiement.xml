@@ -15,103 +15,15 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:gravity="center_horizontal"
-            android:text="Veuillez ajouter ou choisir une méthode de paiement"
+            android:text="Procéder au paiement"
             android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="302dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="Choisir un moyen de paiement (requis)"
-            android:textSize="12sp" />
-
-        <Spinner
-            android:id="@+id/spinner_paiement"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"/>
-
-        <TextView
-            android:layout_width="301dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:gravity="start"
-            android:text="Mode de paiement"
-            android:textSize="14sp" />
-
-        <EditText
-            android:id="@+id/editTextModePaiement"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:hint=""
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/edit_text_border"/>
-
-        <TextView
-            android:layout_width="301dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:gravity="start"
-            android:text="Titulaire de la carte"
-            android:textSize="14sp" />
-
-        <EditText
-            android:id="@+id/editTextCarteName"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:hint=""
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/edit_text_border"/>
-
-        <TextView
-            android:layout_width="301dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:gravity="start"
-            android:text="Numéro de carte"
-            android:textSize="14sp" />
-
-        <EditText
-            android:id="@+id/editTextNumCarte"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:hint=""
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/edit_text_border"/>
-
-        <TextView
-            android:layout_width="301dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:gravity="start"
-            android:text="Date d'expiration"
-            android:textSize="14sp" />
-
-        <EditText
-            android:id="@+id/editTextDateExpiration"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:hint=""
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/edit_text_border"/>
-
-        <TextView
-            android:layout_width="301dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:gravity="start"
-            android:text="Numéro de cvv"
-            android:textSize="14sp" />
-
-        <EditText
-            android:id="@+id/editTextNumeroCvv"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:hint=""
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/edit_text_border"/>
+        <com.stripe.android.view.CardInputWidget
+            android:id="@+id/cardInputWidget"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -121,19 +33,18 @@
             android:layout_marginTop="16dp">
 
             <Button
-                android:id="@+id/buttonRetour"
+                android:id="@+id/backButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="8dp"
+                android:layout_marginRight="30dp"
                 android:text="Retour"
                 android:background="@drawable/button_border"
                 android:textColor="@android:color/black"/>
 
             <Button
-                android:id="@+id/buttonPayer"
+                android:id="@+id/PayButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="8dp"
                 android:text="Payer"
                 android:background="@drawable/button_border"
                 android:textColor="@android:color/black"/>

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.airneis.app-mergeDebugResources-44:/values-pt-rPT/values-pt-rPT.xml",
+            "outputFile": "com.example.airneis.app-mergeDebugResources-46:/values-pt-rPT/values-pt-rPT.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Jean\\.gradle\\caches\\transforms-4\\bf3584da0d1c7ca47ab3825c79eaa3e4\\transformed\\material-1.12.0\\res\\values-pt-rPT\\values-pt-rPT.xml",
@@ -71,6 +71,23 @@
                         "startOffsets": "323,431,537,644,733,834,952,1037,1117,1209,1303,1400,1494,1593,1687,1783,1878,1970,2062,2147,2254,2365,2467,2575,2683,2790,2955,9918",
                         "endColumns": "107,105,106,88,100,117,84,79,91,93,96,93,98,93,95,94,91,91,84,106,110,101,107,107,106,164,98,85",
                         "endOffsets": "426,532,639,728,829,947,1032,1112,1204,1298,1395,1489,1588,1682,1778,1873,1965,2057,2142,2249,2360,2462,2570,2678,2785,2950,3049,9999"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Jean\\.gradle\\caches\\transforms-4\\56ef346e149285a5d51ee2ca89314dba\\transformed\\stripe-3ds2-android-2.7.8\\res\\values-pt-rPT\\values-pt-rPT.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,123,187,255,311,408,516,583,651,717,803",
+                        "endColumns": "67,63,67,55,96,107,66,67,65,85,68",
+                        "endOffsets": "118,182,250,306,403,511,578,646,712,798,867"
+                    },
+                    "to": {
+                        "startLines": "119,120,121,122,123,124,125,126,127,128,129",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "10346,10414,10478,10546,10602,10699,10807,10874,10942,11008,11094",
+                        "endColumns": "67,63,67,55,96,107,66,67,65,85,68",
+                        "endOffsets": "10409,10473,10541,10597,10694,10802,10869,10937,11003,11089,11158"
                     }
                 }
             ]
