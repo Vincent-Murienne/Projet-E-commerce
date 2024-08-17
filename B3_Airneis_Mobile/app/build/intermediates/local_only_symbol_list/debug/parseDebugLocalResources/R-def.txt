@@ -149,6 +149,7 @@ id cardInputWidget
 id cardName
 id categoryImage
 id categoryName
+id cb_change_password
 id cgu_container
 id checkoutButton
 id contact_form
@@ -160,7 +161,9 @@ id editTextAddress
 id editTextAddressName
 id editTextCity
 id editTextCountry
+id editTextEmail
 id editTextFirstName
+id editTextFullName
 id editTextLastName
 id editTextPhone
 id editTextRegion
@@ -172,6 +175,8 @@ id emailEditText
 id error_message
 id error_message_order
 id etEmail
+id et_new_password
+id et_old_password
 id fbSearchBtn
 id forgot_password
 id frameLayout
@@ -261,6 +266,7 @@ layout fragment_checkout_adresse
 layout fragment_checkout_confirmer
 layout fragment_checkout_paiement
 layout fragment_contact
+layout fragment_edit_account
 layout fragment_forget_password
 layout fragment_home
 layout fragment_login

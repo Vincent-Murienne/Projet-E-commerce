@@ -3547,6 +3547,7 @@ id card_number_text_input_layout
 id carryVelocity
 id categoryImage
 id categoryName
+id cb_change_password
 id center
 id centerCrop
 id centerInside
@@ -3643,7 +3644,9 @@ id editTextAddress
 id editTextAddressName
 id editTextCity
 id editTextCountry
+id editTextEmail
 id editTextFirstName
+id editTextFullName
 id editTextLastName
 id editTextPhone
 id editTextRegion
@@ -3673,6 +3676,8 @@ id et_city_aaw
 id et_cvc
 id et_expiry
 id et_name_aaw
+id et_new_password
+id et_old_password
 id et_phone_number_aaw
 id et_postal_code
 id et_postal_code_aaw
@@ -4306,6 +4311,7 @@ layout fragment_checkout_adresse
 layout fragment_checkout_confirmer
 layout fragment_checkout_paiement
 layout fragment_contact
+layout fragment_edit_account
 layout fragment_forget_password
 layout fragment_home
 layout fragment_login
