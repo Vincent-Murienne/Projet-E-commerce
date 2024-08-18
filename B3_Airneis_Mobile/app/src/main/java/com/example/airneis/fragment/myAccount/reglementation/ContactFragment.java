@@ -2,6 +2,7 @@ package com.example.airneis.fragment.myAccount.reglementation;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +13,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
+
 
 import com.example.airneis.R;
-import com.example.airneis.fragment.myAccount.loginRegister.LoginFragment;
 import com.example.airneis.manager.APIManager;
 
 import org.json.JSONException;
@@ -24,7 +24,7 @@ import org.json.JSONObject;
 public class ContactFragment extends Fragment {
 
     private EditText etEmail, etSubject, etMessage;
-    private Button etSubmitbtn;
+    private Button submitBtn;
     private APIManager apiManager;
 
     @Nullable
@@ -33,12 +33,18 @@ public class ContactFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_contact, container, false);
 
         etEmail = view.findViewById(R.id.email);
-        etSubmitbtn = view.findViewById(R.id.submitbtn);
+        submitBtn = view.findViewById(R.id.submitBtn);
         etSubject = view.findViewById(R.id.subject);
         etMessage = view.findViewById(R.id.message);
         apiManager = new APIManager(getActivity().getApplicationContext());
 
-        etSubmitbtn.setOnClickListener(v -> handleSubmit());
+        submitBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("debug","test");
+                handleSubmit();
+            }
+        });
 
         return view;
     }

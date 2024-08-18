@@ -4037,8 +4037,8 @@ id stripe_payment_methods_add_fpx
 id subject
 id submenuarrow
 id submit
+id submitBtn
 id submit_area
-id submitbtn
 id subtitle1
 id subtitle2
 id supportScrollUp

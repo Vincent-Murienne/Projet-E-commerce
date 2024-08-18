@@ -4036,8 +4036,8 @@ int id stripe_payment_methods_add_fpx 0x7f080284
 int id subject 0x7f080285
 int id submenuarrow 0x7f080286
 int id submit 0x7f080287
-int id submit_area 0x7f080288
-int id submitbtn 0x7f080289
+int id submitBtn 0x7f080288
+int id submit_area 0x7f080289
 int id subtitle1 0x7f08028a
 int id subtitle2 0x7f08028b
 int id supportScrollUp 0x7f08028c

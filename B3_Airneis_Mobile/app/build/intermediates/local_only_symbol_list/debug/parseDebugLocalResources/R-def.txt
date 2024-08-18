@@ -243,7 +243,7 @@ id spinner_addresses
 id stockStatus
 id subject
 id submit
-id submitbtn
+id submitBtn
 id subtitle1
 id subtitle2
 id title
