@@ -17,7 +17,7 @@
     "aboutAirneis": "About Àirneis",
     "deleteSuccess": "Successfully deleted!",
     "yourBasket": "Your basket",
-    "quantity": "Quantity",
+    "quantity": "Quantity:",
     "price": "Price",
     "notEnoughStock": "Insufficient stock",
     "delete": "Delete",
@@ -27,5 +27,8 @@
     "categorieTitle": "Welcome to the 'Àirneis' store in the category",
     "categorieDescription1": "Whatever your preferences, you will find original and colorful products that will enhance your decor.",
     "categorieDescription2": "Order now on our site and receive your",
-    "highlightedCategorieTitle": "Discover here our range of"
+    "highlightedCategorieTitle": "Discover the full range of our product categories",
+    "addPanier": "ADD TO CARD",
+    "outOfStock": "SOLD OUT",
+    "produitSimilaire": "SIMILAR PRODUCT"
 }

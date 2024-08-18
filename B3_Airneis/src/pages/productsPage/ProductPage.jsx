@@ -5,8 +5,12 @@ import SliderProduct from "./SliderProduct";
 import ProductSimilaire from "./ProductSimilaire";
 import { UserContext } from "../../context/UserProvider";
 import { ToastQueue } from "@react-spectrum/toast";
+import { useTranslation } from 'react-i18next';
+
 
 const ProductPage = () => {
+    const { t } = useTranslation();
+
     // Setting use states
     const [product, setProduct] = useState(null);
     const [isIncrementDesactivated, setIsIncrementDesactivated] = useState(false);
@@ -103,11 +107,11 @@ const ProductPage = () => {
                             </div>
                             <p className="quantity-container">
                                 <button onClick={decrementCartCount} className={`quantity-button ${isDecrementDesactivated ? 'disabled' : ''}`}>-</button>
-                                <span className="quantity">Quantité : {cartCount}</span>
+                                <span className="quantity">{t('quantity')} {cartCount}</span>
                                 <button onClick={incrementCartCount} className={`quantity-button ${isIncrementDesactivated ? 'disabled' : ''}`}>+</button>
                             </p> 
                             <button onClick={addToCart} className={`btnProduit ${stockStatus === "En stock" ? "" : "disabled"}`} disabled={stockStatus !== "En stock"}>
-                                {stockStatus === "En stock" ? "AJOUTER AU PANIER" : "STOCK ÉPUISÉ"}
+                                {stockStatus === "En stock" ? t('addPanier') : t('outOfStock')}
                             </button>
                         </div>
                     )}

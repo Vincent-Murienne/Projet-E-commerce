@@ -202,8 +202,11 @@ id navigation_categories
 id navigation_fab
 id navigation_home
 id nextSliderButton
+id order_address
 id order_date
 id order_id
+id order_products_list
+id order_state
 id order_status
 id outOfStock
 id password
@@ -221,6 +224,11 @@ id productPriceLabel
 id productQuantity
 id productQuantityLabel
 id productTitle
+id product_description
+id product_image
+id product_name
+id product_quantity
+id product_total_price
 id produits_container
 id recyclerView
 id recycler_view_order_items
@@ -266,6 +274,7 @@ layout fragment_checkout_adresse
 layout fragment_checkout_confirmer
 layout fragment_checkout_paiement
 layout fragment_contact
+layout fragment_details_order
 layout fragment_edit_account
 layout fragment_forget_password
 layout fragment_home
@@ -281,6 +290,7 @@ layout fragment_top_produits
 layout item_basket
 layout item_categories_details
 layout item_order_detail
+layout item_order_details_product
 layout item_order_year
 layout item_product
 layout item_top_card_item

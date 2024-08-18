@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom"; 
 import { Data } from '../../services/api';
 import { useEffect, useState } from "react";
+import { useTranslation } from 'react-i18next';
 import { ToastQueue } from "@react-spectrum/toast";
 
 
 const CategorieList = () => {
+
+    const { t } = useTranslation();
 
     // Setting use states
     const [categories, setCategories] = useState([]);
@@ -26,13 +29,14 @@ const CategorieList = () => {
     return (       
         <section className="categoriePage"> 
             <section className="top-categories">
-            <h1 className="heading">Découvrez la gamme complète de nos catégories de produits</h1>
+            <h1 className="heading">{t('highlightedCategorieTitle')}</h1>
                 <div className="box-container">
                     {categories.map(category => (
                         <div key={category.category_id} className="box">
                             <img src={`/img/${category.image_name}`} alt=""/>
                             <h3>{category.category_name}</h3>
-                            <Link to={`/categories/${category.category_id}`} className="btn">Voir plus</Link>
+                            <Link to={`/categories/${category.category_id}`} className="btn">{t('seeMore')}</Link>
+
                         </div>
                     ))}
                 </div>

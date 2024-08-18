@@ -2,8 +2,11 @@ import { Link } from "react-router-dom";
 import { Data } from '../../services/api';
 import { useEffect, useState } from "react";
 import { ToastQueue } from "@react-spectrum/toast";
+import { useTranslation } from 'react-i18next';
 
 const ProductSimilaire = ({ categoryId, productId }) => {
+    const { t } = useTranslation();
+
     // Setting use states
     const [getTopProducts, setTopProducts] = useState([]);
     
@@ -29,7 +32,7 @@ const ProductSimilaire = ({ categoryId, productId }) => {
         <>  
             <section className="categoriePage">               
                 <section className="top-produits">
-                    <h1 className="heading">PRODUITS SIMILAIRES</h1>
+                    <h1 className="heading">{t('produitSimilaire')}</h1>
                     <div className="box-container">
                         {getTopProducts && getTopProducts.map((product) => (
                             // Check if the product is different from the current product
@@ -40,7 +43,7 @@ const ProductSimilaire = ({ categoryId, productId }) => {
                                         <h4>{product.name}</h4>
                                         <h4>{product.price}€</h4>
                                     </div>
-                                    <Link to={`/product/${product.id}`} className="btn">Voir plus</Link>
+                                    <Link to={`/product/${product.id}`} className="btn">{t('seeMore')}</Link>
                                 </div>
                             )
                         ))}

@@ -17,7 +17,7 @@
     "aboutAirneis": "A propos d'Àirneis",
     "deleteSuccess": "Suppression réussite avec succès !",
     "yourBasket": "Votre panier",
-    "quantity": "Quantité",
+    "quantity": "Quantité:",
     "price": "Prix",
     "notEnoughStock": "Stock insuffisant",
     "delete": "Supprimer",
@@ -27,5 +27,9 @@
     "categorieTitle": "Bienvenue dans la boutique 'Àirneis' de la catégorie",
     "categorieDescription1": "Quels que soient vos préférences, vous trouverez des produits originaux et colorés qui rehausseront votre décoration.",
     "categorieDescription2": "Passez commande dès maintenant sur notre site et recevez directement chez vous vos",
-    "highlightedCategorieTitle": "Découvrez ici notre gamme de"
+    "highlightedCategorieTitle": "Découvrez la gamme complète de nos catégories de produits",
+    "addPanier": "AJOUTER AU PANIER",
+    "outOfStock": "STOCK ÉPUISÉ", 
+    "produitSimilaire": "PRODUIT SIMILAIRE"
+
 }

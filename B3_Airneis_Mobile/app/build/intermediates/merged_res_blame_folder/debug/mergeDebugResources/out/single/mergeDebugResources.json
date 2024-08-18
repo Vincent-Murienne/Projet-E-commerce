@@ -212,6 +212,10 @@
         "source": "com.example.airneis.app-main-50:/layout/fragment_product_detail.xml"
     },
     {
+        "merged": "com.example.airneis.app-debug-48:/layout_item_order_details_product.xml.flat",
+        "source": "com.example.airneis.app-main-50:/layout/item_order_details_product.xml"
+    },
+    {
         "merged": "com.example.airneis.app-debug-48:/layout_activity_main.xml.flat",
         "source": "com.example.airneis.app-main-50:/layout/activity_main.xml"
     },
@@ -350,6 +354,10 @@
     {
         "merged": "com.example.airneis.app-debug-48:/drawable_a1_1_chaise_design_blanc_et_bois_clair.jpg.flat",
         "source": "com.example.airneis.app-main-50:/drawable/a1_1_chaise_design_blanc_et_bois_clair.jpg"
+    },
+    {
+        "merged": "com.example.airneis.app-debug-48:/layout_fragment_details_order.xml.flat",
+        "source": "com.example.airneis.app-main-50:/layout/fragment_details_order.xml"
     },
     {
         "merged": "com.example.airneis.app-debug-48:/drawable_e1_3_ensemble_de_salon_de_jardin.jpg.flat",
