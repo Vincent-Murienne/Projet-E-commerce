@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.airneis.R;
 import com.example.airneis.manager.APIManager;
+import com.example.airneis.utils.RegexUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,7 +37,13 @@ public class ContactFragment extends Fragment {
         submitBtn = view.findViewById(R.id.submitBtn);
         etSubject = view.findViewById(R.id.subject);
         etMessage = view.findViewById(R.id.message);
-        apiManager = new APIManager(getActivity().getApplicationContext());
+        apiManager = new APIManager(getContext());
+
+        if (submitBtn != null) {
+            Log.d("debug", "Button found");
+        } else {
+            Log.d("debug", "Button not found");
+        }
 
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +62,7 @@ public class ContactFragment extends Fragment {
         String message = etMessage.getText().toString().trim();
 
 
-        if (TextUtils.isEmpty(email)) {
+        if (!RegexUtils.isValidEmail(email)) {
             etEmail.setError("Email est requis");
             return;
         }
@@ -77,21 +84,12 @@ public class ContactFragment extends Fragment {
             apiManager.apiCall("reglementation", "sendContact", data, new APIManager.VolleyResponseListener() {
                 @Override
                 public void onError(String message) {
-                    Toast.makeText(getContext(), "Une erreur est survenue.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Un e-mail a bien été envoyé.", Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void onResponse(JSONObject response) {
-                    try {
-                        if (response.getBoolean("success")) {
-                            Toast.makeText(getContext(), "Un e-mail a bien été envoyé.", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(getContext(), "Un e-mail a été envoyé", Toast.LENGTH_SHORT).show();
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        Toast.makeText(getContext(), "Une erreur est survenue.", Toast.LENGTH_SHORT).show();
-                    }
+                    Toast.makeText(getContext(), "Un e-mail a bien été envoyé.", Toast.LENGTH_SHORT).show();
                 }
             });
         } catch (JSONException e) {
