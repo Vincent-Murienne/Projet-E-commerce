@@ -3572,8 +3572,8 @@ id collapseActionView
 id compress
 id confirm_button
 id constraint
-id contact_form
-id contact_info
+id contact
+id contactform
 id container
 id content
 id contentPanel
@@ -3882,8 +3882,11 @@ id open_search_view_search_prefix
 id open_search_view_status_bar_spacer
 id open_search_view_toolbar
 id open_search_view_toolbar_container
+id order_address
 id order_date
 id order_id
+id order_products_list
+id order_state
 id order_status
 id outOfStock
 id outline
@@ -3924,6 +3927,11 @@ id productPriceLabel
 id productQuantity
 id productQuantityLabel
 id productTitle
+id product_description
+id product_image
+id product_name
+id product_quantity
+id product_total_price
 id produits_container
 id progress_bar
 id progress_circular
@@ -4030,7 +4038,7 @@ id subject
 id submenuarrow
 id submit
 id submit_area
-id submit_button
+id submitbtn
 id subtitle1
 id subtitle2
 id supportScrollUp
@@ -4311,6 +4319,7 @@ layout fragment_checkout_adresse
 layout fragment_checkout_confirmer
 layout fragment_checkout_paiement
 layout fragment_contact
+layout fragment_details_order
 layout fragment_edit_account
 layout fragment_forget_password
 layout fragment_home
@@ -4330,6 +4339,7 @@ layout information_zone_view
 layout item_basket
 layout item_categories_details
 layout item_order_detail
+layout item_order_details_product
 layout item_order_year
 layout item_product
 layout item_top_card_item
