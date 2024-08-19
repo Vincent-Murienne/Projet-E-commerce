@@ -51,7 +51,7 @@ const OrderPage = () => {
 
     return (
         <div className="container-order">
-            <h1 className="title-order">{t('myOrders')}</h1>
+            <h1 className="title-order">{t('DetailOrder')}</h1>
             <h2 className="orderDetails">{t('orderDate')}: {orderDate}</h2>
             <h2 className="orderDetails">{t('orderStatus')}: {orderState}</h2>
             <h2 className="orderDetails">{t('totalPrice')}: {totalPrice} €</h2>

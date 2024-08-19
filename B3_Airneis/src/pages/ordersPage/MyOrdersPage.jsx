@@ -53,7 +53,7 @@ const MyOrdersPage = () => {
 
   return (
     <div className="container-order">
-      <h1 className="title-order">{t('DetailOrder')}</h1>
+      <h1 className="title-order">{t('myOrders')}</h1>
       {Object.keys(groupedOrders).sort().reverse().map(year => (
         <div key={year}>
           <h2 className="yearTitle-order">{year}</h2>
