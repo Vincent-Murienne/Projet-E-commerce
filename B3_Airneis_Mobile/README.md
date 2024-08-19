@@ -16,7 +16,7 @@
 3. **Créer un appareil virtuel**
    - Créez un appareil virtuel pour émuler l'application.
    - Nous vous conseillons d'utiliser le Pixel 7.
-   - Pour l'image du système, choisissez une version de l'API entre 28 et 34 (34 étant la version recommandée, soit UpsideDownCake).
+   - Pour l'image du système, choisissez une version de l'API entre 31 et 34 (34 étant la version recommandée, soit UpsideDownCake).
 
 4. **Lancer l'application**
    - Une fois l'appareil installé, lancez l'application. Elle devrait automatiquement se lancer dans votre appareil virtuel.
