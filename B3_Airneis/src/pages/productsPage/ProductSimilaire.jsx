@@ -21,7 +21,7 @@ const ProductSimilaire = ({ categoryId, productId }) => {
                     ToastQueue.negative(response.error, {timeout: 5000});
                 }
             } catch (error) {
-                ToastQueue.negative("Une erreur est survenue lors de la récupération des données du produit.", {timeout: 5000});
+                ToastQueue.negative(t("errorProduct"), {timeout: 5000});
             }
         };
 

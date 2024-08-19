@@ -23,7 +23,7 @@ const CheckoutPayment = () => {
     useEffect(() => {
         let userData = pullData("user"); // Get user information from the cookies    
         if(userData === undefined){
-            ToastQueue.negative("Veuillez vous connecter afin de pouvoir accéder à cette page.", {timeout: 5000});
+            ToastQueue.negative(t("pleaseLogin"), {timeout: 5000});
             navigate("/");
             return;
         }
@@ -66,14 +66,14 @@ const CheckoutPayment = () => {
             Data("orders", "insertOrder", orderData).then(response => {
                 if (response.success === true) {
                     const orderId = response.order_id;
-                    ToastQueue.positive("Commande passée avec succès !", { timeout: 5000 });
+                    ToastQueue.positive(t("OrderSucces"), { timeout: 5000 });
                     navigate(`/CheckoutConfirmer/${orderId}`);
                 } else {
                     ToastQueue.negative(response.error, { timeout: 5000 });
                 }
             });
         } else {
-            ToastQueue.negative("Veuillez sélectionner une adresse de livraison et un mode de paiement.", { timeout: 5000 });
+            ToastQueue.negative(t("choice"), { timeout: 5000 });
         }
     };
 

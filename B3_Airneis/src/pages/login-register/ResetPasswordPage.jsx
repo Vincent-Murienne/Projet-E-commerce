@@ -1,11 +1,12 @@
-import { useState} from 'react';
-import { useParams, useNavigate} from 'react-router-dom';
+import { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { ToastQueue } from '@react-spectrum/toast';
+import { useTranslation } from 'react-i18next';
 import { passwordRegex } from '../../utils/regexes';
 
 const ResetPasswordPage = () => {
-  // Setting use states
+  const { t } = useTranslation(); // Hook for translation
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -16,7 +17,6 @@ const ResetPasswordPage = () => {
     password: ''
   });
 
-  // Handle the change of visibility of the passwords
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -25,7 +25,6 @@ const ResetPasswordPage = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
 
-  // Form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors({
@@ -33,12 +32,12 @@ const ResetPasswordPage = () => {
     });
 
     if (!passwordRegex.test(password)) {
-      setErrors(prevErrors => ({ ...prevErrors, password: 'Le mot de passe doit comporter au moins 12 caractères alphanumériques' }));
+      setErrors(prevErrors => ({ ...prevErrors, password: t('passwordRequirements') }));
       return;
     }
 
     if (password !== confirmPassword) {
-        ToastQueue.negative("Les mots de passe ne correspondent pas.", { timeout: 5000 });
+        ToastQueue.negative(t('passwordMismatch'), { timeout: 5000 });
         return;
     }
 
@@ -53,13 +52,13 @@ const ResetPasswordPage = () => {
 
         const data = await response.json();
         if (data.success) {
-            ToastQueue.positive("Votre mot de passe a été modifié avec succès.", { timeout: 5000 });
+            ToastQueue.positive(t('passwordUpdateSuccess'), { timeout: 5000 });
             navigate('/login');
         } else {
-          ToastQueue.negative("Lien expiré ou invalide.", { timeout: 5000 });
+          ToastQueue.negative(t('invalidOrExpiredLink'), { timeout: 5000 });
         }
     } catch (error) {
-        ToastQueue.negative("Une erreur est survenue lors de la modification du mot de passe.", { timeout: 5000 });
+        ToastQueue.negative(t('errorUpdatingPassword'), { timeout: 5000 });
     }
   };
 
@@ -68,7 +67,7 @@ const ResetPasswordPage = () => {
       <form onSubmit={handleSubmit}>
         <div className='container-reset'>
           <div className='header-reset'>
-            <div className='text'>Créer un nouveau mot de passe</div>
+            <div className='text'>{t('createNewPassword')}</div>
             <div className='underline'></div>
           </div>
           <div className='inputs-reset'>
@@ -76,7 +75,7 @@ const ResetPasswordPage = () => {
               <input
                 type={showPassword ? 'text' : 'password'}
                 id="password"
-                placeholder='Nouveau mot de passe *'
+                placeholder={t('newPasswordPlaceholder')}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -89,7 +88,7 @@ const ResetPasswordPage = () => {
               <input
                 type={showConfirmPassword ? 'text' : 'password'}
                 id="confirmPassword"
-                placeholder='Confirmez le mot de passe *'
+                placeholder={t('confirmPasswordPlaceholder')}
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
@@ -102,7 +101,7 @@ const ResetPasswordPage = () => {
           </div>
           <br />
           <div className="submit-container-reset">
-            <button className="submit-reset" type="submit">Modifier le mot de passe</button>
+            <button className="submit-reset" type="submit">{t('submitButton')}</button>
           </div>
         </div>
       </form>

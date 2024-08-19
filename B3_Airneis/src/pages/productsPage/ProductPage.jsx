@@ -7,7 +7,6 @@ import { UserContext } from "../../context/UserProvider";
 import { ToastQueue } from "@react-spectrum/toast";
 import { useTranslation } from 'react-i18next';
 
-
 const ProductPage = () => {
     const { t } = useTranslation();
 
@@ -26,10 +25,10 @@ const ProductPage = () => {
                     setProduct(response.data[0]);
                     setCartCount(1);           
                 } else {
-                    ToastQueue.negative(response.error, {timeout: 5000});
+                    ToastQueue.negative(t("errorProduct"), {timeout: 5000});
                 }
             } catch (error) {
-                ToastQueue.negative("Une erreur est survenue lors de la récupération des données du produit.", {timeout: 5000});
+                ToastQueue.negative(t("errorProduct"), {timeout: 5000});
             }
         };
 
@@ -37,7 +36,7 @@ const ProductPage = () => {
     }, [productId]);
 
     // Determine the stock status based on the product's available quantity
-    const stockStatus = product && (product.quantity === null || product.quantity <= 0) ? "Hors stock" : "En stock";
+    const stockStatus = product && (product.quantity === null || product.quantity <= 0) ? t("outOfStock") : t("inStock");
 
     const { pullData } = useContext(UserContext);
 
@@ -46,7 +45,7 @@ const ProductPage = () => {
         let user = pullData("user"); // Get user information from the cookies
 
         if (!user) {
-            ToastQueue.negative("Veuillez vous connecter pour ajouter des produits au panier.", { timeout: 5000 });
+            ToastQueue.negative(t("loginRequired"), { timeout: 5000 });
             return;
         }
         const data = {
@@ -56,7 +55,7 @@ const ProductPage = () => {
         };
         Data("basket", "insertBasket", data).then(response => {
             if (response.success === true) {
-                ToastQueue.positive("L'élément a bien été ajouté au panier.", { timeout: 5000 });
+                ToastQueue.positive(t("itemAddedToCart"), { timeout: 5000 });
                 setCartCount(1);
                 setIsDecrementDesactivated(true);
             } else {
@@ -97,12 +96,12 @@ const ProductPage = () => {
                             <div key={product.id}>
                                 <h3>{product.name}</h3>
                                 <div className="stock">
-                                    <h3>{stockStatus} </h3>
+                                    <h3>{stockStatus}</h3>
                                 </div>
                                 <h2>{product.price} €</h2>
                                 <h3>{product.description}.</h3>
                                 {product.material && (
-                                    <h3>{t('materiaux')} {product.material}.</h3>
+                                    <h3>{t('material')} {product.material}.</h3>
                                 )}
                             </div>
                             <p className="quantity-container">
@@ -110,8 +109,8 @@ const ProductPage = () => {
                                 <span className="quantity">{t('quantity')} {cartCount}</span>
                                 <button onClick={incrementCartCount} className={`quantity-button ${isIncrementDesactivated ? 'disabled' : ''}`}>+</button>
                             </p> 
-                            <button onClick={addToCart} className={`btnProduit ${stockStatus === "En stock" ? "" : "disabled"}`} disabled={stockStatus !== "En stock"}>
-                                {stockStatus === "En stock" ? t('addPanier') : t('outOfStock')}
+                            <button onClick={addToCart} className={`btnProduit ${stockStatus === t('inStock') ? "" : "disabled"}`} disabled={stockStatus !== t('inStock')}>
+                                {stockStatus === t('inStock') ? t('addToCart') : t('outOfStock')}
                             </button>
                         </div>
                     )}

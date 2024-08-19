@@ -1,6 +1,6 @@
 import { FaSearch, FaShoppingCart, FaUser, FaBars } from "react-icons/fa"
 import { FaX } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/UserProvider";
 import { ToastQueue } from "@react-spectrum/toast";
@@ -16,6 +16,8 @@ const Header = () => {
         id: ""
     });
     const [ isMenuOpen, setIsMenuOpen ] = useState(false);
+    const navigate = useNavigate();
+
 
     // This is used to close the navigation menu
     const closeMenus = () => {
@@ -108,7 +110,7 @@ const Header = () => {
     const handleKeyPress = (e) => {
         if (e.key === 'Enter') {
             e.preventDefault();
-            window.location.href = `/product?search=${searchQuery}`;
+            navigate(`/product?search=${searchQuery}`);
         }
     };
 

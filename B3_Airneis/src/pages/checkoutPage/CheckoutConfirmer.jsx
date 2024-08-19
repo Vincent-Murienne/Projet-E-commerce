@@ -16,7 +16,7 @@ const CheckoutConfirmer = () => {
     useEffect(() => {
         let userData = pullData("user"); // Get user information from the cookies   
         if (userData === undefined) {
-            ToastQueue.negative("Veuillez vous connecter afin de pouvoir accéder à cette page.", { timeout: 5000 });
+            ToastQueue.negative(t("pleaseLogin"), { timeout: 5000 });
             navigate("/");
             return
         } 

@@ -5,13 +5,14 @@ import { useNavigate, Link } from "react-router-dom";
 import { Data } from "../../services/api";
 import { UserContext } from "../../context/UserProvider";
 import { ToastQueue } from '@react-spectrum/toast';
+import { useTranslation } from 'react-i18next';
 import { fullNameRegex, emailRegex, passwordRegex } from '../../utils/regexes';
 
 const RegisterPage = () => {
+  const { t } = useTranslation();
   const { saveData } = useContext(UserContext);
 
   // Setting use states
-  const [action, setAction] = useState('Inscription');
   const [showPassword, setShowPassword] = useState(false);
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -50,22 +51,22 @@ const RegisterPage = () => {
     });
 
     if (!fullNameRegex.test(fullName)) {
-      setErrors(prevErrors => ({ ...prevErrors, fullName: 'Veuillez saisir un nom complet (5 caractères minimum)' }));
+      setErrors(prevErrors => ({ ...prevErrors, fullName: t('fullNameError') }));
       return;
     }
-  
+
     if (!emailRegex.test(email)) {
-      setErrors(prevErrors => ({ ...prevErrors, email: 'Veuillez saisir une adresse e-mail valide' }));
+      setErrors(prevErrors => ({ ...prevErrors, email: t('emailError') }));
       return;
     }
-  
+
     if (!passwordRegex.test(password)) {
-      setErrors(prevErrors => ({ ...prevErrors, password: 'Le mot de passe doit comporter au moins 12 caractères alphanumériques' }));
+      setErrors(prevErrors => ({ ...prevErrors, password: t('passwordError') }));
       return;
     }
 
     if (!isChecked) {
-      setErrors(prevErrors => ({ ...prevErrors, mentionsLegal: 'Veuillez lire et accepter les mentions légales.' }));
+      setErrors(prevErrors => ({ ...prevErrors, mentionsLegal: t('mentionsLegalError') }));
       return;
     }
 
@@ -77,19 +78,16 @@ const RegisterPage = () => {
       };
 
       Data("loginRegister", "register", data).then(response => {
-        if (response.success === true)
-        {
+        if (response.success === true) {
           saveData("user", { isConnected: true, isAdmin: (response.user.role === "1") ? true : false, id: response.user.id });
-          saveData("message", {type: "success", body: "Inscription réussite avec succès !"});
+          saveData("message", { type: "success", body: t('registerSuccess') });
           navigate('/');
-        }
-        else
-        {
-          ToastQueue.negative(response.error, {timeout: 5000});
+        } else {
+          ToastQueue.negative(response.error, { timeout: 5000 });
         }
       });
     } catch (error) {
-      ToastQueue.negative(error, {timeout: 5000});
+      ToastQueue.negative(error, { timeout: 5000 });
     }
   };
 
@@ -98,7 +96,7 @@ const RegisterPage = () => {
       <form onSubmit={handleRegister}>
         <div className='container'>
           <div className='header'>
-            <div className='text'>{action}</div>
+            <div className='text'>{t("registration")}</div>
             <div className='underline'></div>
           </div>
           <div className='inputs'>
@@ -106,21 +104,21 @@ const RegisterPage = () => {
               <IconContext.Provider value={{ size: '1.5em', style: { marginLeft: '20px' } }}>
                 <FaUser />
               </IconContext.Provider>
-              <input type='text' id="fullName" placeholder='Nom complet *' style={{ marginLeft: '15px' }} value={fullName} onChange={handleFullNameChange} maxLength={30}/>
+              <input type='text' id="fullName" placeholder={t('fullNamePlaceholder')} style={{ marginLeft: '15px' }} value={fullName} onChange={handleFullNameChange} maxLength={30} />
             </div>
             {errors.fullName && <div className="error-message">{errors.fullName}</div>}
             <div className='input'>
               <IconContext.Provider value={{ size: '1.5em', style: { marginLeft: '20px' } }}>
                 <FaRegEnvelope />
               </IconContext.Provider>
-              <input type='email' id="email" placeholder='E-mail *' style={{ marginLeft: '15px' }} value={email} onChange={(e) => setEmail(e.target.value)} maxLength={50}/>
+              <input type='email' id="email" placeholder={t('emailPlaceholder')} style={{ marginLeft: '15px' }} value={email} onChange={(e) => setEmail(e.target.value)} maxLength={50} />
             </div>
             {errors.email && <div className="error-message">{errors.email}</div>}
             <div className='input'>
               <IconContext.Provider value={{ size: '1.5em', style: { marginLeft: '20px' } }}>
                 <FaLock />
               </IconContext.Provider>
-              <input type={showPassword ? 'text' : 'password'} id="password" placeholder='Mot de passe *' style={{ marginLeft: '15px' }} value={password} onChange={(e) => setPassword(e.target.value)} maxLength={30}/>
+              <input type={showPassword ? 'text' : 'password'} id="password" placeholder={t('passwordPlaceholder')} style={{ marginLeft: '15px' }} value={password} onChange={(e) => setPassword(e.target.value)} maxLength={30} />
               <IconContext.Provider value={{ size: '1.5em', style: { marginRight: '20px' } }}>
                 {showPassword ? (<FaEyeSlash onClick={togglePasswordVisibility} style={{ cursor: 'pointer' }} />) : (<FaEye onClick={togglePasswordVisibility} style={{ cursor: 'pointer' }} />)}
               </IconContext.Provider>
@@ -128,13 +126,13 @@ const RegisterPage = () => {
             {errors.password && <div className="error-message">{errors.password}</div>}
             <div className="mentions-legal">
               <input type="checkbox" id="terms" checked={isChecked} onChange={handleCheckboxChange} />
-              <label htmlFor="terms">J'ai lu et j'accepte les <Link to="/mentions-legales">mentions légales</Link> *</label>
+              <label htmlFor="terms">{t('legalTermsLabel')} <Link to="/mentions-legales">{t('mention')}</Link> *</label>
             </div>
             {errors.mentionsLegal && <div className="error-message">{errors.mentionsLegal}</div>}
           </div>
-          <Link to="/login" className="forgot-password">Déjà un compte ? <span>Connectez-vous</span></Link>
+          <Link to="/login" className="forgot-password">{t('alreadyAccount')} <span>{t('loginLink')}</span></Link>
           <div className="submit-container">
-            <button className="submit" type="submit">S'inscrire</button>
+            <button className="submit" type="submit">{t('registerButton')}</button>
           </div>
         </div>
       </form>

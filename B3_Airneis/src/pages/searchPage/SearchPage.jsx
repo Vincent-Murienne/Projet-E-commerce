@@ -1,17 +1,20 @@
-import {useState, useEffect} from 'react';
-import {TextField, Checkbox, Text, ActionButton, Form} from '@adobe/react-spectrum';
+import { useState, useEffect } from 'react';
+import { TextField, Checkbox, Text, ActionButton, Form } from '@adobe/react-spectrum';
 import Delete from '@spectrum-icons/workflow/Delete';
 import { Data } from '../../services/api';
 import Checkmark from '@spectrum-icons/workflow/Checkmark';
 import { ToastQueue } from "@react-spectrum/toast";
-import {Cell, Column, Row, TableView, TableBody, TableHeader} from '@adobe/react-spectrum'
-import {Grid} from '@adobe/react-spectrum'
+import { Cell, Column, Row, TableView, TableBody, TableHeader } from '@adobe/react-spectrum';
+import { Grid } from '@adobe/react-spectrum';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 
 const SearchPage = ({ searchQuery, prixMinInput, prixMaxInput, materiauxInput, categoriesInput, enStockInput, onSearch }) => {
     SearchPage.propTypes = {
         onSearch: PropTypes.func.isRequired, // Check that onSearch is set and is a function
     };
+
+    const { t } = useTranslation();
 
     // Setting use states
     const [minPrice, setMinPrice] = useState(prixMinInput !== null ? prixMinInput : "");
@@ -78,7 +81,7 @@ const SearchPage = ({ searchQuery, prixMinInput, prixMaxInput, materiauxInput, c
         };
 
         onSearch(searchData);
-    }
+    };
 
     // Make an API call to get all needed informations
     let dataCategories = {
@@ -94,7 +97,7 @@ const SearchPage = ({ searchQuery, prixMinInput, prixMaxInput, materiauxInput, c
           if (response.success === true) {
             setCategories(response.data.map(category => ({ ...category, isSelected: false })));
           } else {
-            ToastQueue.negative(response.error, {timeout: 5000});
+            ToastQueue.negative(response.error, { timeout: 5000 });
           }
         });
       
@@ -102,16 +105,16 @@ const SearchPage = ({ searchQuery, prixMinInput, prixMaxInput, materiauxInput, c
           if (response.success === true) {
             setMaterials(response.data.map(material => ({ ...material, isSelected: false })));
           } else {
-            ToastQueue.negative(response.error, {timeout: 5000});
+            ToastQueue.negative(response.error, { timeout: 5000 });
           }
         });
-      }, []);
+    }, []);
 
     return (
         <>
             <Form validationBehavior="native">
                 <Grid
-                    aria-label="Grid"
+                    aria-label={t("grid")}
                     areas={[
                         'recherche recherche',
                         'prixMin prixMax',
@@ -121,12 +124,12 @@ const SearchPage = ({ searchQuery, prixMinInput, prixMaxInput, materiauxInput, c
                         'appliquer réinitialiser',
                         'vide vide'
                     ]}
-                    columns={['2fr','2fr']}
+                    columns={['2fr', '2fr']}
                     rows={['auto', 'size-700', 'size-400', 'auto', 'auto', 'size-1000', 'size-500']}
                     rowGap="size-300">
 
                     <TextField
-                        label="Recherche"
+                        label={t("search")}
                         value={recherche}
                         defaultValue={recherche}
                         onChange={setRecherche}
@@ -136,7 +139,7 @@ const SearchPage = ({ searchQuery, prixMinInput, prixMaxInput, materiauxInput, c
                         width={'size-4000'}
                     />
                     <TextField
-                        label="Prix min€" 
+                        label={t("minPrice")} 
                         maxLength={5}
                         onChange={handleMinPriceChange}
                         defaultValue={minPrice}
@@ -146,7 +149,7 @@ const SearchPage = ({ searchQuery, prixMinInput, prixMaxInput, materiauxInput, c
                         width={'size-2000'}
                     />
                     <TextField 
-                        label="Prix max€" 
+                        label={t("maxPrice")} 
                         maxLength={5}
                         onChange={handleMaxPriceChange}
                         defaultValue={maxPrice}
@@ -156,22 +159,23 @@ const SearchPage = ({ searchQuery, prixMinInput, prixMaxInput, materiauxInput, c
                         width={'size-2000'}
                     />
                     <Checkbox
-                        aria-label="En stock"
+                        aria-label={t("inStock")}
                         justifySelf={'center'} 
                         isSelected={enStock}
                         onChange={handleEnStockChange}
-                        gridArea='enStock'>En stock</Checkbox>
+                        gridArea='enStock'>
+                        {t("inStock")}
+                    </Checkbox>
                     <TableView
-                        aria-label="Example table with static contents"
+                        aria-label={t("materials")}
                         selectionMode="multiple"
                         defaultSelectedKeys={materiauxInput.map(id => id.toString())}
                         onSelectionChange={handleMaterialsChange}
                         height={200}
                         position={'relative'}
-                        gridArea='matérials'
-                        >
+                        gridArea='matérials'>
                         <TableHeader>
-                            <Column>Matériaux</Column>
+                            <Column>{t("materials")}</Column>
                         </TableHeader>
                         <TableBody>
                             {materials && materials.map((material) => (
@@ -182,16 +186,15 @@ const SearchPage = ({ searchQuery, prixMinInput, prixMaxInput, materiauxInput, c
                         </TableBody>
                     </TableView>
                     <TableView
-                        aria-label="Tableau de catégories"
+                        aria-label={t("categories")}
                         selectionMode="multiple"
                         defaultSelectedKeys={categoriesInput.map(id => id.toString())}
                         onSelectionChange={handleCategoriesChange}
                         height={200}
                         position={"relative"}
-                        gridArea="catégories"
-                        >
+                        gridArea="catégories">
                         <TableHeader>
-                            <Column aria-label="Catégories">Catégories</Column>
+                            <Column aria-label={t("categories")}>{t("categories")}</Column>
                         </TableHeader>
                         <TableBody>
                             {categories && categories.map((category) => (
@@ -201,13 +204,13 @@ const SearchPage = ({ searchQuery, prixMinInput, prixMaxInput, materiauxInput, c
                             ))}
                         </TableBody>
                     </TableView>
-                    <ActionButton onPress={handleFilterSearch} gridArea="appliquer" width={"size-2000"} justifySelf={"center"}  aria-label="Appliquer"> 
+                    <ActionButton onPress={handleFilterSearch} gridArea="appliquer" width={"size-2000"} justifySelf={"center"} aria-label={t("apply")}> 
                         <Checkmark />
-                        <Text>Appliquer</Text>
+                        <Text>{t("apply")}</Text>
                     </ActionButton>
-                    <ActionButton onPress={resetFilter} gridArea="réinitialiser" width={"size-2000"} justifySelf={"center"} aria-label="Réinitialiser"> 
+                    <ActionButton onPress={resetFilter} gridArea="réinitialiser" width={"size-2000"} justifySelf={"center"} aria-label={t("reset")}> 
                         <Delete />
-                        <Text>Réinitialiser</Text>
+                        <Text>{t("reset")}</Text>
                     </ActionButton>
                 </Grid>
             </Form>

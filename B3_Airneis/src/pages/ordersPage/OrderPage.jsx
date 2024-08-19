@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Data } from '../../services/api';
 import { ToastQueue } from "@react-spectrum/toast";
+import { useTranslation } from 'react-i18next';
 
 const OrderPage = () => {
+    const { t } = useTranslation();
     // Setting use states
     const { orderId } = useParams();
     const [orderDetails, setOrderDetails] = useState([]);
@@ -49,11 +51,11 @@ const OrderPage = () => {
 
     return (
         <div className="container-order">
-            <h1 className="title-order">Mes Commandes</h1>
-            <h2 className="orderDetails">Date de la commande: {orderDate}</h2>
-            <h2 className="orderDetails">Statut de la commande: {orderState}</h2>
-            <h2 className="orderDetails">Prix total de la commande: {totalPrice} €</h2>
-            <h2 className="orderDetails">Adresse de livraison: {orderAddress}</h2>
+            <h1 className="title-order">{t('myOrders')}</h1>
+            <h2 className="orderDetails">{t('orderDate')}: {orderDate}</h2>
+            <h2 className="orderDetails">{t('orderStatus')}: {orderState}</h2>
+            <h2 className="orderDetails">{t('totalPrice')}: {totalPrice} €</h2>
+            <h2 className="orderDetails">{t('deliveryAddress')}: {orderAddress}</h2>
             <h2 className="order_separator"></h2>
             {orderDetails.map(product => (
                 <div key={product.product_id} className="orderDetailsItem">
@@ -62,13 +64,13 @@ const OrderPage = () => {
                     </div>
                     <div className="orderDetailsInfos">
                         <h3>{product.product_name}</h3>
-                        <p><strong>Description:</strong> {product.product_description}</p>
-                        <p><strong>Quantité:</strong> {product.quantity}</p>
-                        <p><strong>Prix total:</strong> {(Number(product.quantity) * Number(product.product_price)).toFixed(2)} €</p>
+                        <p><strong>{t('description')}:</strong> {product.product_description}</p>
+                        <p><strong>{t('quantity')}</strong> {product.quantity}</p>
+                        <p><strong>{t('totalProductPrice')}:</strong> {(Number(product.quantity) * Number(product.product_price)).toFixed(2)} €</p>
                     </div>
                 </div>
             ))}
-            {orderDetails.length === 0 && <p className="errorMessage-order">Cette commande est vide.</p>}
+            {orderDetails.length === 0 && <p className="errorMessage-order">{t('emptyOrder')}</p>}
         </div>
     );
 };

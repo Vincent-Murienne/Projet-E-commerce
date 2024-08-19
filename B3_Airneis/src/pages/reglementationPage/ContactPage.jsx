@@ -56,7 +56,7 @@ const ContactPage = () => {
             <div className="contact-form">
                 <h2>{t('contactFormHeader')}</h2>
                 <form onSubmit={handleSubmit}>
-                    <label htmlFor="email">{t('email')}</label>
+                    <label htmlFor="email">{t('email')}:</label>
                     <input type="email" id="email" name="email" required onChange={handleChange}/>
 
                     <label htmlFor="subject">{t('sujet')}</label>
