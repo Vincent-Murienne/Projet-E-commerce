@@ -1,4 +1,7 @@
+import { useTranslation } from 'react-i18next';
+
 const MonComptePage = () => {
+    const { t } = useTranslation();
 
     const goToMonCompteParametres = () => {
         window.location.href = "/monCompteParametres";
@@ -12,14 +15,14 @@ const MonComptePage = () => {
         <div className="mainMonCompte">
             <div className="buttons-container-monCompte">
                 <button onClick={goToMonCompteParametres} className="btn-monCompte btn-primary-monCompte">
-                    Paramètres du compte
+                    {t('accountSettings')}
                 </button>
                 <button onClick={goToMesCommandesPages} className="btn-monCompte btn-secondary-monCompte">
-                    Mes commandes
+                    {t('myOrders')}
                 </button>
             </div>
         </div>
-    );
+    );  
 };
 
 export default MonComptePage;

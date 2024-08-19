@@ -4,8 +4,12 @@ import { Data } from "../../services/api";
 import { UserContext } from '../../context/UserProvider';
 import { ToastQueue } from "@react-spectrum/toast";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { useTranslation } from 'react-i18next';
+
 
 const CheckoutPayment = () => {
+    const { t } = useTranslation();
+
     // Setting use states
     const { pullData, saveData } = useContext(UserContext);
     const [getSelectedAddressId, setSelectedAddressId] = useState(undefined);
@@ -104,8 +108,8 @@ const CheckoutPayment = () => {
                 <form onSubmit={handleSubmit} style={{maxWidth: 400}}>
                     <CardElement className="stripe-card-element" options={{ hidePostalCode: true }}/>
                     <div className="buttons">
-                        <Link to="/panier" className="form-btn-error">Annuler</Link>
-                        <button type="submit" className="form-btn-success">Payer</button>
+                        <Link to="/panier" className="form-btn-error">{t('backButton')}</Link>
+                        <button type="submit" className="form-btn-success">{t('payButton')}</button>
                     </div>
                 </form>
             </div>

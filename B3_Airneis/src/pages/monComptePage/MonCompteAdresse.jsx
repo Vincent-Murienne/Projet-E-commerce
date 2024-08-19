@@ -4,11 +4,13 @@ import { Data } from "../../services/api";
 import { UserContext } from '../../context/UserProvider';
 import { ToastQueue } from "@react-spectrum/toast";
 import { Picker, Item } from '@react-spectrum/picker';
+import { useTranslation } from 'react-i18next';
 import { TextField } from "@adobe/react-spectrum";
 import { fullNameRegex, firstNameRegex, addressRegex, zipCodeRegex, phoneRegex } from '../../utils/regexes';
 
 const MonCompteAdresse = () => {
-    // Setting use states
+    const { t } = useTranslation();
+        // Setting use states
     const { pullData } = useContext(UserContext);
     const [getUserAddresses, setUserAddresses] = useState([]);
     const [getSelectedAddress, setSelectedAddress] = useState("0"); 
@@ -68,7 +70,7 @@ const MonCompteAdresse = () => {
     useEffect(() => {
         let userData = pullData("user"); // Get user information from the cookies     
         if(userData === undefined){
-            ToastQueue.negative("Veuillez vous connecter afin de pouvoir accéder à cette page.", {timeout: 5000});
+            ToastQueue.negative(t('pleaseLogin'), {timeout: 5000});
             navigate("/");
             return;
         }
@@ -226,14 +228,14 @@ const MonCompteAdresse = () => {
           
                 Data("panelAdmin", "insertAddress", data).then(response => {
                     if (response.success === true) {
-                        ToastQueue.positive("Adresse ajoutée avec succès !", {timeout: 5000});
+                        ToastQueue.positive(t('addAdress'), {timeout: 5000});
                         navigate("/monCompteParametres");
                     } else {
                         ToastQueue.negative(response.error, {timeout: 5000});
                     }
                 });
             } else {
-                ToastQueue.negative("Veuillez remplir correctement tous les champs.", {timeout: 5000});
+                ToastQueue.negative(t('fillAllFieldsCorrectly'), { timeout: 5000 });
             }
         } else { // If an existing address is selected, then it's an update
             if(getFirstNameValidState === 1 && getLastNameValidState === 1 && getAddressValidState === 1 && getCityValidState === 1 && getZipCodeValidState === 1 && getRegionValidState === 1 && getCountryValidState === 1 && getPhoneValidState === 1) {           
@@ -255,26 +257,26 @@ const MonCompteAdresse = () => {
           
                 Data("panelAdmin", "updateAddress", data).then(response => {
                     if (response.success === true) {
-                        ToastQueue.positive("Modification réussie avec succès !", {timeout: 5000});
+                        ToastQueue.positive(t('updateAddressSuccess'), {timeout: 5000});
                         navigate("/monCompteParametres");
                     } else {
                         ToastQueue.negative(response.error, {timeout: 5000});
                     }
                 });
             } else {
-                ToastQueue.negative("Veuillez remplir correctement tous les champs.", {timeout: 5000});
+                ToastQueue.negative(t('fillAllFieldsCorrectly'), { timeout: 5000 });
             }
         }
     };
 
     // Handling the deletion of the address.
     const handleDelete = () => {
-        const confirmed = window.confirm("Voulez-vous vraiment supprimer cette adresse ?");
+        const confirmed = window.confirm(t("deleteAddress"));
         if (confirmed) {
             Data("panelAdmin", "deleteAddress", {"id": getSelectedAddress })
                 .then(response => {
                     if (response.success === true) {
-                        ToastQueue.positive("Suppression réussie avec succès !", { timeout: 5000 });
+                        ToastQueue.positive(t("addressDeleted"), { timeout: 5000 });
                         window.location.reload();
                     } else {
                         ToastQueue.negative(response.error, { timeout: 5000 });
@@ -288,16 +290,16 @@ const MonCompteAdresse = () => {
         if (getSelectedAddress === "0") {
             return (
                 <>
-                    <Link to="/monCompteParametres" className="form-btn-error">Annuler</Link>
-                    <button type="submit" className="form-btn-success">Ajouter</button>
+                    <Link to="/monCompteParametres" className="form-btn-error">{t('cancel')}</Link>
+                    <button type="submit" className="form-btn-success">{t('submit')}</button>
                 </>
             );
         } else {
             return (
                 <>
-                    <Link to="/monCompteParametres" className="form-btn-error">Annuler</Link>
-                    <button type="submit" className="form-btn-success">Modifier</button>
-                    <button type="button" className="form-btn-delete" onClick={handleDelete}>Supprimer</button>
+                    <Link to="/monCompteParametres" className="form-btn-error">{t('cancel')}</Link>
+                    <button type="submit" className="form-btn-success">{t('submitEdit')}</button>
+                    <button type="button" className="form-btn-delete" onClick={handleDelete}>{t('delete')}</button>
                 </>
             );
         }
@@ -307,14 +309,14 @@ const MonCompteAdresse = () => {
         <>
             <div className="monComptePageAdresse">
                 <form onSubmit={FormSubmitted}>
-                    <h1 className="formTitle">Modifier votre adresse</h1>
+                    <h1 className="formTitle">{t('modifyAdress')}</h1>
                     <div className="picker-container">
                         <Picker
-                            label="Choisir une adresse"
+                            label={t('chooseAddress')}
                             necessityIndicator="label"
                             isRequired
                             minWidth={300}
-                            items={[{ id: 0, address_name: "Ajouter une nouvelle adresse" }, ...getUserAddresses]}
+                            items={[{ id: 0, address_name: t('addNewAddress') }, ...getUserAddresses]}
                             selectedKey={getSelectedAddress} 
                             onSelectionChange={selected => setSelectedAddress(selected)}
                         >
@@ -327,7 +329,7 @@ const MonCompteAdresse = () => {
                             (getAddressNameValidState === 1)
                             ?
                             <TextField
-                                label="Nom d'adresse"
+                                label={t('addressName')}
                                 onChange={setAddressName}
                                 value={getAddressName} 
                                 validationState="valid"
@@ -335,11 +337,11 @@ const MonCompteAdresse = () => {
                             />
                             :
                             <TextField
-                                label="Nom d'adresse"
+                                label={t('addressName')}
                                 onChange={setAddressName}
                                 value={getAddressName} 
                                 validationState="invalid"
-                                errorMessage="Veuillez entrer un nom correct (entre 5 et 50 caractères)."
+                                errorMessage={t('addressNameError')}
                                 width={300}
                             />
                         }
@@ -349,7 +351,7 @@ const MonCompteAdresse = () => {
                             (getFirstNameValidState === 1)
                             ?
                             <TextField
-                                label="Prénom"
+                                label={t('firstName')}
                                 onChange={setFirstName}
                                 value={getFirstName} 
                                 validationState="valid"
@@ -357,11 +359,11 @@ const MonCompteAdresse = () => {
                             />
                             :
                             <TextField
-                                label="Prénom"
+                                label={t('firstName')}
                                 onChange={setFirstName}
                                 value={getFirstName}
                                 validationState="invalid"
-                                errorMessage="Veuillez entrer un nom correct (entre 3 et 50 caractères)."
+                                errorMessage={t('firstNameError')}
                                 width={300}
                             />
                         }
@@ -371,7 +373,7 @@ const MonCompteAdresse = () => {
                             (getLastNameValidState === 1)
                             ?
                             <TextField
-                                label="Nom"
+                                label={t('lastName')}
                                 onChange={setLastName}
                                 value={getLastName}
                                 validationState="valid"
@@ -379,11 +381,11 @@ const MonCompteAdresse = () => {
                             />
                             :
                             <TextField
-                                label="Nom"
+                                label={t('lastName')}
                                 onChange={setLastName}
                                 value={getLastName}
                                 validationState="invalid"
-                                errorMessage="Veuillez entrer un nom correct (entre 5 et 50 caractères)."
+                                errorMessage={t('lastNameError')}
                                 width={300}
                             />
                         }
@@ -393,7 +395,7 @@ const MonCompteAdresse = () => {
                             (getAddressValidState === 1)
                             ?
                             <TextField
-                                label="Adresse"
+                                label={t('address')}
                                 onChange={setAddress}
                                 value={getAddress}
                                 validationState="valid"
@@ -401,11 +403,11 @@ const MonCompteAdresse = () => {
                             />
                             :
                             <TextField
-                                label="Adresse"
+                                label={t('address')}
                                 onChange={setAddress}
                                 value={getAddress}
                                 validationState="invalid"
-                                errorMessage="Veuillez entrer une address valide."
+                                errorMessage={t('addressError')}
                                 width={300}
                             />
                         }
@@ -415,7 +417,7 @@ const MonCompteAdresse = () => {
                             (getCityValidState === 1)
                             ?
                             <TextField
-                                label="Ville"
+                                label={t('city')}
                                 onChange={setCity}
                                 value={getCity}
                                 validationState="valid"
@@ -423,11 +425,11 @@ const MonCompteAdresse = () => {
                             />
                             :
                             <TextField
-                                label="Ville"
+                                label={t('city')}
                                 onChange={setCity}
                                 value={getCity}
                                 validationState="invalid"
-                                errorMessage="Veuillez entrer un nom valide."
+                                errorMessage={t('cityError')}
                                 width={300}
                             />
                         }
@@ -437,7 +439,7 @@ const MonCompteAdresse = () => {
                             (getZipCodeValidState === 1)
                             ?
                             <TextField
-                                label="Code postal"
+                                label={t('zipCode')}
                                 onChange={setZipCode}
                                 value={getZipCode}
                                 validationState="valid"
@@ -445,11 +447,11 @@ const MonCompteAdresse = () => {
                             />
                             :
                             <TextField
-                                label="Code postal"
+                                label={t('zipCode')}
                                 onChange={setZipCode}
                                 value={getZipCode}
                                 validationState="invalid"
-                                errorMessage="Veuillez entrer un code postal valide."
+                                errorMessage={t('zipCodeError')}
                                 width={300}
                             />
                         }
@@ -459,7 +461,7 @@ const MonCompteAdresse = () => {
                             (getRegionValidState === 1)
                             ?
                             <TextField
-                                label="Région"
+                                label={t('region')}
                                 onChange={setRegion}
                                 value={getRegion}
                                 validationState="valid"
@@ -467,11 +469,11 @@ const MonCompteAdresse = () => {
                             />
                             :
                             <TextField
-                                label="Région"
+                                label={t('region')}
                                 onChange={setRegion}
                                 value={getRegion}
                                 validationState="invalid"
-                                errorMessage="Veuillez entrer une region valide."
+                                errorMessage={t('regionError')}
                                 width={300}
                             />
                         }
@@ -481,7 +483,7 @@ const MonCompteAdresse = () => {
                             (getCountryValidState === 1)
                             ?
                             <TextField
-                                label="Pays"
+                                label={t('country')}
                                 onChange={setCountry}
                                 value={getCountry}
                                 validationState="valid"
@@ -489,11 +491,11 @@ const MonCompteAdresse = () => {
                             />
                             :
                             <TextField
-                                label="Pays"
+                                label={t('country')}
                                 onChange={setCountry}
                                 value={getCountry}
                                 validationState="invalid"
-                                errorMessage="Veuillez entrer un pays valide."
+                                errorMessage={t('countryError')}
                                 width={300}
                             />
                         }
@@ -503,7 +505,7 @@ const MonCompteAdresse = () => {
                             (getPhoneValidState === 1)
                             ?
                             <TextField
-                                label="Téléphone"
+                                label={t('phone')}
                                 onChange={setPhone}
                                 value={getPhone}
                                 validationState="valid"
@@ -511,16 +513,15 @@ const MonCompteAdresse = () => {
                             />
                             :
                             <TextField
-                                label="Téléphone"
+                                label={t('phone')}
                                 onChange={setPhone}
                                 value={getPhone}
                                 validationState="invalid"
-                                errorMessage="Veuillez entrer un numero valide."
+                                errorMessage={t('phoneError')}
                                 width={300}
                             />
                         }
                     </div>             
-                    <></>
                     
                     <div className="buttons">
                         {renderButtons()}

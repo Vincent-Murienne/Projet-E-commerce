@@ -1,8 +1,12 @@
 import { ToastQueue } from '@react-spectrum/toast';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+
 
 const ContactPage = () => {
+    const { t } = useTranslation();
+
     // Setting use states
     const [formData, setFormData] = useState({
         email: '',
@@ -41,27 +45,27 @@ const ContactPage = () => {
     };
     return (
         <div className="contact-container">
-            <h1>Nous contacter</h1>
+            <h1>{t('contactUsHeader')}</h1>
             <div className="contact-info">
-                <p>Pour toute question ou information, notre Service Client est à votre disposition :</p>
+                <p>{t('contactInfoText')}</p>
                 <ul>
-                    <li>Par téléphone au <strong>+44 123 456 789</strong> (du lundi au vendredi de 9h à 18h).</li>
-                    <li>Par e-mail à l'adresse <strong>airneis.commerce@gmail.com</strong></li>
+                    <li>{t('contactPhone')} <strong>{t('tel')}</strong> {t('telInfo')}</li>
+                    <li>{t('contactEmail')} <strong> {t('mail')}</strong></li>
                 </ul>
             </div>
             <div className="contact-form">
-                <h2>Formulaire de contact</h2>
+                <h2>{t('contactFormHeader')}</h2>
                 <form onSubmit={handleSubmit}>
-                    <label htmlFor="email">E-mail :</label>
+                    <label htmlFor="email">{t('email')}</label>
                     <input type="email" id="email" name="email" required onChange={handleChange}/>
 
-                    <label htmlFor="subject">Sujet :</label>
+                    <label htmlFor="subject">{t('sujet')}</label>
                     <input type="text" id="subject" name="subject" required onChange={handleChange}/>
 
-                    <label htmlFor="message">Message :</label>
+                    <label htmlFor="message">{t('message')}</label>
                     <textarea id="message" name="message" rows="5" required onChange={handleChange}></textarea>
 
-                    <button type="submit">Envoyer</button>
+                    <button type="submit">{t('envoie')}</button>
                 </form>
             </div>
         </div>
