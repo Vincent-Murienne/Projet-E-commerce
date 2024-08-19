@@ -205,7 +205,6 @@ id nextSliderButton
 id order_address
 id order_date
 id order_id
-id order_products_list
 id order_state
 id order_status
 id outOfStock
@@ -255,6 +254,8 @@ id totalPrice
 id total_items
 id total_price
 id tvForgetPasswordTitle
+id tvNewPassword
+id tvOldPassword
 id tv_order_confirmed
 id tv_order_id
 id tv_thank_you

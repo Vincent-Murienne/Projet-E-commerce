@@ -3884,7 +3884,6 @@ int id open_search_view_toolbar_container 0x7f0801ec
 int id order_address 0x7f0801ed
 int id order_date 0x7f0801ee
 int id order_id 0x7f0801ef
-int id order_products_list 0x7f0801f0
 int id order_state 0x7f0801f1
 int id order_status 0x7f0801f2
 int id outOfStock 0x7f0801f3
@@ -4115,6 +4114,8 @@ int id transition_scene_layoutid_cache 0x7f0802d3
 int id transition_transform 0x7f0802d4
 int id triangle 0x7f0802d5
 int id tvForgetPasswordTitle 0x7f0802d6
+int id tvNewPassword 0x7f0802fa
+int id tvOldPassword 0x7f0802fb
 int id tv_order_confirmed 0x7f0802d7
 int id tv_order_id 0x7f0802d8
 int id tv_thank_you 0x7f0802d9

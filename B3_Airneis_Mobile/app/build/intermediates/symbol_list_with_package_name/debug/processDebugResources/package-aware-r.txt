@@ -3885,7 +3885,6 @@ id open_search_view_toolbar_container
 id order_address
 id order_date
 id order_id
-id order_products_list
 id order_state
 id order_status
 id outOfStock
@@ -4116,6 +4115,8 @@ id transition_scene_layoutid_cache
 id transition_transform
 id triangle
 id tvForgetPasswordTitle
+id tvNewPassword
+id tvOldPassword
 id tv_order_confirmed
 id tv_order_id
 id tv_thank_you

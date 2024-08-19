@@ -1,8 +1,8 @@
 package com.example.airneis.model;
 
 public class ProductModel {
-    private int productId;
-    private String productName, imageName;
+    private int productId, productQuantity;
+    private String productName, productDescription, imageName;
     private double productPrice;
 
     public ProductModel(int productId, String productName, String imageName) {
@@ -18,6 +18,15 @@ public class ProductModel {
         this.productPrice = productPrice;
     }
 
+    public ProductModel(int productId, String productName, String productDescription, String imageName, double productPrice, int productQuantity) {
+        this.productId = productId;
+        this.productName = productName;
+        this.productDescription = productDescription;
+        this.imageName = imageName;
+        this.productPrice = productPrice;
+        this.productQuantity = productQuantity;
+    }
+
     public int getProductId() {
         return productId;
     }
@@ -31,5 +40,11 @@ public class ProductModel {
     }
     public double getProductPrice() {
         return productPrice;
+    }
+    public int getProductQuantity() {
+        return productQuantity;
+    }
+    public String getProductDescription() {
+        return productDescription;
     }
 }

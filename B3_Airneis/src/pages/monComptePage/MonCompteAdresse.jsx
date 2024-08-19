@@ -44,6 +44,15 @@ const MonCompteAdresse = () => {
             setRegion("");
             setCountry("");
             setPhone("");
+            setAddressNameValidState(2);
+            setFirstNameValidState(2);
+            setLastNameValidState(2);
+            setAddressValidState(2);
+            setCityValidState(2);
+            setZipCodeValidState(2);
+            setRegionValidState(2);
+            setCountryValidState(2);
+            setPhoneValidState(2);
         } else {       
             const selectedAddress = getUserAddresses.find(address => address.id.toString() === getSelectedAddress.toString());
             if (selectedAddress) {

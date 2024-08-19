@@ -49,7 +49,7 @@ const OrderPage = () => {
 
     return (
         <div className="container-order">
-            <h1 className="title-order">Mes Commandes</h1>
+            <h1 className="title-order">Détails de ma commande</h1>
             <h2 className="orderDetails">Date de la commande: {orderDate}</h2>
             <h2 className="orderDetails">Statut de la commande: {orderState}</h2>
             <h2 className="orderDetails">Prix total de la commande: {totalPrice} €</h2>
