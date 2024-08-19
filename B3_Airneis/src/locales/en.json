@@ -238,5 +238,6 @@
     "personalDataTitle": "Personal Data",
     "personalDataContent1": "ÀIRNEIS ensures that users' data is processed to guarantee an appropriate level of security. Personal data is not kept longer than necessary.",
     "personalDataContent2": "Collected data may be passed on to service providers, suppliers, and/or partners of ÀIRNEIS solely for the purposes related to their tasks. ÀIRNEIS takes measures to ensure their confidentiality and integrity through appropriate legal frameworks.",
-    "personalDataContent3": "Each person has the right to access, rectify, object to, delete, and transfer their personal data and can determine the fate of their data after their death by email to the following address: airneis.commerce@gmail.com or by mail to the Data Protection Officer at the following address: 123 Rue de l'Écosse, Edinburgh, Scotland. The Site is also designed to be particularly attentive to the needs of its Users."
+    "personalDataContent3": "Each person has the right to access, rectify, object to, delete, and transfer their personal data and can determine the fate of their data after their death by email to the following address: airneis.commerce@gmail.com or by mail to the Data Protection Officer at the following address: 123 Rue de l'Écosse, Edinburgh, Scotland. The Site is also designed to be particularly attentive to the needs of its Users.",
+    "DetailOrder": "Order Details"
 }

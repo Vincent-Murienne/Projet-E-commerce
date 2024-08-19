@@ -3572,8 +3572,8 @@ id collapseActionView
 id compress
 id confirm_button
 id constraint
-id contact_form
-id contact_info
+id contact
+id contactform
 id container
 id content
 id contentPanel
@@ -3885,7 +3885,10 @@ id open_search_view_toolbar_container
 id order_address
 id order_date
 id order_id
+<<<<<<< HEAD
 id order_products_list
+=======
+>>>>>>> develop
 id order_state
 id order_status
 id outOfStock
@@ -4037,8 +4040,8 @@ id stripe_payment_methods_add_fpx
 id subject
 id submenuarrow
 id submit
+id submitBtn
 id submit_area
-id submit_button
 id subtitle1
 id subtitle2
 id supportScrollUp
@@ -4116,6 +4119,8 @@ id transition_scene_layoutid_cache
 id transition_transform
 id triangle
 id tvForgetPasswordTitle
+id tvNewPassword
+id tvOldPassword
 id tv_order_confirmed
 id tv_order_id
 id tv_thank_you

@@ -152,8 +152,8 @@ id categoryName
 id cb_change_password
 id cgu_container
 id checkoutButton
-id contact_form
-id contact_info
+id contact
+id contactform
 id deleteAccountButton
 id deleteButton
 id downloadPersonnalDataButton
@@ -205,7 +205,10 @@ id nextSliderButton
 id order_address
 id order_date
 id order_id
+<<<<<<< HEAD
 id order_products_list
+=======
+>>>>>>> develop
 id order_state
 id order_status
 id outOfStock
@@ -243,7 +246,7 @@ id spinner_addresses
 id stockStatus
 id subject
 id submit
-id submit_button
+id submitBtn
 id subtitle1
 id subtitle2
 id title
@@ -255,6 +258,8 @@ id totalPrice
 id total_items
 id total_price
 id tvForgetPasswordTitle
+id tvNewPassword
+id tvOldPassword
 id tv_order_confirmed
 id tv_order_id
 id tv_thank_you

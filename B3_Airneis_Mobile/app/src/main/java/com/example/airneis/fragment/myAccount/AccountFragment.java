@@ -15,12 +15,12 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.airneis.R;
 import com.example.airneis.databinding.FragmentAccountBinding;
-import com.example.airneis.fragment.myAccount.contact.ContactFragment;
 import com.example.airneis.fragment.myAccount.loginRegister.LoginFragment;
 import com.example.airneis.fragment.myAccount.loginRegister.RegisterFragment;
 import com.example.airneis.fragment.myAccount.orders.OrdersFragment;
 import com.example.airneis.fragment.myAccount.reglementation.AProposFragment;
 import com.example.airneis.fragment.myAccount.reglementation.CguFragment;
+import com.example.airneis.fragment.myAccount.reglementation.ContactFragment;
 import com.example.airneis.fragment.myAccount.reglementation.MentionsLegalesFragment;
 
 public class AccountFragment extends Fragment {
