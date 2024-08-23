@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.airneis.databinding.ActivityMainBinding;
+import com.example.airneis.fragment.search.SearchFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
@@ -56,8 +57,7 @@ public class MainActivity extends AppCompatActivity {
         fbSearchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent search = new Intent(getApplicationContext(), SearchActivity.class);
-                startActivity(search);
+                replaceFragment(new SearchFragment());
             }
         });
     }

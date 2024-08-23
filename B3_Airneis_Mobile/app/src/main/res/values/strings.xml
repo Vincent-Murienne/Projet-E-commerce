@@ -23,4 +23,13 @@
     <string name="image_desc">Image</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="search_sort">
+        <item>Aucun tri</item>
+        <item>Nom (asc)</item>
+        <item>Nom (desc)</item>
+        <item>Prix (asc)</item>
+        <item>Prix (desc)</item>
+        <item>Quantité en stock (asc)</item>
+        <item>Quantité en stock (desc)</item>
+    </string-array>
 </resources>

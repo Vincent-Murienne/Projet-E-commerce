@@ -1,5 +1,6 @@
 R_DEF: Internal format may change without notice
 local
+array search_sort
 color back_1
 color back_2
 color black
@@ -130,6 +131,7 @@ id ZipCodeError
 id about_us_container
 id achatButton
 id addToCartButton
+id applyButton
 id backButton
 id basketTitle
 id bottomAppBar
@@ -177,6 +179,7 @@ id error_message_order
 id etEmail
 id et_new_password
 id et_old_password
+id exitButton
 id fbSearchBtn
 id forgot_password
 id frameLayout
@@ -187,15 +190,17 @@ id imageFacebook
 id imageInstagram
 id imageLinkedIn
 id imageTwitter
+id inStockCheckBox
 id legalInfo1
 id legalInfo2
 id legalInfo3
 id legalInfo4
 id legalInfo5
 id login
-id main
+id maxPriceEditText
 id mentionsLegalCheckBox
 id message
+id minPriceEditText
 id navigation_account
 id navigation_basket
 id navigation_categories
@@ -205,10 +210,6 @@ id nextSliderButton
 id order_address
 id order_date
 id order_id
-<<<<<<< HEAD
-id order_products_list
-=======
->>>>>>> develop
 id order_state
 id order_status
 id outOfStock
@@ -220,6 +221,7 @@ id personalData3
 id prevSliderButton
 id productDescription
 id productImage
+id productListRecyclerView
 id productMaterial
 id productName
 id productPrice
@@ -238,6 +240,15 @@ id recycler_view_order_items
 id recycler_view_orders
 id register
 id registerButton
+id resetButton
+id searchCategoriesRecyclerView
+id searchFilterBtn
+id searchFilterSpinner
+id searchItemCheckBox
+id searchItemTextView
+id searchMaterialsRecyclerView
+id searchQueryEditText
+id searchQueryFilterEditText
 id seeMyAddressesButton
 id similarProductsRecyclerView
 id sliderImageView
@@ -267,7 +278,6 @@ id tvaPrice
 id validateButton
 id year_title_order
 layout activity_main
-layout activity_search
 layout fragment_a_propos
 layout fragment_account
 layout fragment_adresses
@@ -289,6 +299,8 @@ layout fragment_orders
 layout fragment_parametre_compte
 layout fragment_product_detail
 layout fragment_register
+layout fragment_search
+layout fragment_search_filter
 layout fragment_slider
 layout fragment_top_categories
 layout fragment_top_produits
@@ -298,10 +310,12 @@ layout item_order_detail
 layout item_order_details_product
 layout item_order_year
 layout item_product
+layout item_search_product
 layout item_top_card_item
+layout search_item_checkbox
 menu bottom_nav_menu
+mipmap ic_filter
 mipmap ic_launcher
-mipmap ic_launcher_round
 string VAT
 string app_name
 string connexion

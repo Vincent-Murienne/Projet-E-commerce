@@ -4,60 +4,7 @@
             "outputFile": "com.example.airneis.app-mergeDebugResources-46:/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Jean\\.gradle\\caches\\transforms-4\\6cc9ea5713ba8743f302ab84f19445b8\\transformed\\stripe-android-14.4.1\\res\\values-night-v8\\values-night-v8.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "55,125,204,285,355,444,507",
-                        "endColumns": "69,78,80,69,88,62,67",
-                        "endOffsets": "120,199,280,350,439,502,570"
-                    },
-                    "to": {
-                        "startLines": "15,16,17,18,19,20,21",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "853,923,1002,1083,1153,1242,1305",
-                        "endColumns": "69,78,80,69,88,62,67",
-                        "endOffsets": "918,997,1078,1148,1237,1300,1368"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Jean\\.gradle\\caches\\transforms-4\\56ef346e149285a5d51ee2ca89314dba\\transformed\\stripe-3ds2-android-2.7.8\\res\\values-night-v8\\values-night-v8.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,108,165,221,285,339,393,452,509,587,665,729,791,853",
-                        "endLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,27",
-                        "endColumns": "52,56,55,63,53,53,58,56,77,77,63,61,61,12",
-                        "endOffsets": "103,160,216,280,334,388,447,504,582,660,724,786,848,1772"
-                    },
-                    "to": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,22",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,108,165,221,285,339,393,452,509,587,665,729,791,1373",
-                        "endLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,34",
-                        "endColumns": "52,56,55,63,53,53,58,56,77,77,63,61,61,12",
-                        "endOffsets": "103,160,216,280,334,388,447,504,582,660,724,786,848,2292"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Jean\\.gradle\\caches\\transforms-4\\b959c312ae53a6fab93220ce3db301bf\\transformed\\appcompat-1.7.0\\res\\values-night-v8\\values-night-v8.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,125,209,293,389,491,593,687",
-                        "endColumns": "69,83,83,95,101,101,93,88",
-                        "endOffsets": "120,204,288,384,486,588,682,771"
-                    },
-                    "to": {
-                        "startLines": "48,49,50,51,52,53,54,81",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "2877,2947,3031,3115,3211,3313,3415,6397",
-                        "endColumns": "69,83,83,95,101,101,93,88",
-                        "endOffsets": "2942,3026,3110,3206,3308,3410,3504,6481"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Jean\\Desktop\\Programmation\\Projet-E-commerce\\B3_Airneis_Mobile\\app\\src\\main\\res\\values-night\\themes.xml",
+                    "source": "C:\\Users\\murie\\Downloads\\Projet-E-commerce\\B3_Airneis_Mobile\\app\\src\\main\\res\\values-night\\themes.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -76,7 +23,60 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Jean\\.gradle\\caches\\transforms-4\\bf3584da0d1c7ca47ab3825c79eaa3e4\\transformed\\material-1.12.0\\res\\values-night-v8\\values-night-v8.xml",
+                    "source": "C:\\Users\\murie\\.gradle\\caches\\transforms-4\\5cb58c0b2bcf512810d2d8f333824b26\\transformed\\stripe-3ds2-android-2.7.8\\res\\values-night-v8\\values-night-v8.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,108,165,221,285,339,393,452,509,587,665,729,791,853",
+                        "endLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,27",
+                        "endColumns": "52,56,55,63,53,53,58,56,77,77,63,61,61,12",
+                        "endOffsets": "103,160,216,280,334,388,447,504,582,660,724,786,848,1772"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,22",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,108,165,221,285,339,393,452,509,587,665,729,791,1373",
+                        "endLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,34",
+                        "endColumns": "52,56,55,63,53,53,58,56,77,77,63,61,61,12",
+                        "endOffsets": "103,160,216,280,334,388,447,504,582,660,724,786,848,2292"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\murie\\.gradle\\caches\\transforms-4\\11bbd58116d93d3bfc510db2b0bcb81c\\transformed\\appcompat-1.7.0\\res\\values-night-v8\\values-night-v8.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,125,209,293,389,491,593,687",
+                        "endColumns": "69,83,83,95,101,101,93,88",
+                        "endOffsets": "120,204,288,384,486,588,682,771"
+                    },
+                    "to": {
+                        "startLines": "48,49,50,51,52,53,54,81",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "2877,2947,3031,3115,3211,3313,3415,6397",
+                        "endColumns": "69,83,83,95,101,101,93,88",
+                        "endOffsets": "2942,3026,3110,3206,3308,3410,3504,6481"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\murie\\.gradle\\caches\\transforms-4\\42ac7d6b2aa47c515c4af477b366e239\\transformed\\stripe-android-14.4.1\\res\\values-night-v8\\values-night-v8.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "55,125,204,285,355,444,507",
+                        "endColumns": "69,78,80,69,88,62,67",
+                        "endOffsets": "120,199,280,350,439,502,570"
+                    },
+                    "to": {
+                        "startLines": "15,16,17,18,19,20,21",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "853,923,1002,1083,1153,1242,1305",
+                        "endColumns": "69,78,80,69,88,62,67",
+                        "endOffsets": "918,997,1078,1148,1237,1300,1368"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\murie\\.gradle\\caches\\transforms-4\\76632594cf23c9db928e17600e9cc280\\transformed\\material-1.12.0\\res\\values-night-v8\\values-night-v8.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

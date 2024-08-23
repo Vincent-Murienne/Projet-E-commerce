@@ -107,7 +107,7 @@ const ProductSearchPage = () => {
               <Filter />
               <Text>{t('filter')}</Text>
             </ActionButton>
-            <ComboBox description={t('sortBy')} aria-label={t('sortBy')} isDisabled={filtering} onSelectionChange={setOrderBy} selectedKey={orderBy}>
+            <ComboBox isDisabled={filtering} onSelectionChange={setOrderBy} selectedKey={orderBy}>
               <Item key="noSort">{t('noSort')}</Item>
               <Item key="nameAsc">{t('nameAsc')}</Item>
               <Item key="nameDesc">{t('nameDesc')}</Item>

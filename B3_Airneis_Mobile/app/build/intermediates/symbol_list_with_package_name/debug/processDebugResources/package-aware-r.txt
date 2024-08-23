@@ -85,6 +85,7 @@ animator nav_default_enter_anim
 animator nav_default_exit_anim
 animator nav_default_pop_enter_anim
 animator nav_default_pop_exit_anim
+array search_sort
 attr SharedValue
 attr SharedValueId
 attr action
@@ -3490,6 +3491,7 @@ id animateToEnd
 id animateToStart
 id antiClockwise
 id anticipate
+id applyButton
 id arc
 id asConfigured
 id async
@@ -3682,6 +3684,7 @@ id et_phone_number_aaw
 id et_postal_code
 id et_postal_code_aaw
 id et_state_aaw
+id exitButton
 id exitUntilCollapsed
 id expand_activities_button
 id expand_arrow
@@ -3742,6 +3745,7 @@ id imageInstagram
 id imageLinkedIn
 id imageTwitter
 id immediateStop
+id inStockCheckBox
 id included
 id indeterminate
 id info
@@ -3773,7 +3777,6 @@ id locale
 id login
 id ltr
 id m3_side_sheet
-id main
 id mandate_acceptance_text_view
 id marquee
 id masked
@@ -3801,9 +3804,11 @@ id material_timepicker_ok_button
 id material_timepicker_view
 id material_value_index
 id matrix
+id maxPriceEditText
 id mentionsLegalCheckBox
 id message
 id middle
+id minPriceEditText
 id mini
 id month_grid
 id month_navigation_bar
@@ -3885,10 +3890,6 @@ id open_search_view_toolbar_container
 id order_address
 id order_date
 id order_id
-<<<<<<< HEAD
-id order_products_list
-=======
->>>>>>> develop
 id order_state
 id order_status
 id outOfStock
@@ -3923,6 +3924,7 @@ id prevSliderButton
 id price
 id productDescription
 id productImage
+id productListRecyclerView
 id productMaterial
 id productName
 id productPrice
@@ -3949,6 +3951,7 @@ id recycler_view_orders
 id register
 id registerButton
 id report_drawn
+id resetButton
 id reverseSawtooth
 id right
 id rightToLeft
@@ -3968,6 +3971,14 @@ id scrollIndicatorDown
 id scrollIndicatorUp
 id scrollView
 id scrollable
+id searchCategoriesRecyclerView
+id searchFilterBtn
+id searchFilterSpinner
+id searchItemCheckBox
+id searchItemTextView
+id searchMaterialsRecyclerView
+id searchQueryEditText
+id searchQueryFilterEditText
 id search_badge
 id search_bar
 id search_button
@@ -4274,7 +4285,6 @@ layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_main
-layout activity_search
 layout add_payment_method_activity
 layout add_payment_method_card_view
 layout add_payment_method_row
@@ -4334,6 +4344,8 @@ layout fragment_orders
 layout fragment_parametre_compte
 layout fragment_product_detail
 layout fragment_register
+layout fragment_search
+layout fragment_search_filter
 layout fragment_slider
 layout fragment_top_categories
 layout fragment_top_produits
@@ -4347,6 +4359,7 @@ layout item_order_detail
 layout item_order_details_product
 layout item_order_year
 layout item_product
+layout item_search_product
 layout item_top_card_item
 layout m3_alert_dialog
 layout m3_alert_dialog_actions
@@ -4411,6 +4424,7 @@ layout payment_auth_web_view_activity
 layout payment_flow_activity
 layout payment_methods_activity
 layout progress_view_layout
+layout search_item_checkbox
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
@@ -4423,8 +4437,8 @@ layout support_simple_spinner_dropdown_item
 menu add_payment_method
 menu bottom_nav_menu
 menu payment_auth_web_view_menu
+mipmap ic_filter
 mipmap ic_launcher
-mipmap ic_launcher_round
 plurals mtrl_badge_content_description
 string VAT
 string abc_action_bar_home_description

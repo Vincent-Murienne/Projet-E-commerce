@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="search_sort">
+        <item>Aucun tri</item>
+        <item>Nom (asc)</item>
+        <item>Nom (desc)</item>
+        <item>Prix (asc)</item>
+        <item>Prix (desc)</item>
+        <item>Quantité en stock (asc)</item>
+        <item>Quantité en stock (desc)</item>
+    </string-array>
     <color name="back_1">#161c2a</color>
     <color name="back_2">#1a2332</color>
     <color name="black">#FF000000</color>
