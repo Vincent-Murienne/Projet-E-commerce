@@ -101,7 +101,7 @@ const ProductPage = () => {
                                 <h2>{product.price} €</h2>
                                 <h3>{product.description}.</h3>
                                 {product.material && (
-                                    <h3>{t('material')} {product.material}.</h3>
+                                    <h3>{t('materiaux')} {product.material}.</h3>
                                 )}
                             </div>
                             <p className="quantity-container">
