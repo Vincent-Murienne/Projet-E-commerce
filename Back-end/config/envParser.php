@@ -1,5 +1,6 @@
 <?php
 
+// This class will be used to parse .env files and retrieve data associated to a specific key
 class DotEnv
 {
     protected $path;

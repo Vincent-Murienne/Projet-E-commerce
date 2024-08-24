@@ -9,6 +9,7 @@ import axios from "axios";
 
 const ImageAdd = () => {
 
+    // Setting use states
     const [getAllCategories, setAllCategories] = useState([]);
     const [getAllProducts, setAllProducts] = useState([]);
     const [formData, setFormData] = useState({
@@ -18,7 +19,6 @@ const ImageAdd = () => {
     const fileInputRef = useRef(null);
 
     // We are using those useEffect to make API calls to retrieve each categories and products
-
     let data = {
         "table": "categories"
     };
@@ -58,7 +58,6 @@ const ImageAdd = () => {
     }, []);
 
     //We are now going to handle the form submission
-
     const [selectedFile, setSelectedFile] = useState(null);
     const navigate = useNavigate();
     const { saveData } = useContext(UserContext);

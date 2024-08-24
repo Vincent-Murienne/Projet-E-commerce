@@ -9,6 +9,7 @@ import axios from "axios";
 
 const ImageEdit = () => {
 
+    // Setting use states
     const [getAllCategories, setAllCategories] = useState([]);
     const [getAllProducts, setAllProducts] = useState([]);
     const [getImageDetails, setImageDetails] = useState([]);
@@ -18,7 +19,6 @@ const ImageEdit = () => {
     const fileInputRef = useRef(null);
 
     // We are using those useEffect to make API calls to retrieve each categories and products
-
     let data = {
         "table": "categories"
     };
@@ -76,6 +76,7 @@ const ImageEdit = () => {
         });
     }, []);
 
+    // We are setting the categories and products linked to that image
     useEffect(() => {
         if(getImageDetails.category_id !== undefined && getImageDetails.category_id !== null && getImageDetails.category_id !== "null") {
             setCategory(getImageDetails.category_id.toString());
@@ -91,7 +92,6 @@ const ImageEdit = () => {
     }, [getImageDetails]);
 
     //We are now going to handle the form submission
-
     const [selectedFile, setSelectedFile] = useState(null);
     const navigate = useNavigate();
     const { saveData } = useContext(UserContext);

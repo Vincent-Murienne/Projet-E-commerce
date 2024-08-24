@@ -1,24 +1,25 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { TextField } from "@adobe/react-spectrum";
 import { Link, useNavigate } from 'react-router-dom';
 import { Data } from "../../services/api";
 import { UserContext } from '../../context/UserProvider';
 import { ToastQueue } from "@react-spectrum/toast";
+import { mkConfig, generateCsv, download } from "export-to-csv";
+import { useTranslation } from 'react-i18next'; 
 
 const MonCompteParametres = () => {
+    const { t } = useTranslation(); 
     const { pullData, handleLogout } = useContext(UserContext);
     const [getUserName, setUserName] = useState([]);
     const [getUserMail, setUserMail] = useState([]);
-    const [getUserPassword, setUserPassword] = useState([]);
-
     const [getUserId, setUserId] = useState(undefined);
     let userId;
     const navigate = useNavigate();
 
     useEffect(() => {
-        let userData = pullData("user");       
-        if(userData === undefined){
-            ToastQueue.negative("Veuillez vous connecter afin de pouvoir accéder à cette page.", {timeout: 5000});
+        let userData = pullData("user");
+        if (userData === undefined) {
+            ToastQueue.negative(t('pleaseLogin'), { timeout: 5000 }); 
             navigate("/");
             return;
         }
@@ -31,19 +32,32 @@ const MonCompteParametres = () => {
             "id": userId
         };
 
-        Data("panelAdmin", "getWhere", data).then(response => {
+        Data("panelAdmin", "getUserInfo", data).then(response => {
             if (response.success === true) {
-                setUserName(response.data[0].full_name);
-                setUserMail(response.data[0].email);
-                setUserPassword(response.data[0].password);
+                setUserName(response.data.full_name);
+                setUserMail(response.data.email);
             } else {
-                ToastQueue.negative(response.error, {timeout: 5000});
+                ToastQueue.negative(response.error, { timeout: 5000 });
             }
         });
     }, []);
 
+    const handleDownloadData = () => {
+        const csvConfig = mkConfig({ useKeysAsHeaders: true });
+
+        Data("monCompte", "downloadPersonalData", { "id": getUserId }).then(response => {
+            if (response.success) {
+                const csv = generateCsv(csvConfig)(response.data);
+                download(csvConfig)(csv);
+                ToastQueue.positive(t('downloadSuccess'), { timeout: 5000 }); 
+            } else {
+                ToastQueue.negative(response.error, { timeout: 5000 });
+            }
+        });
+    };
+
     const handleDeleteAccount = () => {
-        const confirmed = window.confirm("Voulez-vous vraiment supprimer votre compte ? Cette action est irréversible.");
+        const confirmed = window.confirm(t('deleteAccountConfirmation')); 
         if (confirmed) {
             const data = {
                 "table": "users",
@@ -51,29 +65,28 @@ const MonCompteParametres = () => {
             };
             Data("panelAdmin", "deleteUser", data).then(response => {
                 if (response.success) {
-                    ToastQueue.positive("Compte supprimé avec succès.", {timeout: 5000});
+                    ToastQueue.positive(t('accountDeleted'), { timeout: 5000 }); 
                     handleLogout();
-                    navigate("/");      
-                    window.location.reload();               
+                    navigate("/");
+                    window.location.reload();
                 } else {
-                    ToastQueue.negative(response.error, {timeout: 5000});
+                    ToastQueue.negative(response.error, { timeout: 5000 });
                 }
             });
         }
     };
 
-    return (   
+    return (
         <>
-            <section className="comptePage"> 
-                <h1 className="titreCompte">Paramètres de mon compte</h1>
-                
+            <section className="comptePage">
+                <h1 className="titreCompte">{t('accountSettingsTitle')}</h1>
                 <div className="input-group">
                     <div className="input-container">
                         <TextField
-                            label="Nom complet"
+                            label={t('fullName')} 
                             value={getUserName}
                             width={300}
-                            disabled // To prevent editing the field
+                            disabled
                         />
                     </div>
                 </div>
@@ -81,52 +94,47 @@ const MonCompteParametres = () => {
                 <div className="input-group">
                     <div className="input-container">
                         <TextField
-                            label="E-mail"
+                            label={t('email')} 
                             value={getUserMail}
                             width={300}
                             disabled
-                        />                     
+                        />
                     </div>
                 </div>
 
                 <div className="input-group">
                     <div className="input-container">
                         <TextField
-                            label="Mot de passe"
-                            value={getUserPassword}
+                            label={t('password')} 
+                            value="zgecsudbzgeviuzebfjzhegoifzuebf"
                             type="password"
                             width={300}
                             disabled
-                        />                 
+                        />
                     </div>
                 </div>
-                
+
                 <div className="input-group">
-                    <h4 className="addresses-title">Mes adresses</h4>
+                    <h4 className="addresses-title">{t('myAddresses')}</h4> 
                     <div className="bordered-button">
                         <Link to="/MonCompteAddresse" className="custom-link">
                             <button type="button" className="custom-button">
-                                Voir mes adresses
+                                {t('viewAddresses')} 
                             </button>
                         </Link>
                     </div>
                 </div>
 
-                <div className="input-group">
-                    <h4 className="payement-title">Méthode de payement</h4>
-                        <div className="bordered-button">
-                            <Link to="/MonComptePayment" className="custom-link">
-                                <button type="button" className="custom-button">
-                                    Les méthodes de paiement
-                                </button>
-                            </Link>     
-                    </div>
-                </div>
-        
                 <div className="buttons-container">
-                    <button className="submit" type="submit">Télécharger mes données</button>
-                    <Link to="/monCompteEdit" className="submitModify">Modifier mes données</Link>
-                    <button className="submitDelete" type="submit" onClick={handleDeleteAccount}>Supprimer mon compte</button>
+                    <button className="submit" type="submit" onClick={handleDownloadData}>
+                        {t('downloadData')} 
+                    </button>
+                    <Link to="/monCompteEdit" className="submitModify">
+                        {t('editData')} 
+                    </Link>
+                    <button className="submitDelete" type="submit" onClick={handleDeleteAccount}>
+                        {t('deleteAccount')} 
+                    </button>
                 </div>
             </section>
         </>

@@ -7,10 +7,9 @@ $response = ["success" => false];
 
 // Check if the API call is legitimate
 if ($isAllowed) {
+    // Check if the input variables are set
     if (isset($json["user_id"])) {
-        // Create a new instance of the Database class to interact with the database
         $db = new Database();
-        // Assuming you have a method getAllOrdersByUser in your Database class
         $orders = $db->getAllOrdersByUser($json["user_id"]);
 
         // Check if any results are found

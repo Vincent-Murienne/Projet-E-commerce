@@ -1,42 +1,42 @@
 <?php
-
 require_once "../../config/security.php";
 require_once "../../config/db.php";
+require_once "../../config/crypto.php";
 
 // Set default success response to false in case of unlegitimate API call
 $response["success"] = false;
 
+// Check if the API call is legitimate
 if ($isAllowed) {
+    // Check if the input variables are set
     if (isset($json["email"]) && isset($json["password"])) {
         $db = new Database();
+        $crypto = new Crypto();
 
-        $email = $json["email"];
+        $email = $crypto->cryptData($json["email"]); // Crypt personnal information before sending it into the database
         $password = hash("sha512", $json["password"]);
 
-        // Récupérer l'utilisateur avec l'email fourni
+        // Check if user exist
         $user = $db->selectWhere("users", ["email" => $email], false, null);
 
         if ($user) {
-            // Vérifier si le mot de passe haché correspond
+            // Check if passwords matches
             if ($password == $user[0]["password"]) {
-                // Mot de passe correct, connexion réussie
                 $response["success"] = true;
-                $response["user"] = $user;
+                $response["user"] = ["id" => $user[0]["id"], "role" => $user[0]["role"]];
             } else {
-                // Mot de passe incorrect
                 $response["error"] = "Nom d'utilisateur/email ou mot de passe incorrect.";
             }
         } else {
-            // Utilisateur non trouvé
             $response["error"] = "Nom d'utilisateur/email ou mot de passe incorrect.";
         }
     } else {
-        // Email ou mot de passe manquant
         $response["error"] = "Veuillez fournir un nom d'utilisateur/email et un mot de passe pour vous connecter.";
     }
 } else {
-    // Clé API invalide
     $response["error"] = "La clé API n'est pas fournie ou est incorrecte.";
 }
 
+// Print the response in the JSON format
 echo json_encode($response);
+?>

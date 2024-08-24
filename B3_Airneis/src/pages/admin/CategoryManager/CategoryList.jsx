@@ -10,6 +10,7 @@ function CategoryList() {
     // This block of code is used to retrieve the data from the api and then sort the data if needed on what it needs to be sorted if the user selected one column
     let collator = useCollator({ numeric: true });
 
+    // Make an API call to get all the users informations. We use useAsyncList function that allows the filtering on specific columns to be dynamic
     const data = {
         "table": "categories"
     };
@@ -45,7 +46,6 @@ function CategoryList() {
     });
 
     // This part is used when the user select the action button on the table. We will either edit or delete the row.
-
     const { saveData } = useContext(UserContext);
     const navigate = useNavigate();
 

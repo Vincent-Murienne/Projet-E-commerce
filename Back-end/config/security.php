@@ -16,8 +16,11 @@ $isAllowed = false;
 $json = json_decode(file_get_contents("php://input"), true);
 
 // $json = [
-//     "apiKey" => $apiKey,
-//     "id" => 2,
+//     "recherche" => "tee",
+//     "en_stock" => false,
+//     "categories" => [],
+//     "materiaux" => [],
+//     "apiKey" => $apiKey
 // ];
 
 if(isset($json["apiKey"]) && $json["apiKey"] == $apiKey) {

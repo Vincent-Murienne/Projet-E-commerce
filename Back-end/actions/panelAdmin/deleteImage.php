@@ -7,11 +7,11 @@ $response["success"] = false;
 
 // Check if the API call is legitimate
 if($isAllowed) {
-    // Check if the table to lookup for is given
+    // Check if the input variables are set
     if(isset($json["image"])) {
-        $image_path = "../../../B3_Arneis/public/img/" . $json["image"];
+        $image_path = "../../../B3_Arneis/public/img/" . $json["image"]; // We create the relative path to the image
         if(file_exists($image_path)) {
-            unlink($image_path);
+            unlink($image_path); // We remove the image from our local folder
             $response["success"] = true;
         } else {
             $response["error"] = "Erreur lors de la suppression de l'image du dossier images.";

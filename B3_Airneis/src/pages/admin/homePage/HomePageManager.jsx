@@ -4,14 +4,13 @@ import { ToastQueue } from "@react-spectrum/toast";
 
 
 const HomePageManager = () => {
-    // Setting up useStates and function to show all top 3 correctly on the front end
     
+    // Setting use states 
     const [formData, setFormData] = useState({
         id: "",
         table: "",
         order: ""
     });
-
     const [getReload, setReload] = useState(false);
     const [getEditMode, setEditMode] = useState(false);
     const [getEditModeData, setEditModeData] = useState([]);
@@ -19,6 +18,7 @@ const HomePageManager = () => {
     const [getAllCategories, setAllCategories] = useState([]);
     const [getAllProducts, setAllProducts] = useState([]);
 
+    // This is used to enable the edit mode (it is a popup that allows you to modify each top 3)
     const enableEditMode = (data) => {
         setEditMode(true);
         setFormData({"id": data.id, "table": data.table, "order": data.order});
@@ -44,13 +44,13 @@ const HomePageManager = () => {
         }
     };
 
+    // This is used to close and disable the edit mode
     const disableEditMode = () => {
         setEditMode(false);
         setFormData({"id": "", "table": "", "order": ""});
     };
 
     // Functions to retreive the tops 3 from the database
-
     const [getSliderImages, setSliderImages] = useState([]);
     const [getTopCategories, setTopCategories] = useState([]);
     const [getTopProducts, setTopProducts] = useState([]);
@@ -209,7 +209,6 @@ const HomePageManager = () => {
     }, [getReload]);
 
     // Function to handle form submission and update the data in the database
-
     const handleSelect = (e) => {
         setFormData({"id": e.target.value, "table": formData.table, "order": formData.order});
     }

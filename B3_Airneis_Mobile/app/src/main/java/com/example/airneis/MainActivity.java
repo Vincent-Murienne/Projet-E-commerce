@@ -5,10 +5,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.example.airneis.fragment.AccountFragment;
-import com.example.airneis.fragment.CategoriesFragment;
-import com.example.airneis.fragment.ContactFragment;
-import com.example.airneis.fragment.HomeFragment;
+import com.example.airneis.fragment.myAccount.AccountFragment;
+import com.example.airneis.fragment.basket.BasketFragment;
+import com.example.airneis.fragment.categories.CategoryListFragment;
+import com.example.airneis.fragment.homePage.HomeFragment;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.airneis.databinding.ActivityMainBinding;
+import com.example.airneis.fragment.search.SearchFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
@@ -42,9 +43,9 @@ public class MainActivity extends AppCompatActivity {
             if (itemId == R.id.navigation_home) {
                 replaceFragment(new HomeFragment());
             } else if (itemId == R.id.navigation_categories) {
-                replaceFragment(new CategoriesFragment());
-            } else if (itemId == R.id.navigation_contact) {
-                replaceFragment(new ContactFragment());
+                replaceFragment(new CategoryListFragment());
+            } else if (itemId == R.id.navigation_basket) {
+                replaceFragment(new BasketFragment());
             } else if (itemId == R.id.navigation_account) {
                 replaceFragment(new AccountFragment());
             }
@@ -56,8 +57,7 @@ public class MainActivity extends AppCompatActivity {
         fbSearchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent search = new Intent(getApplicationContext(), SearchActivity.class);
-                startActivity(search);
+                replaceFragment(new SearchFragment());
             }
         });
     }

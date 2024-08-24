@@ -2,25 +2,29 @@
 require_once "../../config/security.php";
 require_once "../../config/db.php";
 
+// We need to put each of these headers to allow api calls from our react project
 header('Access-Control-Allow-Origin: http://localhost:5173');
 header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
 header('Content-Type: application/json');
 
+// If the REQUEST_METHOD is OPTIONS, we quit
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit();
 }
 
+// If the REQUEST_METHOD is POST, we send an error and we quit
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405); // Method not allowed
+    http_response_code(405);
     echo json_encode(['message' => 'Méthode non autorisée']);
     exit;
 }
 
+// Retrieve the data
 $inputJSON = file_get_contents('php://input');
-error_log("Input JSON: " . $inputJSON); // Log for debugging
 $input = json_decode($inputJSON, TRUE);
 
+// Check if the input variables are set
 if (isset($input['token'], $input['password'])) {
     $token = $input['token'];
     $newPassword = $input['password'];
@@ -30,7 +34,7 @@ if (isset($input['token'], $input['password'])) {
     $resetRecord = $database->selectWhere('password_reset', ['token' => $token]);
     if (!empty($resetRecord) && time() < $resetRecord[0]['expiry']) {
         $email = $resetRecord[0]['email'];
-        $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+        $hashedPassword = hash("sha512", $newPassword); // Hash the new password
 
         // Fetch the user ID based on the email
         $userRecord = $database->selectWhere('users', ['email' => $email]);
@@ -41,20 +45,19 @@ if (isset($input['token'], $input['password'])) {
             $updateSuccess = $database->update('users', ['password' => $hashedPassword], $userId);
 
             if ($updateSuccess) {
-                // Optionally, delete the token record if it's a one-time use
+                // Delete the token record after use
                 $database->delete('password_reset', $token);
-                echo json_encode(['success' => true, 'message' => 'Password has been reset.']);
+                echo json_encode(['success' => true, 'message' => 'Le mot de passe a bien été changé.']);
             } else {
-                echo json_encode(['success' => false, 'message' => 'Failed to update password.']);
+                echo json_encode(['success' => false, 'message' => 'Une erreur est survenu lors de la modification du mot de passe.']);
             }
         } else {
-            echo json_encode(['success' => false, 'message' => 'User not found.']);
+            echo json_encode(['success' => false, 'message' => 'Utilisateur inconnu.']);
         }
     } else {
-        echo json_encode(['success' => false, 'message' => 'Invalid or expired token.']);
+        echo json_encode(['success' => false, 'message' => 'Token invalide ou expiré.']);
     }
 } else {
-    error_log("Token or password not provided. Input array: " . print_r($input, true));
-    echo json_encode(['success' => false, 'message' => 'Token or password not provided.']);
+    echo json_encode(['success' => false, 'message' => 'Token ou mot de passe manquant.']);
 }
 ?>

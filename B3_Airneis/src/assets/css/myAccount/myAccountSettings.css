@@ -31,7 +31,8 @@
     margin:0 auto;
     margin-top:10%;
 }
-   /* Bordered form */
+
+/* Bordered form */
 .comptePage form {
     width:100%;
     padding: 30px;
@@ -45,7 +46,7 @@
     padding-bottom: 10px;
 }
 
-   /* Full-width inputs */
+/* Full-width inputs */
 .comptePage input[type=text], .comptePage input[type=password] {
     width: 100%;
     padding: 12px 20px;
@@ -204,7 +205,7 @@
     gap: 1rem;
 }
 
-/* Pour les petits écrans */
+/* For small screens */
 @media only screen and (max-width: 600px) {
     .comptePage {
         padding: 20px; 
@@ -225,14 +226,14 @@
     cursor: pointer;
 }
 
-/* Pour les écrans moyens et grands */
+/* For medium and big sized screens */
 @media only screen and (min-width: 601px) {
     .comptePage {
-        padding: 50px; /* Ajoutez un peu plus d'espace autour du contenu */
+        padding: 50px;
     }
 
     .comptePage input[type="text"],
     .comptePage input[type="password"] {
-        width: 300px; /* Revenez à la largeur fixe pour les écrans plus grands */
+        width: 300px;
     }
 }

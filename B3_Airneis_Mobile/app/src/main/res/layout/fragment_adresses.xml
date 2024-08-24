@@ -1,0 +1,314 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:layout_marginBottom="84dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Veuillez ajouter ou choisir une adresse de livraison"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/black"
+            android:gravity="center_horizontal"/>
+
+        <TextView
+            android:layout_width="302dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Choisir une adresse (requis)"
+            android:textSize="12sp" />
+
+        <Spinner
+            android:id="@+id/spinner_addresses"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:gravity="start"
+            android:text="Nom d'adresse"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/editTextAddressName"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint=""
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/edit_text_border"/>
+
+        <TextView
+            android:id="@+id/AddressNameError"
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:textColor="@color/red"
+            android:textSize="14sp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="start"
+            android:text="Prénom"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/editTextFirstName"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint=""
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/edit_text_border"/>
+
+        <TextView
+            android:id="@+id/FirstNameError"
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:textColor="@color/red"
+            android:textSize="14sp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="start"
+            android:text="Nom"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/editTextLastName"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint=""
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/edit_text_border"/>
+
+        <TextView
+            android:id="@+id/LastNameError"
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:textColor="@color/red"
+            android:textSize="14sp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="start"
+            android:text="Adresse"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/editTextAddress"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint=""
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/edit_text_border"/>
+
+        <TextView
+            android:id="@+id/AddressError"
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:textColor="@color/red"
+            android:textSize="14sp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="start"
+            android:text="Ville"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/editTextCity"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint=""
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/edit_text_border"/>
+
+        <TextView
+            android:id="@+id/CityError"
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:textColor="@color/red"
+            android:textSize="14sp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="start"
+            android:text="Code postal"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/editTextZipCode"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint=""
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/edit_text_border"/>
+
+        <TextView
+            android:id="@+id/ZipCodeError"
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:textColor="@color/red"
+            android:textSize="14sp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="start"
+            android:text="Région"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/editTextRegion"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint=""
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/edit_text_border"/>
+
+        <TextView
+            android:id="@+id/RegionError"
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:textColor="@color/red"
+            android:textSize="14sp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="start"
+            android:text="Pays"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/editTextCountry"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint=""
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/edit_text_border"/>
+
+        <TextView
+            android:id="@+id/CountryError"
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:textColor="@color/red"
+            android:textSize="14sp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="start"
+            android:text="Téléphone"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/editTextPhone"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint=""
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/edit_text_border"/>
+
+        <TextView
+            android:id="@+id/PhoneError"
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:textColor="@color/red"
+            android:textSize="14sp"
+            android:visibility="gone"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="80dp">
+
+            <Button
+                android:id="@+id/backButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:text="Annuler"
+                android:background="@drawable/button_border"
+                android:textColor="@android:color/black"/>
+
+            <Button
+                android:id="@+id/validateButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:text="Modifier"
+                android:background="@drawable/button_border"
+                android:textColor="@android:color/black"/>
+
+            <Button
+                android:id="@+id/deleteButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Supprimer"
+                android:background="@drawable/button_border"
+                android:textColor="@android:color/black"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

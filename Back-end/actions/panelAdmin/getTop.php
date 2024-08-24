@@ -7,11 +7,11 @@ $response["success"] = false;
 
 // Check if the API call is legitimate
 if($isAllowed) {
-    // Check if the table to lookup for is given
+    // Check if the input variables are set
     if(isset($json["table"])) {
-        // Create new instance of class Database to interact with the database
         $db = new Database();
         $data = $db->getTop($json["table"]);
+        
         if($data) {
             $response["success"] = true;
             $response["data"] = $data;

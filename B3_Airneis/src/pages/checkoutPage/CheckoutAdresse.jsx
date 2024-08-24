@@ -4,22 +4,26 @@ import { Data } from "../../services/api";
 import { UserContext } from '../../context/UserProvider';
 import { ToastQueue } from "@react-spectrum/toast";
 import { Picker, Item } from '@react-spectrum/picker';
+import { useTranslation } from 'react-i18next';
 import { TextField } from "@adobe/react-spectrum";
+import { fullNameRegex, firstNameRegex, addressRegex, zipCodeRegex, phoneRegex } from '../../utils/regexes';
 
 const CheckoutAdresse = () => {
+    const { t } = useTranslation();
+    // Setting use states
     const { pullData } = useContext(UserContext);
     const [getUserAddresses, setUserAddresses] = useState([]);
     const [getSelectedAddress, setSelectedAddress] = useState("0"); 
 
-    const [getAddressName, setAddressName] = useState(undefined);
-    const [getFirstName, setFirstName] = useState(undefined);
-    const [getLastName, setLastName] = useState(undefined);
-    const [getAddress, setAddress] = useState(undefined);
-    const [getCity, setCity] = useState(undefined);
-    const [getZipCode, setZipCode] = useState(undefined);
-    const [getRegion, setRegion] = useState(undefined);
-    const [getCountry, setCountry] = useState(undefined);
-    const [getPhone, setPhone] = useState(undefined);
+    const [getAddressName, setAddressName] = useState("");
+    const [getFirstName, setFirstName] = useState("");
+    const [getLastName, setLastName] = useState("");
+    const [getAddress, setAddress] = useState("");
+    const [getCity, setCity] = useState("");
+    const [getZipCode, setZipCode] = useState("");
+    const [getRegion, setRegion] = useState("");
+    const [getCountry, setCountry] = useState("");
+    const [getPhone, setPhone] = useState("");
 
     const [getAddressNameValidState, setAddressNameValidState] = useState(1);
     const [getFirstNameValidState, setFirstNameValidState] = useState(1);
@@ -30,6 +34,8 @@ const CheckoutAdresse = () => {
     const [getRegionValidState, setRegionValidState] = useState(1);
     const [getCountryValidState, setCountryValidState] = useState(1);
     const [getPhoneValidState, setPhoneValidState] = useState(1);
+
+    // On change of the selected address, we change the address informations displayed
     useEffect(() => {
         if (getSelectedAddress === "0") {
             setAddressName("");
@@ -41,6 +47,15 @@ const CheckoutAdresse = () => {
             setRegion("");
             setCountry("");
             setPhone("");
+            setAddressNameValidState(2);
+            setFirstNameValidState(2);
+            setLastNameValidState(2);
+            setAddressValidState(2);
+            setCityValidState(2);
+            setZipCodeValidState(2);
+            setRegionValidState(2);
+            setCountryValidState(2);
+            setPhoneValidState(2);
         } else {       
             const selectedAddress = getUserAddresses.find(address => address.id.toString() === getSelectedAddress.toString());
             if (selectedAddress) {
@@ -49,7 +64,7 @@ const CheckoutAdresse = () => {
                 setLastName(selectedAddress.last_name);
                 setAddress(selectedAddress.address);
                 setCity(selectedAddress.city);
-                setZipCode(selectedAddress.zip_code);
+                setZipCode(formatZipCode(selectedAddress.zip_code));
                 setRegion(selectedAddress.region);
                 setCountry(selectedAddress.country);
                 setPhone(selectedAddress.phone_number);
@@ -61,10 +76,11 @@ const CheckoutAdresse = () => {
     let userId;
     const navigate = useNavigate();
 
+    // Make an API call to get all the user addresses. If his not connected, sends him back to the homepage with an error
     useEffect(() => {
-        let userData = pullData("user");       
+        let userData = pullData("user"); // Get user information from the cookies        
         if(userData === undefined){
-            ToastQueue.negative("Veuillez vous connecter afin de pouvoir accéder à cette page.", {timeout: 5000});
+            ToastQueue.negative(t('formTitle'), {timeout: 5000});
             navigate("/");
             return;
         }
@@ -77,23 +93,23 @@ const CheckoutAdresse = () => {
             "id": userId
         };
 
-        Data("panelAdmin", "getAddresses", addressData).then(response => {
+        Data("panelAdmin", "getUserAddresses", addressData).then(response => {
             if (response.success === true) {
-                setUserAddresses(response.data);  
-                if (response.data.length === 0) {
-                    setSelectedAddress("0");
-                } else {
+                if(response.AddressDataEmpty === false) {
+                    setUserAddresses(response.data); 
                     setSelectedAddress(response.data[0].id.toString());  
-                setAddressName(response.data[0].address_name);           
-                setFirstName(response.data[0].first_name);
-                setLastName(response.data[0].last_name);
-                setAddress(response.data[0].address);
-                setCity(response.data[0].city);
-                setZipCode(response.data[0].zip_code); 
-                setRegion(response.data[0].region);
-                setCountry(response.data[0].country);
-                setPhone(response.data[0].phone_number);
-                setUserId(userId);
+                    setAddressName(response.data[0].address_name);           
+                    setFirstName(response.data[0].first_name);
+                    setLastName(response.data[0].last_name);
+                    setAddress(response.data[0].address);
+                    setCity(response.data[0].city);
+                    setZipCode(formatZipCode(response.data[0].zip_code)); 
+                    setRegion(response.data[0].region);
+                    setCountry(response.data[0].country);
+                    setPhone(response.data[0].phone_number);
+                    setUserId(userId);
+                } else {
+                    setSelectedAddress("0");
                 }
             } else {
                 ToastQueue.negative(response.error, {timeout: 5000});
@@ -101,9 +117,15 @@ const CheckoutAdresse = () => {
         });
     }, []);
 
+    const formatZipCode = (zipCode) => {
+        zipCode = "00000" + zipCode;
+
+        return zipCode[zipCode.length-5] + zipCode[zipCode.length-4] + zipCode[zipCode.length-3] + zipCode[zipCode.length-2] + zipCode[zipCode.length-1];
+    }
+
+    // Check the validation of the inputs
     useEffect(() => {
-        if(getAddressName !== undefined) {
-            const fullNameRegex = /^[a-zA-ZÀ-ÿ\s\d-]{5,50}$/;
+        if(getAddressName !== undefined && getAddressName !== "") {
             if(fullNameRegex.test(getAddressName)) {
                 setAddressNameValidState(1);
             } else {
@@ -113,9 +135,8 @@ const CheckoutAdresse = () => {
     }, [getAddressName]);
 
     useEffect(() => {
-        if(getFirstName !== undefined) {
-            const fullNameRegex = /^[a-zA-ZÀ-ÿ\s-]{3,50}$/;
-            if(fullNameRegex.test(getFirstName)) {
+        if(getFirstName !== undefined && getFirstName !== "") {
+            if(firstNameRegex.test(getFirstName)) {
                 setFirstNameValidState(1);
             } else {
                 setFirstNameValidState(2);
@@ -124,9 +145,8 @@ const CheckoutAdresse = () => {
     }, [getFirstName]);
 
     useEffect(() => {
-        if(getLastName !== undefined) {
-            const fullNameRegex = /^[a-zA-ZÀ-ÿ\s-]{3,50}$/;
-            if(fullNameRegex.test(getLastName)) {
+        if(getLastName !== undefined && getLastName !== "") {
+            if(firstNameRegex.test(getLastName)) {
                 setLastNameValidState(1);
             } else {
                 setLastNameValidState(2);
@@ -135,8 +155,7 @@ const CheckoutAdresse = () => {
     }, [getLastName]);
 
     useEffect(() => {
-        if(getAddress !== undefined) {
-            const addressRegex = /^.{5,100}$/; 
+        if(getAddress !== undefined && getAddress !== "") {
             if(addressRegex.test(getAddress)) {
                 setAddressValidState(1); 
             } else {
@@ -146,9 +165,8 @@ const CheckoutAdresse = () => {
     }, [getAddress]);
 
     useEffect(() => {
-        if(getCity !== undefined) {
-            const cityRegex = /^[a-zA-ZÀ-ÿ\s-]{3,50}$/;
-            if(cityRegex.test(getCity)) {
+        if(getCity !== undefined && getCity !== "") {
+            if(firstNameRegex.test(getCity)) {
                 setCityValidState(1); 
             } else {
                 setCityValidState(2); 
@@ -157,8 +175,7 @@ const CheckoutAdresse = () => {
     }, [getCity]);
     
     useEffect(() => {
-        if(getZipCode !== undefined) {
-            const zipCodeRegex = /^\d{5}$/; 
+        if(getZipCode !== undefined && getZipCode !== "") {
             if(zipCodeRegex.test(getZipCode)) {
                 setZipCodeValidState(1); 
             } else {
@@ -168,9 +185,8 @@ const CheckoutAdresse = () => {
     }, [getZipCode]);
 
     useEffect(() => {
-        if(getRegion !== undefined) {
-            const regionRegex = /^[a-zA-ZÀ-ÿ\s-]{3,50}$/; 
-            if(regionRegex.test(getRegion)) {
+        if(getRegion !== undefined && getRegion !== "") {
+            if(firstNameRegex.test(getRegion)) {
                 setRegionValidState(1); 
             } else {
                 setRegionValidState(2); 
@@ -179,9 +195,8 @@ const CheckoutAdresse = () => {
     }, [getRegion]);
     
     useEffect(() => {
-        if(getCountry !== undefined) {
-            const countryRegex = /^[a-zA-ZÀ-ÿ\s-]{3,50}$/; 
-            if(countryRegex.test(getCountry)) {
+        if(getCountry !== undefined && getCountry !== "") {
+            if(firstNameRegex.test(getCountry)) {
                 setCountryValidState(1); 
             } else {
                 setCountryValidState(2); 
@@ -190,8 +205,7 @@ const CheckoutAdresse = () => {
     }, [getCountry]);
     
     useEffect(() => {
-        if(getPhone !== undefined) {
-            const phoneRegex = /^\d{10}$/; 
+        if(getPhone !== undefined && getPhone !== "") {
             if(phoneRegex.test(getPhone)) {
                 setPhoneValidState(1); 
             } else {
@@ -200,6 +214,7 @@ const CheckoutAdresse = () => {
         }
     }, [getPhone]);
 
+    // Check if all the inputs of the form are valid
     const isFormValid = () => {
         return (
             getAddressNameValidState === 1 &&
@@ -214,309 +229,186 @@ const CheckoutAdresse = () => {
         );
     };
     
-    
+    // Form submission
     const FormSubmitted = async (e) => {
         e.preventDefault();
         if (!isFormValid()) {
-            ToastQueue.negative("Veuillez remplir correctement tous les champs.", { timeout: 5000 });
+            ToastQueue.negative(t('fillAllFieldsCorrectly'), { timeout: 5000 });
             return;
         }
-        if (getSelectedAddress === "0") {
-            let data = {
-                "table": "addresses",
-                "data": {
-                    "user_id": getUserId,
-                    "address_name": getAddressName,
-                    "first_name": getFirstName,
-                    "last_name": getLastName,
-                    "address": getAddress,
-                    "city": getCity,
-                    "zip_code": getZipCode,
-                    "region": getRegion,
-                    "country": getCountry,
-                    "phone_number": getPhone
-                }
-            };
 
-            Data("panelAdmin", "insert", data).then(response => {
-                if (response.success === true) {
-                    ToastQueue.positive("Adresse ajoutée avec succès !", { timeout: 5000 });
-                    window.location.reload();
-                    navigate("/checkoutAdresse");
-                } else {
-                    ToastQueue.negative(response.error, { timeout: 5000 });
-                }
-            });
-        } else {
-            ToastQueue.negative("Veuillez remplir correctement tous les champs.", {timeout: 5000});
-        }
+        let data = {
+            "table": "addresses",
+            "data": {
+                "user_id": getUserId,
+                "address_name": getAddressName,
+                "first_name": getFirstName,
+                "last_name": getLastName,
+                "address": getAddress,
+                "city": getCity,
+                "zip_code": getZipCode,
+                "region": getRegion,
+                "country": getCountry,
+                "phone_number": getPhone
+            }
+        };
+
+        Data("panelAdmin", "insertAddress", data).then(response => {
+            if (response.success === true) {
+                navigate(`/checkoutPayment?addressId=${response.id}`);
+            } else {
+                ToastQueue.negative(response.error, { timeout: 5000 });
+            }
+        });
     } 
 
+    // Render different buttons depending of which address is currently selected
     const renderButtons = () => {
         if (getSelectedAddress === "0") {
             return (
                 <>
-                    <Link to="/" className="form-btn-error">Annuler</Link> 
-                    <button type="submit" className="form-btn-success">Ajouter</button>
+                    <Link to="/panier" className="form-btn-error">{t('backButton')}</Link> 
+                    <button type="submit" className="form-btn-success">{t('validateButton')}</button>
                 </>
             );
         } else {
             return (
                 <>
-                    <div className="checkoutAdresse">
-                        <Link to={`/checkoutPayment?addressId=${getSelectedAddress}`} className="btnProduit">Passer au paiement</Link>
-                    </div>
+                    <Link to="/panier" className="form-btn-error">{t('backButton')}</Link> 
+                    <Link to={`/checkoutPayment?addressId=${getSelectedAddress}`} className="form-btn-success">{t('validateButton')}</Link>
                 </>
             );
         }
     };
-
+    
     return (   
         <>
             <div className="panelAdminAddElement">
-            <form onSubmit={FormSubmitted}>
-                    <h2 className="formTitle">Veuillez ajouter ou choisir une adresse de livraison</h2>
-
+                <form onSubmit={FormSubmitted}>
+                    <h2 className="formTitle">{t('formTitle')}</h2>
+    
                     <div className="picker-container">
                         <Picker
-                            label="Choisir une adresse"
+                            label={t('chooseAddressLabel')}
                             necessityIndicator="label"
                             isRequired
                             minWidth={300}
-                            items={[{ id: 0, address_name: "Ajouter une nouvelle adresse" }, ...getUserAddresses]}
+                            items={[{ id: 0, address_name: t('addNewAddress') }, ...getUserAddresses]}
                             selectedKey={getSelectedAddress} 
                             onSelectionChange={selected => setSelectedAddress(selected)}
                         >
                             {item => <Item key={item.id}>{item.address_name}</Item>}
                         </Picker>
                     </div> 
+    
                     <div>                                               
-                        {
-                            (getAddressNameValidState === 1)
-                            ?
                         <TextField
-                            label="Nom d'adresse"
+                            label={t('addressName')}
                             onChange={setAddressName}
                             value={getAddressName}
                             isReadOnly={getSelectedAddress !== "0"}
                             validationState={getAddressNameValidState === 1 ? "valid" : "invalid"}
-                            errorMessage="Veuillez entrer un nom correct (entre 5 et 50 caractères)."
+                            errorMessage={t('addressNameValidError')}
                             width={300}
                         />
-                            :
-                            <TextField
-                                label="Nom d'adresse"
-                                onChange={setAddressName}
-                                value={getAddressName}
-                                isReadOnly={getSelectedAddress !== "0"}
-                                validationState={getAddressNameValidState === 1 ? "valid" : "invalid"}
-                                errorMessage="Veuillez entrer un nom correct (entre 5 et 50 caractères)."
-                                width={300}
-                            />
-                        }
                     </div>
+    
                     <div>                                               
-                        {
-                            (getFirstNameValidState === 1)
-                            ?
-                            <TextField
-                                label="Prénom"
-                                onChange={setFirstName}
-                                value={getFirstName}
-                                isReadOnly={getSelectedAddress !== "0"}
-                                validationState={getFirstNameValidState === 1 ? "valid" : "invalid"}
-                                errorMessage="Veuillez entrer un nom correct (entre 3 et 50 caractères)."
-                                width={300}
-                            />
-                            :
-                            <TextField
-                                label="Prénom"
-                                onChange={setFirstName}
-                                value={getFirstName}
-                                isReadOnly={getSelectedAddress !== "0"}
-                                validationState={getFirstNameValidState === 1 ? "valid" : "invalid"}
-                                errorMessage="Veuillez entrer un nom correct (entre 3 et 50 caractères)."
-                                width={300}
-                            />
-                        }
+                        <TextField
+                            label={t('firstName')}
+                            onChange={setFirstName}
+                            value={getFirstName}
+                            isReadOnly={getSelectedAddress !== "0"}
+                            validationState={getFirstNameValidState === 1 ? "valid" : "invalid"}
+                            errorMessage={t('firstNameValidError')}
+                            width={300}
+                        />
                     </div>
+    
                     <div>
-                        {
-                            (getLastNameValidState === 1)
-                            ?
-                            <TextField
-                                label="Nom"
-                                onChange={setLastName}
-                                value={getLastName}
-                                isReadOnly={getSelectedAddress !== "0"}
-                                validationState={getLastNameValidState === 1 ? "valid" : "invalid"}
-                                errorMessage="Veuillez entrer un nom correct (entre 3 et 50 caractères)."
-                                width={300}
-                            />
-                            :
-                            <TextField
-                                label="Nom"
-                                onChange={setLastName}
-                                value={getLastName}
-                                isReadOnly={getSelectedAddress !== "0"}
-                                validationState={getLastNameValidState === 1 ? "valid" : "invalid"}
-                                errorMessage="Veuillez entrer un nom correct (entre 3 et 50 caractères)."
-                                width={300}
-                            />
-                        }
+                        <TextField
+                            label={t('lastName')}
+                            onChange={setLastName}
+                            value={getLastName}
+                            isReadOnly={getSelectedAddress !== "0"}
+                            validationState={getLastNameValidState === 1 ? "valid" : "invalid"}
+                            errorMessage={t('lastNameValidError')}
+                            width={300}
+                        />
                     </div>
+    
                     <div>
-                        {
-                            (getAddressValidState === 1)
-                            ?
-                            <TextField
-                                label="Adresse"
-                                onChange={setAddress}
-                                value={getAddress}
-                                isReadOnly={getSelectedAddress !== "0"}
-                                validationState={getAddressValidState === 1 ? "valid" : "invalid"}
-                                errorMessage="Veuillez entrer une address valide."
-                                width={300}
-                            />
-                            :
-                            <TextField
-                                label="Adresse"
-                                onChange={setAddress}
-                                value={getAddress}
-                                isReadOnly={getSelectedAddress !== "0"}
-                                validationState={getAddressValidState === 1 ? "valid" : "invalid"}
-                                errorMessage="Veuillez entrer une address valide."
-                                width={300}
-                            />
-                        }
+                        <TextField
+                            label={t('address')}
+                            onChange={setAddress}
+                            value={getAddress}
+                            isReadOnly={getSelectedAddress !== "0"}
+                            validationState={getAddressValidState === 1 ? "valid" : "invalid"}
+                            errorMessage={t('addressValidError')}
+                            width={300}
+                        />
                     </div>
+    
                     <div>
-                        {
-                            (getCityValidState === 1)
-                            ?
-                            <TextField
-                                label="Ville"
-                                onChange={setCity}
-                                value={getCity}
-                                isReadOnly={getSelectedAddress !== "0"}
-                                validationState={getCityValidState === 1 ? "valid" : "invalid"}
-                                errorMessage="Veuillez entrer un nom valide."
-                                width={300}
-                            />
-                            :
-                            <TextField
-                                label="Ville"
-                                onChange={setCity}
-                                value={getCity}
-                                isReadOnly={getSelectedAddress !== "0"}
-                                validationState={getCityValidState === 1 ? "valid" : "invalid"}
-                                errorMessage="Veuillez entrer un nom valide."
-                                width={300}
-                            />
-                        }
+                        <TextField
+                            label={t('city')}
+                            onChange={setCity}
+                            value={getCity}
+                            isReadOnly={getSelectedAddress !== "0"}
+                            validationState={getCityValidState === 1 ? "valid" : "invalid"}
+                            errorMessage={t('cityValidError')}
+                            width={300}
+                        />
                     </div>
+    
                     <div>
-                        {
-                            (getZipCodeValidState === 1)
-                            ?
-                            <TextField
-                                label="Code postal"
-                                onChange={setZipCode}
-                                value={getZipCode}
-                                isReadOnly={getSelectedAddress !== "0"}
-                                validationState={getZipCodeValidState === 1 ? "valid" : "invalid"}
-                                errorMessage="Veuillez entrer un code postal valide."
-                                width={300}
-                            />
-                            :
-                            <TextField
-                                label="Code postal"
-                                onChange={setZipCode}
-                                value={getZipCode}
-                                isReadOnly={getSelectedAddress !== "0"}
-                                validationState={getZipCodeValidState === 1 ? "valid" : "invalid"}
-                                errorMessage="Veuillez entrer un code postal valide."
-                                width={300}
-                            />
-                        }
+                        <TextField
+                            label={t('zipCode')}
+                            onChange={setZipCode}
+                            value={getZipCode}
+                            isReadOnly={getSelectedAddress !== "0"}
+                            validationState={getZipCodeValidState === 1 ? "valid" : "invalid"}
+                            errorMessage={t('zipCodeValidError')}
+                            width={300}
+                        />
                     </div>
+    
                     <div>
-                        {
-                            (getRegionValidState === 1)
-                            ?
-                            <TextField
-                                label="Région"
-                                onChange={setRegion}
-                                value={getRegion}
-                                isReadOnly={getSelectedAddress !== "0"}
-                                validationState={getRegionValidState === 1 ? "valid" : "invalid"}
-                                errorMessage="Veuillez entrer une region valide."
-                                width={300}
-                            />
-                            :
-                            <TextField
-                                label="Région"
-                                onChange={setRegion}
-                                value={getRegion}
-                                isReadOnly={getSelectedAddress !== "0"}
-                                validationState={getRegionValidState === 1 ? "valid" : "invalid"}
-                                errorMessage="Veuillez entrer une region valide."
-                                width={300}
-                            />
-                        }
+                        <TextField
+                            label={t('region')}
+                            onChange={setRegion}
+                            value={getRegion}
+                            isReadOnly={getSelectedAddress !== "0"}
+                            validationState={getRegionValidState === 1 ? "valid" : "invalid"}
+                            errorMessage={t('regionValidError')}
+                            width={300}
+                        />
                     </div>
+    
                     <div>
-                        {
-                            (getCountryValidState === 1)
-                            ?
-                            <TextField
-                                label="Pays"
-                                onChange={setCountry}
-                                value={getCountry}
-                                isReadOnly={getSelectedAddress !== "0"}
-                                validationState={getCountryValidState === 1 ? "valid" : "invalid"}
-                                errorMessage="Veuillez entrer un pays valide."
-                                width={300}
-                            />
-                            :
-                            <TextField
-                                label="Pays"
-                                onChange={setCountry}
-                                value={getCountry}
-                                isReadOnly={getSelectedAddress !== "0"}
-                                validationState={getCountryValidState === 1 ? "valid" : "invalid"}
-                                errorMessage="Veuillez entrer un pays valide."
-                                width={300}
-                            />
-                        }
+                        <TextField
+                            label={t('country')}
+                            onChange={setCountry}
+                            value={getCountry}
+                            isReadOnly={getSelectedAddress !== "0"}
+                            validationState={getCountryValidState === 1 ? "valid" : "invalid"}
+                            errorMessage={t('countryValidError')}
+                            width={300}
+                        />
                     </div>
+    
                     <div>
-                        {
-                            (getPhoneValidState === 1)
-                            ?
-                            <TextField
-                                label="Téléphone"
-                                onChange={setPhone}
-                                value={getPhone}
-                                isReadOnly={getSelectedAddress !== "0"}
-                                validationState={getPhoneValidState === 1 ? "valid" : "invalid"}
-                                errorMessage="Veuillez entrer un numero valide."
-                                width={300}
-                            />
-                            :
-                            <TextField
-                                label="Téléphone"
-                                onChange={setPhone}
-                                value={getPhone}
-                                isReadOnly={getSelectedAddress !== "0"}
-                                validationState={getPhoneValidState === 1 ? "valid" : "invalid"}
-                                errorMessage="Veuillez entrer un numero valide."
-                                width={300}
-                            />
-                        }
-                    </div>             
-                    <></>
-                    
+                        <TextField
+                            label={t('phoneNumber')}
+                            onChange={setPhone}
+                            value={getPhone}
+                            isReadOnly={getSelectedAddress !== "0"}
+                            validationState={getPhoneValidState === 1 ? "valid" : "invalid"}
+                            errorMessage={t('phoneValidError')}
+                            width={300}
+                        />
+                    </div>
+    
                     <div className="buttons">
                         {renderButtons()}
                     </div> 
@@ -524,6 +416,7 @@ const CheckoutAdresse = () => {
             </div>
         </>
     );
+    
 };
 
 export default CheckoutAdresse;

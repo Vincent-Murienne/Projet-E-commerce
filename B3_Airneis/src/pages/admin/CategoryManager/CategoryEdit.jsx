@@ -7,10 +7,13 @@ import { TextField } from "@adobe/react-spectrum";
 
 const CategoryEdit = () => {
 
+    // Setting use states
     const [getCategoryName, setCategoryName] = useState([]);
     const [validState, setValidState] = useState(1);
 
     const { categoryId } = useParams(); // Retrieving the category ID from URL parameters
+
+    // Make an API call to get the category informations
     let data = {
         "table": "categories",
         "id": categoryId
@@ -29,6 +32,7 @@ const CategoryEdit = () => {
         });
     }, []);
 
+    // Check the validation of the inputs
     useEffect(() => {
         if(getCategoryName.length < 2 || getCategoryName.length > 49) {
             setValidState(2);

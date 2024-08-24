@@ -5,7 +5,6 @@
 @import url("./productSearch.css");
 @import url("./products.css");
 @import url("./basket.css");
-@import url("./checkout.css");
 @import url("./reglementation.css");
 @import url("./admin/homePageManager.css");
 @import url("./admin/ImageManager.css");
@@ -16,7 +15,7 @@
 @import url("./myAccount/myAccountSettings.css");
 @import url("./myAccount/myAccount.css");
 @import url("./orders/myOrders.css");
-@import url("./orders/orderDetails.css");
+@import url("./checkout.css");
 
 @font-face {
     font-family: "Circular Std Book";
@@ -52,7 +51,7 @@ body {
     background-color: var(--darker-white);
 }
 
-/* Stylisation de la barre déroulante à droite */
+/* Stylisation of the scrolling bar on the right of the screen */
 
 html::-webkit-scrollbar{
     width: .7rem;
@@ -66,7 +65,7 @@ html::-webkit-scrollbar{
     background-color: var(--blue);
  }
 
-/* Animation d'underline utilisé dans la barre de navigation */
+/* Underline animation used in the navigation bar */
 
 .hover-underline-animation {
     display: inline-block;
@@ -153,7 +152,7 @@ html::-webkit-scrollbar{
 }
 
 
-/* Média query */
+/* Media query */
 @media (max-width: 500px) {
     .main-container {
         margin-bottom: 2rem;

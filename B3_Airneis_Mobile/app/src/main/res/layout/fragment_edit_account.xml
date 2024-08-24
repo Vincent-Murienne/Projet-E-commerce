@@ -1,0 +1,145 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:layout_marginBottom="84dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Modifier le profil"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/black"
+            android:gravity="center_horizontal"/>
+
+        <TextView
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:gravity="start"
+            android:text="Nom complet"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/editTextFullName"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:text="neri"
+            android:hint=""
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/edit_text_border"/>
+
+        <TextView
+            android:id="@+id/AddressNameError"
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:textColor="@color/red"
+            android:textSize="14sp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="start"
+            android:text="Email"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/editTextEmail"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:text="neri@gmail.com"
+            android:hint=""
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/edit_text_border"/>
+
+        <CheckBox
+            android:id="@+id/cb_change_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Voulez-vous changer de mot de passe ?" />
+
+        <TextView
+            android:id="@+id/tvOldPassword"
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="start"
+            android:text="Ancien mot de passe"
+            android:textSize="14sp"
+            android:visibility="gone"/>
+
+        <EditText
+            android:id="@+id/et_old_password"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/edit_text_border"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tvNewPassword"
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="start"
+            android:text="Nouveau mot de passe"
+            android:textSize="14sp"
+            android:visibility="gone"/>
+
+        <EditText
+            android:id="@+id/et_new_password"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/edit_text_border"
+            android:visibility="gone"/>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="80dp">
+
+            <Button
+                android:id="@+id/backButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:text="Retour"
+                android:background="@drawable/button_border"
+                android:textColor="@android:color/black"/>
+
+            <Button
+                android:id="@+id/validateButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:text="Valider"
+                android:background="@drawable/button_border"
+                android:textColor="@android:color/black"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

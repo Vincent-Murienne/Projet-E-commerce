@@ -22,10 +22,10 @@ const AdminHeader = () => {
     const [ user, setUser ] = useState({
         isConnected: false,
         isAdmin: false,
-        id: "",
-        email: ""
+        id: ""
     });
 
+    // This is used to close the navigation menu
     const closeMenus = () => {
         let dropdownBurgerContent = document.querySelector('.dropdown-burger-content');
         let dropdownUserContent = document.querySelector('.dropdown-user-content');
@@ -39,6 +39,7 @@ const AdminHeader = () => {
         }
     };
 
+    // This is used for debug reason, if we need to reload the data
     useEffect(()=>{
         closeMenus();
         let data = pullData("user");
@@ -97,8 +98,7 @@ const AdminHeader = () => {
         setUser({
             isConnected: false,
             isAdmin: false,
-            id: "",
-            email: ""
+            id: ""
         });
         ToastQueue.positive("Vous vous êtes correctement déconnecté.", {timeout: 5000});
     };

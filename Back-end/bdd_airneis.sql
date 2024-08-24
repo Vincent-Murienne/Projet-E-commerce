@@ -1,33 +1,26 @@
+CREATE DATABASE airneis_e_commerce;
+USE airneis_e_commerce;
+
 CREATE TABLE `users` (
   `id` integer PRIMARY KEY AUTO_INCREMENT,
-  `full_name` varchar(100),
-  `email` varchar(50),
+  `full_name` varchar(200),
+  `email` varchar(200),
   `password` char(128),
   `role` boolean
-);
-
-CREATE TABLE `payments` (
-  `id` integer PRIMARY KEY AUTO_INCREMENT,
-  `user_id` integer,
-  `card_name` varchar(50),
-  `card_owner` varchar(50),
-  `card_number` varchar(16),
- `expiration_date` varchar(7) NOT NULL,
-  `cvv` integer
 );
 
 CREATE TABLE `addresses` (
   `id` integer PRIMARY KEY AUTO_INCREMENT,
   `user_id` integer,
-  `address_name` varchar(50),
-  `first_name` varchar(50),
-  `last_name` varchar(50),
-  `address` varchar(100),
-  `city` varchar(50),
+  `address_name` varchar(200),
+  `first_name` varchar(200),
+  `last_name` varchar(200),
+  `address` varchar(200),
+  `city` varchar(200),
   `zip_code` integer,
-  `region` varchar(50),
-  `country` varchar(30),
-  `phone_number` varchar(10)
+  `region` varchar(200),
+  `country` varchar(200),
+  `phone_number` varchar(200)
 );
 
 CREATE TABLE `categories` (
@@ -77,7 +70,6 @@ CREATE TABLE `orders` (
   `date` timestamp NOT NULL default CURRENT_TIMESTAMP,
   `user_id` integer,
   `address_id` integer,
-  `payment_id` integer,
   `order_state` VARCHAR(10)
 );
 
@@ -95,8 +87,6 @@ CREATE TABLE `password_reset` (
   `expiry` integer NOT NULL
 );
 
-ALTER TABLE `payments` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
 ALTER TABLE `addresses` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 ALTER TABLE `products` ADD FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`);
@@ -112,14 +102,12 @@ ALTER TABLE `baskets` ADD FOREIGN KEY (`product_id`) REFERENCES `products` (`id`
 
 ALTER TABLE `orders` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 ALTER TABLE `orders` ADD FOREIGN KEY (`address_id`) REFERENCES `addresses` (`id`);
-ALTER TABLE `orders` ADD FOREIGN KEY (`payment_id`) REFERENCES `payments` (`id`);
 
 ALTER TABLE `lots_of_product` ADD FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`);
 ALTER TABLE `lots_of_product` ADD FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 
 INSERT INTO users (full_name, email, password, role) VALUES
-('ADMIN', 'admin@admin.com', '395bdb57512f444f07f23923cb637b5bba7c38ea967a458a0553199e8615f1a747a468de07a213c259ac42c390e8c12a48d35cec2d255d89a1d8f6f149b5d976', 1),
-('Neriman', 'neri@gmail.com', '53db0fc135fbce6f381cf5acd2c0e1010d7597e32b7f5c91e371f6985945d7f1bad9e7d6468f885d8849450ebb603540cb59080ff376d7030e707c6ee67b3b32', 1);
+('mzKXYyPEMT63P+0ORzlFmY7O0a6w', 'gsyGSS7L9iqQOa5iuFQyvq7u8Y6QwUmaISgBUk7kgw==', '395bdb57512f444f07f23923cb637b5bba7c38ea967a458a0553199e8615f1a747a468de07a213c259ac42c390e8c12a48d35cec2d255d89a1d8f6f149b5d976', 1);
 
 
 INSERT INTO categories (name, `order`) VALUES
@@ -156,81 +144,81 @@ INSERT INTO products (category_id, name, price, quantity, description, `order`) 
 (7, 'Poubelle de bureau en acier inoxydable', 29.99, 15, 'Poubelle de bureau en acier inoxydable pour un bureau élégant et propre', null);
 
 INSERT INTO images (product_id, category_id, name, `order`) VALUES
-(1, null, '1-1-chaise-design-blanc-et-bois-clair-.jpg', null),
-(1, null, '1-2-chaise-design-blanc-et-bois-clair-.jpg', null),
-(1, null, '1-3-chaise-design-blanc-et-bois-clair-.jpg', 1),
-(2, 1, '2-1-chaise-pivotante.jpg', null),
-(2, null, '2-2-chaise-pivotante.jpg', null),
-(2, null, '2-3-chaise-pivotante.jpg', null),
-(3, null, '3-1-Chaise en metal.jpg', null),
-(3, null, '3-2-Chaise en metal.jpg', null),
-(3, null, '3-3-Chaise en metal.jpg', null),
-(4, null, '4-1-Chaise de bar.jpg', null),
-(4, null, '4-2-Chaise de bar.jpg', null),
-(4, null, '4-3-Chaise de bar.jpg', null),
-(5, 2, '5-1-table-en-chene.jpg', 2),
-(5, null, '5-2-table-en-chene.jpg', null),
-(5, null, '5-3-table-en-chene.jpg', null),
-(6, null, '6-1-table-basse.jpg', null),
-(6, null, '6-2-table-basse.jpg', null),
-(6, null, '6-3-table-basse.jpg', null),
-(7, null, '7-1-Table de cuisine extensible.jpg', null),
-(7, null, '7-2-Table de cuisine extensible.jpg', null),
-(7, null, '7-3-Table de cuisine extensible.jpg', null),
-(8, 3, '8-1-Canape 3 places en cuir italien.jpg', 3),
-(8, null, '8-2-Canape 3 places en cuir italien.jpg', null),
-(8, null, '8-3-Canape 3 places en cuir italien.jpg', null),
-(9, null, '9-1-Canape-lit avec rangement.jpg', null),
-(9, null, '9-2-Canape-lit avec rangement.jpg', null),
-(9, null, '9-3-Canape-lit avec rangement.jpg', null),
-(10, 4, '10-1-armoire-coulissant.jpg', null),
-(10, null, '10-2-armoire-coulissant.jpg', null),
-(10, null, '10-3-armoire-coulissant.jpg', null),
-(11, null, '11-1-Armoire de rangement en bois de cerisier.jpg', null),
-(11, null, '11-2-Armoire de rangement en bois de cerisier.jpg', null),
-(11, null, '11-3-Armoire de rangement en bois de cerisier.jpg', null),
-(12, null, '12-1-Armoire dressing avec miroir.jpg', null),
-(12, null, '12-2-Armoire dressing avec miroir.jpg', null),
-(12, null, '12-3-Armoire dressing avec miroir.jpg', null),
-(13, null, '13-1-Ensemble de salon de jardin.jpg', null),
-(13, null, '13-2-Ensemble de salon de jardin.jpg', null),
-(13, null, '13-3-Ensemble de salon de jardin.jpg', null),
-(14, null, '14-1-Chaise longue de jardin pliante.jpg', null),
-(14, null, '14-2-Chaise longue de jardin pliante.jpg', null),
-(14, null, '14-3-Chaise longue de jardin pliante.jpg', null),
-(15, 5, '15-1-Table de jardin avec parasol.jpg', null),
-(15, null, '15-2-Table de jardin avec parasol.jpg', null),
-(15, null, '15-3-Table de jardin avec parasol.jpg', null),
-(16, null, '16-1-table-chevet-avec-tiroir.jpg', null),
-(16, null, '16-2-table-chevet-avec-tiroir.jpg', null),
-(16, null, '16-3-table-chevet-avec-tiroir.jpg', null),
-(17, 6, '17-1-Table de chevet suspendue.jpg', null),
-(17, null, '17-2-Table de chevet suspendue.jpg', null),
-(17, null, '17-3-Table de chevet suspendue.jpg', null),
-(18, null, '18-1-Table de chevet design en verre.jpg', null),
-(18, null, '18-2-Table de chevet design en verre.jpg', null),
-(18, null, '18-3-Table de chevet design en verre.jpg', null),
-(19, null, '19-1-Table de chevet en metal noir.jpg', null),
-(19, null, '19-2-Table de chevet en metal noir.jpg', null),
-(19, null, '19-3-Table de chevet en metal noir.jpg', null),
-(20, 7, '20-1-Organiseur de bureau en bois.jpg', null),
-(20, null, '20-2-Organiseur de bureau en bois.jpg', null),
-(20, null, '20-3-Organiseur de bureau en bois.jpg', null),
-(21, null, '21-1-lampe-de-bureau.jpg', null),
-(21, null, '21-2-lampe-de-bureau.jpg', null),
-(21, null, '21-3-lampe-de-bureau.jpg', null),
-(22, null, '22-1-Poubelle de bureau en acier inoxydable.jpg', null),
-(22, null, '22-2-Poubelle de bureau en acier inoxydable.jpg', null),
-(22, null, '22-3-Poubelle de bureau en acier inoxydable.jpg', null);
+(1, null, 'a1_1_chaise_design_blanc_et_bois_clair.jpg', null),
+(1, null, 'a1_2_chaise_design_blanc_et_bois_clair.jpg', null),
+(1, null, 'a1_3_chaise_design_blanc_et_bois_clair.jpg', 1),
+(2, 1, 'a2_1_chaise_pivotante.jpg', null),
+(2, null, 'a2_2_chaise_pivotante.jpg', null),
+(2, null, 'a2_3_chaise_pivotante.jpg', null),
+(3, null, 'a3_1_chaise_en_metal.jpg', null),
+(3, null, 'a3_2_chaise_en_metal.jpg', null),
+(3, null, 'a3_3_chaise_en_metal.jpg', null),
+(4, null, 'a4_1_chaise_de_bar.jpg', null),
+(4, null, 'a4_2_chaise_de_bar.jpg', null),
+(4, null, 'a4_3_chaise_de_bar.jpg', null),
+(5, 2, 'b1_1_table_en_chene.jpg', 2),
+(5, null, 'b1_2_table_en_chene.jpg', null),
+(5, null, 'b1_3_table_en_chene.jpg', null),
+(6, null, 'b2_1_table_basse.jpg', null),
+(6, null, 'b2_2_table_basse.jpg', null),
+(6, null, 'b2_3_table_basse.jpg', null),
+(7, null, 'b3_1_table_de_cuisine_extensible.jpg', null),
+(7, null, 'b3_2_table_de_cuisine_extensible.jpg', null),
+(7, null, 'b3_3_table_de_cuisine_extensible.jpg', null),
+(8, 3, 'c1_1_canape_3_places_en_cuir_italien.jpg', 3),
+(8, null, 'c1_2_canape_3_places_en_cuir_italien.jpg', null),
+(8, null, 'c1_3_canape_3_places_en_cuir_italien.jpg', null),
+(9, null, 'c2_1_canape_lit_avec_rangement.jpg', null),
+(9, null, 'c2_2_canape_lit_avec_rangement.jpg', null),
+(9, null, 'c2_3_canape_lit_avec_rangement.jpg', null),
+(10, 4, 'd1_1_armoire_coulissant.jpg', null),
+(10, null, 'd1_2_armoire_coulissant.jpg', null),
+(10, null, 'd1_3_armoire_coulissant.jpg', null),
+(11, null, 'd2_1_armoire_de_rangement_en_bois_de_cerisier.jpg', null),
+(11, null, 'd2_2_armoire_de_rangement_en_bois_de_cerisier.jpg', null),
+(11, null, 'd2_3_armoire_de_rangement_en_bois_de_cerisier.jpg', null),
+(12, null, 'd3_1_armoire_dressing_avec_miroir.jpg', null),
+(12, null, 'd3_2_armoire_dressing_avec_miroir.jpg', null),
+(12, null, 'd3_3_armoire_dressing_avec_miroir.jpg', null),
+(13, null, 'e1_1_ensemble_de_salon_de_jardin.jpg', null),
+(13, null, 'e1_2_ensemble_de_salon_de_jardin.jpg', null),
+(13, null, 'e1_3_ensemble_de_salon_de_jardin.jpg', null),
+(14, null, 'e2_1_chaise_longue_de_jardin_pliante.jpg', null),
+(14, null, 'e2_2_chaise_longue_de_jardin_pliante.jpg', null),
+(14, null, 'e2_3_chaise_longue_de_jardin_pliante.jpg', null),
+(15, 5, 'e3_1_table_de_jardin_avec_parasol.jpg', null),
+(15, null, 'e3_2_table_de_jardin_avec_parasol.jpg', null),
+(15, null, 'e3_3_table_de_jardin_avec_parasol.jpg', null),
+(16, null, 'f1_1_table_chevet_avec_tiroir.jpg', null),
+(16, null, 'f1_2_table_chevet_avec_tiroir.jpg', null),
+(16, null, 'f1_3_table_chevet_avec_tiroir.jpg', null),
+(17, 6, 'f2_1_table_de_chevet_suspendue.jpg', null),
+(17, null, 'f2_2_table_de_chevet_suspendue.jpg', null),
+(17, null, 'f2_3_table_de_chevet_suspendue.jpg', null),
+(18, null, 'f3_1_table_de_chevet_design_en_verre.jpg', null),
+(18, null, 'f3_2_table_de_chevet_design_en_verre.jpg', null),
+(18, null, 'f3_3_table_de_chevet_design_en_verre.jpg', null),
+(19, null, 'f4_1_table_de_chevet_en_metal_noir.jpg', null),
+(19, null, 'f4_2_table_de_chevet_en_metal_noir.jpg', null),
+(19, null, 'f4_3_table_de_chevet_en_metal_noir.jpg', null),
+(20, 7, 'g1_1_organiseur_de_bureau_en_bois.jpg', null),
+(20, null, 'g1_2_organiseur_de_bureau_en_bois.jpg', null),
+(20, null, 'g1_3_organiseur_de_bureau_en_bois.jpg', null),
+(21, null, 'g2_1_lampe_de_bureau.jpg', null),
+(21, null, 'g2_2_lampe_de_bureau.jpg', null),
+(21, null, 'g2_3_lampe_de_bureau.jpg', null),
+(22, null, 'g3_1_poubelle_de_bureau_en_acier_inoxydable.jpg', null),
+(22, null, 'g3_2_poubelle_de_bureau_en_acier_inoxydable.jpg', null),
+(22, null, 'g3_3_poubelle_de_bureau_en_acier_inoxydable.jpg', null);
 
 INSERT INTO orders (date, user_id, order_state) VALUES
-(STR_TO_DATE("11/05/2024", "%d/%m/%Y"), 1, "En cours"),
-(STR_TO_DATE("10/05/2024", "%d/%m/%Y"), 1, "En cours"),
-(STR_TO_DATE("05/05/2024", "%d/%m/%Y"), 1, "Livré"),
-(STR_TO_DATE("05/05/2024", "%d/%m/%Y"), 1, "Livré"),
-(STR_TO_DATE("05/05/2024", "%d/%m/%Y"), 1, "Livré"),
-(STR_TO_DATE("28/04/2024", "%d/%m/%Y"), 1, "Livré"),
-(STR_TO_DATE("28/04/2024", "%d/%m/%Y"), 1, "Livré");
+(STR_TO_DATE("11/05/2024", "%d/%m/%Y"), 1, "EN COURS"),
+(STR_TO_DATE("10/05/2024", "%d/%m/%Y"), 1, "EN COURS"),
+(STR_TO_DATE("05/05/2024", "%d/%m/%Y"), 1, "LIVRÉE"),
+(STR_TO_DATE("05/05/2024", "%d/%m/%Y"), 1, "LIVRÉE"),
+(STR_TO_DATE("05/05/2024", "%d/%m/%Y"), 1, "LIVRÉE"),
+(STR_TO_DATE("28/04/2024", "%d/%m/%Y"), 1, "LIVRÉE"),
+(STR_TO_DATE("28/04/2024", "%d/%m/%Y"), 1, "LIVRÉE");
 
 INSERT INTO lots_of_product (order_id, product_id, quantity) VALUES
 (1, 1, 2),
@@ -252,14 +240,6 @@ INSERT INTO lots_of_product (order_id, product_id, quantity) VALUES
 (7, 10, 1),
 (7, 11, 1);
 
-INSERT INTO `addresses` (`user_id`, `address_name`, `first_name`, `last_name`, `address`, `city`, `zip_code`, `region`, `country`, `phone_number`) VALUES
-(2, 'Maison de neri', 'neri', 'her', '123 Rue de la Liberté', 'Paris', 75001, 'Île-de-France', 'France', 723456789),
-(2, 'Maison de neri 2', 'neri', 'her', '456 Business Boulevard', 'Paris', 75002, 'Île-de-France', 'France', 723456789);
-
-INSERT INTO `payments` (`user_id`, `card_name`, `card_owner`, `card_number`, `expiration_date`, `cvv`) VALUES 
-(2, 'Mastercard', 'Neriman Her', '1111111111111234', TIMESTAMP('2026-05-01'), 123),
-(2, 'Visa', 'Neriman Her', '1111111111115364', TIMESTAMP('2025-09-01'), 456);
-
 INSERT INTO `materials_list` (`id`, `name`) VALUES
 (1, 'Bois'),
 (2, 'Fer'),
@@ -267,3 +247,11 @@ INSERT INTO `materials_list` (`id`, `name`) VALUES
 (4, 'Bronze'),
 (5, 'Papier'),
 (6, 'Coton');
+
+INSERT INTO `products_materials` (`product_id`, `materials_list_id`) VALUES
+(7, 1),
+(1, 5),
+(2, 1),
+(2, 6),
+(3, 2),
+(4, 2);

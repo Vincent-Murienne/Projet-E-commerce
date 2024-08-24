@@ -5,6 +5,7 @@ const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
 
+    // Setting use states
     const [ reloadData, setReloadData ] = useState(false);
 
     // Function to save data in cookies so it can live in the whole application even after a reload
@@ -32,7 +33,8 @@ const UserProvider = ({ children }) => {
         Cookies.remove(key);
     };
 
-        const handleLogout = () => {
+    // Function to logout the user and removing all infos from the cookies
+    const handleLogout = () => {
         removeData("user");
         Cookies.remove("user");
     }

@@ -5,58 +5,57 @@ import SliderProduct from "./SliderProduct";
 import ProductSimilaire from "./ProductSimilaire";
 import { UserContext } from "../../context/UserProvider";
 import { ToastQueue } from "@react-spectrum/toast";
+import { useTranslation } from 'react-i18next';
 
 const ProductPage = () => {
+    const { t } = useTranslation();
+
+    // Setting use states
     const [product, setProduct] = useState(null);
     const [isIncrementDesactivated, setIsIncrementDesactivated] = useState(false);
     const [isDecrementDesactivated, setIsDecrementDesactivated] = useState(true);
-
     const [cartCount, setCartCount] = useState(1);
     const { productId } = useParams(); 
+
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await Data("product", "getProductDetail", { table: "products", id: productId });
                 if (response.success === true) {
                     setProduct(response.data[0]);
-                    setCartCount(1);
-                    
+                    setCartCount(1);           
                 } else {
-                    ToastQueue.negative(response.error, {timeout: 5000});
+                    ToastQueue.negative(t("errorProduct"), {timeout: 5000});
                 }
             } catch (error) {
-                console.error('Une erreur est survenue lors de la récupération des données du produit:', error);
+                ToastQueue.negative(t("errorProduct"), {timeout: 5000});
             }
         };
 
         fetchData();
     }, [productId]);
 
-    //Determine the stock status based on the product's available quantity
-    const stockStatus = product && (product.quantity === null || product.quantity === 0) ? "Hors stock" : "En stock";
+    // Determine the stock status based on the product's available quantity
+    const stockStatus = product && (product.quantity === null || product.quantity <= 0) ? t("outOfStock") : t("inStock");
 
     const { pullData } = useContext(UserContext);
 
+    // Add product to cart if the user is connected
     const addToCart = async () => {
-        let user = pullData("user");
+        let user = pullData("user"); // Get user information from the cookies
 
         if (!user) {
-            ToastQueue.negative("Veuillez vous connecter pour ajouter des produits au panier.", { timeout: 5000 });
+            ToastQueue.negative(t("loginRequired"), { timeout: 5000 });
             return;
         }
-
         const data = {
-            table: "baskets",
-            data: {
-                user_id: user.id,
-                product_id: productId,
-                quantity: cartCount
-            }
+            user_id: user.id,
+            product_id: productId,
+            quantity: cartCount           
         };
-
-        Data("panelAdmin", "insert", data).then(response => {
+        Data("basket", "insertBasket", data).then(response => {
             if (response.success === true) {
-                ToastQueue.positive("L'élément a bien été ajouté au panier.", { timeout: 5000 });
+                ToastQueue.positive(t("itemAddedToCart"), { timeout: 5000 });
                 setCartCount(1);
                 setIsDecrementDesactivated(true);
             } else {
@@ -65,8 +64,8 @@ const ProductPage = () => {
         });
     };
 
+    // Decrement the quantity of this product to add to cart (can't go under 1)
     const decrementCartCount = () => {
-        
         if (cartCount > 1) {
             if ((cartCount - 1) === 1){
                 setIsDecrementDesactivated(true);
@@ -76,6 +75,7 @@ const ProductPage = () => {
         }       
     };
 
+    // Increment the quantity of this product to add to cart (can't go over the stock in the database)
     const incrementCartCount = () => {
         if(product && product.quantity > 0 && cartCount < product.quantity) {
             if((cartCount + 1) === product.quantity){
@@ -96,21 +96,21 @@ const ProductPage = () => {
                             <div key={product.id}>
                                 <h3>{product.name}</h3>
                                 <div className="stock">
-                                    <h3>{stockStatus} </h3>
+                                    <h3>{stockStatus}</h3>
                                 </div>
                                 <h2>{product.price} €</h2>
                                 <h3>{product.description}.</h3>
                                 {product.material && (
-                                    <h3>Conçu avec un matériau de qualité supérieure, fait de {product.material}.</h3>
+                                    <h3>{t('materiaux')} {product.material}.</h3>
                                 )}
                             </div>
                             <p className="quantity-container">
                                 <button onClick={decrementCartCount} className={`quantity-button ${isDecrementDesactivated ? 'disabled' : ''}`}>-</button>
-                                <span className="quantity">Quantité : {cartCount}</span>
+                                <span className="quantity">{t('quantity')} {cartCount}</span>
                                 <button onClick={incrementCartCount} className={`quantity-button ${isIncrementDesactivated ? 'disabled' : ''}`}>+</button>
                             </p> 
-                            <button onClick={addToCart} className={`btnProduit ${stockStatus === "En stock" ? "" : "disabled"}`} disabled={stockStatus !== "En stock"}>
-                                {stockStatus === "En stock" ? "AJOUTER AU PANIER" : "STOCK ÉPUISÉ"}
+                            <button onClick={addToCart} className={`btnProduit ${stockStatus === t('inStock') ? "" : "disabled"}`} disabled={stockStatus !== t('inStock')}>
+                                {stockStatus === t('inStock') ? t('addToCart') : t('outOfStock')}
                             </button>
                         </div>
                     )}

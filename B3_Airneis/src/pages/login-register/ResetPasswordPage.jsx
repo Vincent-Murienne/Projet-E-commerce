@@ -1,47 +1,21 @@
-import { useState, useEffect } from 'react';
-import { useParams, useNavigate} from 'react-router-dom';
+import { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { ToastQueue } from '@react-spectrum/toast';
+import { useTranslation } from 'react-i18next';
+import { passwordRegex } from '../../utils/regexes';
 
 const ResetPasswordPage = () => {
+  const { t } = useTranslation(); // Hook for translation
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [isValidToken, setIsValidToken] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [errorMessage, setErrorMessage] = useState('');
-  const { token } = useParams(); // Récupérer le token de l'URL
+  const { token } = useParams();
   const navigate = useNavigate();
-
-
-  useEffect(() => {
-    const verifyToken = async () => {
-      try {
-        const response = await fetch('http://localhost:8000/actions/loginRegister/verifyToken.php', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ token }),
-        });
-
-        const data = await response.json();
-
-        if (data.success) {
-          setIsValidToken(true);
-        } else {
-          setErrorMessage(data.message || 'Le token est invalide ou a expiré.');
-          navigate('/login'); // Rediriger l'utilisateur si le token n'est pas valide
-        }
-      } catch (error) {
-        setErrorMessage('Une erreur est survenue lors de la vérification du token.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    verifyToken();
-  }, [token, navigate]);
+  const [errors, setErrors] = useState({
+    password: ''
+  });
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -53,13 +27,21 @@ const ResetPasswordPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrors({
+      password: '',
+    });
+
+    if (!passwordRegex.test(password)) {
+      setErrors(prevErrors => ({ ...prevErrors, password: t('passwordRequirements') }));
+      return;
+    }
+
     if (password !== confirmPassword) {
-        alert('Les mots de passe ne correspondent pas.');
+        ToastQueue.negative(t('passwordMismatch'), { timeout: 5000 });
         return;
     }
 
     try {
-      console.log(JSON.stringify({ token, password }));
       const response = await fetch('http://localhost:8000/actions/loginRegister/resetPassword.php', {
             method: 'POST',
             headers: {
@@ -70,14 +52,13 @@ const ResetPasswordPage = () => {
 
         const data = await response.json();
         if (data.success) {
-            alert('Votre mot de passe a été modifié avec succès.');
+            ToastQueue.positive(t('passwordUpdateSuccess'), { timeout: 5000 });
             navigate('/login');
         } else {
-            alert(data.message);
+          ToastQueue.negative(t('invalidOrExpiredLink'), { timeout: 5000 });
         }
     } catch (error) {
-        console.error('Error:', error);
-        alert('Une erreur est survenue lors de la modification du mot de passe.');
+        ToastQueue.negative(t('errorUpdatingPassword'), { timeout: 5000 });
     }
   };
 
@@ -86,7 +67,7 @@ const ResetPasswordPage = () => {
       <form onSubmit={handleSubmit}>
         <div className='container-reset'>
           <div className='header-reset'>
-            <div className='text'>Créer un nouveau mot de passe</div>
+            <div className='text'>{t('createNewPassword')}</div>
             <div className='underline'></div>
           </div>
           <div className='inputs-reset'>
@@ -94,7 +75,7 @@ const ResetPasswordPage = () => {
               <input
                 type={showPassword ? 'text' : 'password'}
                 id="password"
-                placeholder='Nouveau mot de passe *'
+                placeholder={t('newPasswordPlaceholder')}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -107,7 +88,7 @@ const ResetPasswordPage = () => {
               <input
                 type={showConfirmPassword ? 'text' : 'password'}
                 id="confirmPassword"
-                placeholder='Confirmez le mot de passe *'
+                placeholder={t('confirmPasswordPlaceholder')}
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
@@ -116,10 +97,11 @@ const ResetPasswordPage = () => {
                 {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
               </span>
             </div>
+            {errors.password && <div className="error-message">{errors.password}</div>}
           </div>
           <br />
           <div className="submit-container-reset">
-            <button className="submit-reset" type="submit">Modifier le mot de passe</button>
+            <button className="submit-reset" type="submit">{t('submitButton')}</button>
           </div>
         </div>
       </form>

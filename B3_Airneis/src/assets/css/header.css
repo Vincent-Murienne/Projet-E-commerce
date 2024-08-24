@@ -49,8 +49,7 @@ header nav .end-nav {
     gap: 1rem;
 }
 
-/* Dropdown du menu utilisateur */
-
+/* Dropdown of the user menu */
 header nav .dropdown-user-content {
     display: none;
     position: absolute;
@@ -98,9 +97,13 @@ header nav .separator {
     text-align: center;
 }
 
-/* Média query */
+/* Media query */
 @media (max-width: 1300px) {
     header nav .middle-nav {
+        display: none;
+    }
+
+    header nav .nav-display-none {
         display: none;
     }
 

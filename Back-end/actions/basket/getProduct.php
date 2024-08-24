@@ -7,13 +7,11 @@ $response["success"] = false;
 
 // Check if the API call is legitimate
 if ($isAllowed) {
+    // Check if the input variables are set
     if (isset($json["user_id"])) {
-        // Create new instance of class Database to interact with the database
         $db = new Database();
-
         $productBasket = $db->getProductBasket($json["user_id"]);
 
-        // Check if any results are found
         if ($productBasket !== null) {
             $response["success"] = true;
             $response["data"] = $productBasket;

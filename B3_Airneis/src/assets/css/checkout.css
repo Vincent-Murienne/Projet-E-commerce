@@ -1,22 +1,19 @@
-.checkoutAdresse .btnProduit {
+
+.stripe-form {
+    width: 400px;
+    height: 100%;
+    margin: 7rem auto;
+    text-align: center;
+    background-color: var(--white);
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.stripe-form .buttons {
+    margin-top: 2rem;
     display: flex;
-    padding: .6rem 6rem;
-    /* Adjust padding as needed */
-    background-color: #FADBD8; /* Button background color */
-    color: black; /* Button text color */
-    text-decoration: none; /* Remove link underline */
-    border: 3px solid black;
-    font-weight: bold;
-  
-}
-
-/* Button hover style */
-.checkoutAdresse .btnProduit:hover {
-    background-color: var(--dark-blue); /* Button background color on hover */
-    color: black; /* Button text color on hover */
-}
-
-/* Button active style */
-.checkoutAdresse .btnProduit:active {
-    color: var(--white); /* Button text color on click */
+    flex-direction: row;
+    justify-content: center;
+    gap: 2rem;
 }

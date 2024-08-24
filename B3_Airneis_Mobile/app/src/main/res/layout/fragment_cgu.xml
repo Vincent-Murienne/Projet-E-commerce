@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="#ecf0f1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/cgu_container"
+        android:layout_margin="20dp"
+        android:maxWidth="800dp">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Conditions Générales d'Utilisation"
+            android:textSize="24sp"
+            android:layout_marginBottom="20dp"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:gravity="center" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1. Conditions d'utilisation du site"
+                android:textSize="18sp"
+                android:textColor="#2c3e50"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bienvenue sur le site ÀIRNEIS. En accédant à ce site, vous acceptez d'être lié par les présentes conditions générales d'utilisation, toutes les lois et réglementations applicables, et acceptez que vous êtes responsable du respect de toutes les lois locales applicables. Si vous n'êtes pas d'accord avec ces conditions, vous êtes interdit d'utiliser ou d'accéder à ce site."
+                android:lineHeight="24dp"
+                android:layout_marginBottom="15dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2. Propriété Intellectuelle"
+                android:textSize="18sp"
+                android:textColor="#2c3e50"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Le contenu du site, y compris, mais sans s'y limiter, les textes, graphiques, images, logos et logiciels, est la propriété exclusive de ÀIRNEIS ou de ses concédants de licence et est protégé par les lois sur le droit d'auteur et autres lois sur la propriété intellectuelle."
+                android:lineHeight="24dp"
+                android:layout_marginBottom="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="La reproduction et/ou la représentation des éléments du Site n'est autorisée qu'à des fins d'information pour un usage strictement personnel et privé. L'utilisation commerciale de ces éléments est interdite sauf éventuelle autorisation préalable de la Société ÀIRNEIS."
+                android:lineHeight="24dp"
+                android:layout_marginBottom="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Le non-respect de cette interdiction constitue une contrefaçon pouvant engager la responsabilité civile et pénale du contrefacteur à l'encontre duquel NEOMARCHE se réserve la possibilité de réclamer l'indemnisation de son entier préjudice."
+                android:lineHeight="24dp"
+                android:layout_marginBottom="15dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3. Utilisation du Site"
+                android:textSize="18sp"
+                android:textColor="#2c3e50"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vous êtes autorisé à utiliser ce site uniquement à des fins légales et conformément aux présentes conditions générales d'utilisation. Vous acceptez de ne pas utiliser ce site d'une manière qui pourrait causer des dommages au site ou altérer la disponibilité ou l'accessibilité du site."
+                android:lineHeight="24dp"
+                android:layout_marginBottom="15dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4. Limitation de Responsabilité"
+                android:textSize="18sp"
+                android:textColor="#2c3e50"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="En aucun cas, ÀIRNEIS ou ses fournisseurs ne seront responsables des dommages (y compris, sans limitation, les dommages pour perte de données ou de profit, ou en raison d'une interruption de l'activité) découlant de l'utilisation ou de l'incapacité à utiliser les matériaux sur le site Internet de ÀIRNEIS."
+                android:lineHeight="24dp"
+                android:layout_marginBottom="15dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5. Modifications des Conditions"
+                android:textSize="18sp"
+                android:textColor="#2c3e50"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ÀIRNEIS peut réviser ces conditions d'utilisation pour son site web à tout moment sans préavis. En utilisant ce site web, vous acceptez d'être lié par la version actuelle de ces conditions d'utilisation."
+                android:lineHeight="24dp"
+                android:layout_marginBottom="15dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="6. Loi Applicable"
+                android:textSize="18sp"
+                android:textColor="#2c3e50"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Toutes réclamations relatives au site web de ÀIRNEIS seront régies par les lois du pays d'Écosse sans égard à ses conflits de dispositions légales."
+                android:lineHeight="24dp"
+                android:layout_marginBottom="15dp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="80dp" />
+
+    </LinearLayout>
+</ScrollView>

@@ -1,24 +1,33 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import {Flex, Text, ActionButton, ComboBox, Item} from '@adobe/react-spectrum';
+import { Flex, Text, ActionButton, ComboBox, Item } from '@adobe/react-spectrum';
 import SearchPage from '../searchPage/SearchPage';
 import Close from '@spectrum-icons/workflow/Close';
 import Filter from '@spectrum-icons/workflow/Filter';
 import { Data } from '../../services/api';
 import { ToastQueue } from "@react-spectrum/toast";
-import {Grid} from '@adobe/react-spectrum'
+import { Grid } from '@adobe/react-spectrum';
+import { useTranslation } from 'react-i18next';
 
 const ProductSearchPage = () => {
-  // Récupération des informations de la barre de recherche
+  const { t } = useTranslation();
+  // Get URL informations
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const searchQuery = searchParams.get('search');
-  const showResults = searchQuery !== null; // Checks if searchQuery is defined
 
+  // Setting use states
+  const [searchQuery, setSearchQuery] = useState(searchParams.get('search') !== null ? searchParams.get('search') : "");
   const [showSearchPage, setShowSearchPage] = useState(false);
   const [filtering, setFiltering] = useState(false);
   const [produits, setProduits] = useState([]);
+  const [prixMin, setPrixMin] = useState(null);
+  const [prixMax, setPrixMax] = useState(null);
+  const [materiaux, setMateriaux] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [enStock, setEnStock] = useState(false);
+  const [orderBy, setOrderBy] = useState("noSort");
 
+  // Handling form changes
   const handleShowSearchPage = () => {
     setShowSearchPage(true);
     setFiltering(true);
@@ -30,84 +39,102 @@ const ProductSearchPage = () => {
   };
 
   useEffect(() => {
-    Data("searchProduct", "getProductByPriority", { "name": searchQuery, "table": "products" }).then(response => {
-      if (response.success === true) {
-        setProduits(response.data);
-        console.log("tqt", produits);
-      } else {
-        ToastQueue.negative(response.error, {timeout: 5000});
-      }
-    });
-  }, [searchQuery]);
+    const searchData = {
+      recherche: searchQuery !== "" ? searchQuery : null,
+      prix_min: prixMin,
+      prix_max: prixMax,
+      materiaux: materiaux,
+      categories: categories,
+      en_stock: enStock
+    };
 
-  // J'aimerai que cette fonction soit appelée lorsque l'utilisateur clique sur le bouton de filtrage
-  // les informations de filtrage sont récupérées dans le composant SearchPage
-  // et sont envoyées à la fonction handleSearch
-  // handleSearch doit ensuite appeler la fonction Data pour récupérer les produits filtrés
-  // et les afficher dans la liste des produits
+    handleSearch(searchData);
+  }, []);
 
+  useEffect(() => {
+    const searchData = {
+      recherche: searchQuery !== "" ? searchQuery : null,
+      prix_min: prixMin,
+      prix_max: prixMax,
+      materiaux: materiaux,
+      categories: categories,
+      en_stock: enStock
+    };
+
+    handleSearch(searchData);
+  }, [orderBy]);
+
+  // Form submission
   const handleSearch = (searchData) => {
-    console.log(searchData);
+    handleCloseSearchPage();
+
+    if (searchData.recherche !== null) {
+      setSearchQuery(searchData.recherche);
+    } else {
+      setSearchQuery("");
+    }
+
+    setPrixMin(searchData.prix_min);
+    setPrixMax(searchData.prix_max);
+    setMateriaux(searchData.materiaux);
+    setCategories(searchData.categories);
+    setEnStock(searchData.en_stock);
+
+    if (orderBy !== "noSort") {
+      searchData.orderBy = orderBy;
+    } else {
+      searchData.orderBy = null;
+    }
+
     Data("searchProduct", "getProductByFilter", searchData).then(response => {
       if (response.success === true) {
         setProduits(response.data);
-        console.log("tqt", produits);
       } else {
-        ToastQueue.negative(response.error, {timeout: 5000});
+        ToastQueue.negative(response.error, { timeout: 5000 });
       }
     });
   }
 
-
   return (
     <>
       {filtering && <div className="overlay"></div>}
-      {/* ProductPage */}
       <section className="categoriePage">
         <div className={`product-page ${filtering ? 'inactive' : ''}`}>
-          {showResults ? (
-              <>
-                  <h1>Résultat</h1>
-                  <h2>Liste des produits : "{searchQuery}"</h2>
-              </>
-          ) : (
-              <>
-                  <h1>Liste des produits</h1>
-              </>
-          )}
+          <h1>{t('searchResult')}</h1>
+          <h2>{t('productList')} : "{searchQuery}"</h2>
           <Flex justifyContent="center" direction="row" gap="size-300" wrap>
-            <ActionButton onClick={handleShowSearchPage} isDisabled={filtering}> 
+            <ActionButton onPress={handleShowSearchPage} isDisabled={filtering}> 
               <Filter />
-              <Text>Filtrer</Text>
+              <Text>{t('filter')}</Text>
             </ActionButton>
-            <ComboBox placeholder='Trier par:' isDisabled={filtering}>
-              <Item key="prixAsc">prix (asc)</Item>
-              <Item key="prixDesc">prix (desc)</Item>
-              <Item key="AjoutAsc">Date d'ajout (asc)</Item>
-              <Item key="AjoutDesc">Date d'ajout (desc)</Item>
-              <Item key="QuantitéAsc">Quantité en stock (asc)</Item>
-              <Item key="QuantitéDesc">Quantité en stock (desc)</Item>
+            <ComboBox isDisabled={filtering} onSelectionChange={setOrderBy} selectedKey={orderBy}>
+              <Item key="noSort">{t('noSort')}</Item>
+              <Item key="nameAsc">{t('nameAsc')}</Item>
+              <Item key="nameDesc">{t('nameDesc')}</Item>
+              <Item key="priceAsc">{t('priceAsc')}</Item>
+              <Item key="priceDesc">{t('priceDesc')}</Item>
+              <Item key="quantityInStockAsc">{t('quantityInStockAsc')}</Item>
+              <Item key="quantityInStockDesc">{t('quantityInStockDesc')}</Item>
             </ComboBox>
           </Flex>
           {produits.length > 0 ? (
             <div className="box-container">
               {produits.map((product, index) => (
                 <div key={product.id || index} className="box">
-                  <img src={`/img/${product.image_name}`} alt=""/>
+                  <img src={`/img/${product.image_name}`} alt="" />
                   <div className="card-title">
                     <h4>{product.produits_nom}</h4>
                     <h4>{product.price}€</h4>
                   </div>
-                  <Link to={`/product/${product.id}`} className="btn">Voir plus</Link>  
+                  <Link to={`/product/${product.produits_id}`} className="btn">{t('seeMore')}</Link>  
                 </div>
               ))}
             </div>
           ) : (
-            <div>Aucun produit trouvé.</div>
+            <div>{t('noProductsFound')}</div>
           )}
         </div>
   
-        {/* SearchPage */}
         {showSearchPage && (
           <div className="rectangle">
             <Grid
@@ -117,12 +144,12 @@ const ProductSearchPage = () => {
               columns={['2fr', '2fr']}
               rows={['size-1000']}
               rowGap={'size-500'}>
-              <ActionButton onClick={handleCloseSearchPage} gridArea="btnClose" width={'size-1500'} marginTop={'size-400'} justifySelf={'center'}>
-                <Close/>
-                <Text>Fermer</Text>
+              <ActionButton onPress={handleCloseSearchPage} gridArea="btnClose" width={'size-1500'} marginTop={'size-400'} justifySelf={'center'}>
+                <Close />
+                <Text>{t('close')}</Text>
               </ActionButton>
             </Grid>
-            <SearchPage onSearch={handleSearch} />
+            <SearchPage searchQuery={searchQuery} prixMinInput={prixMin} prixMaxInput={prixMax} materiauxInput={materiaux} categoriesInput={categories} enStockInput={enStock} onSearch={handleSearch}/>
           </div>
         )}
       </section>

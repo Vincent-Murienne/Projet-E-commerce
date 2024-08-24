@@ -7,10 +7,8 @@ $response["success"] = false;
 
 // Check if the API call is legitimate
 if($isAllowed) {
-    // Check if the table to lookup for is given
+    // Check if the input variables are set
     if(isset($json["table"]) && isset($json["id"]))  {
-
-        // Create new instance of class Database to interact with the database
         $db = new Database();
         $resData = $db->getProductSimilaire($json["id"]);
         
@@ -21,8 +19,10 @@ if($isAllowed) {
             $response["error"] = "Veuillez indiquer dans les données envoyés la table dans laquelle faire cette recherche.";
         }
     } else {
-        $response["error"] = "La clé API n'est pas fournie ou est incorrecte.";
+        $response["error"] = "Veuillez indiquer toutes les données nécessaires à ce traitement.";
     }
+} else {
+    $response["error"] = "La clé API n'est pas fournie ou est incorrecte.";
 }
 
 // Print the response in the json format

@@ -1,17 +1,22 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from '../../context/UserProvider';
 import { ToastQueue } from "@react-spectrum/toast";
+import { useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const CheckoutConfirmer = () => {
+    const { t } = useTranslation();
+    // Setting use states
     const { pullData } = useContext(UserContext);
-    const [userId, setUserId] = useState(undefined);
+    const { orderId } = useParams();
     const navigate = useNavigate();
 
+    // Check if user is connected. If not, redirect him to the home page with an error
     useEffect(() => {
-        let userData = pullData("user");
+        let userData = pullData("user"); // Get user information from the cookies   
         if (userData === undefined) {
-            ToastQueue.negative("Veuillez vous connecter afin de pouvoir accéder à cette page.", { timeout: 5000 });
+            ToastQueue.negative(t("pleaseLogin"), { timeout: 5000 });
             navigate("/");
             return
         } 
@@ -19,16 +24,16 @@ const CheckoutConfirmer = () => {
 
     return (
         <>
-        <div className="monComptePageAdresse">
-            <form>
-                <h1>Commande effectuée</h1>
-                <h4>Merci de votre achat !</h4>
-                <h4>Votre commande a bien été enregistrée sous le numéro XXXXXX. Vous pouvez suivre son état depuis votre espace client.</h4>
-                <Link to="/" className="btnProduit">Continuer mes achats</Link> 
-            </form> 
-        </div>
+            <div className="monComptePageAdresse">
+                <form>
+                    <h1>{t('orderCompletedTitle')}</h1>
+                    <h4>{t('thankYouMessage')}</h4>
+                    <h4>{t('orderConfirmationMessage')} {orderId}. {t('suiteOrder')}</h4>
+                    <Link to="/" className="btnProduit">{t('continueShopping')}</Link> 
+                </form> 
+            </div>
         </>
-    );
+    );    
 };
 
 export default CheckoutConfirmer;
