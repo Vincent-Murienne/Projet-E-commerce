@@ -42,60 +42,26 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class SearchFragment extends Fragment {
-
     private RecyclerView recyclerView;
     private SearchFilterAdapter produitsAdapter;
     private ArrayList<ProductModel> productModelList;
     EditText searchQueryEditText;
-    private EditText minPriceEditText;
-    private EditText maxPriceEditText;
-    private CheckBox inStockCheckBox;
-
     private Button searchFilterBtn;
     private Spinner searchFilterSpinner;
-
-    private SearchFilterCategoryAdapter searchFilterCategoryAdapter;
-    private SearchFilterMaterialAdapter searchFilterMaterialAdapter;
+    private String minPrice = "", maxPrice = "";
+    private boolean inStock = false;
+    private ArrayList<Integer> selectedCategories, selectedMaterials;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
-        View searchFilterView = inflater.inflate(R.layout.fragment_search_filter, container, false);
 
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            String query = bundle.getString("recherche");
-            String minPrice = bundle.getString("prix_min");
-            String maxPrice = bundle.getString("prix_max");
-            boolean inStock = bundle.getBoolean("en_stock");
-            ArrayList<Integer> selectedCategories = bundle.getIntegerArrayList("categories");
-            ArrayList<Integer> selectedMaterials = bundle.getIntegerArrayList("materiaux");
-
-            Log.d("SearchFragment", "Received from Bundle - Query: " + query + ", MinPrice: " + minPrice + ", MaxPrice: " + maxPrice + ", InStock: " + inStock);
-            fetchSearchProduits(query, minPrice, maxPrice, inStock, selectedCategories, selectedMaterials); //, selectedCategories, selectedMaterials);
-        }
+        selectedCategories = new ArrayList<>();
+        selectedMaterials = new ArrayList<>();
 
         recyclerView = view.findViewById(R.id.productListRecyclerView);
         searchQueryEditText = view.findViewById(R.id.searchQueryEditText);
-
-
-        minPriceEditText = searchFilterView.findViewById(R.id.minPriceEditText);
-        maxPriceEditText = searchFilterView.findViewById(R.id.maxPriceEditText);
-        inStockCheckBox = searchFilterView.findViewById(R.id.inStockCheckBox);
-        RecyclerView categoryRecyclerView = searchFilterView.findViewById(R.id.searchCategoriesRecyclerView);
-        RecyclerView materialRecyclerView = searchFilterView.findViewById(R.id.searchMaterialsRecyclerView);
-
-        ArrayList<CategoryModel> categoryList = new ArrayList<>();
-        searchFilterCategoryAdapter = new SearchFilterCategoryAdapter(getContext(), categoryList);
-        categoryRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        categoryRecyclerView.setAdapter(searchFilterCategoryAdapter);
-
-        ArrayList<MaterialModel> materialList = new ArrayList<>();
-        searchFilterMaterialAdapter = new SearchFilterMaterialAdapter(getContext(), materialList);
-        materialRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        materialRecyclerView.setAdapter(searchFilterMaterialAdapter);
-
 
         productModelList = new ArrayList<>();
 
@@ -114,18 +80,38 @@ public class SearchFragment extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         searchFilterSpinner.setAdapter(adapter);
 
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            String query = bundle.getString("recherche");
+            minPrice = bundle.getString("prix_min");
+            maxPrice = bundle.getString("prix_max");
+            inStock = bundle.getBoolean("en_stock");
+            selectedCategories = bundle.getIntegerArrayList("categories");
+            selectedMaterials = bundle.getIntegerArrayList("materiaux");
+            int orderBySpinnerPosition = bundle.getInt("orderBySpinnerPosition");
+
+            searchQueryEditText.setText(query);
+            searchFilterSpinner.setSelection(orderBySpinnerPosition);
+
+            String orderBy = getSortString(searchFilterSpinner.getItemAtPosition(searchFilterSpinner.getSelectedItemPosition()).toString());
+
+            fetchSearchProduits(query, minPrice, maxPrice, inStock, selectedCategories, selectedMaterials, orderBy);
+        }
+
         searchFilterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedSort = parent.getItemAtPosition(position).toString();
-                Log.d(TAG, "Selected sort order: " + selectedSort);
-                sortProducts(selectedSort);
+                String sortString = getSortString(selectedSort);
+
+                String searchQuery = searchQueryEditText.getText().toString();
+
+                fetchSearchProduits(searchQuery, minPrice, maxPrice, inStock, selectedCategories, selectedMaterials, sortString);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                Log.d(TAG, "No sort order selected");
-                // Aucun tri
+
             }
         });
 
@@ -137,11 +123,12 @@ public class SearchFragment extends Fragment {
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putString("recherche", searchQueryEditText.getText().toString());
-                bundle.putString("prix_min", minPriceEditText.getText().toString());
-                bundle.putString("prix_max", maxPriceEditText.getText().toString());
-                bundle.putBoolean("en_stock", inStockCheckBox.isChecked());
-                bundle.putIntegerArrayList("categories", new ArrayList<>());
-                bundle.putIntegerArrayList("materiaux", new ArrayList<>());
+                bundle.putString("prix_min", minPrice);
+                bundle.putString("prix_max", maxPrice);
+                bundle.putBoolean("en_stock", inStock);
+                bundle.putIntegerArrayList("categories", selectedCategories);
+                bundle.putIntegerArrayList("materiaux", selectedMaterials);
+                bundle.putInt("orderBySpinnerPosition", searchFilterSpinner.getSelectedItemPosition());
 
                 Fragment searchFilterFragment = new SearchFilterFragment();
                 searchFilterFragment.setArguments(bundle);
@@ -159,15 +146,10 @@ public class SearchFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                Log.d("SearchFragment", "Search query: " + s.toString());
                 String searchQuery = searchQueryEditText.getText().toString();
-                String minPrice = minPriceEditText.getText().toString();
-                String maxPrice = maxPriceEditText.getText().toString();
-                boolean inStock = inStockCheckBox.isChecked();
-                ArrayList<Integer> selectedCategories = searchFilterCategoryAdapter.getSelectedCategories();
-                ArrayList<Integer> selectedMaterials = searchFilterMaterialAdapter.getSelectedMaterials();
+                String orderBy = getSortString(searchFilterSpinner.getItemAtPosition(searchFilterSpinner.getSelectedItemPosition()).toString());
 
-                fetchSearchProduits(searchQuery, minPrice, maxPrice, inStock, selectedCategories, selectedMaterials);
+                fetchSearchProduits(searchQuery, minPrice, maxPrice, inStock, selectedCategories, selectedMaterials, orderBy);
             }
 
             @Override
@@ -179,53 +161,37 @@ public class SearchFragment extends Fragment {
         return view;
     }
 
-    private void sortProducts(String sortOrder) {
-        Log.d(TAG, "Sorting products by: " + sortOrder);
-        switch (sortOrder) {
-            case "nameAsc":
-                productModelList.sort((p1, p2) -> p1.getProductName().compareTo(p2.getProductName()));
-                break;
-            case "nameDesc":
-                productModelList.sort((p1, p2) -> p2.getProductName().compareTo(p1.getProductName()));
-                break;
-            case "priceAsc":
-                productModelList.sort((p1, p2) -> Double.compare(p1.getProductPrice(), p2.getProductPrice()));
-                break;
-            case "priceDesc":
-                productModelList.sort((p1, p2) -> Double.compare(p2.getProductPrice(), p1.getProductPrice()));
-                break;
-            case "quantityInStockAsc":
-                productModelList.sort((p1, p2) -> Integer.compare(p1.getProductQuantity(), p2.getProductQuantity()));
-                break;
-            case "quantityInStockDesc":
-                productModelList.sort((p1, p2) -> Integer.compare(p2.getProductQuantity(), p1.getProductQuantity()));
-                break;
+    private String getSortString(String sortItem) {
+        switch (sortItem) {
+            case "Nom (asc)":
+                return "nameAsc";
+            case "Nom (desc)":
+                return "nameDesc";
+            case "Prix (asc)":
+                return "priceAsc";
+            case "Prix (desc)":
+                return "priceDesc";
+            case "Quantité en stock (asc)":
+                return "quantityInStockAsc";
+            case "Quantité en stock (desc)":
+                return "quantityInStockDesc";
             default:
-                Log.d(TAG, "No sorting applied");
-                break; // Aucun tri
+                return null;
         }
-        produitsAdapter.notifyDataSetChanged(); // Notifier l'adaptateur que les données ont changé
-        Log.d(TAG, "Products sorted. Total products: " + productModelList.size());
     }
 
-    private void fetchSearchProduits(String query, String minPrice, String maxPrice, boolean inStock, ArrayList<Integer> categories, ArrayList<Integer> materials) {
-        Log.d("SearchFragment", "Fetching products for query: " + query);
-
+    private void fetchSearchProduits(String query, String minPrice, String maxPrice, boolean inStock, ArrayList<Integer> categories, ArrayList<Integer> materials, String orderBy) {
         APIManager apiManager = new APIManager(getContext());
-
-        query = (query != null && query.isEmpty()) ? null : query;
-        minPrice = minPrice.isEmpty() ? null : minPrice;
-        maxPrice = maxPrice.isEmpty() ? null : maxPrice;
 
         JSONObject data = new JSONObject();
         try {
-            data.put("recherche", query);
-            data.put("prix_min", minPrice);
-            data.put("prix_max", maxPrice);
+            data.put("recherche", (query != null && query.isEmpty()) ? JSONObject.NULL : query);
+            data.put("prix_min", minPrice.isEmpty() ? JSONObject.NULL : Integer.parseInt(minPrice));
+            data.put("prix_max", maxPrice.isEmpty() ? JSONObject.NULL : Integer.parseInt(maxPrice));
             data.put("en_stock", inStock);
             data.put("categories", new JSONArray(categories));
             data.put("materiaux", new JSONArray(materials));
-            Log.d("SearchFragment", "Data sent to API: " + data.toString());
+            data.put("orderBy", orderBy != null ? orderBy : JSONObject.NULL);
         } catch (JSONException e) {
             Log.e("SearchFragment", "Error creating JSON object: " + e.getMessage());
             e.printStackTrace();
@@ -239,10 +205,7 @@ public class SearchFragment extends Fragment {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    Log.d("SearchFragment", "API Response: " + response.toString());
-
                     if (response.getBoolean("success")) {
-                        Log.d("debug", "API Response Success");
                         JSONArray products = response.getJSONArray("data");
                         productModelList.clear();
                         for (int i = 0; i < products.length(); i++) {
@@ -253,7 +216,6 @@ public class SearchFragment extends Fragment {
                             int productId = product.getInt("produits_id");
                             productModelList.add(new ProductModel(productId, productName, imageName, productPrice));
                         }
-                        Log.d("SearchFragment", "Products list updated, total: " + productModelList.size());
                         produitsAdapter.notifyDataSetChanged();
                     } else {
                         String error = response.getString("error");

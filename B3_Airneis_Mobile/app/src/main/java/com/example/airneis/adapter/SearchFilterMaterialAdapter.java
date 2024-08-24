@@ -22,9 +22,10 @@ public class SearchFilterMaterialAdapter extends RecyclerView.Adapter<SearchFilt
     private Context context;
     private ArrayList<Integer> selectedMaterials = new ArrayList<>();
 
-    public SearchFilterMaterialAdapter(Context context, ArrayList<MaterialModel> materials) {
+    public SearchFilterMaterialAdapter(Context context, ArrayList<MaterialModel> materials, ArrayList<Integer> selectedMaterials) {
         this.context = context;
         this.materials = materials;
+        this.selectedMaterials = selectedMaterials;
     }
 
     @NonNull

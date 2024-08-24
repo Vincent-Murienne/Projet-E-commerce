@@ -15,6 +15,14 @@ $apiKey = getenv("API_KEY");
 $isAllowed = false;
 $json = json_decode(file_get_contents("php://input"), true);
 
+// $json = [
+//     "recherche" => "tee",
+//     "en_stock" => false,
+//     "categories" => [],
+//     "materiaux" => [],
+//     "apiKey" => $apiKey
+// ];
+
 if(isset($json["apiKey"]) && $json["apiKey"] == $apiKey) {
     $isAllowed = true;
 }

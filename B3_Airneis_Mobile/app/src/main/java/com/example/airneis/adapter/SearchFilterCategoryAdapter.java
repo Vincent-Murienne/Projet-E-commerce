@@ -18,9 +18,10 @@ public class SearchFilterCategoryAdapter extends RecyclerView.Adapter<SearchFilt
     private Context context;
     private ArrayList<Integer> selectedCategories = new ArrayList<>();
 
-    public SearchFilterCategoryAdapter(Context context, ArrayList<CategoryModel> categories) {
+    public SearchFilterCategoryAdapter(Context context, ArrayList<CategoryModel> categories, ArrayList<Integer> selectedCategories) {
         this.context = context;
         this.categories = categories;
+        this.selectedCategories = selectedCategories;
     }
 
     @NonNull

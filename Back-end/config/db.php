@@ -333,22 +333,22 @@ class Database {
 
         if (!is_null($orderBy)) {
             switch($orderBy) {
-                case "nomAsc":
+                case "nameAsc":
                     $sql .= " ORDER BY products.name;";
                     break;
-                case "nomDesc":
+                case "nameDesc":
                     $sql .= " ORDER BY products.name DESC;";
                     break;
-                case "prixAsc":
+                case "priceAsc":
                     $sql .= " ORDER BY products.price;";
                     break;
-                case "prixDesc":
+                case "priceDesc":
                     $sql .= " ORDER BY products.price DESC;";
                     break;
-                case "QuantiteAsc":
+                case "quantityInStockAsc":
                     $sql .= " ORDER BY products.quantity;";
                     break;
-                case "QuantiteDesc":
+                case "quantityInStockDesc":
                     $sql .= " ORDER BY products.quantity DESC;";
                     break;
             }

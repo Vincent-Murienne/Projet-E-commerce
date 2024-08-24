@@ -27,6 +27,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class SearchFilterFragment extends Fragment {
 
@@ -44,6 +45,8 @@ public class SearchFilterFragment extends Fragment {
     private RecyclerView materialsRecyclerView;
     private SearchFilterMaterialAdapter searchFilterMaterialAdapter;
     private ArrayList<MaterialModel> materialModelList = new ArrayList<>();
+    private int orderBySpinnerPosition;
+    private ArrayList<Integer> selectedMaterials, selectedCategories;
 
 
     @Override
@@ -62,8 +65,17 @@ public class SearchFilterFragment extends Fragment {
             String minPrice = getArguments().getString("prix_min");
             String maxPrice = getArguments().getString("prix_max");
             boolean inStock = getArguments().getBoolean("en_stock");
-
-            Log.d("SearchFilterFragment", "Received from Bundle - Query: " + query + ", MinPrice: " + minPrice + ", MaxPrice: " + maxPrice + ", InStock: " + inStock);
+            if(getArguments().getIntegerArrayList("categories") == null) {
+                selectedCategories = new ArrayList<>();
+            } else {
+                selectedCategories = getArguments().getIntegerArrayList("categories");
+            }
+            if(getArguments().getIntegerArrayList("materiaux") == null) {
+                selectedMaterials = new ArrayList<>();
+            } else {
+                selectedMaterials = getArguments().getIntegerArrayList("materiaux");
+            }
+            orderBySpinnerPosition = getArguments().getInt("orderBySpinnerPosition");
 
             searchQueryFilterEditText.setText(query);
             minPriceEditText.setText(minPrice);
@@ -81,18 +93,13 @@ public class SearchFilterFragment extends Fragment {
 
         categoriesRecyclerView = view.findViewById(R.id.searchCategoriesRecyclerView);
         categoriesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        searchFilterCategoryAdapter = new SearchFilterCategoryAdapter(getContext(), categoryModelList);
+        searchFilterCategoryAdapter = new SearchFilterCategoryAdapter(getContext(), categoryModelList, selectedCategories);
         categoriesRecyclerView.setAdapter(searchFilterCategoryAdapter);
 
         materialsRecyclerView = view.findViewById(R.id.searchMaterialsRecyclerView);
         materialsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        searchFilterMaterialAdapter = new SearchFilterMaterialAdapter(getContext(), materialModelList);
+        searchFilterMaterialAdapter = new SearchFilterMaterialAdapter(getContext(), materialModelList, selectedMaterials);
         materialsRecyclerView.setAdapter(searchFilterMaterialAdapter);
-
-        if (getArguments() != null) {
-            String query = getArguments().getString("recherche");
-            searchQueryFilterEditText.setText(query);
-        }
 
         applyButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,8 +108,6 @@ public class SearchFilterFragment extends Fragment {
                 String minPrice = minPriceEditText.getText().toString();
                 String maxPrice = maxPriceEditText.getText().toString();
                 boolean inStock = inStockCheckBox.isChecked();
-
-                Log.d("SearchFilterFragment", "Applying filters - Query: " + query + ", MinPrice: " + minPrice + ", MaxPrice: " + maxPrice + ", InStock: " + inStock);
 
                 ArrayList<Integer> selectedCategories = searchFilterCategoryAdapter.getSelectedCategories();
                 ArrayList<Integer> selectedMaterials = searchFilterMaterialAdapter.getSelectedMaterials();
@@ -114,6 +119,7 @@ public class SearchFilterFragment extends Fragment {
                 bundle.putBoolean("en_stock", inStock);
                 bundle.putIntegerArrayList("categories", selectedCategories);
                 bundle.putIntegerArrayList("materiaux", selectedMaterials);
+                bundle.putInt("orderBySpinnerPosition", orderBySpinnerPosition);
 
                 Fragment searchFragment = new SearchFragment();
                 searchFragment.setArguments(bundle);
@@ -128,7 +134,30 @@ public class SearchFilterFragment extends Fragment {
         exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navigateToSearchFragment();
+                String query = searchQueryFilterEditText.getText().toString();
+                String minPrice = minPriceEditText.getText().toString();
+                String maxPrice = maxPriceEditText.getText().toString();
+                boolean inStock = inStockCheckBox.isChecked();
+
+                ArrayList<Integer> selectedCategories = searchFilterCategoryAdapter.getSelectedCategories();
+                ArrayList<Integer> selectedMaterials = searchFilterMaterialAdapter.getSelectedMaterials();
+
+                Bundle bundle = new Bundle();
+                bundle.putString("recherche", query);
+                bundle.putString("prix_min", minPrice);
+                bundle.putString("prix_max", maxPrice);
+                bundle.putBoolean("en_stock", inStock);
+                bundle.putIntegerArrayList("categories", selectedCategories);
+                bundle.putIntegerArrayList("materiaux", selectedMaterials);
+                bundle.putInt("orderBySpinnerPosition", orderBySpinnerPosition);
+
+                Fragment searchFragment = new SearchFragment();
+                searchFragment.setArguments(bundle);
+
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                transaction.replace(R.id.frameLayout, searchFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         });
 
@@ -243,6 +272,9 @@ public class SearchFilterFragment extends Fragment {
 
         searchFilterMaterialAdapter.clearData();
         searchFilterCategoryAdapter.clearData();
+
+        fetchCategories();
+        fetchMaterials();
     }
 
     private void navigateToSearchFragment() {
