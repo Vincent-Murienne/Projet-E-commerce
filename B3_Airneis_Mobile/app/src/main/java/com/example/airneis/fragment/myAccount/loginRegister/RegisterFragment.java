@@ -3,9 +3,14 @@ package com.example.airneis.fragment.myAccount.loginRegister;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -35,6 +40,7 @@ public class RegisterFragment extends Fragment {
     private EditText fullNameEditText, emailEditText, passwordEditText;
     private CheckBox mentionsLegalCheckBox;
     private Button registerButton;
+    private boolean isPasswordVisible = false;
 
     private static final String TAG = "RegisterFragment";
 
@@ -53,6 +59,16 @@ public class RegisterFragment extends Fragment {
 
         registerButton.setOnClickListener(v -> handleRegister(view));
 
+        passwordEditText.setOnTouchListener((v, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                if (event.getRawX() >= (passwordEditText.getRight() - passwordEditText.getCompoundDrawables()[2].getBounds().width())) {
+                    togglePasswordVisibility();
+                    return true;
+                }
+            }
+            return false;
+        });
+
         TextView loginLink = view.findViewById(R.id.login);
         loginLink.setOnClickListener(v -> {
             // Navigate to register page
@@ -63,7 +79,43 @@ public class RegisterFragment extends Fragment {
             transaction.commit();
         });
 
+        fullNameEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String upperCaseText = s.toString().toUpperCase();
+                if (!upperCaseText.equals(s.toString())) {
+                    fullNameEditText.removeTextChangedListener(this);
+                    fullNameEditText.setText(upperCaseText);
+                    fullNameEditText.setSelection(upperCaseText.length());
+                    fullNameEditText.addTextChangedListener(this);
+                }
+            }
+        });
+
         return view;
+    }
+
+
+    private void togglePasswordVisibility() {
+        if (isPasswordVisible) {
+            // Hide password
+            passwordEditText.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            passwordEditText.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_lock, 0, R.drawable.ic_eye, 0);
+        } else {
+            // Show password
+            passwordEditText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            passwordEditText.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_lock, 0, R.drawable.ic_eye_slash, 0);
+        }
+        isPasswordVisible = !isPasswordVisible;
+        passwordEditText.setSelection(passwordEditText.getText().length());
     }
 
     private void handleRegister(View view) {

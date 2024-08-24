@@ -4,8 +4,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -32,6 +35,7 @@ public class LoginFragment extends Fragment {
     private EditText emailField;
     private EditText passwordField;
     private TextView errorMessage;
+    private boolean isPasswordVisible = false;
 
     @Nullable
     @Override
@@ -46,6 +50,16 @@ public class LoginFragment extends Fragment {
         Button submitButton = view.findViewById(R.id.submit);
 
         submitButton.setOnClickListener(v -> handleLogin());
+
+        passwordField.setOnTouchListener((v, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                if (event.getRawX() >= (passwordField.getRight() - passwordField.getCompoundDrawables()[2].getBounds().width())) {
+                    togglePasswordVisibility();
+                    return true;
+                }
+            }
+            return false;
+        });
 
         TextView forgotPasswordLink = view.findViewById(R.id.forgot_password);
         forgotPasswordLink.setOnClickListener(v -> {
@@ -68,6 +82,20 @@ public class LoginFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private void togglePasswordVisibility() {
+        if (isPasswordVisible) {
+            // Hide password
+            passwordField.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            passwordField.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_lock, 0, R.drawable.ic_eye, 0);
+        } else {
+            // Show password
+            passwordField.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            passwordField.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_lock, 0, R.drawable.ic_eye_slash, 0);
+        }
+        isPasswordVisible = !isPasswordVisible;
+        passwordField.setSelection(passwordField.getText().length());
     }
 
     private void handleLogin() {
