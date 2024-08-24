@@ -33,20 +33,23 @@
 1. **Lancer les serveurs Apache et MySQL**
    - Assurez-vous que les serveurs Apache et MySQL de XAMPP sont bien lancés.
 
-2. **Ouvrir le projet**
+2. **Créer la base de données**
+  - Pour créer la base de données, utilisez le script disponible dans le dossier `Back-end/bdd_airneis.sql`.
+     
+3. **Ouvrir le projet**
    - Ouvrez le projet back-end dans un éditeur de code, tel que Visual Studio Code.
 
-3. **Préparation des dépendances**
+4. **Préparation des dépendances**
    - Naviguez dans `Back-end\vendor` et supprimez les dossiers `phpmailer` et `stripe` pour permettre à Composer d'installer correctement les dépendances.
 
-4. **Installer les dépendances**
+5. **Installer les dépendances**
    - Ouvrez un terminal dans le dossier `Back-end`.
    - Exécutez la commande suivante pour télécharger les dépendances :
      ```sh
      composer install
      ```
 
-5. **Lancer le serveur PHP**
+6. **Lancer le serveur PHP**
    - Pour le projet web React, exécutez la commande suivante dans le terminal :
      ```sh
      php -S localhost:8000
